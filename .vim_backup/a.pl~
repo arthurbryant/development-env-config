@@ -1,0 +1,6 @@
+use strict;
+use warnings;
+
+sub {
+    my $hoge, $(fug) = @_;
+}

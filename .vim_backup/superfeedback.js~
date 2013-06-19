@@ -1,0 +1,119 @@
+Namespace('jp.mixi.model.superfeedback')
+.use('brook promise')
+.use('brook.model createModel')
+.use('jp.mixi.model.utils *')
+.use('jp.co.mixi.ui.widget.util isEnabled')
+.use('jp.mixi.home.pc.responseerrorhandler responseErrorHandler')
+.use('jp.mixi.home.pc.resourceid getObjectIdByResourceId, getOwnerIdByResourceId, getObjectTypeByResourceId')
+.define(function(ns){
+
+    var buttons = [];
+    var cleanUp = function() {
+        buttons = _.filter(buttons, function(button) {
+            return ns.isEnabled(button);
+        });
+    };
+    
+    var createKey = function(param){
+        return param.owner_id + "." + param.id;
+    };
+
+    var setParam = function(param){
+        return ns.promise(function(next, value){
+            if(!value || !(function (object) {
+                for (var o in object) {
+                    return true;
+                }
+                return false;
+            })(value)) return next(param);
+            return next(value);
+        });
+    };
+
+    var models = {};
+
+    var createModel = function(service, param){
+        if (models[service + "." + createKey(param)]) {
+            return models[service + "." + createKey(param)];
+        }
+        var model = ns.createModel({
+            'create': ns.promise().bind(
+                setParam(param),
+                ns.appendViewerId,
+                ns.createRPCPromise('jp.mixi.' + service + '.superfeedback.create'),
+                ns.whenExpiredSessionToReload
+            )
+        });
+        models[service + "." + createKey(param)] = model;
+        return model;
+    };
+
+    ns.provide({
+        registerElement : function(element, dataset) {
+            initialize(element, dataset);
+        },
+                           
+        createSuperFeedbackModel: createModel
+    });
+});
+
+    var isTarget = function(resourceId, request) {
+        var id      = ns.getObjectIdByResourceId(resourceId);
+        var ownerId = ns.getOwnerIdByResourceId(resourceId);
+        return (request.id == id) && (request.owner_id == ownerId);
+
+    };
+
+    var feedbackCreateHandler = ns.responseErrorHandler('feedback')
+    .bind(function(next, value) {
+        cleanUp();
+        if (!value.response.error) {
+            _.each(buttons, function(button) {
+                var resourceId = button.data('resourceId');
+
+                if (isTarget(resourceId, value.request)) {
+                    button.addClass('acted');
+                    var label = button.data('disabledLabel');
+                    if (label) {
+                        button.find('span').text(label);
+                    }
+                }
+            });
+        }
+        next(value);
+    });
+var initialize = function(element, dataset) {
+    var resourceId = dataset.resourceId;
+    var service = dataset.service || ns.getObjectTypeByResourceId(resourceId);
+        var params = {
+            id       : ns.getObjectIdByResourceId(resourceId),
+            owner_id : ns.getOwnerIdByResourceId(resourceId)
+        };
+    var model = ns.createFeedbackModel(service, params);
+    model.method('create').observe(feedbackCreateHandler);
+
+        var button = $j(element);
+        button.click(function(evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            if (!button.hasClass('acted')) {
+                model.notify('create').run(params);
+            }
+
+        });
+        buttons.push(button);
+};
+
+Namespace('jp.mixi.home.pc.feed.widget.commentarea')
+.use('brook promise')
+.use('jp.mixi.model.superfeedback createModel')
+.define(function(ns) {
+    
+    ns.provide({
+        registerElement : function(element, dataset) {
+            
+        }
+    });
+
+});

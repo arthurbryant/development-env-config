@@ -1,0 +1,42 @@
+use strict;
+use warnings;
+
+use TechStudy::Color;
+use Test::More;
+use Data::Dumper;
+
+subtest 'create blue' => sub {
+    my $blue = TechStudy::Color->new({
+        R => 15,
+        G => 15,
+        B => 255
+    });
+    isa_ok($blue, "TechStudy::Color");
+    is( $blue->get_color_code, '#0f0fff' );
+};
+
+subtest 'new from code' => sub {
+    my $color_code = "#ff0000";
+    my $item = TechStudy::Color->new_from_code($color_code);
+    isa_ok($item, "TechStudy::Color");
+    is($item->get_color_code, '#ff0000', "right");
+    print Dumper($item); 
+};
+
+subtest 'mix color' => sub {
+    my $red= TechStudy::Color->new({
+        R => 255,
+        G => 128,
+        B => 0
+    });
+    my $blue = TechStudy::Color->new({
+        R => 0,
+        G => 0,
+        B => 255
+    });
+    my $mixed = $red->mix_color($blue);
+    isa_ok($mixed, "TechStudy::Color");
+    is($mixed->get_color_code, "#ff80ff");
+};
+done_testing;
+

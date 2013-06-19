@@ -1,0 +1,67 @@
+Namespace("jp.co.mixi.nativeproxy")
+.use('brook promise')
+.use('brook.channel observeChannel')
+.use('brook.util mapper')
+.use('jp.co.mixi.gateway gateway')
+.define(function(ns){
+    // native proxy
+    var _nativeProxy = function(){
+        return window.WebBridge;
+    };
+
+    var _existWebBridge = function(){
+        return window.WebBridge ? true : false;
+    }
+
+    var isEnableNativeProxy = function(){
+        if(!_existWebBridge()) return;
+        return _nativeProxy().isEnableBridge();
+    };
+
+    var onStartNativeProxy = function(method){
+        if(!_existWebBridge()) return;
+        if(!method) return;
+        var callback = (method && method.run) ? function(){method.run();} : method;
+        _nativeProxy().onStart(callback);
+    };
+
+    var callNativeProxy = function(dest, request, callback){
+        if(!_existWebBridge()) return;
+        _nativeProxy().call(dest, request, callback);
+    };
+
+    var notifyNativeProxy = function(dest, request){
+        if(!_existWebBridge()) return;
+        _nativeProxy().notify(dest, request);
+    };
+
+    var createNativeProxyPromise = function(dest){
+        return ns.promise(function(next,request){
+            callNativeProxy(dest, request, function(response){
+                next({
+                    request  : request,
+                    response : response
+                });
+            });
+        });
+    };
+
+    var createNativeProxyGateway = function(ruleData){
+        var promise = ruleData.onDisableProxy;
+        onStartNativeProxy(function(){
+            promise = ruleData.onEnableProxy;
+        });
+        return ns.promise(function(next, value){
+            promise.bind(next).run(value);
+        });
+    };
+
+    ns.provide({
+        isEnableNativeProxy: isEnableNativeProxy,
+        onStartNativeProxy: onStartNativeProxy,
+        callNativeProxy: callNativeProxy,
+        notifyNativeProxy: notifyNativeProxy,
+        createNativeProxyPromise: createNativeProxyPromise,
+        createNativeProxyGateway: createNativeProxyGateway
+    });
+});

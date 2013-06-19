@@ -1,0 +1,30 @@
+<html>
+<head>
+  <title>Pages practice</title>
+</head>
+
+<body>
+
+<!-- 
+$self->templte->add_error で渡された $warings は内部で変換されて
+error のキー値でtmplにセットされます
+ここではひとまず「そういうもの」と認識だけして用いてください
+-->
+<TMPL_IF NAME="error">
+以下の項目が入力エラーです。
+<TMPL_VAR NAME="error" ESCAPE=0>
+</TMPL_IF>
+<!-- ここまで -->
+
+作業者はmember_id : <TMPL_VAR EXPR="html_escape(member_id)">です。<br>
+
+<form action="hello_world.pl" method="get">
+task_id を入力してください。 <input type=text name="task_id" value=""><br>
+text を入力してください。 <input type=text name="text" value=""><br>
+<input type=hidden name="mode" value="confirm"><br>
+<input type="submit" value="進む">
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Test::More;
+use Mixi::Proper13
+
+is +Mixi::Proper13->hello, 'hello', 'should say hello';
+
+done_testing;

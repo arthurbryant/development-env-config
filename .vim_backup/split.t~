@@ -1,0 +1,42 @@
+use strict;
+use warnings;
+use Test::More;
+
+my $sentence = "Takeny KAKKA Yokomark TheFaceBook Miff Melton";
+my @words = split(" ", $sentence);
+
+is( scalar @words, 6, "length of words is 6");
+is_deeply(
+    \@words,
+    [ 'Takeny','KAKKA','Yokomark','TheFaceBook','Miff','Melton'],
+    "split by white space"
+);
+my $date = "2012-11-27";
+my @y_m_d = split("-", $date);
+is_deeply(\@y_m_d, ['2012', '11', '27'], "today");
+
+$date = "2012--11-27";
+my @y_m_d2 = split("-", $date);
+is_deeply(\@y_m_d2, ['2012', '', '11', '27'], "wrong today");
+
+$date = "2012--11-27";
+my @y_m_d3 = split("-", $date, 3);
+is_deeply(\@y_m_d3, ['2012', '', '11-27'], "wrong today");
+
+my $input = "split /PATTERN/,EXPR,LIMIT
+split /PATTERN/,EXPR
+split /PATTERN/
+split
+Splits the string EXPR into a list of strings and returns the list in list context, or the size of the list in scalar context.
+If only PATTERN is given, EXPR defaults to '\$_' .
+Anything in EXPR that matches PATTERN is taken to be a separator that separates the EXPR into substrings (called 'fields') that do not include the separator. Note that a separator may be longer than one character or even have no characters at all (the empty string, which is a zero-width match).
+The PATTERN need not be constant; an expression may be used to specify a pattern that varies at runtime.
+If PATTERN matches the empty string, the EXPR is split at the match position (between characters). As an example, the following:";
+my @output = split(/ /, $input);
+is($output[0], "split", "split");
+like($input, qr/PATTERN/, "pattern covered");
+#ok(cmp(2, 1+1), "==");
+my @d = split(/(-)|(,)/, "1-10,20", 3);
+is_deeply(\@d, ["1", "10", "20"], "two split operator");
+
+done_testing();

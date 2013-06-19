@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+git push ssh://git@git.lo.mixi.jp/users/feng.zhang/banana.git

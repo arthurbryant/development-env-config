@@ -1,0 +1,110 @@
+Namespace('jp.mixi.featuredcontents.ui.searchform')
+.use('jp.co.mixi.gateway gateway')
+.use('jp.co.mixi.ui.textareawithplaceholder clearTextarea')
+.define(function (ns) {
+    var _rootElement,
+        _selectorSelect,
+        _selectorTextField,
+        _selectorSubmitButton,
+        _selectorForm;
+
+    var getInitializedForm = function(searchType) {
+        var mapTypeToFormSelector = {
+            'search_comm'        : '.JS_formCommunitySearch',
+            'search_game'        : '.JS_formGameSearch',
+            'search_appli'       : '.JS_formAppliSearch',
+            'search_page'        : '.JS_formPageSearch',
+            'search_profile'     : '.JS_formProfileSearch',
+            'search_school'      : '.JS_formSchoolSearch',
+            'search_company'     : '.JS_formCompanySearch',
+            'search_mykeyword'   : '.JS_formMyKeywordSearch',
+            'search_friend_mail' : '.JS_formFriendMailSearch',
+            'search_news'        : '.JS_formNewsSearch',
+            'search_item'        : '.JS_formItemSearch',
+            'search_mall'        : '.JS_formMallSearch',
+            'search_diary'       : '.JS_formDiarySearch'
+        };
+        if(searchType === "select"){
+            alert("検索するサービスを選択してください");
+        }
+        var form = $j(_rootElement).find(mapTypeToFormSelector[searchType]);
+        if(_.isEmpty(form)) return;
+
+        //placeholderをvalueで定義しているのでvalueをセットする際にリセットする
+        ns.clearTextarea($j(_rootElement).find(_selectorTextField)[0]);
+
+        var searchText = $j(_rootElement).find(_selectorTextField).val();
+        if(searchType === 'search_mykeyword') {
+            form.find('input[name=mykeyword]').val(searchText);
+        } else if(searchType === 'search_friend_mail') {
+            form.find('input[name=mail]').val(searchText);
+        } else {
+            form.find('input[name=keyword]').val(searchText);
+        }
+
+        return form;
+    };
+
+    var submitSelectedForm = function(searchType) {
+
+        var form = getInitializedForm(searchType);
+        var backCharset = document.charset;
+        //pageとmallだけエンコードが異なる対応
+        document.charset = (searchType === 'search_page') ? 'UTF-8' :
+                           (searchType === 'search_mall') ? 'UTF-8' : 'EUC-JP';
+
+        form.acceptCharset = document.charset;
+        form.submit();
+        document.charset = backCharset;
+
+    };
+
+    var observeTypeChangeEvent = function(proc) {
+        $j(_rootElement).find(_selectorSelect).bind('change', proc);
+    };
+
+    var getDefaultSearchType = function() {
+        // 検索種類を引き継ぐ
+        var href = document.location.href;
+        var mixi_prefix_regexp = '(' + ns.gateway('url_mixi_prefix') + '|' + ns.gateway('url_mixi_prefix_ssl') + ')';
+        var map = {
+            "search_comm"        : '^' + mixi_prefix_regexp + 'search_community',
+            "search_game"        : '^' + mixi_prefix_regexp + '(search_appli_result.*is_game=1|search_game)',
+            "search_appli"       : '^' + mixi_prefix_regexp + 'search_appli_result.*is_game=0',
+            "search_page"        : '^' + ns.gateway('url_fan_prefix'),
+            "search_profile"     : '^' + mixi_prefix_regexp + 'search_profile',
+            "search_school"      : '^' + mixi_prefix_regexp + 'search_school',
+            "search_company"     : '^' + mixi_prefix_regexp + 'search_company',
+            "search_mykeyword"   : '^' + mixi_prefix_regexp + 'search_mykeyword',
+            "search_friend_mail" : '^' + mixi_prefix_regexp + 'search_friend_mail',
+            "search_news"        : '^' + ns.gateway('url_news_prefix') + 'search_news',
+            "search_item"        : '^' + mixi_prefix_regexp + 'search_item',
+            "search_diary"       : '^' + mixi_prefix_regexp + 'search_diary'
+        };
+
+        for(var key in map){
+            if(map.hasOwnProperty(key)){
+                var regexp = new RegExp(map[key]);
+                if(regexp.test(href)){
+                    return key;
+                }
+            }
+        }
+    };
+
+    var initialize = function(element, dataset) {
+        _rootElement = element;
+        _selectorSelect = dataset.formSelect;
+        _selectorTextField = dataset.formTextField;
+        _selectorSubmitButton = dataset.formSubmit;
+        _selectorForm = dataset.form;
+    };
+
+    ns.provide({
+        initializeSearchForm   : initialize,
+        getInitializedForm     : getInitializedForm,
+        submitSelectedForm     : submitSelectedForm,
+        observeTypeChangeEvent : observeTypeChangeEvent,
+        getDefaultSearchType   : getDefaultSearchType
+    });
+});

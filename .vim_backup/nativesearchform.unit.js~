@@ -1,0 +1,150 @@
+Namespace('jp.mixi.featuredcontents.ui.searchform')
+.define(function(ns) {
+    "use strict";
+
+    var _mockInitializeForm;
+
+    var setMockForm = function(mock) {
+        _mockInitializeForm = mock;
+    };
+
+    var getInitializedForm = function(searchType) {
+        return _mockInitializeForm(searchType);
+    };
+
+    ns.provide({
+        getInitializedForm : getInitializedForm,
+        _setMockForm       : setMockForm
+    });
+});
+
+Namespace('jp.co.mixi.nativeproxy')
+.define(function(ns) {
+    "use strict";
+
+    var _mockNativeProxy;
+
+    var setMockNativeProxy = function(mock) {
+        _mockNativeProxy = mock;
+    };
+
+    var notifyNativeProxy = function(dest, request) {
+        _mockNativeProxy(dest, request);
+    };
+
+    ns.provide({
+        notifyNativeProxy     : notifyNativeProxy,
+        _setMockNativeProxy : setMockNativeProxy
+    });
+});
+
+Namespace
+.use('jp.mixi.featuredcontents.ui.nativesearchform createSearchURL,sendSearchRequest')
+.use('jp.mixi.featuredcontents.ui.searchform _setMockForm')
+.use('jp.co.mixi.nativeproxy _setMockNativeProxy')
+.apply(function(ns) {
+    /*global $j:false, test:false, _:false, sinon:false, module:false,
+        strictEqual:false, ok:false, deepEqual:false */
+    "use strict";
+
+    var createForm = function(url, paramsList) {
+        var form = $j("<form />");
+        form.attr("action", url);
+        _.each(paramsList, function(param) {
+            form.append($j('<input />').attr({
+                name  : param.name,
+                value : param.value,
+                type  : "hidden"
+            }));
+        });
+        form.append('<input type="submit" value="search" />');
+        return form;
+    };
+
+    module("createSearchURL");
+
+    test("with url without question mark", function() {
+        var url = "http://mixi.jp/";
+        var params = [
+            {name : "mocked",  value : "value"},
+            {name : "hoge",    value : "fuga"}
+        ];
+
+        var stub = sinon.stub();
+        var form = createForm(url, params);
+        stub.withArgs("test").returns(form);
+        ns._setMockForm(stub);
+        strictEqual(ns.createSearchURL("test"), "http://mixi.jp/?mocked=value&hoge=fuga", "should return valid url");
+    });
+
+    test("with url with parameter", function() {
+        var url = "http://mixi.jp/?key=value";
+        var params = [
+            {name : "mocked",  value : "value"},
+            {name : "hoge",    value : "fuga"}
+        ];
+
+        var stub = sinon.stub();
+        var form = createForm(url, params);
+        stub.withArgs("test").returns(form);
+        ns._setMockForm(stub);
+        strictEqual(ns.createSearchURL("test"), "http://mixi.jp/?key=value&mocked=value&hoge=fuga", "should return valid url");
+    });
+
+    test("with url with trailing question mark", function() {
+        var url = "http://mixi.jp/?";
+        var params = [
+            {name : "mocked",  value : "value"},
+            {name : "hoge",    value : "fuga"}
+        ];
+
+        var stub = sinon.stub();
+        var form = createForm(url, params);
+        stub.withArgs("test").returns(form);
+        ns._setMockForm(stub);
+        strictEqual(ns.createSearchURL("test"), "http://mixi.jp/?mocked=value&hoge=fuga", "should return valid url");
+    });
+
+    test("with url with trailing question mark", function() {
+        var url = "http://mixi.jp/?key=value&";
+        var params = [
+            {name : "mocked",  value : "value"},
+            {name : "hoge",    value : "fuga"}
+        ];
+
+        var stub = sinon.stub();
+        var form = createForm(url, params);
+        stub.withArgs("test").returns(form);
+        ns._setMockForm(stub);
+        strictEqual(ns.createSearchURL("test"), "http://mixi.jp/?key=value&mocked=value&hoge=fuga", "should return valid url");
+    });
+
+    module("sendSearchRequest");
+
+    test("basic", function() {
+        var url = "http://mixi.jp/";
+        var params = [
+            {name : "mocked",  value : "value"},
+            {name : "hoge",    value : "fuga"}
+        ];
+
+        var stub = sinon.stub();
+        var form = createForm(url, params);
+        stub.withArgs("test").returns(form);
+        ns._setMockForm(stub);
+
+        var nativeProxySpy = sinon.spy();
+        ns._setMockNativeProxy(nativeProxySpy);
+
+        ns.sendSearchRequest("test");
+
+        ok(nativeProxySpy.calledOnce, "notifyNativeProxy should be called only once");
+        deepEqual(nativeProxySpy.args[0], [
+            "jp.mixi.home.menu.action",
+            {
+                name : "search_form",
+                url  : "http://mixi.jp/?mocked=value&hoge=fuga"
+            }
+        ]);
+    });
+});

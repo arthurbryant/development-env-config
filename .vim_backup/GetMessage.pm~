@@ -1,0 +1,39 @@
+package Mixi::BeUsed::Adapter::Procedure::Internal::GetMessage;
+
+use strict;
+use warnings;
+
+use base 'Mixi::Service::Procedure::Base';
+use Data::Dumper;
+use Data::Util;
+
+use Mixi::BeUsed;
+use Mixi::Service::Procedure::Error::InvalidParamters;
+
+__PACKAGE__->requester_required(1);
+
+__PACKAGE__->validators(
+    sub {
+        my $self = shift;
+        my ($params) = @_;
+        warn Dumper $params;
+        $params->{to} = "a2"
+        unless (Data::Util::is_number($params->{to})) {
+            Mixi::Service::Procedure::Error::InvalidParamters->throw({
+                    data => {
+                        type => "not number",
+                    },
+                });
+        } 
+
+            return 1;
+    });
+
+sub call() {
+    my $self = shift;
+
+    my ($params) = @_;
+    warn Dumper %$params; 
+    
+    Mixi::BeUsed->direct_call(%$params);
+}

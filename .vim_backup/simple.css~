@@ -1,0 +1,10 @@
+h2 {
+    color:red;
+    background:yellow;
+}
+p {
+    color:blue;
+}
+font {
+   font-size:10px; 
+}

@@ -1,0 +1,14 @@
+package Mixi::Independence::Adapter::Procedure::Internal::GetEntry
+
+use strict;
+use warnings;
+
+use base 'Mixi::Service::Procedure::Base';
+
+use Mixi::Independence;
+
+sub call()
+{
+    my $entry = Mixi::Independence->get_entry_data();
+
+}

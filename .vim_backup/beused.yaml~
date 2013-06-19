@@ -1,0 +1,2 @@
+methods:
+  getmessage : 'Miix::BeUsed::Adapter::Procedure::Internal::GetMessage'

@@ -1,0 +1,43 @@
+package Mixi::Controller::HelloWorld;
+use strict;
+use warnings;
+
+use Mixi::Pages;
+use Mixi::Service::Procedure::InternalGateway;
+use Data::Dumper;
+
+__PACKAGE__->auth_type(AUTH_REQUIRED);
+
+__PACKAGE__->templates(
+    _default => 'hello_world.tmpl'
+);
+
+__PACKAGE__->assign(
+    _default => \&assign_default
+);
+
+my $TO_MEMBER_ID = 9599;
+
+sub assign_default{
+    my $self = shift;
+
+    my $message = Mixi::Service::Procedure::InternalGateway->call(
+        "jp.mixi.beused.getmessage" => {
+            requester_id => $self->member->{id},
+            params => {
+                from => $self->member->{id},
+                to => $TO_MEMBER_ID,
+            },
+        }    
+    ); 
+    warn Dumper $message;
+        
+    $self->template->param(
+        message => $message,
+    );
+    return;
+}
+
+
+1;
+

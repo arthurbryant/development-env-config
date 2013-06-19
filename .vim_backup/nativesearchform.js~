@@ -1,0 +1,27 @@
+Namespace('jp.mixi.featuredcontents.ui.nativesearchform')
+.use('jp.mixi.featuredcontents.ui.searchform getInitializedForm')
+.use('jp.co.mixi.nativeproxy notifyNativeProxy')
+.define(function (ns) {
+    "use strict";
+
+    var createSearchURL = function(searchType) {
+
+        var form = ns.getInitializedForm(searchType);
+
+        var action = form.attr("action").replace(/[?&]+$/, '');
+        var requestParameter = form.serialize();
+
+        var seperator = (action.lastIndexOf("?") === -1 ? "?" : "&");
+        return action + seperator + requestParameter;
+    };
+
+    var sendSearchRequest = function(searchType) {
+        var url = createSearchURL(searchType);
+        ns.notifyNativeProxy("jp.mixi.home.menu.action", {name : "search_form", url : url});
+    };
+
+    ns.provide({
+        createSearchURL : createSearchURL,
+        sendSearchRequest : sendSearchRequest
+    });
+});

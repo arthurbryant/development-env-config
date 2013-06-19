@@ -1,0 +1,61 @@
+
+/*
+ * GET home page.
+ */
+
+exports.main = function(req, res){
+    res.render('iyadamain', { title: 'Express' });
+};
+
+exports.res = function(req, res){
+    var exec = require('child_process').exec,
+    child;
+    var recommends = [];
+
+    var iyadaString;
+    if( req.body.iyada ) iyadaString = req.body.iyada.join(' ');
+    child = exec('cd ~/banana/javabin; java -classpath .:/home/bkapps/banana/javabin/* IyadaSearch "' + iyadaString + '"',
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        //console.log('stderr: ' + stderr);
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+        var lines = stdout.split('\n');
+        for( var i=0; i<lines.length; i++ ){
+            var tokens = lines[i].split(',');
+            recommends.push({
+                name:       tokens[0],
+                walktime:   tokens[1],
+                menu:       tokens[2],
+                price:      tokens[3],
+                evaluation: tokens[4],
+                imageUrl:   tokens[5],
+                tabelogUrl: tokens[6]
+            });
+        }
+        var json = JSON.stringify(recommends);
+        //console.log(json);
+        res.contentType('application/json');
+        res.send(json);
+    });
+
+};
+
+exports.commit = function(req, res){
+    var db = require('../lib/db');
+    db.insertDecidedOrder(req.body.order);
+    console.dir(req.body);
+
+    var iyadas = req.body.iyadas;
+    if( !iyadas || !iyadas.length ){
+       return;
+    }
+    for( var i = 0; i < iyadas.length; i++){
+        db.insertAssociation(iyadas[i], req.body.clicked);
+    }
+};
+
+exports.report = function(req, res){
+    res.render('index', { title: 'Express' });
+};

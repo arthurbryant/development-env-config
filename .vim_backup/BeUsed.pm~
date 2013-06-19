@@ -1,0 +1,35 @@
+package Mixi::BeUsed;
+use strict;
+use warnings;
+
+use List::Util qw/shuffle/;
+use Mixi::Entity::User;
+use Data::Dumper;
+
+my @LETTER_LIST = (
+    "How are you ?",
+    "How do you do ?",
+    "What's up ?"
+);
+
+sub direct_call{
+    my $self = shift;
+    my %param = @_;
+
+    warn Dumper %param;
+    my $from_user = Mixi::Entity::User->new($param{from});
+    my $to_user   = Mixi::Entity::User->new($param{to});
+
+    my @shuffle_list = shuffle @LETTER_LIST;
+    my $letter  = $shuffle_list[0];
+    
+    return sprintf '%s  From %s : To %s',
+        $letter,
+        $from_user->nickname,
+        $to_user->nickname
+    ;
+
+}
+
+1;
+

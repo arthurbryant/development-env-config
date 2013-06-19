@@ -1,0 +1,13 @@
+---
+'Mixi::Service::AnalysisLogger'             : 1
+'Mixi::Service::AnalysisLogger::NullObject' : 9
+
+fixed:
+    42129901 : 'Mixi::Service::AnalysisLogger'
+    1747295  : 'Mixi::Service::AnalysisLogger'
+    3693373  : 'Mixi::Service::AnalysisLogger'
+    43641677 : 'Mixi::Service::AnalysisLogger'
+    26058107 : 'Mixi::Service::AnalysisLogger'
+    10022574 : 'Mixi::Service::AnalysisLogger'
+    10023520 : 'Mixi::Service::AnalysisLogger'
+---

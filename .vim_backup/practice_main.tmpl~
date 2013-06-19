@@ -1,0 +1,22 @@
+<TMPL_INCLUDE EXPR="common('header.tmpl')">
+<TMPL_INCLUDE NAME="menu.tmpl">
+<TMPL_INCLUDE NAME="navi.tmpl">
+<TMPL_VAR EXPR="add_css('practice.css')">
+
+<div id="mainArea">
+<TMPL_VAR EXPR="add_js('jp/co/mixi/lang/date.js')">
+<TMPL_VAR EXPR="add_js('jp/mixi/practice/pc/widget.js')">
+<TMPL_VAR EXPR="add_js('jp/mixi/practice/pc/show.js')">
+<TMPL_VAR EXPR="add_js('jp/mixi/practice/pc/hello.js')">
+<!--TMPL_VAR EXPR="add_js('jp/mixi/practice/pc/time.js')"-->
+  <div id="bodyArea" class="practice">
+    <div class="clickMe widget" data-widget-namespace="click.me.widget" data-click-me="click me data">
+      <img src="http://img.mixi.net/img/stamp/4/11ac7c4c65052b230a2c37c2c4791697_smart.png">
+    </div>
+    <div class="findMe widget" data-widget-namespace="find.me.widget" data-find-me="find me data">
+      <img src="http://img.mixi.net/img/stamp/4/132d652e54c623bd63989a0a2666885c_smart.png">
+    </div>
+  </div>
+</div>
+
+<TMPL_INCLUDE NAME="footer.tmpl">

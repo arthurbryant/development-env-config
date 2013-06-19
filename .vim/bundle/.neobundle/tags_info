@@ -1,0 +1,13 @@
+ctrlp.vim
+gundo.vim
+neocomplcache.vim
+syntastic
+vim-fugitive
+vim-indent-guides
+vim-powerline
+vim-quickrun
+vim-repeat
+vim-smartinput
+vim-surround
+vim-unimpaired
+vim-visualstar

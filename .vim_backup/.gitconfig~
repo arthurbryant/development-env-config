@@ -1,0 +1,7 @@
+[user]
+	name = feng.zhang
+	email = feng.zhang@mixi.co.jp
+[core]
+    excludesfile = ~/.gitignore_global
+    attributesfile = ~/.gitattributes_global
+    editor = vim

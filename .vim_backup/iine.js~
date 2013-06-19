@@ -1,0 +1,11 @@
+Namespace("super.iine.widget")
+.use("brook.channel *")
+.use("brook promise")
+.define(function(ns) {
+    ns.provide({
+        registerElements : function(element, dataset) {
+            console.log(element);
+            $j(element).append("<div>######</div>");
+        } 
+    });
+});

@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+visit_list = [ 
+        1 , 2, 
+        1 , 2, 
+        2 , 1, 
+        2 , 4,
+        4 , 2,
+        1 , 3,
+        1 , 4
+    ];
+sql = """INSERT INTO 
+    notify (from_member_id, member_id, created_at, unreads, count) 
+VALUES 
+    (%d, %d, current_date(), 1, 1) 
+ON DUPLICATE KEY UPDATE 
+    unreads = VALUES(unreads) + 1, 
+    count = VALUES(count) + 1;"""
+for i in range(0, len(visit_list)-1, 2):
+    #print sql % (from_id, to_id), "\n"
+    print sql % (visit_list[i], visit_list[i+1]), "\n"

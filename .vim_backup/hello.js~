@@ -1,0 +1,7 @@
+Namespace('jp.mixi.practice.pc')
+.use('jp.mixi.practice.pc.time timer')
+.use('jp.mixi.practice.pc.show show')
+.use("brook.widget *")
+.apply(function (ns) {
+    //ns.show();
+});

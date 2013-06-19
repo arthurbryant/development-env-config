@@ -1,0 +1,49 @@
+Namespace("click.me.widget")
+.use('jp.co.mixi.lang.date formatTimeSpanAgo')
+.use("brook.channel *")
+.use("brook promise")
+.define(function(ns){
+    ns.provide({
+        registerElement : function(element, dataset) 
+        {
+            var show_self = ns.channel("show_self");
+            var start_time = new Date().getTime();
+            $j(element).click(function(event){
+                var result = ns.formatTimeSpanAgo(start_time);
+                alert(result + dataset.clickMe);
+                ns.sendChannel("show_self").run();
+            });
+            var fade_out = ns.channel("test");
+            fade_out.observe(ns.promise(function(next, value){
+                if(value) {
+                    $j(element).fadeOut();
+                }
+            }))
+        } 
+    });
+});
+
+Namespace("find.me.widget")
+.use("brook.channel *")
+.use("brook promise")
+.define(function(ns){
+    ns.provide({
+        registerElement : function(element, dataset) {
+            var show_self = ns.channel("show_self");
+            show_self.observe(ns.promise(function(next, value){
+                $j(element).fadeIn();
+            }));
+            var fade_out = ns.channel("test");
+            fade_out.observe(ns.promise(function(next, value){
+                if(!value) {
+                    $j(element).fadeOut();
+                }
+            }));
+            $j(element).click(function(){
+                var choose = confirm();
+                ns.sendChannel("test").run(choose);
+                console.log(element);
+            });
+        }
+    });
+});

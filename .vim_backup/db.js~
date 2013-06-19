@@ -1,0 +1,102 @@
+// db.js
+// mysql interface
+
+module.exports = {
+    insertDecidedOrder : function(order){
+        var mysql = require('mysql');
+        var connection = mysql.createConnection({
+                host     : 'dev.mysql.lo.mixi.jp',
+                user     : 'root',
+                password : '',
+                database : 'akio_watanabe',
+        });
+
+        var sql = 'INSERT INTO decided_order (decided_order, created_at) VALUES (?,NOW());';
+
+        connection.connect();
+
+        var query = connection.query(sql, order);
+
+        query
+            .on('error', function(err){
+                console.log('err is: ', err );
+            })
+            .on('result', function(rows){
+                console.log('THe res is: ', rows );
+            })
+            .on('end', function() {
+                console.log('end');
+                connection.destroy();
+            });
+    },
+    insertAssociation : function(iyadas, category){
+        var mysql = require('mysql');
+        var connection = mysql.createConnection({
+                host     : 'dev.mysql.lo.mixi.jp',
+                user     : 'root',
+                password : '',
+                database : 'akio_watanabe',
+        });
+
+        var sql = 'INSERT INTO query_menu_association_proto (query, category) VALUES (?,?) ON DUPLICATE KEY UPDATE click = click+1;';
+        var total_sql = 'INSERT INTO query_menu_association_proto (query, category) VALUES (?,"total") ON DUPLICATE KEY UPDATE click = click+1;';
+
+        connection.connect();
+
+        var query = connection.query(sql, [iyadas, category]);
+        var total_query = connection.query(total_sql, iyadas);
+
+        query
+            .on('error', function(err){
+                console.log('err is: ', err );
+            })
+            .on('result', function(rows){
+                console.log('THe res is: ', rows );
+            })
+            .on('end', function() {
+                console.log('end');
+                connection.destroy();
+            });
+        total_query
+            .on('error', function(err){
+                console.log('err is: ', err );
+            })
+            .on('result', function(rows){
+                console.log('THe res is: ', rows );
+            })
+            .on('end', function() {
+                console.log('end');
+                connection.destroy();
+            });
+    }
+    /*
+    getReportData : function(res){
+        var mysql = require('mysql');
+        var connection = mysql.createConnection({
+            host        : 'dev.mysql.lo.mixi.jp',
+            user        : 'root',
+            password    : '',
+            database    : 'akio_watanabe',
+        }); 
+        
+        var report_data = ["hoge"];
+        connection.connect();
+        var query = connection.query('select decided_order from decided_order', function(err, rows, field){
+            if(err) throw err;
+
+            var json = JSON.stringify(rows);
+            res.contentType('application/json');
+            res.send(json);
+            console.dir(json);
+            //console.dir(rows);
+            report_data = rows; 
+        });
+        
+        console.dir(report_data);
+        
+        connection.end();
+
+        return report_data;
+    }
+*/
+};

@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+#
+# Author: feng.zhang   Email: feng.zhang@mixi.co.jp  2012-10-23
+#
+package Ooqabooqoo::Print;
+
+use strict;
+use warnings;
+
+use Data::Dumper;
+
+require "chp10_exe1.pl";
+
+@day = qw(ark dip wap sen pop sep kir);
+@month = qw(diz pod bod rod sip wax lin sen kun fiz nap dep);
+
+sub date {
+	my ($sec, $min, $hour, $day, $month, $year, $wday) = localtime;
+	$month += 1;
+	$year += 1990;
+	
+}
+

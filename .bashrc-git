@@ -1,0 +1,5 @@
+# alias 
+alias cp='cp -i'
+alias rm='rm -i'
+alias ga="git add"
+alias gm="git commit"

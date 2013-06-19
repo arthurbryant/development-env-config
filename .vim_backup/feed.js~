@@ -1,0 +1,65 @@
+/*
+ * 1. イイネボタンのclickイベントが発火したらボタンの見た目を変えてください
+ * ヒント）
+ * 　　ボタンの見た目を変えるにはdiabled属性をtrueにしてください
+ *     （CSSはあらかじめ用意しています）
+ *
+ *     １つ１つのボタンにイベントリスナーを設定するのではなく、
+ *     jQueryの.on()を使って１つの親要素にdelegateしてください
+ *
+ * 2. つぶやきの投稿フォームに文字が入力されるたびに文字カウントを更新してください
+ */
+
+/*
+ * strict mode
+ * JSの落とし穴にはまるのを防ぐため、許可された書き方の一部をエラーにする
+ * 例外を設けたい場合は以下の様にコメントで記述できます
+ * mixiのコーディングガイドラインでも新規コードはstrict mode必須となっています
+ */
+/*jshint browser:true, strict:true*/
+/*global jQuery:false, _:false*/
+
+(function() {
+    "use strict";
+    $j(".likeButton").on(
+        "click",
+        null, 
+        function(){
+            this.disabled = !this.disabled;
+        });
+
+var feedList = {
+    list : $j("#feedList"),
+    postHandler : function(event, name, body) {
+                console.log(name + body);
+                var post = "<div class='feed clearfix'><div class='nickname'>" + name + "</div><div class='text'>" + body + "</div> <button class='likeButton'></button></div>";
+                console.log(post);
+                this.list.append(post); 
+            },
+    postEventListener : function() { 
+        $j(window).on("addPost", _.bind(this.postHandler, this));
+    }
+};
+
+var voiceForm = {
+    count : $j(".count"),
+    input : $j("input"),
+    textarea : $j("textarea"),
+    setCountListener : function() {
+                this.count.text(this.textarea.val().length); 
+                console.log(this.count.text());
+            },
+    setPostListener : function() {
+        var self = this;
+        self.textarea.on("keyup", _.bind(self.setCountListener, self));
+        $j("#voiceForm button").on(
+            "click", 
+            function() {
+                $j(window).trigger('addPost', [self.input.val(), self.textarea.val()]);
+            })
+    }
+};
+
+    feedList.postEventListener();
+    voiceForm.setPostListener();
+})();

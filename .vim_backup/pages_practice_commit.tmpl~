@@ -1,0 +1,21 @@
+<html>
+<head>
+  <title>Pages practice</title>
+</head>
+
+<body>
+
+<form action="hello_world.pl" method="get">
+<input type="text" name="task_id" value="<TMPL_VAR EXPR='html_escape(task_id)'>">
+<input type="text" name="text" value="<TMPL_VAR EXPR='html_escape(text)'>">
+<input type="hidden" name="mode" value="commit">
+<input type="submit" value="進む">
+</form>
+作業者はmember_id : ○○○です。<br>
+
+入力されたtask_id は△△△ です<br>
+入力されたtext    は□□□ です<br>
+
+<a href="hello_world.pl">トップへ戻る</a>
+</body>
+</html>

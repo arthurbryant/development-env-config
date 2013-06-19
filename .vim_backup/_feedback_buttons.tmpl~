@@ -1,0 +1,27 @@
+<ul class="listAction" >
+<TMPL_VAR EXPR="add_js('mixi/model/superfeedback.js')">
+
+<TMPL_UNLESS NAME=feedback_disabled>
+
+<li class="supperiine : widget" style="<TMPL_IF EXPR="(owner_id === viewer_id)">display:none;</TMPL_IF>"><a href="javascript:void(null);" class="widget likeIcon <TMPL_IF EXPR="(can_feedback<1)">acted</TMPL_IF>"
+    data-widget-namespace="jp.mixi.model.superfeedback"
+    data-location="feed"
+    data-service="<TMPL_VAR EXPR=html_escape(service)>"
+    data-resource-id="<TMPL_VAR EXPR=form(hashfragment)>" title="イイネ！"><span>超イイネ！</span></a></li>
+
+<li class="iine" style="<TMPL_IF EXPR="(owner_id == viewer_id)">display:none;</TMPL_IF>"><a href="javascript:void(null);" class="widget likeIcon <TMPL_IF EXPR="(can_feedback<1)">acted</TMPL_IF>"
+    data-widget-namespace="jp.mixi.home.pc.widget.feedbackbutton"
+    data-location="feed"
+    data-service="<TMPL_VAR EXPR=html_escape(service)>"
+    data-resource-id="<TMPL_VAR EXPR=form(hashfragment)>" title="イイネ！"><span>イイネ！</span></a></li>
+</TMPL_UNLESS>
+
+<li class="comment">
+<TMPL_IF EXPR="(can_comment == 1)">
+<a href="javascript:void(null);" class="JS_commentButton commentIcon" title="コメント">コメント</a><TMPL_ELSE><span class="commentIcon">コメント</span></TMPL_IF></li>
+</ul>
+<TMPL_IF EXPR="(can_comment == 0)">
+<ul class="limitFeedback">
+<li>※コメントの上限に達しました。</li>
+</ul>
+</TMPL_IF>

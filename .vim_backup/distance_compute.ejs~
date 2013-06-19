@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Help</title>
+  </head>
+  <body>
+      <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            /*
+            var parameters = "origin=Boston,MA&destination=Concord,MA&sensor=false";
+            $.getJSON(escape("http://maps.googleapis.com/maps/api/directions/json?" + parameters), function(data){
+                        var output = ""
+                                for (x = 0;x < data.routes[0].legs[0].steps.length; x++){
+                                                output = output + data.routes[0].legs[0].steps[x].html_instructions;
+                                                            output += " (Distance: " + data.routes[0].legs[0].steps[x].distance.text + ") <br />";
+                                                                    }
+                                                                            
+                                                                            document.getElementById("test").innerHTML=output
+                                                                        });
+        */
+
+        $().ready(function(){
+            
+            var request = $.ajax({
+                 url : "http://maps.googleapis.com/maps/api/directions/json?",
+                  type: "POST",
+                  data: {
+                        origin : "東京都渋谷区東１丁目２−２０",
+                        destination : "東京都渋谷区渋谷４−４−２５",
+                        sensor : false,
+                        mode : "walking"
+                  },
+                    dataType: "jsonp",
+                });
+                 
+                request.done(function(msg) {
+                      $("#log").html( msg );
+                  });
+                   
+                  request.fail(function(jqXHR, textStatus) {
+                        alert( "Request failed: " + textStatus );
+                    });
+        });
+        </script>
+  </body>
+</html> 

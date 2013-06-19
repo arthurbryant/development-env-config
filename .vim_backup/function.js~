@@ -1,0 +1,30 @@
+(function(){ 
+    var createAddHoge = function() {
+        var count = 0;
+        return function(str) {
+            count++;
+            return str + "Hoge" + count;
+        };
+    };
+    
+    var addHoge = createAddHoge();
+    var addHoge2 = createAddHoge();
+    var result;
+    result = addHoge("test");
+    console.log(result);
+    result = addHoge("test");
+    console.log(result);
+    result = addHoge2("test");
+    console.log(result);
+
+    var person = {
+        height : 1.72,
+        weight : 53,
+        bmi : function() {
+            return this.weight / (this.height * this.height);
+        }
+    };
+    window.bmi = person.bmi;
+    result = window.bmi();
+    console.log(result);
+})()
