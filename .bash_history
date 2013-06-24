@@ -1,662 +1,3 @@
-fg
-./hash.pl 
-fg
-./hash.pl 
-clear]
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-fg
-./hash.pl 
-:wq
-fg
-ls
-cd git/git-learning/
-ls
-vim index.html 
-git status
-git log
-clear
-touch a
-git status
-ls
-git add a
-git rm a
-git status
-git commit -m "add a"
-git status
-git rm a
-ls
-gitk
-yum install gitk
-git dif
-git diff
-ls
-touch a
-git add a
-git commit -m "adda "
-git status
-git log
-git reset --hard 962b
-git log
-ls
-git log
-clear
-git log
-git reset --hard d944
-ls
-git branch
-git checkout master
-git branch
-git checkout develop
-git diff l"@{yesterday]"
-git diff "@{yesterday}"
-git log
-git branch
-git remote -v
-git checkout -b bugfix origin/master
-git branch
-ls
-touch bugfix
-git add bugfix
-git commit -m "add bugfix"
-git status
-git branch -a
-git status
-git log
-touch b
-git add .
-git commit -m "add bugfix b"
-git log
-git branch -a
-git checkout develop
-git merge --squash bugfix
-git log
-ls
-git branch
-git log origin/master
-git log origin master
-git branch
-git log master bugfix
-git log master -- bugfix
-git log master -- index.html
-git log -p
-git show
-clear
-git show
-git blame
-git blame -e
-ls
-git blame index.html
-git log
-git show 2a793a13c9c7cd4b168647d2b386c35a0c82ca73
-clear
-git log .
-clear
-git log -- .
-mkdir test
-cd test/
-ls
-clear
-ls
-cd ..
-ls
-cd ..
-ls
-git clone ssh://git@git.lo.mixi.jp/projects/git-training/team01.git
-git clone ssh://git@git.lo.mixi.jp/projects/git-training/team02.git
-ls
-git rm team01/
-rm -rf team01/
-cd team02/
-ls
-vim Numbers.txt 
-git add .
-git commit -m "change to 444"
-git remote -v
-git branch
-git push origin/master
-git push origin master
-git pull
-git status
-vim Numbers.txt 
-git push origin master
-git log
-vim Numbers.txt 
-ls
-vim Numbers.txt 
-git status
-git add Numbers.txt
-vim Numbers.txt 
-git add Numbers.txt
-git commit -m "add feng.zhang"
-git log
-git blame Numbers.txt
-git .git/config
-vim .git/config
-git config --global user.name "feng.zhang"
-git config --global user.email "feng.zhang@mixi.co.jp"
-git push origin master
-git remote -v
-clear
-git status
-git branch -v
-git branch -a
-git branch -b bugfix origin/master
-git co -b bugfix origin/master
-git checkout -b bugfix origin/master
-vim Numbers.txt 
-git log
-ls
-vim Numbers.txt 
-git add .
-git commit -m "add feng.zhang"
-git push origin master
-git rebase origin master
-git log
-vim Numbers.txt 
-git log
-git pull 
-vim Numbers.txt 
-git push origin master
-git status
-git add Numbers.txt
-git commit --amend
-git status
-git commit
-git log
-git push origin master
-git log
-git branch
-git checkout bugfix 
-git status
-vim Numbers.txt 
-git pull 
-vim Numbers.txt 
-git pull 
-ls
-git status
-git add .
-git commit -m "correct conflict"
-git pull 
-git status
-git log
-git push origin master
-vim Numbers.txt 
-git pull
-git push origin master
-git branch
-git branch -a
-git push origin master 
-git push origin bugfix
-git checkout master
-git pull
-git merge bugfix
-git push origin master
-cd ..
-history | grep "clone"
- git clone ssh://git@git.lo.mixi.jp/projects/git-training/team01.git
-ls
-cd team01/
-ls
-vim Numbers.txt 
-git pull
-vim Numbers.txt 
-git remote -a
-git branch -a
-git fetch
-clear
-ls
-vim Numbers.txt 
-ls
-vim Numbers.txt 
-git add .
-git commit -a "add conflict"
-git commit -m "add conflict"
-git status
-git branch
-git push origin master
-git pull
-vim Numbers.txt 
-git log
-s
-git log
-vim Numbers.txt 
-git add .
-git commit -m "add conflict"
-git log
-git push origin master
-vim Numbers.txt 
-git pull
-vim Numbers.txt 
-git add .
-git log
-git status
-ls
-vim \#Numbers.txt# 
-ls
-vim \#Numbers.txt# 
-git log
-git status
-git commit --amend
-git commit 
-git push origin master
-git pull
-vim Numbers.txt 
-ls
-git add .
-git commit -m "add conflict"
-git push origin master
-vim Numbers.txt 
-git log
-fg
-vim Numbers.txt 
-git add .
-git commit -m "add commit"
-vim Numbers.txt 
-git add .
-git commit --amend
-git status
-git push origin master
-git pull
-vim Numbers.txt 
-git add .
-git log
-git commit -m "add comment"
-git push origin master
-git pull
-vim Numbers.txt 
-git add .
-git commit -m "add comment"
-git push origin master
-git pull
-git status
-git push origin master
-git log
-clear
-ls
-cat Numbers.txt 
-git log
-ls
-vim Numbers.txt 
-git add .
-git commit -m "add smile"
-git log
-vim Numbers.txt 
-git add .
-git commit -m "add cry"
-git log
-git rebase -i HEAD~2 
-git 
-git push origin master
-git pull
-vim Numbers.txt 
-git push origin master
-git pull
-git add .
-git log
-git status
-git commit -m "add cry"
-git log
-git push origin master
-git pull
-vim Numbers.txt 
-git log
-git add .
-git commit -m "add cry"
-git log
-git rebase -i HEAD~2
-git log
-git push origin master
-git pull
-git add .
-git commit 
-git push origin master
-git pull
-git branch
-git checkout master
-ls
-git log
-cat Numbers.txt 
-git log
-git rebase -i HEAD~2
-git rebase --continue
-vim Numbers.txt 
-git status
-git log
-git add .
-git commit -m "add cry and smile"
-git log
-git rebase -i HEAD~2
-git rebase --continue
-git push origin master
-git pull
-vim Numbers.txt 
-git add .
-git commit "add simle"
-git commit -m "add smile"
-git push origin master
-git branch
-git pull
-vim Numbers.txt 
-git add .
-git log
-git status
-vim Numbers.txt 
-git commit 
-git log
-git push origin master
-git pull
-ls
-vim Numbers.txt 
-git pull --rebase
-git branch
-ls -a
-git rebase --abort
-git pull --rebase
-ls
-vim Numbers.txt 
-git add .
-git commit -m "delete comment"
-git log
-git push origin master
-git pull --rebase
-git status
-git push origin master
-vim Numbers.txt 
-git branch
-git checkout -b bugfix origin/master
-ls
-git branch
-git diff --check
-ls
-git log
-man git log
-git log --graph
-clear
-git log --graph
-git branch
-git log
-git remote show origin 
-ls
-vim Numbers.txt 
-git pull
-git pull --rebase
-git branch
-git checkout master
-git pull
-git status
-git add .
-git commit 
-git log
-git pull --rebase
-vim Numbers.txt 
-git rebase --continue
-vim Numbers.txt 
-git add .
-git rebase --continue
-git log
-git push origin master
-git log
-clear
-ls
-vim Numbers.txt 
-git log
-git fetch
-vim Numbers.txt 
-clear
-git pull
-vim Numbers.txt 
-ls
-git log
-clear
-git branch
-git pull
-vim Numbers.txt 
-git log
-ls
-vim Numbers.txt 
-git add .
-git commit 
-git push origin master
-git log]
-git log
-git pull --rebase
-vim Numbers.txt 
-git status
-git push origin master
-clear
-ls
-git reflog
-tig
-cd
-ls
-cd git/temp/
-ls
-cd mixi/
-ls
-git status
-git fetch
-tig
-man tig
-tig show
-man tig
-tig status
-tig
-cd -
-cd ../git-learning/
-ls
-cd ../team0
-ls
-tig
-magit
-emacs
-clear
-man git bisect
-history
-tig
-fg
-exitg
-exit
-ls
-cd git/sicp/
-ls
-cd chapter1/
-ls
-cd ..
-ls
-git remote -v
-git fetch
-ls
-cd chapter1/
-ls
-cd ..
-ls
-git fetch origin 
-git pull origin/master
-git pull origin master
-git status
-ls
-cd chapter1/
-ls
-vim 17.scm 
-cd ..
-ls
-mv chapter1/ chapter.bak
-ls
-git status
-git pull origin master
-ls
-cd chapter1
-ls
-cd part1/
-ls
-cd ..
-ls
-cd ..
-ls
-clear
-ls
-cd chapter1
-ls
-mkdir part3
-ls
-cd part3/
-ls
-cp ../part1/t.scm .
-mv t.scm multiple.scm
-vim multiple.scm 
-ls
-ll
-chmod +x multiple.scm 
-./multiple.scm 
-fg
-./multiple.scm 
-fg
-./multiple.scm 
-fg
-./multiple.scm 
-fg
-./multiple.scm 
-]fg
-fg
-ls
-cp multiple.scm power.scm
-vim power.scm 
-./power.scm 
-fg
-./power.scm 
-fg
-./power.scm 
-fg
-./power.scm 
-fg
-ls
-cd ..
-ls
-git status
-git add .
-git status
-git commit -m "part3 add"
-git push origin master
-git log
-clear
-ls
-git status
-cd git/sicp/
-ls
-git pull origin master
-ls
-cd chapter1/
-ls
-cd part3/
-ls
-cd ../..
-clear
-cd
-ls
-exit
-ls
-cd git/
-ls
-mkdir ios-server
-vim server.pl
-ls
-exit
-ls
-cd git/sicp/
-ls
-git status
-git pull origin master
-ls
-cd chapter
-rm -rf chapter.bak/
-git status
-git rm -rf chapter1/*
-git ls
-ls
-git status
-git checkout chapter1
-git pull origin master
-ls
-git log
-git status
-git reset --hard HEAD 
-ls
-git status
-rm -rf chapter.bak/
-git status
-git rm chapter.bak/
-git -r rm chapter.bak/
-git rm chapter.bak/ p
-git rm chapter.bak/ -r
-git status
-git add .
-git commit -m "remove chapter.bak"
-git push 
-ls
-cd chapter1/
-ls
-cd part3/
-ls
-cd ..
-ls
-mkdir part4
-cd part4/
-ls
-cp ../part3/power.scm .
-ls
-mv power.scm smallest-divisor.scm
-vim smallest-divisor.scm 
-ls
-fg
-vim smallest-divisor.scm 
-ls
-cd ..
-ls
-grep "square" . -r
-fg
-git status
-git add .
-git commit 
-git push
-clear
-ls
-clear
-ls
-cd mixi/
-ls
-exit
 cd mixi/
 ls
 clear
@@ -998,3 +339,662 @@ ls
 cd ..
 vim .gitconfig 
 vim /home/bkapps/.vimrc
+ls
+cd git/
+ls
+rm -rf touch-skin/
+git clone ssh://git@git.lo.mixi.jp/projects/touch-skin.git
+ls
+git branch -a
+git checkout master
+ls
+pwd
+cd touch-skin/
+ls
+git branch -a
+git checkout remotes/origin/COREDEVSOCIAL-420
+git branch -a
+git checkout touch-theme
+git checkout -b touch-theme
+git branch
+ls
+git branch -a
+git chekcout remotes/origin/COREDEVSOCIAL-429
+git checkout remotes/origin/COREDEVSOCIAL-429
+git checkout -b touch-theme-manage-tool
+ls
+git branch
+git log
+ls
+cd ..
+ls
+cd bash/
+ls
+vim mount-file-sv.sh
+chmod +x mount-file-sv.sh 
+./mount-file-sv.sh 
+exit
+ls
+vim a
+ls -a
+vim a
+vim .vimrc
+rm -rf a
+vim a
+mv a a.js
+vim a.js 
+mv a.js a.pl
+vim a.pl 
+ls
+fg
+vim a.pl 
+vim /home/bkapps/.vimrc
+ls
+vim /home/bkapps/.vimrc
+fg
+clear
+ls
+rm -rf a.pl
+ls
+cd mixi/
+ls
+cd ..
+ls
+cd git/
+ls
+git clone ssh://git@git.lo.mixi.jp/projects/touch-skin.git
+ls
+ls -t
+cd touch-skin/
+ls
+ls -a
+cd .git/
+ls
+cd ..
+ls
+df -h
+cd ..
+ls
+cd ..
+ls
+git remote -v
+git remote add origin git@github.com:arthurbryant/configfiles.git
+git status
+git add .bash* .git* 
+git status
+git add .vim*
+git status
+git commit 
+gm
+git push
+ls
+cd git/touch-skin/
+ls
+git log | grep db
+git log 
+git log --stat
+git log --stat -p
+git log
+git remote add mixi git@git.lo.mixi.jp:mixi/mixi.git
+git fetch mixi
+git log mixi/master..
+git log mixi/master.. --stat
+g
+git log mixi/master..touch-theme --stat
+git log mixi/master..touch-theme --stat -p
+clear
+git log mixi/master..touch-theme --stat -p
+ls
+script/devel/server -p 7777
+cd git/touch-skin/
+ls
+git diff mixi/master... 
+gb
+git diff mixi/master...touch-theme 
+vim lib/Mixi/Template/Touch/DesignScheme.pm 
+git diff mixi/master...touch-theme 
+ls
+pwd
+cd lib/Mixi/Template/
+ls
+cd Touch/
+ls
+vim DesignScheme.pm 
+cd ..
+ls
+cd Register/
+ls
+vim Mobile.pm 
+cd git/banana/banana/
+ls
+vim app.js 
+ls
+git remote -all
+gb -a
+git branch
+git pull origin/banana
+git pull origin banana
+git checkout app.js
+git pull origin banana
+git status
+git checkout origin/banana
+git status
+git reset --hard
+git status
+clear
+ls
+git remote -v
+gb -a
+git status
+history | grep git
+clear
+gb -a
+git checkout remote/origin/banana
+git remote -v
+git branch
+git checkout remote/origin/banana
+history | grep git
+ls
+git bra c
+gb
+git fetch
+git remote -v
+gb -a
+git checkout -b develop
+git checkout remotes/origin/banana
+git checkout -b banana
+gb -a
+man git branch
+git branch -D develop
+gb
+git fetch 
+node app.js 
+vim app.js 
+node app.js 
+clear
+node app.js 
+]
+node app.js 
+clear
+node app.js 
+;s
+ls
+cd lib/
+ls
+cd ../javabin/
+ls
+cd lib/
+ls
+cd ..
+ls
+cd src/
+ls
+cd ..
+ls
+fg
+cd ..
+ls
+vim routes/iyada/list.js 
+fg
+ls
+cd javabin/
+ls
+java -classpath .:/home/bkapps/git/banana/banana/javabin/lib/mysql-connector-java-5.1.25-bin.jar IyadaSearch 
+java --version
+java 
+java -v
+java -version
+ls
+java -classpath .:/home/bkapps/git/banana/banana/javabin/lib/mysql-connector-java-5.1.25-bin.jar IyadaSearch 
+java -version
+locate java
+clear
+locate java
+whereis java
+cd /usr/java/jdk1.7.0_05/bin/
+ls
+cd ..
+ls
+cd ..
+cd jdk1.
+cd jdk1.7.0_05/
+ls
+cd bin/
+ls
+java
+./java -version
+cd ..
+ls
+cd-
+cd
+ls
+cd git/banana/banana/
+ls
+history | grep class
+ls
+cd javabin
+ls
+/usr/java/jdk1.7.0_05/bin/java -classpath .:/home/bkapps/git/banana/banana/javabin/lib/mysql-connector-java-5.1.25-bin.jar IyadaSearch
+whereis java
+cd ..
+ls
+fg
+ls
+clear
+ls
+fg
+ls
+cd lib/
+ls
+vim db.js 
+ls
+fg
+cd ..
+ls
+fg
+exit
+ls
+cd git/banana/banana/
+ls
+git remote -v
+history | grep git 
+git remote add banana ssh://git@git.lo.mixi.jp/users/akio.watanabe/banana.git
+ls
+git status
+cp views/bubble.ejs ../
+cd ..
+ls
+rm -rf banana/
+git clone ssh://git@git.lo.mixi.jp/users/akio.watanabe/banana.git
+ls
+cd banana/
+ls
+node app.js 
+npm install express
+ls
+node app.js
+ls
+vim app.js 
+ps axu | grep node
+kill 5094
+ps axu | grep node
+node app.js 
+ls
+git branch
+vim app.js 
+npm install ejs
+ls
+vim readme 
+cd views/
+ls
+vim index.ejs 
+cd ..
+ls
+vim routes/iyada/list.js 
+vim views/iyada/list.ejs 
+vim readme 
+ls
+git status
+vim .gitignore 
+ls
+vim .gitignore 
+fg
+vim .gitignore 
+fg
+vim .gitignore 
+fg
+git status
+git add .
+git commit
+git push 
+clear
+ls
+cd views/
+ls
+vim iyada/list.ejs 
+ls
+cd ..
+ls
+vim public/javascripts/hot-query.js 
+vim views/iyada/list.ejs 
+git status
+clear
+ls
+vim app.js 
+cd views/
+ls
+vim report.ejs 
+ls
+ls -a
+ls -al
+vim /home/bkapps/.bashrc-git 
+source /home/bkapps/.bashrc-git 
+cmx report.ejs 
+git status
+git diff
+ls -al
+vim iyada/list.ejs 
+ls
+cd ..
+ls
+cd public/
+ls
+cd ..
+ls
+cd public/javascripts/
+ls
+vim hot-query.js 
+vim banana.iyada.list.js 
+grep db . -r
+clear
+ls
+vim banana.iyada.list.js 
+ls
+cd ..
+ls
+cd ..
+ls
+cd routes/
+ls
+vim iyada/list.js 
+cd ..
+ls
+vim lib/db.js 
+fg
+ls
+cd javabin/
+ls
+cd ..
+ls
+grep "home/bkapps/banana_xp/j" . -r
+vim routes/iyada/list.js 
+ls
+cd javabin/
+ls
+cd lib/
+ls
+cd ../..
+ls
+fg
+pwd
+fg
+vim routes/iyada/list.js 
+clear
+ls
+node app.js 
+clear
+ls
+cd ..
+ls
+cd ../touch-skin/
+ls
+gb
+vim 
+fg
+vim
+fg
+vi
+vim 
+ls
+gti status
+gs
+git status
+git log
+git diff 
+clear
+git diff mixi/master... 
+fg
+vim
+cler
+clear
+vim /home/bkapps/.bashrc-git 
+source ~/.bashrc-git 
+gss 
+gst
+git add .
+gm
+git push
+gs
+gst
+vim
+git add .
+gm
+git push
+vim
+ga .
+gm
+git push
+git fetch
+git pull
+ls
+git pull
+ls
+condb.sh 
+clear
+ls
+cd git/touch-skin/
+ls
+gb
+git status
+ls
+clear
+ls
+git branch
+history | grep git
+clear
+ls
+git log
+gb -a
+history | grep master
+git log mixi/master..
+git log mixi/master.. --stat
+clear
+ls
+clear
+ls
+ls -d
+ls /
+ls ./
+ls -d ./
+cd db-schema/
+ls
+ls -al
+clear
+ls
+git remote -v
+git fetch
+gb 
+git checkout COREDEVSOCIAL-429_manager__develop 
+gb
+ls
+cd ..
+ls
+script/devel/server  -p 4242
+ls
+cd git/touch-skin/
+;s
+ls
+git status
+git pull
+git log
+clear
+ls
+git pull
+vim
+ls
+vim db-schema/DB_TOUCHSKIN__touchskin.sql 
+git status
+git checkout 
+git status
+git reset --hard
+git status
+git pull
+ls
+git log
+ls
+vim
+fg
+git status
+clear
+ls
+git status
+ga .
+gm
+git push
+ls
+git status
+git pull
+git log
+clear
+ls
+vim
+vim db-schema/DB_PCSKIN__pcskin.sql 
+git status
+ls
+vim
+fg
+vim
+ag 
+man ag
+ag SKIN_DATA .
+vim
+vim ./lib/Mixi/Skin/Touch.pm
+clear
+ag SKIN_DATA .
+ls
+clear
+vim
+find . -name "home2011"
+find . -name "home2011*"
+vim
+find . -name "home2011*"
+vim
+ls
+git log
+git pull
+git reset --hard HEAD~2
+git log
+git reset --hard HEAD~2
+git log
+git status
+vim
+git diff
+gs
+gst
+git add .
+gm
+gst
+gb
+git remote -v
+git push origin -f
+git log
+ls
+clear
+ls
+clear
+vim
+ag skin_data .
+ag skin_data ./.*/touch/
+ag skin_data ./.*/touch/.*
+clear
+ag skin_data .
+vim
+cd lib/Mixi/Skin/
+ls
+clear
+ag skin_data .
+ag skin_data 
+clear
+ag skin_data 
+vim Touch.pm 
+ls -al
+git diff Touch.pm
+git log Touch.pm
+fg
+ls
+clear
+ls
+pwd
+vim Admin.pm 
+ag memcache .
+ag cache .
+vim Controller/Manage.pm 
+git log
+git pull
+git log
+fg
+pwd
+ls
+fg
+cd Touch/
+ls
+vim Admin.pm 
+git log
+git pull
+fg
+ls
+vim Admin.pm 
+ls
+cd ..
+ls
+g
+fg
+vim
+pwd
+ls
+vim Touch/Admin.pm 
+ls
+ag skin_data 
+ag -i skin_dara
+ag -i skin_data
+vim Touch.pm 
+av -i member_skin
+ag -i member_skin
+clear
+ag MEMBER_SKIN
+vim Test.pm 
+git diff Test.pm
+git log Test.pm
+vim Test.pm 
+ls
+vim Config.pm 
+gst
+git diff
+git diff --color
+ag MEMBER_SKIN
+vim Touch/Admin.pm 
+gst
+git add .
+gm
+git push
+git pull --rebase 
+git push
+git log
+ls
+cd Touch/
+ls
+vim Admin.pm 
+pwd
+ls
+cd ..
+ls
+cd Controller/
+ls
+vim Manage.pm 
+gst
+fg
+ls
+cd ..
+ls
+vim Admin.pm 
+fg
+cd git/touch-skin/
+script/devel/server  -p 4242
+lsof -i:4242
+kill -9 28828
+kill -9 28830
+kill -9 28831
+cleaqr
+clear
+ls
+script/devel/server  -p 4242
