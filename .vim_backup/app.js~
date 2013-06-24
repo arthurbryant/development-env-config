@@ -6,9 +6,6 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
-  , iyada = require('./routes/iyada')
-  , report = require('./routes/report')
-  , detail = require('./routes/detail_menu')
   , http = require('http')
   , path = require('path');
 
@@ -33,14 +30,6 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/iyada/main', iyada.main);
-app.get('/report/main', report.main);
-app.get('/detail_menu/main', detail.main);
-app.get('/report/report', report.report);
-app.get('/report/test', report.test);
-app.post('/iyada/res', iyada.res);
-app.post('/iyada/commit', iyada.commit);
-app.post('/detail_menu/main', detail.main);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

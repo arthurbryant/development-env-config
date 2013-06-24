@@ -3,3 +3,7 @@ alias cp='cp -i'
 alias rm='rm -i'
 alias ga="git add"
 alias gm="git commit"
+alias gb="git branch"
+alias gd="git diff --color"
+alias gst="git status"
+alias cmx="chmod +x"

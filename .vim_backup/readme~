@@ -1,2 +1,19 @@
-id_rsa:         git key
-./detroit       siau and detroit private key
+1. Run
+
+node app.js
+
+2. if error: Cannot find module 'express' 
+try the following
+
+npm install -d
+
+
+Todo:
+1. reportの時間を見やすいようにする
+
+2. Add bubble
+    a. get frequently queried keywords
+    b. put the words into the bubble image
+    c. make bubble animation
+Question:
+    bubbleをクリックしたら、何か起こすの？

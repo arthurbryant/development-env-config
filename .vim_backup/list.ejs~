@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]> <html lang="ja" class="IE8"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="ja" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta name="description" content="気に入らない食べ物が一切なく、毎日ドキドキワクワクお食事を提案するスマートフォンアプリ「バナナ」の公式ウェブサイトです。">
+        <meta name="author" content="Team Banana">
+        <meta name="keywords" content="">
+        <meta property="fb:admins" content="">
+        <meta property="fb:app_id" content="">
+        <meta property="og:url" content="http://banana.jp/">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="banana（バナナ）｜目新しいお店を提案する">
+        <meta property="og:description" content="気に入らない食べ物が一切なく、毎日ドキドキワクワクお食事を提案するスマートフォンアプリ「バナナ」の公式ウェブサイトです。">
+        <meta property="og:image" content="http://nohana.jp/img/nohana_banner_250.png">
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/stylesheets/banana.css" rel="stylesheet">
+        <link href="/stylesheets/shoplist.css" rel="stylesheet">
+        <link href="/images/banana.ico" type="image/vnd.microsoft.icon" rel="icon">
+        <link href="/images/banana.ico" type="image/vnd.microsoft.icon" rel="shortcut icon">
+        <link href="/images/banana64.png" rel="apple-touch-icon-precomposed">
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="/javascripts/banana.iyada.list.js"></script>
+        <script src="/javascripts/hot-query.js"></script>
+        <title>いやだ検索 | 何を食べるか考えるのをやめよう</title>
+    </head>
+
+    <body class="index" data-twttr-rendered="true">
+        <div class="navbar navbar-fixed-top center" style="top:-50px;">
+            <div class="navbar-inner">
+                <form class="wrapper" action='####' onsubmit='getRes();return false;'>
+                    <input class="" type="text"/>
+                    <span>は</span>
+                    <a href="####" class="button navbar">いやだ！</a>
+                </form>
+            </div>
+        </div>
+  
+        <div id="container" class="contents">
+            <div id="hotwords">
+                よく検索されるワード(文字をクリック！)</br></br>
+                <div class="hotword" onclick='addHotQuery(this.innerHTML);'>ラーメン</div>
+                <div class="hotword" onclick='addHotQuery(this.innerHTML);'>和食</div>
+                <div class="hotword" onclick='addHotQuery(this.innerHTML);'>肉</div>
+            </div>
+
+            <div class="form">
+                <form class="wrapper" action='####' onsubmit='getFirstRes();return false;'>
+                    <span>いやだ検索</span><br/><br/>
+                    <span style="font-size:small">例：ラーメン、脂っこいもの、まずいもの</span><br/>
+                    <span>　　</span>
+                    <input class="JS_activeInput" type="text" tabindex="0" id="input"/>
+                    <span>　は</span><br/>
+                    <a href="####" class="button main" onclick='getFirstRes();'>　いやだ！</a>
+                </form>
+            </div>
+        <!--/contents--></div>
+    </body>
+</html>

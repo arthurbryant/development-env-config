@@ -2,18 +2,21 @@
 // mysql interface
 
 module.exports = {
-    insertDecidedOrder : function(order){
+    connectDB : function() {
         var mysql = require('mysql');
         var connection = mysql.createConnection({
-                host     : 'dev.mysql.lo.mixi.jp',
+                host     : 'mysql.lo.mixi.jp',
                 user     : 'root',
                 password : '',
                 database : 'akio_watanabe',
         });
-
-        var sql = 'INSERT INTO decided_order (decided_order, created_at) VALUES (?,NOW());';
-
         connection.connect();
+        return connection;
+    },
+
+    insertDecidedOrder : function(order){
+        var connection = connectDB();
+        var sql = 'INSERT INTO decided_order (decided_order, created_at) VALUES (?,NOW());';
 
         var query = connection.query(sql, order);
 
@@ -32,7 +35,7 @@ module.exports = {
     insertAssociation : function(iyadas, category){
         var mysql = require('mysql');
         var connection = mysql.createConnection({
-                host     : 'dev.mysql.lo.mixi.jp',
+                host     : 'mysql.lo.mixi.jp',
                 user     : 'root',
                 password : '',
                 database : 'akio_watanabe',
@@ -68,35 +71,34 @@ module.exports = {
                 console.log('end');
                 connection.destroy();
             });
-    }
-    /*
-    getReportData : function(res){
+    },
+    findRestaurant : function( id, callback ){
         var mysql = require('mysql');
         var connection = mysql.createConnection({
-            host        : 'dev.mysql.lo.mixi.jp',
-            user        : 'root',
-            password    : '',
-            database    : 'akio_watanabe',
-        }); 
-        
-        var report_data = ["hoge"];
-        connection.connect();
-        var query = connection.query('select decided_order from decided_order', function(err, rows, field){
-            if(err) throw err;
-
-            var json = JSON.stringify(rows);
-            res.contentType('application/json');
-            res.send(json);
-            console.dir(json);
-            //console.dir(rows);
-            report_data = rows; 
+                host     : 'mysql.lo.mixi.jp',
+                user     : 'root',
+                password : '',
+                database : 'akio_watanabe',
         });
-        
-        console.dir(report_data);
-        
-        connection.end();
 
-        return report_data;
+        var sql = 'SELECT * FROM shop_list_proto WHERE shop_id = ?';
+
+        connection.connect();
+
+        var query = connection.query(sql, id);
+
+        query
+            .on('error', function(err){
+                console.log('err is: ', err );
+            })
+            .on('result', function(rows){
+                console.log('THe res is: ', rows );
+                callback(rows);
+            })
+            .on('end', function() {
+                console.log('end');
+                connection.destroy();
+            });
     }
-*/
+
 };

@@ -1,0 +1,26 @@
+<div id="menu">
+
+<h3>ミクコレ管理</h3>
+<ul>
+<li><a href="list_skin.pl?skin_type=0">ミクコレ一覧（無料）</a></li>
+<li><a href="list_skin.pl?skin_type=1">ミクコレ一覧（有料）</a></li>
+<li><a href="list_skin.pl?skin_type=2">ミクコレ一覧（タイアップ）</a></li>
+<li><a href="list_skin.pl?mode=waiting_to_open_edit">ミクコレ公開待修正一覧(<TMPL_VAR EXPR="html(waiting_to_open_edit_count)">)</a></li> 
+<li><a href="list_skin.pl?mode=open_edit">ミクコレ公開中修正一覧(<TMPL_VAR EXPR="html(open_edit_count)">)</a></li> 
+<li><a href="list_skin.pl?mode=closed_edit">ミクコレ非公開修正一覧(<TMPL_VAR EXPR="html(closed_edit_count)">)</a></li> 
+<li><a href="manage_skin.pl?mode=add">ミクコレ新規登録</a></li>
+</ul>
+
+<h3>ジャンル管理</h3>
+<ul>
+<li><a href="manage_genre.pl">ジャンル一覧</a></li>
+</ul>
+
+<h3>ログ集計</h3>
+<ul>
+<li><a href="view_log.pl?mode=daily_ranking">日別ランキング</a></li>
+<li><a href="view_log.pl?mode=script_count">ログデータ閲覧</a></li>
+<li><a href="view_log.pl?mode=use_count">設定数遷移履歴</a></li>
+</ul>
+
+</div>
