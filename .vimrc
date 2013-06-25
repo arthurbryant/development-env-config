@@ -156,4 +156,8 @@ endfunction
 filetype plugin on
 filetype indent on
 
+set list                    " highlight garbage characters (see below)
+set listchars=tab:»-,trail:\ ,extends:»,precedes:«,nbsp:%
+highlight SpecialKey   ctermbg=darkyellow guibg=darkyellow"
+
 syntax on

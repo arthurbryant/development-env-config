@@ -1,385 +1,3 @@
-cd mixi/
-ls
-clear
-cd ..
-
-cd ..
-ls
-cd
-ls
-locate android
-clear
-cd git/android/
-ls
-cd android/
-ls
-git status
-git pull
-ls
-git submodule  update
-git submodule sync 
-git submodule  update
-ls
-clear
-ls
-vim /home/bkapps/.vimrc
-cd
-git clone https://github.com/Shougo/neobundle.vim ./.vim/neobundle.vim.git
-vim /home/bkapps/.vimrc
-ls
-cd git/
-ls
-cd ba
-cd bash/
-ls
-vim argv.sh 
-cd mixi/
-ls
-script/perl script/devel/server  -p 8888
-git status
-vim .git/info/exclude 
-git status
-clear
-ls
-git branch
-gitk
-tig 
-clear
-ls
-git remote -a
-git remote -v
-git remote -vv
-git remote -all
-git remote -vvv
-git branch -all
-git branch -a
-git remote add touch-home  git@git.lo.mixi.jp:projects/touchhome.git 
-git remote -v
-git fetch touch-home 
-git branch
-git checkout offline_menu
-git branch
-git log
-clear
-vim
-script/perl script/devel/server  -p 8888
-ls
-make -j4 -B
-script/perl script/devel/server  -p 8888
-vim /home/bkapps/.vimrc
-cd .vim
-ls
-cd bundle/
-ls
-cd syntastic/
-ls
-cd plugin/
-ls
-cd ..
-ls
-cd ..
-ls
-cd ..
-ls
-vim /home/bkapps/.vimrc
-fg
-vim /home/bkapps/.vimrc
-ls
-cd bundle/
-ls
-git clone https://github.com/Shougo/neobundle.vim.git
-ls
-cd ..
-ls
-cd neobundle.vim.git/
-ls
-cd ..
-ls
-rm -rf neobundle.vim.git/
-ls
-vim /home/bkapps/.vimrc
-ls
-cd 
-cd mixi/
-ls
-vim 
-ls
-vim 
-fg
-pstree
-pstree -p
-pstree -p -c
-pstree -p
-kill  17076
-kill  17150
-fg
-vim
-lls
-lclear
-clear
-ls
-find . -name "search_form"
-find . -name "search_form*"
-find . -name "*search_form*" 
-find . -name "*search_form*.js" 
-find . -name "*search*form*.js" 
-clear
-find . -name "*search*form*.js" 
-vim
-fg
-vim
-ls
-vim
-cd static/js/jp/mixi/featuredcontents/ui/
-ls
-pwd
-ls
-vim searchform.js 
-ls
-fg
-vim searchform.js 
-fg
-git diff
-ls
-git log
-ls
-node /usr/local/mixi-devtools/mixi-codereview-js/codereview.js
-node /usr/local/mixi-devtools/mixi-codereview-js/codereview.js .
-fg
-npm install jshin
-vim /home/bkapps/.bashrc 
-cd ~/node_modules/.bin/
-pwd
-fg
-source  ~/.bashrc 
-cd -
-jshint 
-ls
-jshint .
-fg
-vim nativeSearchForm.js 
-fg
-vim 
-vim /home/bkapps/.vimrc
-ls
-fg
-vim nativeSearchForm.js 
-vim searchform.js 
-ls
-mv nativeSearchForm.js nativesearchform.js 
-ls
-git status
-make -B -j4
-cd 
-cd -
-cd ~/mixi/
-make -B -j4
-git status
-git add .
-git commit
-git log
-git remote
-git branch
-git push
-git pull --rebase
-git log
-git push
-cd mixi/
-ls
-./script/devel/server -p 8888
-./script/devel/server -p 9999
-ls
-cd mixi/
-ls
-clear
-vim
-mv nativeSearchForm.js nativesearchform.js 
-cd static/js/jp/mixi/featuredcontents/ui/
-ls
-cd -
-cd static/js/jp/mixi/featuredcontents/ui/
-ls
-cd -
-mv nativeSearchForm.js nativesearchform.js 
-locate nativeSearchFrom.js
-locate nativesearchfrom.js
-locate "nativesearchfrom.js"
-whereis "nativesearchform"
-locate nativesearchform.js
-cd static/js/jp/mixi/featuredcontents/ui/
-ls
-ls -a
-pwd
-cd -
-cd static/ssl/js/jp/mixi/
-ls
-cd featuredcontents/ui/
-ls
-vim nativesearchform.js 
-pwd
-git log
-pwd
-ls
-git log
-pwd
-cd
-ls
-cd mixi/
-ls
-git log
-git status
-git branch
-git checkout offline_menu
-git log
-ls
-cd static/js/jp/mixi/featuredcontents/ui/
-ls
-cd -
-ls
-cd -
-ls
-cd -
-git pull
-ls
-cd -
-ls
-vim nativesearchform.js 
-fg
-ls
-git status
-pwd
-git status
-cd -
-ls
-git status
-git add .
-git commit
-git commit -v
-ls
-git push 
-ls
-fg
-git log
-tig
-clear
-ls
-git status
-git remote -v
-git pull
-ls
-vim
-vim -v
-vim -V
-clear
-ls
-man vim
-vim --version
-vim --version | grep lua
-vim
-vim /home/bkapps/.vimrc
-vim --version | grep lua
-clear
-ls
-pwd
-vim 
-fg
-vim
-vim /home/bkapps/.vimrc
-fg
-vim
-git status
-git add .
-git commit
-git pull
-git push
-ls
-fg
-ls
-clear
-ls
-cd mixi/
-ls
-vim
-git status
-git log
-vim /home/bkapps/.bashrc 
-vim /home/bkapps/.vimrc
-vim /home/bkapps/.bashrc 
-ls
-fg
-vim /home/bkapps/.bashrc 
-ls
-cd 
-ls
-vim .bashrc-git
-ls
-cd mixi/
-ls
-jshint 
-man jshint
-vim .git/config 
-cd
-vim .gitconfig 
-fg
-clear
-ls
-vim .gitconfig 
-vim .gitignore_global
-.gitattributes_global
-vim .gitattributes_global
-ls
-cd
-ls
-ls -a
-vim a
-chmod +x a
-./a 
-cd .git/
-ls
-cd ..
-vim .gitconfig 
-vim /home/bkapps/.vimrc
-ls
-cd git/
-ls
-rm -rf touch-skin/
-git clone ssh://git@git.lo.mixi.jp/projects/touch-skin.git
-ls
-git branch -a
-git checkout master
-ls
-pwd
-cd touch-skin/
-ls
-git branch -a
-git checkout remotes/origin/COREDEVSOCIAL-420
-git branch -a
-git checkout touch-theme
-git checkout -b touch-theme
-git branch
-ls
-git branch -a
-git chekcout remotes/origin/COREDEVSOCIAL-429
-git checkout remotes/origin/COREDEVSOCIAL-429
-git checkout -b touch-theme-manage-tool
-ls
-git branch
-git log
-ls
-cd ..
-ls
-cd bash/
-ls
-vim mount-file-sv.sh
-chmod +x mount-file-sv.sh 
-./mount-file-sv.sh 
-exit
-ls
-vim a
-ls -a
-vim a
-vim .vimrc
-rm -rf a
 vim a
 mv a a.js
 vim a.js 
@@ -998,3 +616,385 @@ cleaqr
 clear
 ls
 script/devel/server  -p 4242
+cd git/
+ls
+cd javascript/
+ls
+git clone https://github.com/lamberta/html5-animation.git
+ls
+cd html5-animation/
+ls
+cd examples/ch09/
+ls
+cd ..
+ls
+cd
+ls
+cd git/
+ls
+cd ..
+ls
+cd mixi/
+ls
+git status
+git log
+git checkout .
+git status
+git remote -v
+git checkout .
+git status
+git clean
+git clean -f 
+git status
+git pull
+clear
+
+vim static/js/jp/mixi/featuredcontents/touch/widget/searchform.js 
+vim static/js/jp/mixi/featuredcontents/ui/searchform.js 
+ls
+fg
+clear
+ls
+vim
+history
+git checkout master
+vim static/js/jp/mixi/featuredcontents/ui/searchform.js 
+ls
+pwd
+git log
+clear
+git log
+git branch
+vim /home/bkapps/.bashrc-git 
+cd
+fg
+vim .bashrc-git 
+cd mixi/
+ls
+gb
+sourc ~/.bashrc
+source ~/.bashrc
+cd
+ls
+source .bashrc
+cd mixi/
+gb
+ls
+cd
+ls
+cd git/
+ls
+cd touch-skin/
+ls
+gb
+clear
+git log
+clear
+ls
+cd ..
+ls
+cd banana/
+ls
+cd banana/
+ls
+git status
+git remote -v
+clear
+git remote -v
+ls
+git status
+git diff
+git diff --color
+vim /home/bkapps/.bashrc
+vim /home/bkapps/.bashrc-git 
+vim /home/bkapps/.bashrc
+source ~/.bashrc-git 
+gd
+clear
+gd
+ls
+git status
+gm
+ga .
+gm
+git status
+git pull
+git pull origin master
+git log
+clear
+ls
+cd views/
+ls
+百度文库首页|下载客户端|百度首页|登录注册
+新闻网页贴吧知道音乐图片视频地图百科文库
+ 帮助
+全部DOCPPTTXTPDFXLS
+百度文库专业资料IT/计算机互联网
+限时！免财富值下载
+由下自上不断上升冒气泡的js特效代码19人阅读
+©2013 Baidu 使用百度前必读 | 文库协议
+用手机扫此二维码：쎗
+以下结果由提供：쎗
+百度翻译
+百科词条：쎗
+百度百科
+复制 | 搜索 | 翻译 | 百科 | 分享 | 二维码
+文字已复制
+分享至：×
+ 
+2 财富值限时！免财富值下载到手机
+/3
+百度文库客户端
+免财富值下载文档点击或扫描下载
+由下自上不断上升冒气泡的js 特效代码  <html> <head>  <title>JS实现气泡从水中急速上升效果</title> <style type="text/css"> body {cursor:crosshair;margin:0; padding:0; position:absolute; overflow:hidden;  background:#FFF;left:0; top:0; width:100%; height:100%;} </style>  <script type="text/javascript"> var object = new Array(); nbfm   = 60; var xm = 0; var ym = 9999; var nx = 0; var ny = 0;  function movbulb(){ with (this) { if(ec < 20){  if(Math.abs(x0‐xm) < 100 &&Math.abs(y0‐ym) < 100){ xx = (xm‐x0) / 8; yy = (ym‐y0) / 8; ec++; } } xx *= 0.99; yy *= 0.99;  x0 = Math.round(x0 + Math.cos(y0 / 15) * p) + xx; y0+= yy‐v;  if(y0 <‐h * 2 || x0 <‐w * 2 || x0 > nx + w * 2){ y0 = ny + N + h * 2;  x0 = nx/2‐100 + Math.random() * 100; ec = 0; }  obj.style.top  = y0‐h; obj.style.left = x0‐w; } }
+function CObj(N,img,w,h){  this.obj = document.createElement("img"); this.obj.src = img.src;  this.obj.style.position = "absolute"; this.obj.style.left =‐1000;  document.body.appendChild(this.obj); this.N  = N; this.x0 = 0; this.y0 =‐1000;  this.v  = 1 + Math.round((80 / h) * Math.random()); this.p  = 1 + Math.round((w / 8) * Math.random()); this.xx = 0; this.yy = 0; this.ec = 0; this.w  = w; this.h  = h;  this.movbulb = movbulb; }  function resize(){  nx = document.body.offsetWidth; ny = document.body.offsetHeight; }  onresize = resize;  document.onmousemove = function(e){ if (window.event) e = window.event;  xm = document.body.scrollLeft+(e.x || e.clientX); ym = document.body.scrollTop+(e.y || e.clientY); }  function run(){  for(i in object)object[i].movbulb(); setTimeout(run, 16); }  onload = function() {  PIC = document.getElementById("bubbles").getElementsByTagName("img"); resize();  for(nbf=0;nbf<nbfm;nbf++){ sf = PIC[nbf%PIC.length];  object[nbf] = new CObj(nbf,sf,sf.width/2,sf.height/2); } run(); }
+</script> </head> <body>  <div id="bubbles" style="visibility:hidden">  <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/smile.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/biggrin.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/eek.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/rolleyes.gif"> </div> </body> </html>
+clear
+ls
+vim bubble.ejs
+vim bubble.ejs 
+vim /home/bkapps/.vimrc
+vim bubble.ejs 
+vim ../app.js 
+ls
+vim bubble.ejs 
+ls
+cd ..
+ls
+vim app.js 
+ls
+cd routes/
+ls
+cp report.js bubble.js
+vim bubble.js 
+ls
+vim bubble.js 
+cd ..
+vim views/bubble.ejs 
+vim app.js 
+vim routes/report.js 
+vim views/report.ejs 
+clear
+ls
+vim views/bubble.ejs 
+vim routes/bubble.js 
+cd views/
+ls
+mv bubble.ejs bubble.ejs.bak
+cp index.ejs bubble.ejs
+vim index.ejs 
+vim ../app.js 
+grep report
+grep report . -r
+cd ..
+grep report . -r
+vim views/report.ejs 
+clear
+ls
+vim routes/bubble.js 
+cd routes/
+ls
+vim detail_menu.js 
+cd ..
+vim app.js 
+cd views/
+ls
+mv bubble.ejs.bak bubble.ejs
+vim bubble.ejs 
+cat bubble.ejs 
+<html>
+<head>
+<title>JS实现气泡从水中急速上升效果</title> <style type="text/css"> body {cursor:crosshair;margin:1; padding:0; position:absolute; overflow:hidden;  background:#FFF;left:0; top:0; width:100%; height:100%;} </style>  <script type="text/javascript"> var object = new Array(); nbfm   = 60; var xm = 0; var ym = 9999; var nx = 0; var ny = 0;  function movbulb(){ with (this) { if(ec < 20){  if(Math.abs(x0‐xm) < 100 &&Math.abs(y0‐ym) < 100){ xx = (xm‐x0) / 8; yy = (ym‐y0) / 8; ec++; } } xx *= 0.99; yy *= 0.99;  x0 = Math.round(x0 + Math.cos(y0 / 15) * p) + xx; y0+= yy‐v;  if(y0 <‐h * 2 || x0 <‐w * 2 || x0 > nx + w * 2){ y0 = ny + N + h * 2;  x0 = nx/2‐100 + Math.random() * 100; ec = 0; }  obj.style.top  = y0‐h; obj.style.left = x0‐w; } }
+function CObj(N,img,w,h){  this.obj = document.createElement("img"); this.obj.src = img.src;  this.obj.style.position = "absolute"; this.obj.style.left =‐1000;  document.body.appendChild(this.obj); this.N  = N; this.x0 = 0; this.y0 =‐1000;  this.v  = 1 + Math.round((80 / h) * Math.random()); this.p  = 1 + Math.round((w / 8) * Math.random()); this.xx = 0; this.yy = 0; this.ec = 0; this.w  = w; this.h  = h;  this.movbulb = movbulb; }  function resize(){  nx = document.body.offsetWidth; ny = document.body.offsetHeight; }  onresize = resize;  document.onmousemove = function(e){ if (window.event) e = window.event;  xm = document.body.scrollLeft+(e.x || e.clientX); ym = document.body.scrollTop+(e.y || e.clientY); }  function run(){  for(i in object)object[i].movbulb(); setTimeout(run, 16); }  onload = function() {  PIC = document.getElementById("bubbles").getElementsByTagName("img"); resize();  for(nbf=0;nbf<nbfm;nbf++){ sf = PIC[nbf%PIC.length];  object[nbf] = new CObj(nbf,sf,sf.width/2,sf.height/2); } run(); }
+</script> </head> <body>  <div id="bubbles" style="visibility:hidden">  <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/smile.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/biggrin.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/eek.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/rolleyes.gif"> </div> </body> </html>
+clear
+fg
+vim bubble.ejs 
+vim ../app.js 
+vim ../routes/iyada.js 
+vim iyadamain.ejs 
+ls
+cd ..
+ls
+git status
+vim lib/db.js 
+git diff
+git diff --color
+git status
+ga 
+ga .
+gm 
+ls
+git log
+clear
+ls
+git status
+cd ..
+ls
+cd
+ls
+git status
+git add .bashrc-git .vim*
+gm
+git push
+clear
+ls
+vim README.md 
+cd
+ls
+cd git/sicp/
+ls
+cd chapter1/
+ls
+cd part3/
+ls
+vim sin.scm 
+ls
+vim power.scm 
+vim multiple.scm 
+ls
+cd ../part4/
+ls
+s
+ls
+cd 
+ls
+cd git/banana/banana/
+ls
+vim /home/bkapps/.bashrc-git 
+source ~/.bashrc-git 
+ls
+cd
+ls
+git status
+git add .bash* 
+gm
+git push
+cd -
+ls
+vim app.js 
+cd lib/
+ls
+vim db.js 
+fg
+vim db.js 
+git status
+git diff
+fg
+clear
+vim /home/bkapps/.bashrc-git 
+gd
+git checkout db.js
+ls
+gst
+git log
+man git diff
+gd c2a221d6
+gd  c2a221d601264732df91843494a57876ce077b01
+git diff  c2a221d601264732df91843494a57876ce077b01
+git diff 0680b2b9bcbdc64803985300cc38be13315ed650
+gd 0680b2b9bcbdc64803985300cc38be13315ed650
+fg
+vim db.js 
+ls
+cd ..
+ls
+vim views/iyada/list.ejs 
+vim public/javascripts/hot-query.js 
+vim public/javascripts/banana.iyada.list.js 
+ag db.js
+vim lib/db.js 
+ag  insertDecidedOrder
+ag db 
+clear
+vim public/javascripts/banana.iyada.list.js 
+ag  insertDecidedOrder
+vim routes/iyada/list.js 
+fg
+cd routes/
+ls
+cd iyada/
+ls
+cd ../..
+fg
+vim views/iyada/list.ejs 
+fg
+av find
+ag find
+fg
+ag  findRestaurant
+vim routes/iyada/detail.js 
+fg
+vim views/iyada/list.ejs 
+fg
+ls
+vim routes/iyada/list.js 
+ls
+cd public/javascripts/
+ls
+vim jquery.googleSuggest.js 
+cd ..
+ls
+cd ../routes/
+ls
+cd iyada/
+ls
+vim detail.js 
+vim list.js 
+cd ..
+ls
+vim report.js 
+fg
+vim report.js 
+fg
+rm -rf iyada/bubble.js 
+ls
+cd ..
+vim views/iyada/list.ejs 
+cat public/javascripts/show_hot_queries.js 
+rm -rf public/javascripts/show_hot_queries.js 
+ls
+fg
+vim routes/iyada/list.js 
+ls
+condb.sh 
+cd git/banana/banana/
+vim views/iyada/list.ejs 
+vim routes/iyada/list.js 
+fg
+ls
+r(json);
+ 92                 console.log('err is: ', err );         |   20         }
+fg
+ls -alt
+vim routes/iyada/list.js 
+rm -rf routes/iyada/.list.js.swp 
+vim routes/iyada/list.js 
+vim app.js 
+v routes/report.js 
+fg
+vim routes/iyada/list.js 
+vim app.js 
+fg
+clear
+git diff
+clear 
+gd
+fg
+gst
+git checkout app.js
+gd
+fg
+vim views/iyada/list.ejs 
+gd
+gst
+gd public/javascripts/hot-query.js 
+ga .
+gm
+git log
+gl
+vim /home/bkapps/.bashrc-git 
+clear
+ls
+fg
+exit

@@ -1,0 +1,6 @@
+function show_hot_queries() {
+    var db = require('../../lib/db');
+    db.getHotQueries(function(data){
+        console.dir(data);
+    });
+}

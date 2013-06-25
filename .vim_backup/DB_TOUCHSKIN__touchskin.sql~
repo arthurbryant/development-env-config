@@ -1,0 +1,189 @@
+--
+-- ユーザ情報とミクコレ情報のリレーション
+--
+
+DROP TABLE IF EXISTS touchskin_member_skin_relation;
+CREATE TABLE touchskin_member_skin_relation (
+  member_id INT(10) UNSIGNED  NOT NULL,
+  skin_id   INT(10) UNSIGNED  NOT NULL,
+  timestamp TIMESTAMP         NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (member_id),
+  KEY key_1 (skin_id,member_id)
+) ENGINE=InnoDB DEFAULT CHARSET=ujis;
+
+--
+-- ユーザ情報とミクコレ情報のリレーション(ステージング環境でのテスト用)
+--
+
+DROP TABLE IF EXISTS touchskin_member_skin_relation_for_test;
+CREATE TABLE touchskin_member_skin_relation_for_test (
+  member_id INT(10) UNSIGNED  NOT NULL,
+  skin_id   INT(10) UNSIGNED  NOT NULL,
+  timestamp TIMESTAMP         NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (member_id),
+  KEY key_1 (skin_id,member_id)
+) ENGINE=InnoDB DEFAULT CHARSET=ujis;
+
+--
+-- ミクコレ情報:
+--
+-- =========================================================
+-- skin_type                    ミクコレ種別(0:無料,1:有料,2:営業,3:タイアップ)
+-- status                       ミクコレ公開ステータス(0:登録中,1:公開中,2:公開中(修正),3:強制終了,4:削除)
+-- name                         ミクコレ名
+-- start_datetime               ミクコレ公開開始日
+-- end_datetime                 ミクコレ公開終了日
+-- skin_color_type              ミクコレの色パターン(0:red,1:blue ...)
+-- skin_color_data              ミクコレ色情報(mobileミクコレで使っていて後々必要になるかもしれないとのことなので残す)
+-- memo                         メモ
+-- skin_version                 スキンのバージョン(1,2,3..)
+-- temporary_skin_info          公開中（修正）時、staging確認用に一時的にデータをyaml形式で保持する。 ex) skin_type : 1,
+-- =========================================================
+--
+
+DROP TABLE IF EXISTS touchskin_skin_data;
+CREATE TABLE touchskin_skin_data (
+  id                      INT(10)       UNSIGNED AUTO_INCREMENT,
+  skin_type               TINYINT(3)    UNSIGNED NOT NULL DEFAULT 0,
+  status                  TINYINT(3)    UNSIGNED NOT NULL DEFAULT 0,
+  name                    VARCHAR(255)  NOT NULL DEFAULT '',
+  regist_staff            VARCHAR(255)  NOT NULL,
+  regist_datetime         TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  update_staff            VARCHAR(255)  NOT NULL,
+  update_datetime         TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  open_datetime           DATETIME      NOT NULL,
+  close_datetime          DATETIME      NOT NULL DEFAULT '9999-12-31 23:59:59',
+  skin_color_type         TINYINT(3)    UNSIGNED NOT NULL,
+  skin_color_data         TEXT          NOT NULL DEFAULT '',
+  memo                    TEXT          NOT NULL DEFAULT '',
+  skin_version            TINYINT(3)    UNSIGNED NOT NULL DEFAULT 1,
+  temporary_skin_info     TEXT          DEFAULT NULL,
+  contents_id             VARCHAR(32)   NOT NULL DEFAULT '',
+  has_home_header_img     TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
+  has_prof_header_img     TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
+  has_bg_img              TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
+  has_border_img          TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
+  has_logo_jack           TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
+  has_banner_img          TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
+  banner_link             VARCHAR(255)  NOT NULL DEFAULT '',
+
+-- Color data
+  body_text_color                   VARCHAR(255)  NOT NULL,
+  nickname_text_color               VARCHAR(255)  NOT NULL,
+  post_datetime_text_color          VARCHAR(255)  NOT NULL,
+  link_color                   VARCHAR(255)  NOT NULL,
+  red_link_color               VARCHAR(255)  NOT NULL,
+  border_color                 VARCHAR(255)  NOT NULL,
+  background_color             VARCHAR(255)  NOT NULL,
+  feedback_button_color        VARCHAR(255)  NOT NULL,
+  gradation_start_color        VARCHAR(255)  NOT NULL,
+  gradation_end_color          VARCHAR(255)  NOT NULL,
+  
+
+  PRIMARY KEY (id),
+  KEY key_1 (skin_type,status,close_datetime,open_datetime)
+) ENGINE=InnoDB DEFAULT CHARSET=ujis;
+
+--
+-- ミクコレ着用履歴
+-- 
+-- =========================================================
+-- start_datetime               ミクコレ着用開始日
+-- end_datetime                 ミクコレ着用終了日
+-- script_id                    ミクコレ適用元 (0:show_friend.pl、1:edit_skin.pl etc )
+-- extra_id                     適用元のその他のパラメータ？(mobileミクコレと構成を合わせるため残す)
+-- =========================================================
+--
+
+DROP TABLE IF EXISTS touchskin_member_skin_log;
+CREATE TABLE touchskin_member_skin_log (
+  member_id       INT(10)       UNSIGNED NOT NULL,
+  skin_id         INT(10)       UNSIGNED NOT NULL,
+  start_datetime  DATETIME      NOT NULL,
+  end_datetime    DATETIME      DEFAULT NULL,
+  script_id       TINYINT(3)    UNSIGNED NOT NULL, 
+  extra_id        INT(10)       NOT NULL DEFAULT 0,
+  PRIMARY KEY (member_id,start_datetime),
+  KEY key_1 (skin_id,start_datetime)
+) ENGINE=InnoDB DEFAULT CHARSET=ujis;
+
+--
+-- ジャンル情報
+-- 
+-- =========================================================
+-- genre_name                   ジャンル名
+-- display                      y:公開、n:非公開
+-- priority                     表示優先度
+-- =========================================================
+--
+
+DROP TABLE IF EXISTS touchskin_genre_data;
+CREATE TABLE touchskin_genre_data (
+  id              INT(10)       UNSIGNED NOT NULL AUTO_INCREMENT,
+  genre_name      VARCHAR(255)  NOT NULL DEFAULT '',                   
+  display         ENUM('n','y') NOT NULL DEFAULT 'n',                  
+  priority        INT(10)       UNSIGNED NOT NULL DEFAULT '0',         
+  regist_staff    VARCHAR(255)  NOT NULL,                              
+  regist_datetime DATETIME      NOT NULL DEFAULT '1970-01-01 00:00:00',
+  PRIMARY KEY (id),
+  KEY display (display,priority)
+) ENGINE=InnoDB DEFAULT CHARSET=ujis;
+
+--
+-- ジャンル情報とミクコレ情報のリレーション
+--
+
+DROP TABLE IF EXISTS touchskin_skin_genre_relation;
+CREATE TABLE touchskin_skin_genre_relation (
+  genre_id  INT(10) UNSIGNED NOT NULL,
+  skin_id   INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY  (genre_id,skin_id),
+  KEY key_1 (skin_id)
+) ENGINE=InnoDB DEFAULT CHARSET=ujis;
+
+--
+-- スキン適用状況の集計テーブル
+--
+-- touchskin_member_skin_relationとtouchskin_member_skin_logから集計して格納します。
+-- cronにて実行予定
+--
+-- =========================================================
+-- date                         集計日
+-- skin_id
+-- use_count                    適用数
+-- =========================================================
+--
+
+DROP TABLE IF EXISTS `touchskin_skin_count_date`;
+CREATE TABLE `touchskin_skin_count_date` (
+  `date` date NOT NULL,
+  `skin_id` int(10) unsigned NOT NULL,
+  `use_count` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`skin_id`,`date`),
+  KEY key_1 (`date`,`use_count`)
+) ENGINE=InnoDB DEFAULT CHARSET=ujis;
+
+--
+-- スキン適用履歴情報の集計テーブル
+-- 
+--
+-- =========================================================
+-- date                 集計日
+-- skin_id
+-- script_data  script_id情報をyaml形式で保存 {script_id => count,script_id => count},
+-- all_count    利用総数
+-- uu_count     利用UU
+-- avg_date     適用期間の平均日数 ( start_datetime - (end_datetime || now()) )
+-- =========================================================
+--
+
+DROP TABLE IF EXISTS `touchskin_skin_monthly_report_data`;
+CREATE TABLE `touchskin_skin_monthly_report_data` (
+  `date` date NOT NULL,
+  `skin_id`     INT(10)     UNSIGNED NOT NULL,
+  `script_data` TEXT        NOT NULL DEFAULT '',
+  `count`       INT(10)     UNSIGNED NOT NULL default '0',
+  `uu_count`    INT(10)     UNSIGNED NOT NULL default '0',
+  `avg_date`    INT(10)     UNSIGNED NOT NULL default '0',
+  PRIMARY KEY  (`date`,`skin_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=ujis;

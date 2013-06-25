@@ -4,10 +4,17 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
+  , report = require('./routes/report')
+  , bubble = require('./routes/bubble')
   , http = require('http')
   , path = require('path');
+
+var lp = require('./routes/lp/index');
+var iyada = {
+    list   : require('./routes/iyada/list'),
+    detail : require('./routes/iyada/detail')
+};
+//var report = require('./routes/report/report');
 
 var app = express();
 
@@ -19,8 +26,8 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
+app.use(express.cookieParser('your secret here'));
+app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -29,9 +36,18 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', lp.index);
+
+app.get('/iyada/list', iyada.list.main);
+app.post('/iyada/list/tracer', iyada.list.tracer);
+
+app.get('/iyada/detail', iyada.detail.main);
+
+app.get('/report/main', report.main);
+app.get('/report/report', report.report);
+
+app.post('/json/iyada/search', iyada.list.search);
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('Express banana listening on port ' + app.get('port'));
 });

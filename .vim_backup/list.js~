@@ -4,7 +4,29 @@
  */
 
 exports.main = function(req, res){
-    res.render('iyada/list', {});
+        var mysql = require('mysql');
+        var connection = mysql.createConnection({
+                host     : 'mysql.lo.mixi.jp',
+                user     : 'root',
+                password : '',
+                database : 'akio_watanabe',
+        });
+        var sql = "select * from hot_queries";
+        connection.connect();
+
+    var query = connection.query(sql,
+        function(err, rows, field) {
+        /*
+            if(err) throw err;
+
+            var json = JSON.stringify(rows);
+            res.contentType('application/json');
+            res.send(json);
+            console.dir(json);
+            */
+            res.render('iyada/list', {data : rows});
+        }
+    );
 };
 
 /*
@@ -41,7 +63,7 @@ exports.search = function(req, res){
     if( req.body.iyadas && req.body.iyadas.length ){
         iyadaString = req.body.iyadas.join(' ');
     }
-    var command = 'cd ' + JAVA_BIN_PATH + '; java -classpath .:' + MYSQL_PATH + ' IyadaSearch "' + iyadaString + '"'; 
+    var command = 'cd ' + JAVA_BIN_PATH + '; /usr/java/jdk1.7.0_05/bin/java -classpath .:' + MYSQL_PATH + ' IyadaSearch "' + iyadaString + '"'; 
     //child = exec('cd JAVA_BIN_CLASS; java -classpath .:/home/bkapps/banana_xp/javabin/lib/mysql-connector-java-5.1.25-bin.jar IyadaSearch "' + iyadaString + '"',
     child = exec(
         command,

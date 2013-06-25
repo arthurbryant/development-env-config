@@ -40,6 +40,9 @@
         <div id="container" class="contents">
             <div id="hotwords">
                 よく検索されるワード(文字をクリック！)</br></br>
+                <% for(i in data) {%>
+                <div class="hotword" onclick='addHotQuery(this.innerHTML);'><%= data[i].query %></div>
+                <%}%>
                 <div class="hotword" onclick='addHotQuery(this.innerHTML);'>ラーメン</div>
                 <div class="hotword" onclick='addHotQuery(this.innerHTML);'>和食</div>
                 <div class="hotword" onclick='addHotQuery(this.innerHTML);'>肉</div>

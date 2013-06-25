@@ -6,6 +6,7 @@
 #   (use "git reset HEAD <file>..." to unstage)
 #
 #	modified:   lib/db.js
+#	modified:   public/javascripts/hot-query.js
 #	modified:   routes/iyada/list.js
-#	modified:   views/report.ejs
+#	modified:   views/iyada/list.ejs
 #

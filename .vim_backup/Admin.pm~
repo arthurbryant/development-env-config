@@ -1,0 +1,604 @@
+package Mixi::Skin::Touch::Admin;
+use strict;
+use warnings;
+use base qw(Mixi::Skin::Touch);
+use Mixi::Skin::Config;
+
+use Date::Calc qw(Today_and_Now);
+
+use Nove::Core::Datetime;
+use Mixi::Log;
+use Mixi::Convert;
+use Params::Validate qw(:types);
+
+sub get_skins {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_,{
+        genre_id     => { type => SCALAR | UNDEF,optional => 1 },
+        admin_status => { type => SCALAR | UNDEF,optional => 1 },
+        sort_key     => { type => SCALAR | UNDEF,optional => 1 },
+        sort_order   => { type => SCALAR | UNDEF,optional => 1 },
+    });
+
+    my $enable_admin_status_sort;
+    my $admin_status_sort_order;
+    if(defined $args{sort_key} && $args{sort_key} eq 'admin_status' && $args{sort_order}){
+        $enable_admin_status_sort = 1;
+        $admin_status_sort_order = $args{sort_order};
+        $args{sort_key}   = '';
+        $args{sort_order} = '';
+    }
+
+    my $skins;
+    if(defined $args{genre_id} && $args{genre_id} ne ""){
+        $skins = $self->db(-Skin=> { role => 's' })->select_skins_by_genre(%args,(
+            skin_type => $self->skin_type,
+        ));
+    }else{
+        $skins = $self->db(-Skin=> { role => 's' })->select_skins(%args,(
+            skin_type => $self->skin_type,
+        ));
+    }
+
+    for(@$skins){ $self->_set_admin_skin_info($_) }
+
+    if(defined $args{admin_status}){
+        @$skins = grep {
+            $args{admin_status} == $_->{admin_status}
+        } @$skins;
+    }
+
+    if($enable_admin_status_sort){
+        if($admin_status_sort_order eq 'desc'){
+            @$skins = sort {
+                $b->{admin_status} <=> $a->{admin_status}
+            } @$skins;
+        }else{
+            @$skins = sort {
+                $a->{admin_status} <=> $b->{admin_status}
+            } @$skins;
+        }
+    }
+
+    return $skins;
+}
+
+sub get_all_skins {
+    my $self = shift;
+    return $self->db(-Skin=> { role => 's' })->select_all_skins();
+}
+
+sub add_skin {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        skin_color_type     => { type => SCALAR },
+        skin_type           => { type => SCALAR },
+        name                => { type => SCALAR },
+        open_datetime       => { type => SCALAR },
+        close_datetime      => { type => SCALAR },
+        memo                => { type => SCALAR },
+        genres              => { type => ARRAYREF | UNDEF,optional => 1 },
+        contents_id         => { type => SCALAR },
+        has_home_header_img => { type => SCALAR },
+        has_prof_header_img => { type => SCALAR },
+        has_bg_img          => { type => SCALAR },
+        has_border_img      => { type => SCALAR },
+        has_logo_jack       => { type => SCALAR },
+        has_banner_img      => { type => SCALAR },
+        banner_link         => { type => SCALAR },
+    });
+
+    my $insert_id;
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->begin();
+    eval {
+        $insert_id = $db->insert_skin(
+            %args,
+            regist_staff    => _admin_user_name(),
+            skin_color_data => '',
+            status          => Mixi::Skin::Config::SKIN_STATUS_DB->{REGISTRATION},
+        );
+
+        if(defined $insert_id){
+            for(@{$args{genres} || []}){
+                $db->insert_skin_genre_relation(
+                    skin_id  => $insert_id,
+                    genre_id => $_,
+                );
+            }
+        } 
+    };
+    if($@){
+        $db->rollback();
+        Mixi::Log->new->warn("faild to add_skin [$@]");
+        return;
+    }
+    $db->end();
+    return $insert_id;
+}
+
+sub edit_skin {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        id                  => { type => SCALAR },
+        skin_color_type     => { type => SCALAR },
+        skin_type           => { type => SCALAR },
+        name                => { type => SCALAR },
+        open_datetime       => { type => SCALAR },
+        close_datetime      => { type => SCALAR },
+        memo                => { type => SCALAR },
+        skin                => { type => HASHREF },
+        genres              => { type => ARRAYREF | UNDEF,optional => 1 },
+        contents_id         => { type => SCALAR },
+        has_home_header_img => { type => SCALAR },
+        has_prof_header_img => { type => SCALAR },
+        has_bg_img          => { type => SCALAR },
+        has_border_img      => { type => SCALAR },
+        has_logo_jack       => { type => SCALAR },
+        has_banner_img      => { type => SCALAR },
+        banner_link         => { type => SCALAR },
+    });
+
+    my $skin = delete $args{skin};
+
+    $args{update_staff} = _admin_user_name();
+
+    for(qw/regist_datetime regist_staff skin_color_data status skin_version temporary_skin_info/){
+        $args{$_} = $skin->{$_};
+    }
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->begin();
+    eval{
+        $db->update_skin(%args);
+        $db->delete_skin_genre_relation(skin_id => $args{id});
+        for(@{$args{genres} || []}){
+            $db->insert_skin_genre_relation(
+                skin_id  => $args{id},
+                genre_id => $_,
+            );
+        }
+    };
+    if($@){
+        $db->rollback();
+        Mixi::Log->new->warn("faild to edit_skin [$@]");
+        return;
+    }
+    $db->end();
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$args{id}]);
+    return 1;
+}
+
+sub get_skin {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { id => { type => SCALAR } });
+
+    my $skin = $self->_get_skin($args{id});
+    $self->_set_admin_skin_info($skin);
+
+    if($skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT}){
+        my $new_version = $self->_get_editing_skin_version($skin->{temporary_skin_info});
+        if($new_version){
+            $skin->{skin_version_staging} = $new_version;
+            $skin->{skin_base_staging}    = $self->_make_skin_base($skin->{id},$skin->{skin_version_staging});
+        }
+    }else{
+        $skin->{skin_version_staging} = $skin->{skin_version};
+        $skin->{skin_base_staging}    = $skin->{skin_base};
+    }
+
+    return $skin;
+}
+
+sub get_skin_name {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { id => { type => SCALAR } });
+    my $skin = $self->_get_skin($args{id});
+    return $skin->{name};
+}
+
+sub set_to_open_edit {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { skin      => { type => HASHREF } });
+
+    my $skin = $args{skin};
+    return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN};
+
+    my $engine  = Mixi::Convert->new('YAML');
+    my $yaml = $engine->encode({
+        skin_version    => $skin->{skin_version} + 1,
+    });
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->update_skin_status_and_temp(
+        id                  => $skin->{id},
+        status              => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT},
+        temporary_skin_info => $yaml,
+        update_staff        => _admin_user_name(),
+    );
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$skin->{id}]);
+    return 1;
+}
+
+sub set_to_open {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { skin      => { type => HASHREF } });
+
+    my $skin = $args{skin};
+    return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{REGISTRATION} || $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{FORCE_CLOSED};
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->update_skin_status_and_temp(
+        id                  => $skin->{id},
+        status              => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+        temporary_skin_info => '',
+        update_staff        => _admin_user_name(),
+    );
+
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$skin->{id}]);
+    return 1;
+}
+
+sub set_to_open_and_commit_edit_data {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { skin      => { type => HASHREF } });
+
+    my $skin = $args{skin};
+    return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT};
+
+    my $new_version = $self->_get_editing_skin_version($skin->{temporary_skin_info});
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->update_skin(
+        %{$skin},
+        skin_version        => $new_version,
+        status              => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+        temporary_skin_info => '',
+    );
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$skin->{id}]);
+    return 1;
+}
+
+sub cancel_open_edit {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { skin      => { type => HASHREF } });
+
+    my $skin = $args{skin};
+    return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT};
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->update_skin_status_and_temp(
+        id                  => $skin->{id},
+        status              => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+        temporary_skin_info => '',
+        update_staff        => _admin_user_name(),
+    );
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$skin->{id}]);
+    return 1;
+}
+
+sub set_to_force_close {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { skin      => { type => HASHREF } });
+
+    my $skin = $args{skin};
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->begin();
+    eval {
+        $db->update_skin_status_and_temp(
+            id                  => $skin->{id},
+            status              => Mixi::Skin::Config::SKIN_STATUS_DB->{FORCE_CLOSED},
+            temporary_skin_info => '',
+            update_staff        => _admin_user_name(),
+        );
+        $db->delete_member_skin_relation_by_skin_id(skin_id => $skin->{id});
+    };
+    if($@){
+        $db->rollback();
+        Mixi::Log->new->warn("faild to set_to_force_close [$@]");
+        return;
+    }
+    $db->end();
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$skin->{id}]);
+    return 1;
+}
+
+sub set_to_delete {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { skin      => { type => HASHREF } });
+
+    my $skin = $args{skin};
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->begin();
+    eval {
+        $db->update_skin_status_and_temp(
+            id                  => $skin->{id},
+            status              => Mixi::Skin::Config::SKIN_STATUS_DB->{DELETED},
+            temporary_skin_info => '',
+            update_staff        => _admin_user_name(),
+        );
+        $db->delete_member_skin_relation_by_skin_id(skin_id => $skin->{id});
+    };
+    if($@){
+        $db->rollback();
+        Mixi::Log->new->warn("faild to set_to_delete [$@]");
+        return;
+    }
+    $db->end();
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$skin->{id}]);
+    return 1;
+}
+
+sub set_to_registration {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { skin      => { type => HASHREF } });
+
+    my $skin = $args{skin};
+    return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN};
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->update_skin_status_and_temp(
+        id                  => $skin->{id},
+        status              => Mixi::Skin::Config::SKIN_STATUS_DB->{REGISTRATION},
+        temporary_skin_info => '',
+        update_staff        => _admin_user_name(),
+    );
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$skin->{id}]);
+    return 1;
+}
+
+sub get_all_genres {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { 
+        offset => { type => SCALAR | UNDEF,optional => 1 },
+        limit  => { type => SCALAR | UNDEF,optional => 1 },
+    });
+
+    my $db = $self->db(-Skin=> { role => 's' });
+    if($args{limit} && $args{offset}){
+        return $db->select_all_genres_with_limit(%args);
+    }else{
+        return $db->select_all_genres();
+    }
+}
+
+sub genre_has_skins {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { genre_id => { type => SCALAR } });
+
+    my $db = $self->db(-Skin=> { role => 's' });
+    return $db->select_public_skins_count_by_genre(
+        genre_id  => $args{genre_id}
+    ); 
+}
+
+sub add_genre {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { 
+        genre_name => { type => SCALAR },
+        display    => { type => SCALAR },
+        priority   => { type => SCALAR },
+    });
+    #同名のジャンル登録を禁止
+    return if $self->get_genre_by_name(genre_name => $args{genre_name}); 
+
+    return $self->db(-Skin=> { role => 'm' })->insert_genre(
+        %args,
+        regist_datetime => sprintf("%04d-%02d-%02d %02d:%02d:%02d",Date::Calc::Today_and_Now()),
+        regist_staff    => _admin_user_name(),
+    );
+}
+
+sub get_genre_by_name {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { genre_name => { type => SCALAR } });
+    return $self->db(-Skin=> { role => 's' })->select_genre_by_name(%args);
+}
+
+sub edit_genre {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { 
+        id         => { type => SCALAR },
+        genre_name => { type => SCALAR },
+        display    => { type => SCALAR },
+        priority   => { type => SCALAR },
+    });
+
+    #同名のジャンル登録を禁止
+    my $genre = $self->get_genre_by_name(genre_name => $args{genre_name}); 
+    return if $genre && $genre->{id} != $args{id};
+
+    return $self->db(-Skin=> { role => 'm' })->update_genre(%args);
+}
+
+sub delete_genre {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { id => { type => SCALAR } });
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->begin();
+    eval {
+        $db->delete_genre(%args);
+        $db->delete_skin_genre_relation_by_genre(genre_id => $args{id});
+    };
+    if($@){
+        $db->rollback();
+        return;
+    }
+    $db->end();
+    return 1;
+}
+
+sub get_skin_use_count {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { date => { type => SCALAR } });
+    return $self->db(-Skin=> { role => 's' })->select_skin_use_count(%args);
+}
+
+sub get_skin_use_count_by_skin {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        skin_id => { type => SCALAR },
+        start   => { type => SCALAR },
+        end     => { type => SCALAR },
+        offset  => { type => SCALAR },
+        limit   => { type => SCALAR },
+    });
+    return $self->db(-Skin=> { role => 's' })->select_skin_use_count_by_skin(%args);
+}
+
+sub count_skin_members {
+    my $self = shift;
+    return $self->db(-Skin=> { role => 's' })->count_skin_members();
+}
+
+sub set_skin_use_count {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        skin_id   => { type => SCALAR },
+        date      => { type => SCALAR },
+        use_count => { type => SCALAR },
+    });
+    return $self->db(-Skin=> { role => 'm' })->insert_skin_use_count(%args);
+}
+
+sub get_skin_log {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        skin_id => { type => SCALAR },
+        start   => { type => SCALAR },
+        end     => { type => SCALAR },
+    });
+    return $self->db(-Skin=> { role => 's' })->select_skin_log(%args);
+}
+
+sub get_skin_log_by_member_id {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        member_id => { type => SCALAR },
+        datetime  => { type => SCALAR },
+    });
+    return $self->db(-Skin=> { role => 's' })->select_skin_log_by_member_id(%args);
+}
+
+sub get_skin_monthly_report {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        skin_id => { type => SCALAR },
+        date    => { type => SCALAR },
+    });
+    return $self->db(-Skin=> { role => 's' })->select_skin_monthly_report(%args);
+}
+
+sub set_skin_monthly_report {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        skin_id     => { type => SCALAR },
+        date        => { type => SCALAR },
+        script_data => { type => SCALAR },
+        count       => { type => SCALAR },
+        uu_count    => { type => SCALAR },
+        avg_date    => { type => SCALAR },
+    });
+    return $self->db(-Skin => { role => 'm' })->insert_skin_monthly_report(%args);
+}
+
+#管理ツールでは全てのステイタスのスキンが利用可
+sub can_use_skin {
+    my $self = shift;
+    return 1;
+}
+
+#管理ツールでは全てのステイタスのスキンが設定可
+sub can_set_skin {
+    my $self = shift;
+    return 1;
+}
+
+#管理ツールでのミクコレ着用履歴はログに残さない。
+sub set_member_skin {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        member_id => { type => SCALAR },
+        skin      => { type => HASHREF },
+    });
+
+    my $new_skin = $args{skin};
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->insert_member_skin_relation(
+        member_id => $args{member_id},
+        skin_id   => $new_skin->{id},
+    );
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_MEMBER_SKIN}->{KEY},$args{member_id}]);
+    return 1;
+}
+
+sub _set_admin_skin_info {
+    my ($self,$skin) = @_;
+    my $db = $self->db(-Skin=> { role => 's' });
+    my $genres = $db->select_genre_by_skin_id(
+        skin_id => $skin->{id},
+    );
+    $skin->{genres} = $genres || [];
+
+    my $admin_status_key       = _get_skin_admin_status($skin);
+    $skin->{admin_status}      = Mixi::Skin::Config::ADMIN_STATUS->{$admin_status_key};
+    $skin->{admin_status_text} = Mixi::Skin::Config::ADMIN_STATUS_LABEL->{$admin_status_key};
+}
+
+sub _admin_user_name {
+    return $ENV{REMOTE_USER} || 'UNKNOWN';
+}
+
+sub _get_skin_admin_status {
+    my $skin = shift;
+
+    if($skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{REGISTRATION}){
+        return  'REGISTRATION';
+    }
+    elsif ($skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{FORCE_CLOSED}){
+        return  'FORCE_CLOSED';
+    }
+    elsif ($skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{DELETED}){
+        return  'DELETED';
+    }
+    else{
+        my $close_datetime = Nove::Core::Datetime::normalize_date($skin->{close_datetime});
+        my $open_datetime = Nove::Core::Datetime::normalize_date($skin->{open_datetime});
+        my $today = sprintf("%04d%02d%02d%02d%02d%02d", Date::Calc::Today_and_Now());
+
+        my $key;
+        if(Nove::Core::Datetime::in_duration($skin->{open_datetime},$skin->{close_datetime})){
+            $key = 'OPEN';
+        }
+        elsif($open_datetime > $today) {
+            $key = 'WAITING_TO_OPEN';
+        }elsif($close_datetime < $today){
+            $key = 'CLOSED';
+        }
+        if($skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN}){
+            return $key;
+        }
+        elsif($skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT}){
+            return $key . "_EDIT";
+        }
+        return;
+    }
+}
+
+sub get_edit_skin_count {
+    my $self = shift;
+    my %result;
+    my $skins = $self->get_skins(admin_status => 2);
+    $result{waiting_to_open_edit_count} = scalar @{$skins};
+    $skins = $self->get_skins(admin_status => 4);
+    $result{open_edit_count} = scalar @{$skins};
+    $skins = $self->get_skins(admin_status => 6);
+    $result{closed_edit_count} = scalar @{$skins};
+    return \%result;
+}
+
+1;
