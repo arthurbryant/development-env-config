@@ -34,11 +34,8 @@ BEGIN {
             RED      => 3,
             PINK     => 4,
             YAMABUKI => 5,
-            WHITE    => 6,
             PURPLE   => 7,
-            DEFAULT  => 8,
             ORANGE   => 9,
-            GRAY     => 10,
         },
         SKIN_COLOR_LABEL => {
             BLACK    => 'ブラック',
@@ -54,13 +51,6 @@ BEGIN {
             GRAY     => 'グレー(デフォルト)',
         },
         SKIN_STATUS_DB => {
-            REGISTRATION  => 0,
-            CAN_OPEN      => 1,
-            CAN_OPEN_EDIT => 2,
-            FORCE_CLOSED  => 3,
-            DELETED       => 4,
-        },
-        TOUCH_SKIN_STATUS_DB => {
             REGISTRATION  => 0,
             CAN_OPEN      => 1,
             CAN_OPEN_EDIT => 2,

@@ -1,451 +1,3 @@
-vim a
-mv a a.js
-vim a.js 
-mv a.js a.pl
-vim a.pl 
-ls
-fg
-vim a.pl 
-vim /home/bkapps/.vimrc
-ls
-vim /home/bkapps/.vimrc
-fg
-clear
-ls
-rm -rf a.pl
-ls
-cd mixi/
-ls
-cd ..
-ls
-cd git/
-ls
-git clone ssh://git@git.lo.mixi.jp/projects/touch-skin.git
-ls
-ls -t
-cd touch-skin/
-ls
-ls -a
-cd .git/
-ls
-cd ..
-ls
-df -h
-cd ..
-ls
-cd ..
-ls
-git remote -v
-git remote add origin git@github.com:arthurbryant/configfiles.git
-git status
-git add .bash* .git* 
-git status
-git add .vim*
-git status
-git commit 
-gm
-git push
-ls
-cd git/touch-skin/
-ls
-git log | grep db
-git log 
-git log --stat
-git log --stat -p
-git log
-git remote add mixi git@git.lo.mixi.jp:mixi/mixi.git
-git fetch mixi
-git log mixi/master..
-git log mixi/master.. --stat
-g
-git log mixi/master..touch-theme --stat
-git log mixi/master..touch-theme --stat -p
-clear
-git log mixi/master..touch-theme --stat -p
-ls
-script/devel/server -p 7777
-cd git/touch-skin/
-ls
-git diff mixi/master... 
-gb
-git diff mixi/master...touch-theme 
-vim lib/Mixi/Template/Touch/DesignScheme.pm 
-git diff mixi/master...touch-theme 
-ls
-pwd
-cd lib/Mixi/Template/
-ls
-cd Touch/
-ls
-vim DesignScheme.pm 
-cd ..
-ls
-cd Register/
-ls
-vim Mobile.pm 
-cd git/banana/banana/
-ls
-vim app.js 
-ls
-git remote -all
-gb -a
-git branch
-git pull origin/banana
-git pull origin banana
-git checkout app.js
-git pull origin banana
-git status
-git checkout origin/banana
-git status
-git reset --hard
-git status
-clear
-ls
-git remote -v
-gb -a
-git status
-history | grep git
-clear
-gb -a
-git checkout remote/origin/banana
-git remote -v
-git branch
-git checkout remote/origin/banana
-history | grep git
-ls
-git bra c
-gb
-git fetch
-git remote -v
-gb -a
-git checkout -b develop
-git checkout remotes/origin/banana
-git checkout -b banana
-gb -a
-man git branch
-git branch -D develop
-gb
-git fetch 
-node app.js 
-vim app.js 
-node app.js 
-clear
-node app.js 
-]
-node app.js 
-clear
-node app.js 
-;s
-ls
-cd lib/
-ls
-cd ../javabin/
-ls
-cd lib/
-ls
-cd ..
-ls
-cd src/
-ls
-cd ..
-ls
-fg
-cd ..
-ls
-vim routes/iyada/list.js 
-fg
-ls
-cd javabin/
-ls
-java -classpath .:/home/bkapps/git/banana/banana/javabin/lib/mysql-connector-java-5.1.25-bin.jar IyadaSearch 
-java --version
-java 
-java -v
-java -version
-ls
-java -classpath .:/home/bkapps/git/banana/banana/javabin/lib/mysql-connector-java-5.1.25-bin.jar IyadaSearch 
-java -version
-locate java
-clear
-locate java
-whereis java
-cd /usr/java/jdk1.7.0_05/bin/
-ls
-cd ..
-ls
-cd ..
-cd jdk1.
-cd jdk1.7.0_05/
-ls
-cd bin/
-ls
-java
-./java -version
-cd ..
-ls
-cd-
-cd
-ls
-cd git/banana/banana/
-ls
-history | grep class
-ls
-cd javabin
-ls
-/usr/java/jdk1.7.0_05/bin/java -classpath .:/home/bkapps/git/banana/banana/javabin/lib/mysql-connector-java-5.1.25-bin.jar IyadaSearch
-whereis java
-cd ..
-ls
-fg
-ls
-clear
-ls
-fg
-ls
-cd lib/
-ls
-vim db.js 
-ls
-fg
-cd ..
-ls
-fg
-exit
-ls
-cd git/banana/banana/
-ls
-git remote -v
-history | grep git 
-git remote add banana ssh://git@git.lo.mixi.jp/users/akio.watanabe/banana.git
-ls
-git status
-cp views/bubble.ejs ../
-cd ..
-ls
-rm -rf banana/
-git clone ssh://git@git.lo.mixi.jp/users/akio.watanabe/banana.git
-ls
-cd banana/
-ls
-node app.js 
-npm install express
-ls
-node app.js
-ls
-vim app.js 
-ps axu | grep node
-kill 5094
-ps axu | grep node
-node app.js 
-ls
-git branch
-vim app.js 
-npm install ejs
-ls
-vim readme 
-cd views/
-ls
-vim index.ejs 
-cd ..
-ls
-vim routes/iyada/list.js 
-vim views/iyada/list.ejs 
-vim readme 
-ls
-git status
-vim .gitignore 
-ls
-vim .gitignore 
-fg
-vim .gitignore 
-fg
-vim .gitignore 
-fg
-git status
-git add .
-git commit
-git push 
-clear
-ls
-cd views/
-ls
-vim iyada/list.ejs 
-ls
-cd ..
-ls
-vim public/javascripts/hot-query.js 
-vim views/iyada/list.ejs 
-git status
-clear
-ls
-vim app.js 
-cd views/
-ls
-vim report.ejs 
-ls
-ls -a
-ls -al
-vim /home/bkapps/.bashrc-git 
-source /home/bkapps/.bashrc-git 
-cmx report.ejs 
-git status
-git diff
-ls -al
-vim iyada/list.ejs 
-ls
-cd ..
-ls
-cd public/
-ls
-cd ..
-ls
-cd public/javascripts/
-ls
-vim hot-query.js 
-vim banana.iyada.list.js 
-grep db . -r
-clear
-ls
-vim banana.iyada.list.js 
-ls
-cd ..
-ls
-cd ..
-ls
-cd routes/
-ls
-vim iyada/list.js 
-cd ..
-ls
-vim lib/db.js 
-fg
-ls
-cd javabin/
-ls
-cd ..
-ls
-grep "home/bkapps/banana_xp/j" . -r
-vim routes/iyada/list.js 
-ls
-cd javabin/
-ls
-cd lib/
-ls
-cd ../..
-ls
-fg
-pwd
-fg
-vim routes/iyada/list.js 
-clear
-ls
-node app.js 
-clear
-ls
-cd ..
-ls
-cd ../touch-skin/
-ls
-gb
-vim 
-fg
-vim
-fg
-vi
-vim 
-ls
-gti status
-gs
-git status
-git log
-git diff 
-clear
-git diff mixi/master... 
-fg
-vim
-cler
-clear
-vim /home/bkapps/.bashrc-git 
-source ~/.bashrc-git 
-gss 
-gst
-git add .
-gm
-git push
-gs
-gst
-vim
-git add .
-gm
-git push
-vim
-ga .
-gm
-git push
-git fetch
-git pull
-ls
-git pull
-ls
-condb.sh 
-clear
-ls
-cd git/touch-skin/
-ls
-gb
-git status
-ls
-clear
-ls
-git branch
-history | grep git
-clear
-ls
-git log
-gb -a
-history | grep master
-git log mixi/master..
-git log mixi/master.. --stat
-clear
-ls
-clear
-ls
-ls -d
-ls /
-ls ./
-ls -d ./
-cd db-schema/
-ls
-ls -al
-clear
-ls
-git remote -v
-git fetch
-gb 
-git checkout COREDEVSOCIAL-429_manager__develop 
-gb
-ls
-cd ..
-ls
-script/devel/server  -p 4242
-ls
-cd git/touch-skin/
-;s
-ls
-git status
-git pull
-git log
-clear
-ls
-git pull
-vim
-ls
-vim db-schema/DB_TOUCHSKIN__touchskin.sql 
-git status
-git checkout 
-git status
-git reset --hard
-git status
 git pull
 ls
 git log
@@ -998,3 +550,451 @@ clear
 ls
 fg
 exit
+ls
+cd git/banana/banana/
+ls
+ls -lst
+cd views/
+ls
+cd iyada/
+ls
+cd ..
+ls
+find . -name image
+find . -name image -r
+find . -name image -R
+locate image
+locate image .
+clear
+ls
+find . -name iya
+find . -name iya*
+find . -name image*
+cd public/images/
+ls
+curl http://www.clker.com/cliparts/A/J/g/V/N/d/bubble-sky-blue-md.png
+curl -o http://www.clker.com/cliparts/A/J/g/V/N/d/bubble-sky-blue-md.png
+man curl
+wget http://www.clker.com/cliparts/A/J/g/V/N/d/bubble-sky-blue-md.png
+ls
+mv bubble-sky-blue-md.png bubble.png
+cd ..
+ls
+clear
+cd ..
+vim views/iyada/list.ejs 
+ls
+cd views/
+ls
+cd iyada/
+ls
+cd ..
+ls
+cd ..
+vim views/iyada/list.ejs views/test.ejs
+cd views/
+cp iyada/list.ejs test.ejs
+vim test.ejs 
+cd ..
+npm install csslint
+pwd
+ls
+cd node_modules/
+ls
+cd ..
+npm uninstall csslint
+cd
+ls
+npm install csslint
+ls
+cd node_modules/
+l
+ls
+ls .bin
+cd ..
+cd -
+cd ../git/banana/banana/
+fg
+vim /home/bkapps/.vimrc
+fg
+vim public/stylesheets/banana.css 
+vim /home/bkapps/.vimrc
+fg
+vim /home/bkapps/.vimrc
+vim public/stylesheets/banana.css 
+vim /home/bkapps/.vimrc
+fg
+ls
+fg
+exit
+gpl
+cd git/touch-skin/
+script/devel/server -p 4242
+lsof -i:4242
+kill -9 32546
+lsof -i:4242
+kill -9 32548
+kill -9 32549
+script/devel/server -p 4242
+ls
+vim /home/bkapps/.vimrc
+gst
+ga .bash* .vim*
+gm 
+git push
+clear
+vim .bashrc-git 
+clear
+ls
+cd git/touch-skin/
+ls
+vim /home/bkapps/.bashrc-git 
+source ~/.bashrc-git 
+gpl
+git lg
+git log
+gl
+clear
+ls
+clear
+gl
+cd lib/Mixi/Skin/
+ls
+vim Admin.pm 
+cd Touch/
+ls
+cd ..
+vim Touch.pm 
+ls
+ag get_member_skin
+vim Touch.pm 
+fg
+find . -name mixi_skin.pm
+find . -name mixi_skin.pm -r
+cd ..
+vim
+vim lib/Mixi/Skin.pm 
+fg
+vim lib/Mixi/Skin.pm 
+vim /home/bkapps/.vimrc
+fg
+cd lib/Mixi/Skin/
+ag cache
+fg
+cd ../..
+ls
+cd ..
+ag delete_cached 
+ag delete_cached  lib/Mixi/Skin
+ag delete_cached  lib/Mixi/Skin.pm
+gst
+ga .
+gm
+gps
+clear
+ls
+vim /home/bkapps/bin/condb.sh 
+ls
+cd lib/Mixi/Skin/
+ls
+cd ..
+ls
+cd Skin/n
+cd Skin/
+ls
+vim 
+cd -
+ls
+ag staging
+pwd
+cd ../..
+ls
+clear
+ag lib/Mixi/Skin
+ag staging lib/Mixi/Skin
+vim lib/Mixi/Skin/Touch/Admin.pm
+vim lib/Mixi/Skin/Admin.pm 
+git log
+gpl
+gst
+ls
+fg
+ls
+cd lib/Mixi/Mobile2/
+ls
+ag money 
+cd Carrier/
+ls
+cd ..
+cd ../../..
+ls
+vim
+gpl
+clear
+ls
+gl
+ag touch_skin_status_db
+ag -i touch_skin_status_db
+cd lib/Mixi/Skin/
+vim Config.pm 
+vim Touch/DB/Skin.pm 
+ag -i skin_status_db
+clear
+ag -i skin_type
+vim Touch.pm 
+ls
+vim DB.pm 
+vim DB/Skin.pm 
+pwd
+vim Touch/DB/Skin.pm 
+ls
+vim Config.pm 
+ag TOUCH_SKIN_STATUS_DB
+ag TOUCH_SKIN_STATUS_DB ../../
+gst
+ga .
+gm
+gpu
+gps
+ls
+fg
+vim
+locate edit_skin.tmpl
+v /home/bkapps/git/touch-skin/boofy/tmpl/skin/touch/edit_skin.tmpl
+cd ../..
+cd ..
+vim db-schema/DB_TOUCHSKIN__touchskin.sql 
+gst
+gd
+ls
+gst
+gd boofy/tmpl/skin/touch/skin_form_parts.tmpl
+ga boofy/tmpl/skin/touch/skin_form_parts.tmpl
+gm
+gps
+gst
+ga .
+gm
+gps
+git log
+clear
+vim /home/bkapps/.bashrc-git 
+cl
+source /home/bkapps/.bashrc-git 
+cl
+cd lib/Mixi/Skin/
+ls
+vim DB.pm 
+cd DB/
+ls
+vim Skin.pm 
+cd ../Touch/DB
+ls
+vim Skin.pm 
+ls
+vim ../DB/Skin.pm 
+fg
+gst
+ga 
+ga .
+gm
+gps
+ls
+fg
+vim
+ls
+gpl
+ls
+condb.sh 
+cd git/touch-skin/
+ls
+vim db-schema/DB_TOUCHSKIN_touchskin.sql 
+ls
+ag type2color
+ls
+gb
+gst
+gpl
+gl
+ls
+gb
+git checkout COREDEVSOCIAL-429_manager__develop 
+git fetch
+gpl
+gl
+clear
+ag type2color
+ag type2
+clear
+ag -i type2color
+vim lib/Mixi/Skin/Touch/Style.pm 
+ag -i is_softlaunch
+clear
+ag touch_re
+ag is_touch_re
+clear
+ag touch_re_after
+vim ./lib/Mixi/News/Controller.pm
+clear
+ag touch_re_after
+ag touch_re_after | ag touch
+ag -i is_softlaunch_activated
+vim lib/Mixi
+vim ./lib/Mixi/Template/Role/SoftLaunch.pm
+ag touch_re_after
+v 
+clear
+v 
+vim
+clear
+ag touch_re_after
+fg
+vim 
+gst
+gd
+gst
+fg
+vim
+gd
+gst
+ga lib/Mixi/Skin/Touch/Style.pm
+gm
+gst
+ga .
+gm
+gps
+gl
+gc --amend
+gm --amend
+gsh
+gps
+gl
+ls
+gst
+gl
+gst
+git reset --hard origin/COREDEVSOCIAL-429_manager__develop
+gl
+gst
+ag ピンク
+vim 
+ag -i touch_skin_color
+ag -i skin_color
+ag SKIN_COLOR
+vim 
+gst
+ga .
+gm
+gps
+find . -name home*
+find . -name home* -r
+clear
+locate home2011*
+find . -name home*
+find . -name home.*
+find . -name "home"
+find . -name "home2011"
+find . -name "home.*"
+find . -name "home.\*"
+find . -name "home*"
+find . -name "home2*"
+clear
+pwd
+gpl
+vim db-schema/DB_TOUCHSKIN__touchskin.sql 
+clear
+ls
+vim db-schema/DB_TOUCHSKIN__touchskin.sql 
+ -name *skin*
+gst
+gpl
+find . -name home20*
+vim static/css/smartphone/touch/home2013.css 
+vim static/css/smartphone/touch/home2011.css 
+fg
+lsof -i:4242
+kill -9 22048
+kill -9 22050
+kill -9 22051
+cd git/touch-skin/
+script/devel/server -p 4242
+]
+script/devel/server -p 4242
+ls
+cd git/touch-skin/
+ls
+gpl
+gl
+clear
+ls
+vim db-schema/DB_TOUCHSKIN__touchskin.sql 
+cd 
+ls
+vim /home/bkapps/.vimrc
+fg
+ls
+cd git/
+ls
+cd touch-skin/
+ls
+cd lib/Mixi/Skin/
+ls
+vim Test.pm 
+cd -
+ag _get_editing_skin_version
+fg
+ag "::Test"
+cd -
+ag "::Test"
+vim Touch.pm 
+vim Test.pm 
+fg
+vim Touch.pm 
+pwd
+fg
+vim Test.pm 
+vim
+ls
+cd Touch/
+ls
+vim Admin.pm 
+ls
+cd ..
+ls
+cd Touch/
+ls
+vim Admin.pm 
+ls
+cd ..
+vim Touch
+ls
+vim Touch.pm 
+ag _get_skin
+vim Touch/Admin.pm 
+ag get_skin
+fg
+gl
+gf
+gd
+gst
+gd
+ls
+go Test.pm 
+cd -
+gst
+ga .
+gm
+cat ~/.bashrc-git 
+gm
+cd ../..
+ls
+cd ..
+ls
+cd ..
+gst
+ga .
+gm
+gps
+fg
+gpl
+gl

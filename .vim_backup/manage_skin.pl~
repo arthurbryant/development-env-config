@@ -59,13 +59,13 @@ __PACKAGE__->validation_and_warnings(
         skin_type => [
             ['NOT_BLANK']
                 => 'ミクコレ種別が設定されていません。',
-            [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_SKIN_TYPE()}]
+            [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE()}]
                 => 'ミクコレ種別は入力必須項目です。',
         ],
         skin_color_type => [
             ['NOT_BLANK']
                 => 'ミクコレ色パターンが設定されていません。',
-            [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_SKIN_COLOR()}]
+            [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR()}]
                 => 'ミクコレ色パターンは入力必須項目です。',
         ],
         name => [
@@ -207,6 +207,8 @@ __PACKAGE__->conditions(
     -edit_commit => sub {
         my $self = shift;
 
+        warn Dumper $self->stash->{skin};
+        Mixi::Log->warn($self->stash->{skin});
         return $self->alert unless defined $self->stash->{skin};
 
         if (my $warnings = $self->has_warnings('commit')) {
@@ -223,24 +225,35 @@ __PACKAGE__->conditions(
 
         #ミクコレ情報変更
         my $is_updated  = $self->stash->{skin_module}->edit_skin(
-            id                  => $self->stash->{skin}->{id},
-            skin_color_type     => $self->param->{skin_color_type},
-            skin_type           => $self->param->{skin_type},
-            name                => $self->param->{name},
-            open_datetime       => $self->param->{open_datetime},
-            close_datetime      => $self->param->{close_datetime},
-            memo                => $self->param->{memo},
-            genres              => $self->param->{genres} || [],
-            skin                => $self->stash->{skin},
-            contents_id         => $self->param->{contents_id        } || '',
-            has_home_header_img => $self->param->{has_home_header_img},
-            has_prof_header_img => $self->param->{has_prof_header_img},
-            has_bg_img          => $self->param->{has_bg_img         },
-            has_border_img      => $self->param->{has_border_img     },
-            has_logo_jack       => $self->param->{has_logo_jack      },
-            has_banner_img      => $self->param->{has_banner_img     },
-            banner_link         => $self->param->{banner_link        } || '',
+            id                       => $self->stash->{skin}->{id},
+            skin_color_type          => $self->param->{skin_color_type},
+            skin_type                => $self->param->{skin_type},
+            name                     => $self->param->{name},
+            open_datetime            => $self->param->{open_datetime},
+            close_datetime           => $self->param->{close_datetime},
+            memo                     => $self->param->{memo},
+            genres                   => $self->param->{genres} || [],
+            skin                     => $self->stash->{skin},
+            contents_id              => $self->param->{contents_id} || '',
+            body_text_color          => $self->param->{body_text_color},
+            nickname_text_color      => $self->param->{nickname_text_color},
+            post_datetime_text_color => $self->param->{post_datetime_text_color},
+            link_color               => $self->param->{link_color},
+            red_link_color           => $self->param->{red_link_color},
+            border_color             => $self->param->{border_color},
+            background_color         => $self->param->{background_color},
+            feedback_button_color    => $self->param->{feedback_button_color},
+            gradation_start_color    => $self->param->{gradation_start_color},
+            gradation_end_color      => $self->param->{gradation_end_color},
+            has_home_header_img      => $self->param->{has_home_header_img},
+            has_prof_header_img      => $self->param->{has_prof_header_img},
+            has_bg_img               => $self->param->{has_bg_img},
+            has_border_img           => $self->param->{has_border_img},
+            has_logo_jack            => $self->param->{has_logo_jack},
+            has_banner_img           => $self->param->{has_banner_img},
+            banner_link              => $self->param->{banner_link} || '',
         );
+        
 
         return $self->alert unless $is_updated;
 
@@ -445,19 +458,19 @@ sub assign_common_form_data {
     my $self = shift;
     my @all_skin_type = map {
         {
-            key   => Mixi::Skin::Config::SKIN_TYPE->{$_},
+            key   => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{$_},
             value => Mixi::Skin::Config::SKIN_TYPE_LABEL->{$_},
         }
-    } keys %{Mixi::Skin::Config::SKIN_TYPE()};
+    } keys %{Mixi::Skin::Config::TOUCH_SKIN_TYPE()};
 
     my @all_color_type = map {
         {
-            key   => Mixi::Skin::Config::SKIN_COLOR->{$_},
+            key   => Mixi::Skin::Config::TOUCH_SKIN_COLOR->{$_},
             value => Mixi::Skin::Config::SKIN_COLOR_LABEL->{$_},
         }
     } sort {
-        Mixi::Skin::Config::SKIN_COLOR->{$a} <=> Mixi::Skin::Config::SKIN_COLOR->{$b}
-    } keys %{Mixi::Skin::Config::SKIN_COLOR()};
+        Mixi::Skin::Config::TOUCH_SKIN_COLOR->{$a} <=> Mixi::Skin::Config::TOUCH_SKIN_COLOR->{$b}
+    } keys %{Mixi::Skin::Config::TOUCH_SKIN_COLOR()};
 
     $self->template->param(
         all_skin_type  => \@all_skin_type,
@@ -467,12 +480,13 @@ sub assign_common_form_data {
 
 sub assign_show {
     my $self = shift;
+    warn Dumper $self->stash->{skin};
     $self->template->param(%{ $self->stash->{skin}},(
             genre => join (",",map {
                 $_->{genre_name}; 
             } @{$self->stash->{skin}->{genres}}),
-            skin_type       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_SKIN_TYPE->{$self->stash->{skin}->{skin_type}}},
-            skin_color_type => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_SKIN_COLOR->{$self->stash->{skin}->{skin_color_type}}},
+            skin_type       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE->{$self->stash->{skin}->{skin_type}}},
+            skin_color_type => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$self->stash->{skin}->{skin_color_type}}},
             post_key        => $self->post_key->encode([qw/_TIMESTAMP_/]),
     ));
 }
@@ -508,8 +522,8 @@ sub assign_confirm {
         %{$self->param},
         genres                  => join (' ',@{$self->param->{genres} || []}),
         genres_forview          => $genres_forview,
-        skin_type_forview       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_SKIN_TYPE->{$self->param->{skin_type}}},
-        skin_color_type_forview => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_SKIN_COLOR->{$self->param->{skin_color_type}}},
+        skin_type_forview       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE->{$self->param->{skin_type}}},
+        skin_color_type_forview => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$self->param->{skin_color_type}}},
         post_key                => $self->post_key->encode([qw/_TIMESTAMP_/]),
         has_home_header_img_forview  => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_home_header_img}},
         has_prof_header_img_forview  => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_prof_header_img}},
@@ -526,8 +540,8 @@ sub assign_set_user_skin {
             genre => join (",",map {
                 $_->{genre_name}; 
             } @{$self->stash->{skin}->{genres}}),
-            skin_type       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_SKIN_TYPE->{$self->stash->{skin}->{skin_type}}},
-            skin_color_type => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_SKIN_COLOR->{$self->stash->{skin}->{skin_color_type}}},
+            skin_type       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE->{$self->stash->{skin}->{skin_type}}},
+            skin_color_type => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$self->stash->{skin}->{skin_color_type}}},
             member_id       => $self->param->{member_id},
             post_key        => $self->post_key->encode([qw/_TIMESTAMP_/]),
     ));

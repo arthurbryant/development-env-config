@@ -67,18 +67,17 @@ CREATE TABLE touchskin_skin_data (
   has_banner_img          TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
   banner_link             VARCHAR(255)  NOT NULL DEFAULT '',
 
--- Color data
-  body_text_color                   VARCHAR(255)  NOT NULL,
-  nickname_text_color               VARCHAR(255)  NOT NULL,
-  post_datetime_text_color          VARCHAR(255)  NOT NULL,
-  link_color                   VARCHAR(255)  NOT NULL,
-  red_link_color               VARCHAR(255)  NOT NULL,
-  border_color                 VARCHAR(255)  NOT NULL,
-  background_color             VARCHAR(255)  NOT NULL,
-  feedback_button_color        VARCHAR(255)  NOT NULL,
-  gradation_start_color        VARCHAR(255)  NOT NULL,
-  gradation_end_color          VARCHAR(255)  NOT NULL,
-  
+  -- color items
+  body_text_color               VARCHAR(255)   NOT NULL,
+  nickname_text_color           VARCHAR(255)   NOT NULL,
+  post_datetime_text_color      VARCHAR(255)   NOT NULL,
+  link_color                    VARCHAR(255)   NOT NULL,
+  red_link_color                VARCHAR(255)   NOT NULL,
+  border_color                  VARCHAR(255)   NOT NULL,
+  background_color              VARCHAR(255)   NOT NULL,
+  feedback_button_color         VARCHAR(255)   NOT NULL,
+  gradation_start_color         VARCHAR(255)   NOT NULL,
+  gradation_end_color           VARCHAR(255)   NOT NULL,
 
   PRIMARY KEY (id),
   KEY key_1 (skin_type,status,close_datetime,open_datetime)

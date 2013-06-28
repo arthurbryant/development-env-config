@@ -1,11 +1,9 @@
 function addHotQuery(query){
-    // Get hot queries from database
-
-
     // Add hot query to search box
     var input = document.getElementById('input');
     if(input.value.length > 0){
         input.value += " ";
     }
     input.value += query;
+    // Todo: make the bubble disapear
 }

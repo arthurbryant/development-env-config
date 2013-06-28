@@ -2,8 +2,9 @@ ctrlp.vim
 gundo.vim
 neocomplcache.vim
 syntastic
+tabular
+vim-css3-syntax
 vim-fugitive
-vim-indent-guides
 vim-powerline
 vim-quickrun
 vim-repeat

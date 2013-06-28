@@ -135,8 +135,29 @@ sub get_public_skins_by_genre {
 
 sub get_skin {
     my ($self, %args) = @_;
-    my $skin = $self->db(-Skin=> { role => 's' })->select_skin_by_id(id => $args{id});
-    $skin->{skin_base} = $self->_make_skin_base($skin->{id}, $skin->{skin_version}) if $skin;
+    my $id = $args{id};
+    return unless $id;
+
+    ## @KEY: touch_skin:skin_data:<SKIN_ID> TOUCHスキン情報
+    return $self->call_cached(-Format => {
+        keyinfo => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$id],
+        expire  => Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{EXPIRE},
+        code    => sub { $self->_get_skin($id); },
+    });
+}
+
+sub get_staging_skin {
+    my ($self, $id) = @_;
+    my $skin = $self->_get_skin($id);
+    return unless $skin;
+    return unless $self->can_use_skin($skin);
+
+    if($skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT}){
+        my $new_version = $self->_get_editing_skin_version($skin->{temporary_skin_info});
+        $skin->{skin_version} = $new_version if $new_version;
+        $skin->{skin_base} = $self->_make_skin_base($skin->{id},$skin->{skin_version});
+    }
+
     return $skin;
 }
 
@@ -157,6 +178,7 @@ sub set_member_skin {
         Mixi::Log->new->warn("faild to set_member_skin [$@]");
         return;
     }
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_MEMBER_SKIN}->{KEY},$args{member_id}]);
 
     return 1;
 }
@@ -172,18 +194,27 @@ sub delete_member_skin {
         Mixi::Log->new->warn("faild to delete_member_skin [$@]");
         return;
     }
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_MEMBER_SKIN}->{KEY},$args{member_id}]);
 
     return 1;
 }
 
 sub get_member_skin {
-    my ($self, %args) = @_;
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, { member_id => VALIDATION_RULE->{MEMBER_ID} });
 
-    my $skin_id = $self->db(-Skin=> { role => 's' })->select_member_skin_id(
+    ## @KEY: pc_skin:member_skin:<MEMBER_ID> ユーザが着用しているTouchスキンのID
+    my $skin_id  = $self->call_cached(-Format => {
+        keyinfo => [Mixi::Skin::Config::CACHE->{TOUCH_MEMBER_SKIN}->{KEY},$args{member_id}],
+        expire  => Mixi::Skin::Config::CACHE->{TOUCH_MEMBER_SKIN}->{EXPIRE},
+        code    => sub{
+            return $self->db(-Skin=> { role => 's' })->select_member_skin_id(
         member_id => $args{member_id},
     );
-    return unless $skin_id;
+        }
+    });
 
+    return unless $skin_id;
     return $self->get_skin(id => $skin_id);
 }
 
@@ -198,20 +229,15 @@ sub get_members {
     );
 }
 
+# get uncached skin
 sub _get_skin {
     my ($self,$id) = @_;
     return unless $id;
 
-    ## @KEY: pc_skin:skin_data:<SKIN_ID> PCスキン情報
-    return $self->call_cached(-Format => {
-        keyinfo => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$id],
-        expire  => Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{EXPIRE},
-        code    => sub {
-            my $skin = $self->db(-Skin=> { role => 's' })->select_skin_by_id(id => $id);
-            $skin->{skin_base} = $self->_make_skin_base($skin->{id},$skin->{skin_version}) if $skin;
-            return $skin;
-        }
-    });
+    my $skin = $self->db(-Skin=> { role => 's' })->select_skin_by_id(id => $id);
+    $skin->{skin_base} = $self->_make_skin_base($skin->{id}, $skin->{skin_version}) if $skin;
+    return $skin;
+
 }
 
 sub can_use_skin {

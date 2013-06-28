@@ -1,0 +1,600 @@
+package Mixi::Skin::Touch::DB::Skin;
+
+use strict;
+use warnings;
+
+use base qw( Mixi::Skin::Touch::DB );
+
+use Mixi::Config;
+use Mixi::Skin::Config;
+
+sub unique {
+    my ($class, $args) = @_;
+    __PACKAGE__ . '_' . ($args->{role} || 'm');
+}
+
+sub connect {
+    my ($self, $args) = @_;
+    my $dsn  = (($args->{role} || 'm') eq 'm') ? Mixi::Config::DB_TOUCHSKIN_MST
+        : ($args->{role}               eq 'b') ? Mixi::Config::DB_TOUCHSKIN_BAK
+        : ($args->{role}               eq 's') ? Mixi::Config::DB_TOUCHSKIN_SLV
+        : Mixi::Config::DB_TOUCHSKIN_MST ;
+    if ($self->link(%$args, db => $dsn)) {
+        return $self;
+    }
+    return;
+}
+
+#
+# touchskin_member_skin_relation
+#
+
+sub select_member_skin_id {
+    my ($self, %args) = @_;
+    $self->select_one(q/
+        SELECT skin_id
+        FROM touchskin_member_skin_relation
+        WHERE member_id = ?
+    /,@args{qw/member_id/});
+}
+
+sub select_skin_member_ids {
+    my ($self, %args) = @_;
+    $self->select_all(q/
+        SELECT member_id, timestamp 
+        FROM touchskin_member_skin_relation
+        WHERE skin_id = ?
+        ORDER BY member_id DESC
+    /,@args{qw/skin_id/});
+}
+
+sub count_skin_members {
+    my ($self, %args) = @_;
+    $self->select_all(q/
+        SELECT count(*) AS count,skin_id
+        FROM touchskin_member_skin_relation
+        GROUP BY skin_id
+    /);
+}
+
+sub delete_member_skin_relation {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        DELETE FROM touchskin_member_skin_relation
+        WHERE member_id = ?
+     /,@args{qw/member_id/});
+}
+
+sub delete_member_skin_relation_by_skin_id {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        DELETE FROM touchskin_member_skin_relation
+        WHERE skin_id = ?
+     /,@args{qw/skin_id/});
+}
+
+sub insert_member_skin_relation {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        REPLACE INTO  touchskin_member_skin_relation SET
+            member_id = ?,
+            skin_id = ?
+     /,@args{qw/member_id skin_id/});
+}
+
+#
+# touchskin_skin_data
+#
+
+sub select_all_skins {
+    my $self = shift;
+    $self->select_all(qq/
+        SELECT * FROM touchskin_skin_data
+    /);
+}
+
+sub select_skins {
+    my ($self, %args) = @_;
+    my $sort = "";
+    if($args{sort_key} and $args{sort_order}){
+        $sort = $args{sort_key} . " " . $args{sort_order} . ",";
+    }
+
+    $self->select_all(qq/
+        SELECT *
+        FROM touchskin_skin_data
+        WHERE skin_type = ?
+        ORDER BY $sort status,update_datetime DESC
+    /,@args{qw/skin_type/});
+}
+
+sub select_skins_by_genre {
+    my ($self, %args) = @_;
+
+    my $sort = "";
+    if($args{sort_key} and $args{sort_order}){
+        $sort = "skin." . $args{sort_key} . " " . $args{sort_order} . ",";
+    }
+
+    $self->select_all(qq/
+        SELECT skin.*,genre.id AS genre_id
+        FROM touchskin_skin_data skin JOIN touchskin_skin_genre_relation relation ON skin.id = relation.skin_id JOIN touchskin_genre_data genre ON relation.genre_id = genre.id
+        WHERE skin.skin_type = ? AND relation.genre_id = ?
+        ORDER BY $sort skin.status,skin.open_datetime DESC
+    /,@args{qw/skin_type genre_id/});
+}
+
+sub select_public_skins {
+    my ($self, %args) = @_;
+    my $limit = "";
+    if(defined $args{offset} && defined $args{count}){
+        $limit = sprintf("LIMIT %d,%d",$args{offset},$args{count});
+    }
+
+    my $result = $self->select_all(qq/
+        SELECT SQL_CALC_FOUND_ROWS *
+        FROM touchskin_skin_data
+        WHERE skin_type = ? AND status IN(?,?) AND open_datetime <= NOW() AND close_datetime >= NOW()
+        ORDER BY open_datetime DESC
+        $limit
+    /,@args{qw/skin_type/}, Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN}, Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT});
+    return $result;
+}
+
+sub select_public_skins_for_test {
+    my ($self, %args) = @_;
+    my $limit = "";
+    $limit = sprintf("LIMIT %d,%d",$args{offset},$args{count}) if (defined $args{offset} && defined $args{count});
+
+    $self->select_all(qq/
+        SELECT SQL_CALC_FOUND_ROWS *
+        FROM touchskin_skin_data
+        WHERE skin_type = ? AND status IN(?,?,?) AND close_datetime >= NOW()
+        ORDER BY open_datetime DESC
+        $limit
+    /,@args{qw/skin_type/}, Mixi::Skin::Config::SKIN_STATUS_DB->{REGISTRATION}, Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN}, Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT});
+}
+
+sub select_public_skins_by_genre {
+    my ($self, %args) = @_;
+
+    my $limit = "";
+    if(defined $args{offset} && defined $args{count}){
+        $limit = sprintf("LIMIT %d,%d",$args{offset},$args{count});
+    }
+
+    $self->select_all(qq/
+        SELECT SQL_CALC_FOUND_ROWS skin.*
+        FROM touchskin_skin_data skin JOIN touchskin_skin_genre_relation relation ON skin.id = relation.skin_id JOIN touchskin_genre_data genre ON relation.genre_id = genre.id
+        WHERE genre.id = ? AND skin.skin_type = ? AND skin.status IN (?,?) AND skin.open_datetime <= NOW() AND skin.close_datetime >= NOW()
+        ORDER BY skin.open_datetime DESC
+        $limit
+    /,@args{qw/genre_id skin_type/}, Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN}, Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT});
+}
+
+sub select_public_skins_count_by_genre {
+    my ($self, %args) = @_;
+
+    return $self->select_one(qq/
+        SELECT count(*)
+        FROM touchskin_skin_data skin JOIN touchskin_skin_genre_relation relation ON skin.id = relation.skin_id JOIN touchskin_genre_data genre ON relation.genre_id = genre.id
+        WHERE genre.id = ? AND skin.status IN (?,?) AND skin.open_datetime <= NOW() AND skin.close_datetime >= NOW()
+    /,@args{qw/genre_id/}, Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN}, Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT});
+}
+
+sub select_skin_by_id {
+    my ($self, %args) = @_;
+    $self->select_row(q/
+        SELECT *
+        FROM touchskin_skin_data
+        WHERE id = ?
+    /,@args{qw/id/});
+}
+
+sub insert_skin {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        INSERT INTO
+            touchskin_skin_data
+        SET
+            skin_type = ?,
+            status = ?,
+            name = ?,
+            regist_staff = ?,
+            regist_datetime = NOW(),
+            open_datetime = ?,
+            close_datetime = ?,
+            skin_color_type = ?,
+            skin_color_data = ?,
+            memo = ?,
+            contents_id         = ?,
+            has_home_header_img = ?,
+            has_prof_header_img = ?,
+            has_bg_img          = ?,
+            has_border_img      = ?,
+            has_logo_jack       = ?,
+            has_banner_img      = ?,
+            banner_link         = ?,
+            body_text_color          = ?,
+            nickname_text_color      = ?,
+            post_datetime_text_color = ?,
+            link_color               = ?,
+            red_link_color           = ?,
+            background_color         = ?,
+            feedback_button_color    = ?,
+            gradation_start_color    = ?,
+            gradation_end_color      = ?
+    /,@args{qw/
+        skin_type
+        status
+        name
+        regist_staff
+        open_datetime
+        close_datetime
+        skin_color_type
+        skin_color_data
+        memo
+        contents_id
+        has_home_header_img
+        has_prof_header_img
+        has_bg_img
+        has_border_img
+        has_logo_jack
+        has_banner_img
+        banner_link
+        body_text_color
+        nickname_text_color
+        post_datetime_text_color
+        link_color
+        red_link_color
+        background_color
+        feedback_button_color
+        gradation_start_color
+        gradation_end_color
+    /});
+    return $self->last_insert_id();
+}
+
+sub update_skin {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        UPDATE
+            touchskin_skin_data
+        SET
+            skin_type = ?,
+            status = ?,
+            name = ?,
+            update_staff = ?,
+            open_datetime = ?,
+            close_datetime = ?,
+            skin_color_type = ?,
+            skin_color_data = ?,
+            memo = ?,
+            skin_version = ?,
+            temporary_skin_info = ?,
+            contents_id         = ?,
+            has_home_header_img = ?,
+            has_prof_header_img = ?,
+            has_bg_img          = ?,
+            has_border_img      = ?,
+            has_logo_jack       = ?,
+            has_banner_img      = ?,
+            banner_link         = ?,
+            body_text_color          = ?,
+            nickname_text_color      = ?,
+            post_datetime_text_color = ?,
+            link_color               = ?,
+            red_link_color           = ?,
+            background_color         = ?,
+            feedback_button_color    = ?,
+            gradation_start_color    = ?,
+            gradation_end_color      = ?
+        WHERE id = ?
+    /,@args{qw/
+        skin_type
+        status
+        name
+        update_staff
+        open_datetime
+        close_datetime
+        skin_color_type
+        skin_color_data
+        memo
+        skin_version
+        temporary_skin_info
+        contents_id
+        has_home_header_img
+        has_prof_header_img
+        has_bg_img
+        has_border_img
+        has_logo_jack
+        has_banner_img
+        banner_link
+        body_text_color
+        nickname_text_color
+        post_datetime_text_color
+        link_color
+        red_link_color
+        background_color
+        feedback_button_color
+        gradation_start_color
+        gradation_end_color
+        id
+    /});
+}
+
+sub update_skin_status_and_temp {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        UPDATE touchskin_skin_data SET
+            temporary_skin_info = ?,
+            status = ?,
+            update_staff = ?
+        WHERE id = ?
+     /,@args{qw/temporary_skin_info status update_staff id/});
+}
+
+#
+# touchskin_genre_data
+#
+
+sub select_public_genres {
+    my ($self, %args) = @_;
+    $self->select_all(q/
+        SELECT id,genre_name
+        FROM touchskin_genre_data
+        WHERE display = 'y'
+        ORDER BY priority DESC
+    /);
+}
+
+sub select_all_genres_with_limit {
+    my ($self, %args) = @_;
+    $self->select_all(q/
+        SELECT *
+        FROM touchskin_genre_data
+        ORDER BY display DESC,priority DESC
+        LIMIT ?,?
+    /,@args{qw/offset limit/});
+}
+
+sub select_all_genres {
+    my ($self, %args) = @_;
+    $self->select_all(q/
+        SELECT *
+        FROM touchskin_genre_data
+        ORDER BY display DESC,priority DESC
+    /);
+}
+
+sub select_genre_by_id {
+    my ($self, %args) = @_;
+    $self->select_row(q/
+        SELECT *
+        FROM touchskin_genre_data
+        WHERE id = ?
+    /,@args{qw/id/});
+}
+
+sub select_genre_by_name {
+    my ($self, %args) = @_;
+    $self->select_row(q/
+        SELECT *
+        FROM touchskin_genre_data
+        WHERE genre_name = ?
+    /,@args{qw/genre_name/});
+}
+
+sub select_genre_by_skin_id {
+    my ($self, %args) = @_;
+    $self->select_all(q/
+        SELECT genre.id,genre.genre_name
+        FROM touchskin_genre_data genre JOIN touchskin_skin_genre_relation relation ON genre.id = relation.genre_id
+        WHERE relation.skin_id = ?
+        ORDER BY priority DESC
+    /,@args{qw/skin_id/});
+}
+
+sub insert_genre {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        INSERT INTO touchskin_genre_data SET
+            genre_name = ?,
+            display = ?,
+            priority = ?,
+            regist_staff = ?,
+            regist_datetime = ?
+     /,@args{qw/genre_name display priority regist_staff regist_datetime/});
+}
+
+sub update_genre {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        UPDATE touchskin_genre_data SET
+            genre_name = ?,
+            display = ?,
+            priority = ?
+        WHERE id = ?
+     /,@args{qw/genre_name display priority id/});
+}
+
+sub delete_genre {
+    my ($self, %args) = @_;
+    $self->execute(q/
+       DELETE FROM touchskin_genre_data
+        WHERE id = ?
+     /,@args{qw/id/});
+}
+
+#
+# touchskin_skin_genre_relation
+#
+
+sub insert_skin_genre_relation {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        REPLACE INTO touchskin_skin_genre_relation SET
+            skin_id = ?,
+            genre_id = ?
+     /,@args{qw/skin_id genre_id/});
+}
+
+sub delete_skin_genre_relation {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        DELETE FROM touchskin_skin_genre_relation
+        WHERE skin_id = ?
+     /,@args{qw/skin_id/});
+}
+
+sub delete_skin_genre_relation_by_genre {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        DELETE FROM touchskin_skin_genre_relation
+        WHERE genre_id = ?
+     /,@args{qw/genre_id/});
+}
+
+sub count_genre_skins {
+    my ($self, %args) = @_;
+    $self->select_one(q/
+        SELECT count(*)
+        FROM touchskin_skin_genre_relation
+        WHERE genre_id = ?
+     /,@args{qw/genre_id/});
+}
+
+#
+# touchskin_member_skin_log
+#
+
+sub set_skin_log_as_start{
+    my ($self, %args) = @_;
+    $self->execute(q/
+        INSERT IGNORE INTO 
+            touchskin_member_skin_log 
+        SET
+            member_id = ?,
+            skin_id = ?,
+            script_id = ?,
+            extra_id = ?,
+            start_datetime = NOW()
+     /,@args{qw/member_id skin_id script_id extra_id/});
+}
+
+sub set_skin_log_as_end {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        UPDATE touchskin_member_skin_log SET
+            end_datetime = NOW()
+        WHERE member_id = ? AND skin_id = ? AND end_datetime IS NULL
+     /,@args{qw/member_id skin_id/});
+}
+
+sub select_skin_log {
+    my ($self, %args) = @_;
+    $self->select_all(q/
+        SELECT *
+        FROM touchskin_member_skin_log
+        WHERE skin_id = ? AND start_datetime >= ? AND start_datetime <= ?
+    /,@args{qw/skin_id start end/});
+}
+
+#ユーザが指定日以降にミクコレを設定したか
+sub select_skin_log_by_member_id {
+    my ($self, %args) = @_;
+    $self->select_one(q/
+        SELECT count(*)
+        FROM touchskin_member_skin_log
+        WHERE member_id = ? AND start_datetime > ?
+    /,@args{qw/member_id datetime/});
+}
+
+#
+# touchskin_skin_count_date
+#
+
+sub select_skin_use_count {
+    my ($self, %args) = @_;
+    $self->select_all(q/
+        SELECT use_count,skin_id,date
+        FROM touchskin_skin_count_date
+        WHERE date = ?
+        ORDER BY use_count DESC
+    /,@args{qw/date/});
+}
+
+sub select_skin_use_count_by_skin {
+    my ($self, %args) = @_;
+    $self->select_all(q/
+        SELECT use_count,skin_id,date
+        FROM touchskin_skin_count_date
+        WHERE skin_id = ? AND date >=? AND date <=?
+        ORDER BY date DESC LIMIT ?,?
+    /,@args{qw/skin_id start end offset limit/});
+}
+
+sub insert_skin_use_count {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        INSERT IGNORE INTO touchskin_skin_count_date SET
+            skin_id   = ?,
+            date      = ?,
+            use_count = ?
+     /,@args{qw/skin_id date use_count/});
+}
+
+#
+#touchskin_skin_monthly_report_data
+#
+
+sub select_skin_monthly_report{
+    my ($self, %args) = @_;
+    $self->select_row(q/
+        SELECT * FROM touchskin_skin_monthly_report_data WHERE date = ? AND skin_id = ?
+     /,@args{qw/date skin_id/});
+}
+
+sub insert_skin_monthly_report {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        INSERT INTO touchskin_skin_monthly_report_data SET date = ?,skin_id = ?,script_data = ?,count = ?,uu_count = ?,avg_date = ?
+     /,@args{qw/date skin_id script_data count uu_count avg_date/});
+}
+
+
+#
+# touchskin_member_skin_relation_for_test
+#
+
+sub select_member_skin_id_for_test {
+    my ($self, %args) = @_;
+    $self->select_one(q/
+        SELECT skin_id
+        FROM touchskin_member_skin_relation_for_test
+        WHERE member_id = ?
+    /,@args{qw/member_id/});
+}
+
+sub delete_member_skin_relation_for_test {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        DELETE FROM touchskin_member_skin_relation_for_test
+        WHERE member_id = ?
+     /,@args{qw/member_id/});
+}
+
+sub insert_member_skin_relation_for_test {
+    my ($self, %args) = @_;
+    $self->execute(q/
+        REPLACE INTO  touchskin_member_skin_relation_for_test SET
+            member_id = ?,
+            skin_id = ?
+     /,@args{qw/member_id skin_id/});
+}
+
+sub select_found_rows {
+    return shift->select_one('SELECT FOUND_ROWS()');
+}
+
+1;

@@ -1,0 +1,58 @@
+package Mixi::Template::Role::Touch::Static::StyleSheet::DesignScheme;
+use Mouse::Role;
+use MouseX::AttributeHelpers;
+use Mixi;
+use Mixi::Template::Touch::DesignScheme;
+use Mixi::SoftLaunch;
+
+requires 'charset';
+
+with q|Mixi::Template::Role::AbstractInterface|;
+
+requires qw/
+    STATIC_DIRECTORY
+    STATIC_SERVER
+    extend_static_mtime
+    member_id_option
+/;
+
+has skin_option      => (
+    is  => 'rw',
+    isa => 'HashRef|Undef'
+);
+
+has design_scheme      => (
+    is  => 'rw',
+    isa => 'Mixi::Template::Touch::DesignScheme'
+);
+
+before _register_function => sub {
+    my $self = shift;
+
+    $self->design_scheme(my $theme = Mixi::Template::Touch::DesignScheme->new(
+        { skin    => $self->skin_option }
+    ));
+
+    # bk: クロージャ内部へのインスタンスの残留を防ぐ
+    my $class = ref $self;
+
+    my $viewer_id = $self->member_id_option;
+
+    $self->register_function(
+        build_design_scheme => sub {
+            return '' if(!defined $viewer_id || Mixi::SoftLaunch->new(service => 'touch_re_after')->is_activated($viewer_id));
+            join "\n",map{
+                my $path;
+                if( /^\/img\// ){
+                    $path = $class->STATIC_SERVER . $_;
+                }else{
+                    $path = (( PRODUCTION ) ? $class->STATIC_SERVER : '' ) .
+                            $class->extend_static_mtime( sprintf('%scss/%s',$class->STATIC_DIRECTORY , $_ ) );
+                }
+                qq{<link rel="stylesheet" type="text/css" href="$path" />};
+            } $theme->get_style;
+        },
+    );
+};
+
+1;

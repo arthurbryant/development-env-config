@@ -1,0 +1,32 @@
+package Mixi::Skin::Touch::Style;
+use strict;
+use warnings;
+
+use base qw(
+    Class::Accessor::Fast
+    Class::Data::Inheritable
+);
+
+use Mixi::Skin::Config;
+
+__PACKAGE__->mk_accessors(qw/
+    skin
+/);
+
+sub get_css {
+    my $self = shift;
+
+    my $skin = $self->skin;
+    return unless $skin;
+
+    my @css_files;
+    my $colorvariation_type = lc( Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$skin->{skin_color_type}} );
+
+    push @css_files, Mixi::Skin::Config::TOUCH_SKIN_BASE_PATH . $colorvariation_type . '.css' if $colorvariation_type;
+
+    push @css_files, $skin->{skin_base} . '/mixicollection.css';
+
+    return @css_files;
+}
+
+1;

@@ -39,21 +39,16 @@
 
         <div id="container" class="contents">
             <div id="hotwords">
+                よく検索されるワード(文字をクリック！)</br></br>
                 <% for(i in data) {%>
-                    <div class="image hotword" onclick='addHotQuery(this.innerText);'>
-                        <h5><%= data[i].query %></h5>
-                        <img src="/images/bubble.png" alt=""/>
-                    </div>
-                <script type="text/javascript">
-                    var width = Math.random() % window.innerWidth;
-                    var height = Math.random() % (window.innerHeight / 2);
-
-                    // Todo: impl animation
-                    //var ss = document.getElementById("bubble");
-                    //var ss = document.getElementsByTagName("img");
-                    ss.style.cssText = "top:"+b+"px;position:absolute;left:"+parseInt(a*1300)+"px;";
-                </script>
+                <div class="hotword" onclick='addHotQuery(this.innerHTML);'><%= data[i].query %></div>
                 <%}%>
+                <!--div class="imageContainer">Some Text</div -->
+                <div id="bubble_image" class="image">
+                    <h2>Text</h2>
+                    <img src="/images/bubble.png" alt=""/>
+                </div>
+                <!--image src="/images/bubble.png" align="center">hello</image -->
             </div>
 
             <div class="form">
