@@ -1,66 +1,96 @@
-<!DOCTYPE html>
-<!--[if IE 8 ]> <html lang="ja" class="IE8"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="ja" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta name="description" content="気に入らない食べ物が一切なく、毎日ドキドキワクワクお食事を提案するスマートフォンアプリ「バナナ」の公式ウェブサイトです。">
-        <meta name="author" content="Team Banana">
-        <meta name="keywords" content="">
-        <meta property="fb:admins" content="">
-        <meta property="fb:app_id" content="">
-        <meta property="og:url" content="http://banana.jp/">
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="banana（バナナ）｜目新しいお店を提案する">
-        <meta property="og:description" content="気に入らない食べ物が一切なく、毎日ドキドキワクワクお食事を提案するスマートフォンアプリ「バナナ」の公式ウェブサイトです。">
-        <meta property="og:image" content="http://nohana.jp/img/nohana_banner_250.png">
-        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/stylesheets/banana.css" rel="stylesheet">
-        <link href="/stylesheets/shoplist.css" rel="stylesheet">
-        <link href="/images/banana.ico" type="image/vnd.microsoft.icon" rel="icon">
-        <link href="/images/banana.ico" type="image/vnd.microsoft.icon" rel="shortcut icon">
-        <link href="/images/banana64.png" rel="apple-touch-icon-precomposed">
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script src="/javascripts/banana.iyada.list.js"></script>
-        <script src="/javascripts/hot-query.js"></script>
-        <title>いやだ検索 | 何を食べるか考えるのをやめよう</title>
-    </head>
+<html>
+<head>
+<title>JS实现气泡从水中急速上升效果</title>
+<style type="text/css">
+body {cursor:crosshair;margin:0; padding:0; position:absolute; overflow:hidden; background:#FFF; left:0; top:0; width:100%; height:100%;}
+</style>
+<script type="text/javascript">
+var object = new Array();
+nbfm   = 60;
+var xm = 0;
+var ym = 9999;
+var nx = 0;
+var ny = 0;
 
-    <body class="index" data-twttr-rendered="true">
-        <div class="navbar navbar-fixed-top center" style="top:-50px;">
-            <div class="navbar-inner">
-                <form class="wrapper" action='####' onsubmit='getRes();return false;'>
-                    <input class="" type="text"/>
-                    <span>は</span>
-                    <a href="####" class="button navbar">いやだ！</a>
-                </form>
-            </div>
-        </div>
+function movbulb(){
+ with (this) {
+  if(ec < 20){
+   if(Math.abs(x0 - xm) < 100 && Math.abs(y0 - ym) < 100){
+    xx = (xm - x0) / 8;
+    yy = (ym - y0) / 8;
+    ec++;
+   }
+  }
 
-        <div id="container" class="contents">
-            <div id="hotwords">
-                よく検索されるワード(文字をクリック！)</br></br>
-                <% for(i in data) {%>
-                <div class="hotword" onclick='addHotQuery(this.innerHTML);'><%= data[i].query %></div>
-                <%}%>
-                <!--div class="imageContainer">Some Text</div -->
-                <div id="bubble_image" class="image">
-                    <h2>Text</h2>
-                    <img src="/images/bubble.png" alt=""/>
-                </div>
-                <!--image src="/images/bubble.png" align="center">hello</image -->
-            </div>
+  xx *= 0.99;
+  yy *= 0.99;
 
-            <div class="form">
-                <form class="wrapper" action='####' onsubmit='getFirstRes();return false;'>
-                    <span>いやだ検索</span><br/><br/>
-                    <span style="font-size:small">例：ラーメン、脂っこいもの、まずいもの</span><br/>
-                    <span>　　</span>
-                    <input class="JS_activeInput" type="text" tabindex="0" id="input"/>
-                    <span>　は</span><br/>
-                    <a href="####" class="button main" onclick='getFirstRes();'>　いやだ！</a>
-                </form>
-            </div>
-        <!--/contents--></div>
-    </body>
+  x0 = Math.round(x0 + Math.cos(y0 / 15) * p) + xx;
+  y0+= yy - v;
+
+  if(y0 < -h * 2 || x0 < -w * 2 || x0 > nx + w * 2){
+   y0 = ny + N + h * 2;
+   x0 = nx/2-100 + Math.random() * 100;
+   ec = 0;
+  }
+
+  obj.style.top  = y0 - h;
+  obj.style.left = x0 - w;
+ }
+}
+
+function CObj(N,img,w,h){
+ this.obj = document.createElement("img");
+ this.obj.src = img.src;
+ this.obj.style.position = "absolute";
+ this.obj.style.left = -1000;
+ document.body.appendChild(this.obj);
+ this.N  = N;
+ this.x0 = 0;
+ this.y0 = -1000;
+ this.v  = 1 + Math.round((80 / h) * Math.random());
+ this.p  = 1 + Math.round((w / 8) * Math.random());
+ this.xx = 0;
+ this.yy = 0;
+ this.ec = 0;
+ this.w  = w;
+ this.h  = h;
+ this.movbulb = movbulb;
+}
+function resize(){
+ nx = document.body.offsetWidth;
+ ny = document.body.offsetHeight;
+}
+onresize = resize;
+document.onmousemove = function(e){
+ if (window.event) e = window.event;
+ xm = document.body.scrollLeft+(e.x || e.clientX);
+ ym = document.body.scrollTop+(e.y || e.clientY);
+}
+
+function run(){
+ for(i in object)object[i].movbulb();
+ setTimeout(run, 16);
+}
+
+onload = function() {
+ PIC = document.getElementById("bubbles").getElementsByTagName("img");
+ resize();
+ for(nbf=0;nbf<nbfm;nbf++){
+  sf = PIC[nbf%PIC.length];
+  object[nbf] = new CObj(nbf,sf,sf.width/2,sf.height/2);
+ }
+ run();
+}
+
+</script>
+</head>
+<body>
+<div id="bubbles" style="visibility:hidden">
+ <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/smile.gif">
+ <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/biggrin.gif">
+ <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/eek.gif">
+ <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/rolleyes.gif">
+</div>
+</body>
 </html>

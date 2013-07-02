@@ -62,12 +62,6 @@ __PACKAGE__->validation_and_warnings(
             [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE()}]
                 => 'ミクコレ種別は入力必須項目です。',
         ],
-        skin_color_type => [
-            ['NOT_BLANK']
-                => 'ミクコレ色パターンが設定されていません。',
-            [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR()}]
-                => 'ミクコレ色パターンは入力必須項目です。',
-        ],
         name => [
             ['NOT_BLANK']
                 => 'ミクコレ名は入力必須項目です。',
@@ -104,7 +98,39 @@ __PACKAGE__->validation_and_warnings(
             ['LENGTH', 0, Mixi::Skin::Config::SKIN_MEMO_LIMIT()]
                 => 'メモは全角' . Mixi::Skin::Config::SKIN_MEMO_LIMIT()/2 .'文字以内で入力してください。',
         ],
+        contents_id => [
+            ['ASCII'] => 'コンテンツIDは半角で入力してください。',
+            ['LENGTH', 0, Mixi::Skin::Config::CONTENT_ID_LENGTH_LIMIT()]
+                => 'コンテンツIDは' . Mixi::Skin::Config::CONTENT_ID_LENGTH_LIMIT() .'文字以内で入力してください。',
+        ],
     ],
+    skin_style_param => [
+        skin_color_type => [
+            ['NOT_BLANK']
+                => 'ミクコレ色パターンが設定されていません。',
+            [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR()}]
+                => 'ミクコレ色パターンは入力必須項目です。',
+        ],
+        has_home_header_img => [
+            [IN_ARRAY => (0, 1)] => 'home_header画像の値が不正です。',
+        ],
+        has_prof_header_img => [
+            [IN_ARRAY => (0, 1)] => 'prof_header画像の値が不正です。',
+        ],
+        has_bg_img => [
+            [IN_ARRAY => (0, 1)] => 'bg画像の値が不正です。',
+        ],
+        has_border_img => [
+            [IN_ARRAY => (0, 1)] => 'border画像の値が不正です。',
+        ],
+        has_logo_jack_img => [
+            [IN_ARRAY => (0, 1)] => 'logo_jack画像の値が不正です。',
+        ],
+        has_banner_img => [
+            [IN_ARRAY => (0, 1)] => 'banner画像の値が不正です。',
+        ],
+    ],
+    # TODO: add validation 
     set_user_skin => [
         member_id  => [
             ['NOT_BLANK'] => "ユーザIDを入力してください。",
@@ -172,17 +198,24 @@ __PACKAGE__->conditions(
     -edit  => sub {
         my $self = shift;
         return $self->alert unless defined $self->stash->{skin};
+        $self->set_can_edit_style;
         return FIXED;
     },
     -edit_cancel => sub {
         my $self = shift;
+        return $self->alert unless defined $self->stash->{skin};
+        $self->set_can_edit_style;
         return FIXED;
     },
     -edit_confirm => sub {
         my $self = shift;
         return $self->alert unless defined $self->stash->{skin};
-
-        if (my $warnings = $self->has_warnings('skin_param')) {
+        $self->set_can_edit_style;
+        my @validation_modes = ('skin_param');
+        if($self->stash->{can_edit_style}) {
+            push @validation_modes, 'skin_style_param';
+        }
+        if (my $warnings = $self->has_warnings(@validation_modes)) {
             $self->template->add_error($warnings);
             $self->mode("edit_error");
             return FIXED;
@@ -207,26 +240,20 @@ __PACKAGE__->conditions(
     -edit_commit => sub {
         my $self = shift;
 
-        warn Dumper $self->stash->{skin};
-        Mixi::Log->warn($self->stash->{skin});
         return $self->alert unless defined $self->stash->{skin};
-
-        if (my $warnings = $self->has_warnings('commit')) {
+        $self->set_can_edit_style;
+        my @validation_modes = ('commit', 'skin_param');
+        if($self->stash->{can_edit_style}) {
+            push @validation_modes, 'skin_style_param';
+        }
+        if (my $warnings = $self->has_warnings(@validation_modes)) {
             $self->template->add_error($warnings);
             $self->mode("edit_error");
             return FIXED;
         }
 
-        if (my $warnings = $self->has_warnings('skin_param')) {
-            $self->template->add_error($warnings);
-            $self->mode("edit_error");
-            return FIXED;
-        }
-
-        #ミクコレ情報変更
-        my $is_updated  = $self->stash->{skin_module}->edit_skin(
+        my %basic_info = (
             id                       => $self->stash->{skin}->{id},
-            skin_color_type          => $self->param->{skin_color_type},
             skin_type                => $self->param->{skin_type},
             name                     => $self->param->{name},
             open_datetime            => $self->param->{open_datetime},
@@ -235,6 +262,9 @@ __PACKAGE__->conditions(
             genres                   => $self->param->{genres} || [],
             skin                     => $self->stash->{skin},
             contents_id              => $self->param->{contents_id} || '',
+        );
+        my %style_info = (
+            skin_color_type          => $self->param->{skin_color_type},
             body_text_color          => $self->param->{body_text_color},
             nickname_text_color      => $self->param->{nickname_text_color},
             post_datetime_text_color => $self->param->{post_datetime_text_color},
@@ -243,6 +273,7 @@ __PACKAGE__->conditions(
             border_color             => $self->param->{border_color},
             background_color         => $self->param->{background_color},
             feedback_button_color    => $self->param->{feedback_button_color},
+            contents_title_bg_color  => $self->param->{contents_title_bg_color},
             gradation_start_color    => $self->param->{gradation_start_color},
             gradation_end_color      => $self->param->{gradation_end_color},
             has_home_header_img      => $self->param->{has_home_header_img},
@@ -253,8 +284,20 @@ __PACKAGE__->conditions(
             has_banner_img           => $self->param->{has_banner_img},
             banner_link              => $self->param->{banner_link} || '',
         );
-        
-
+        #ミクコレ情報変更
+        my $is_updated;
+        if($self->stash->{can_edit_staging_style}) {
+            $is_updated = $self->stash->{skin_module}->edit_skin_staging(
+                basic_info => \%basic_info,
+                style_info => \%style_info,
+            );
+        }
+        elsif($self->stash->{can_edit_style}) {
+            $is_updated = $self->stash->{skin_module}->edit_skin(%basic_info, %style_info);
+        }
+        else {
+            $is_updated = $self->stash->{skin_module}->edit_skin_basic_info(%basic_info);
+        }
         return $self->alert unless $is_updated;
 
         return $self->redirect('list_skin.pl',( skin_type => $self->param->{skin_type} ));
@@ -269,7 +312,7 @@ __PACKAGE__->conditions(
     },
     -add_confirm => sub {
         my $self = shift;
-        if (my $warnings = $self->has_warnings('skin_param')) {
+        if (my $warnings = $self->has_warnings('skin_param', 'skin_style_param')) {
             $self->template->add_error($warnings);
             $self->mode("add_error");
             return FIXED;
@@ -294,13 +337,7 @@ __PACKAGE__->conditions(
     -add_commit => sub {
         my $self = shift;
 
-        if (my $warnings = $self->has_warnings('commit')) {
-            $self->template->add_error($warnings);
-            $self->mode("add_error");
-            return FIXED;
-        }
-
-        if (my $warnings = $self->has_warnings('skin_param')) {
+        if (my $warnings = $self->has_warnings('commit', 'skin_param', 'skin_style_param')) {
             $self->template->add_error($warnings);
             $self->mode("add_error");
             return FIXED;
@@ -308,22 +345,35 @@ __PACKAGE__->conditions(
 
         #ミクコレ情報保存
         my $insert_id = $self->stash->{skin_module}->add_skin(
-            skin_color_type     => $self->param->{skin_color_type},
-            skin_type           => $self->param->{skin_type},
-            name                => $self->param->{name},
-            open_datetime       => $self->param->{open_datetime},
-            close_datetime      => $self->param->{close_datetime},
-            memo                => $self->param->{memo},
-            genres              => $self->param->{genres} || [],
-            contents_id         => $self->param->{contents_id        } || '',
-            has_home_header_img => $self->param->{has_home_header_img},
-            has_prof_header_img => $self->param->{has_prof_header_img},
-            has_bg_img          => $self->param->{has_bg_img         },
-            has_border_img      => $self->param->{has_border_img     },
-            has_logo_jack       => $self->param->{has_logo_jack      },
-            has_banner_img      => $self->param->{has_banner_img     },
-            banner_link         => $self->param->{banner_link        } || '',
+            skin_color_type          => $self->param->{skin_color_type},
+            skin_type                => $self->param->{skin_type},
+            name                     => $self->param->{name},
+            open_datetime            => $self->param->{open_datetime},
+            close_datetime           => $self->param->{close_datetime},
+            memo                     => $self->param->{memo},
+            genres                   => $self->param->{genres} || [],
+            contents_id              => $self->param->{contents_id} || '',
+            body_text_color          => $self->param->{body_text_color},
+            nickname_text_color      => $self->param->{nickname_text_color},
+            post_datetime_text_color => $self->param->{post_datetime_text_color},
+            link_color               => $self->param->{link_color},
+            red_link_color           => $self->param->{red_link_color},
+            border_color             => $self->param->{border_color},
+            background_color         => $self->param->{background_color},
+            feedback_button_color    => $self->param->{feedback_button_color},
+            contents_title_bg_color  => $self->param->{contents_title_bg_color},
+            gradation_start_color    => $self->param->{gradation_start_color},
+            gradation_end_color      => $self->param->{gradation_end_color},
+            has_home_header_img      => $self->param->{has_home_header_img},
+            has_prof_header_img      => $self->param->{has_prof_header_img},
+            has_bg_img               => $self->param->{has_bg_img},
+            has_border_img           => $self->param->{has_border_img},
+            has_logo_jack            => $self->param->{has_logo_jack},
+            has_banner_img           => $self->param->{has_banner_img},
+            banner_link              => $self->param->{banner_link} || '',
         );
+
+        $self->alert unless $insert_id;
 
         return $self->redirect('list_skin.pl',( skin_type => $self->param->{skin_type} ));
     },
@@ -383,9 +433,10 @@ __PACKAGE__->conditions(
         return $self->alert unless defined $self->stash->{skin};
 
         #公開中（修正）登録
-        $self->stash->{skin_module}->set_to_open_edit(skin => $self->stash->{skin});
+        my $skin = $self->stash->{skin};
+        $self->stash->{skin_module}->set_to_open_edit(skin => $skin);
 
-        return $self->redirect('list_skin.pl',( skin_type => $self->stash->{skin}->{skin_type} ));
+        return $self->redirect('manage_skin.pl',( mode => "edit", id => $skin->{id} ));
     },
     -set_to_registration => sub {
         my $self = shift;
@@ -504,6 +555,8 @@ sub assign_add {
 sub assign_edit {
     my $self = shift;
     $self->template->param(
+        use Data::Dumper;
+        warn Dumper $self->stash->{skin};
         %{$self->stash->{skin}},
         post_key => $self->post_key->encode([qw/_TIMESTAMP_/]),
     );
@@ -550,6 +603,8 @@ sub assign_set_user_skin {
 sub assign_input_data {
     my $self = shift;
 
+    use Data::Dumper;
+    warn Dumper $self->param;
     $self->template->param(%{$self->param});
     $self->_assign_genre_data($self->param->{genres} || []);
 }
@@ -564,6 +619,18 @@ sub _assign_genre_data {
     $self->template->param(
         all_genres => $all_genres,
     );
+}
+
+sub set_can_edit_style {
+    my $self = shift;
+
+    my $can_edit_style = ($self->stash->{skin}->{status} != Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN});
+    $self->stash->{can_edit_style} = $can_edit_style;
+    $self->template->param(can_edit_style => $can_edit_style);
+
+    my $can_edit_staging_style = ($self->stash->{skin}->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT});
+    $self->stash->{can_edit_staging_style} = $can_edit_staging_style;
+    $self->template->param(can_edit_staging_style => $can_edit_staging_style);
 }
 
 sub trim {

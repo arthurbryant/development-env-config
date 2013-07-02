@@ -37,24 +37,44 @@
             </div>
         </div>
 
-        <div id="container" class="contents">
+        <div id="container" class="contets">
             <div id="hotwords">
                 <% for(i in data) {%>
-                    <div class="image hotword" onclick='addHotQuery(this.innerText);'>
+                <div class="image hotword" onclick='addHotQuery(this);'>
                         <h5><%= data[i].query %></h5>
                         <img src="/images/bubble.png" alt=""/>
                     </div>
-                <script type="text/javascript">
-                    var width = Math.random() % window.innerWidth;
-                    var height = Math.random() % (window.innerHeight / 2);
-
-                    // Todo: impl animation
-                    //var ss = document.getElementById("bubble");
-                    //var ss = document.getElementsByTagName("img");
-                    ss.style.cssText = "top:"+b+"px;position:absolute;left:"+parseInt(a*1300)+"px;";
-                </script>
                 <%}%>
             </div>
+            <script type="text/javascript">
+            //Todo: impl animation
+            var Bubbles = document.getElementById("hotwords").getElementsByTagName("div");
+            console.dir(Bubbles.length);
+            console.dir(Bubbles);
+            for(var i = 0; i < Bubbles.length; ++i) {
+                setPosition(Bubbles[i]);
+                resize(Bubbles[i]);
+            }
+            function resize(element) {
+                console.dir(element);
+                element.style.width = "90px";
+                element.style.height = "90px";
+            }
+            function setPosition(element) {
+                var width = Math.random() * window.innerWidth;
+                var height = Math.random() * window.innerHeight / 18;
+                console.dir(window.innerHeight);
+                console.dir(height);
+                element.style.marginLeft = width + 'px';
+                element.style.marginBottom= height + 'px';
+                /*
+                if(left == width){
+                    clearInterval(id);
+                }
+                */
+            }
+            document.getElementById("hotwords").getElementsByTagName("h5").style.margin = '10px';
+           </script>
 
             <div class="form">
                 <form class="wrapper" action='####' onsubmit='getFirstRes();return false;'>

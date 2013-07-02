@@ -220,6 +220,7 @@ sub insert_skin {
             post_datetime_text_color = ?,
             link_color               = ?,
             red_link_color           = ?,
+            border_color             = ?,
             background_color         = ?,
             feedback_button_color    = ?,
             gradation_start_color    = ?,
@@ -247,12 +248,49 @@ sub insert_skin {
         post_datetime_text_color
         link_color
         red_link_color
+        border_color
         background_color
         feedback_button_color
         gradation_start_color
         gradation_end_color
     /});
     return $self->last_insert_id();
+}
+
+sub update_skin_basic_info {
+    my ($self, %args) = @_;
+    use Data::Dumper;
+    warn Dumper %args;
+    $self->execute(q/
+        UPDATE
+            touchskin_skin_data
+        SET
+            skin_type = ?,
+            status = ?,
+            name = ?,
+            update_staff = ?,
+            open_datetime = ?,
+            close_datetime = ?,
+            skin_color_data = ?,
+            memo = ?,
+            skin_version = ?,
+            contents_id = ?,
+            temporary_skin_info = ?
+        WHERE id = ?
+    /,@args{qw/
+        skin_type
+        status
+        name
+        update_staff
+        open_datetime
+        close_datetime
+        skin_color_data
+        memo
+        skin_version
+        contents_id
+        temporary_skin_info
+        id
+    /});
 }
 
 sub update_skin {
@@ -285,6 +323,7 @@ sub update_skin {
             post_datetime_text_color = ?,
             link_color               = ?,
             red_link_color           = ?,
+            border_color             = ?,
             background_color         = ?,
             feedback_button_color    = ?,
             gradation_start_color    = ?,
@@ -315,6 +354,7 @@ sub update_skin {
         post_datetime_text_color
         link_color
         red_link_color
+        border_color
         background_color
         feedback_button_color
         gradation_start_color

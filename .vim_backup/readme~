@@ -12,8 +12,10 @@ Todo:
 1. reportの時間を見やすいようにする
 
 2. Add bubble
-    a. get frequently queried keywords
-    b. put the words into the bubble image
-    c. make bubble animation
+    a. D! get frequently queried keywords
+    b. D! put the words into the bubble image
+    c. make bubble animation(algorithm)
+    d. make the page looks pretty
+    e. when click the bubble it should disappear
 Question:
     bubbleをクリックしたら、何か起こすの？

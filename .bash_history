@@ -1,563 +1,3 @@
-git pull
-ls
-git log
-ls
-vim
-fg
-git status
-clear
-ls
-git status
-ga .
-gm
-git push
-ls
-git status
-git pull
-git log
-clear
-ls
-vim
-vim db-schema/DB_PCSKIN__pcskin.sql 
-git status
-ls
-vim
-fg
-vim
-ag 
-man ag
-ag SKIN_DATA .
-vim
-vim ./lib/Mixi/Skin/Touch.pm
-clear
-ag SKIN_DATA .
-ls
-clear
-vim
-find . -name "home2011"
-find . -name "home2011*"
-vim
-find . -name "home2011*"
-vim
-ls
-git log
-git pull
-git reset --hard HEAD~2
-git log
-git reset --hard HEAD~2
-git log
-git status
-vim
-git diff
-gs
-gst
-git add .
-gm
-gst
-gb
-git remote -v
-git push origin -f
-git log
-ls
-clear
-ls
-clear
-vim
-ag skin_data .
-ag skin_data ./.*/touch/
-ag skin_data ./.*/touch/.*
-clear
-ag skin_data .
-vim
-cd lib/Mixi/Skin/
-ls
-clear
-ag skin_data .
-ag skin_data 
-clear
-ag skin_data 
-vim Touch.pm 
-ls -al
-git diff Touch.pm
-git log Touch.pm
-fg
-ls
-clear
-ls
-pwd
-vim Admin.pm 
-ag memcache .
-ag cache .
-vim Controller/Manage.pm 
-git log
-git pull
-git log
-fg
-pwd
-ls
-fg
-cd Touch/
-ls
-vim Admin.pm 
-git log
-git pull
-fg
-ls
-vim Admin.pm 
-ls
-cd ..
-ls
-g
-fg
-vim
-pwd
-ls
-vim Touch/Admin.pm 
-ls
-ag skin_data 
-ag -i skin_dara
-ag -i skin_data
-vim Touch.pm 
-av -i member_skin
-ag -i member_skin
-clear
-ag MEMBER_SKIN
-vim Test.pm 
-git diff Test.pm
-git log Test.pm
-vim Test.pm 
-ls
-vim Config.pm 
-gst
-git diff
-git diff --color
-ag MEMBER_SKIN
-vim Touch/Admin.pm 
-gst
-git add .
-gm
-git push
-git pull --rebase 
-git push
-git log
-ls
-cd Touch/
-ls
-vim Admin.pm 
-pwd
-ls
-cd ..
-ls
-cd Controller/
-ls
-vim Manage.pm 
-gst
-fg
-ls
-cd ..
-ls
-vim Admin.pm 
-fg
-cd git/touch-skin/
-script/devel/server  -p 4242
-lsof -i:4242
-kill -9 28828
-kill -9 28830
-kill -9 28831
-cleaqr
-clear
-ls
-script/devel/server  -p 4242
-cd git/
-ls
-cd javascript/
-ls
-git clone https://github.com/lamberta/html5-animation.git
-ls
-cd html5-animation/
-ls
-cd examples/ch09/
-ls
-cd ..
-ls
-cd
-ls
-cd git/
-ls
-cd ..
-ls
-cd mixi/
-ls
-git status
-git log
-git checkout .
-git status
-git remote -v
-git checkout .
-git status
-git clean
-git clean -f 
-git status
-git pull
-clear
-
-vim static/js/jp/mixi/featuredcontents/touch/widget/searchform.js 
-vim static/js/jp/mixi/featuredcontents/ui/searchform.js 
-ls
-fg
-clear
-ls
-vim
-history
-git checkout master
-vim static/js/jp/mixi/featuredcontents/ui/searchform.js 
-ls
-pwd
-git log
-clear
-git log
-git branch
-vim /home/bkapps/.bashrc-git 
-cd
-fg
-vim .bashrc-git 
-cd mixi/
-ls
-gb
-sourc ~/.bashrc
-source ~/.bashrc
-cd
-ls
-source .bashrc
-cd mixi/
-gb
-ls
-cd
-ls
-cd git/
-ls
-cd touch-skin/
-ls
-gb
-clear
-git log
-clear
-ls
-cd ..
-ls
-cd banana/
-ls
-cd banana/
-ls
-git status
-git remote -v
-clear
-git remote -v
-ls
-git status
-git diff
-git diff --color
-vim /home/bkapps/.bashrc
-vim /home/bkapps/.bashrc-git 
-vim /home/bkapps/.bashrc
-source ~/.bashrc-git 
-gd
-clear
-gd
-ls
-git status
-gm
-ga .
-gm
-git status
-git pull
-git pull origin master
-git log
-clear
-ls
-cd views/
-ls
-百度文库首页|下载客户端|百度首页|登录注册
-新闻网页贴吧知道音乐图片视频地图百科文库
- 帮助
-全部DOCPPTTXTPDFXLS
-百度文库专业资料IT/计算机互联网
-限时！免财富值下载
-由下自上不断上升冒气泡的js特效代码19人阅读
-©2013 Baidu 使用百度前必读 | 文库协议
-用手机扫此二维码：쎗
-以下结果由提供：쎗
-百度翻译
-百科词条：쎗
-百度百科
-复制 | 搜索 | 翻译 | 百科 | 分享 | 二维码
-文字已复制
-分享至：×
- 
-2 财富值限时！免财富值下载到手机
-/3
-百度文库客户端
-免财富值下载文档点击或扫描下载
-由下自上不断上升冒气泡的js 特效代码  <html> <head>  <title>JS实现气泡从水中急速上升效果</title> <style type="text/css"> body {cursor:crosshair;margin:0; padding:0; position:absolute; overflow:hidden;  background:#FFF;left:0; top:0; width:100%; height:100%;} </style>  <script type="text/javascript"> var object = new Array(); nbfm   = 60; var xm = 0; var ym = 9999; var nx = 0; var ny = 0;  function movbulb(){ with (this) { if(ec < 20){  if(Math.abs(x0‐xm) < 100 &&Math.abs(y0‐ym) < 100){ xx = (xm‐x0) / 8; yy = (ym‐y0) / 8; ec++; } } xx *= 0.99; yy *= 0.99;  x0 = Math.round(x0 + Math.cos(y0 / 15) * p) + xx; y0+= yy‐v;  if(y0 <‐h * 2 || x0 <‐w * 2 || x0 > nx + w * 2){ y0 = ny + N + h * 2;  x0 = nx/2‐100 + Math.random() * 100; ec = 0; }  obj.style.top  = y0‐h; obj.style.left = x0‐w; } }
-function CObj(N,img,w,h){  this.obj = document.createElement("img"); this.obj.src = img.src;  this.obj.style.position = "absolute"; this.obj.style.left =‐1000;  document.body.appendChild(this.obj); this.N  = N; this.x0 = 0; this.y0 =‐1000;  this.v  = 1 + Math.round((80 / h) * Math.random()); this.p  = 1 + Math.round((w / 8) * Math.random()); this.xx = 0; this.yy = 0; this.ec = 0; this.w  = w; this.h  = h;  this.movbulb = movbulb; }  function resize(){  nx = document.body.offsetWidth; ny = document.body.offsetHeight; }  onresize = resize;  document.onmousemove = function(e){ if (window.event) e = window.event;  xm = document.body.scrollLeft+(e.x || e.clientX); ym = document.body.scrollTop+(e.y || e.clientY); }  function run(){  for(i in object)object[i].movbulb(); setTimeout(run, 16); }  onload = function() {  PIC = document.getElementById("bubbles").getElementsByTagName("img"); resize();  for(nbf=0;nbf<nbfm;nbf++){ sf = PIC[nbf%PIC.length];  object[nbf] = new CObj(nbf,sf,sf.width/2,sf.height/2); } run(); }
-</script> </head> <body>  <div id="bubbles" style="visibility:hidden">  <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/smile.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/biggrin.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/eek.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/rolleyes.gif"> </div> </body> </html>
-clear
-ls
-vim bubble.ejs
-vim bubble.ejs 
-vim /home/bkapps/.vimrc
-vim bubble.ejs 
-vim ../app.js 
-ls
-vim bubble.ejs 
-ls
-cd ..
-ls
-vim app.js 
-ls
-cd routes/
-ls
-cp report.js bubble.js
-vim bubble.js 
-ls
-vim bubble.js 
-cd ..
-vim views/bubble.ejs 
-vim app.js 
-vim routes/report.js 
-vim views/report.ejs 
-clear
-ls
-vim views/bubble.ejs 
-vim routes/bubble.js 
-cd views/
-ls
-mv bubble.ejs bubble.ejs.bak
-cp index.ejs bubble.ejs
-vim index.ejs 
-vim ../app.js 
-grep report
-grep report . -r
-cd ..
-grep report . -r
-vim views/report.ejs 
-clear
-ls
-vim routes/bubble.js 
-cd routes/
-ls
-vim detail_menu.js 
-cd ..
-vim app.js 
-cd views/
-ls
-mv bubble.ejs.bak bubble.ejs
-vim bubble.ejs 
-cat bubble.ejs 
-<html>
-<head>
-<title>JS实现气泡从水中急速上升效果</title> <style type="text/css"> body {cursor:crosshair;margin:1; padding:0; position:absolute; overflow:hidden;  background:#FFF;left:0; top:0; width:100%; height:100%;} </style>  <script type="text/javascript"> var object = new Array(); nbfm   = 60; var xm = 0; var ym = 9999; var nx = 0; var ny = 0;  function movbulb(){ with (this) { if(ec < 20){  if(Math.abs(x0‐xm) < 100 &&Math.abs(y0‐ym) < 100){ xx = (xm‐x0) / 8; yy = (ym‐y0) / 8; ec++; } } xx *= 0.99; yy *= 0.99;  x0 = Math.round(x0 + Math.cos(y0 / 15) * p) + xx; y0+= yy‐v;  if(y0 <‐h * 2 || x0 <‐w * 2 || x0 > nx + w * 2){ y0 = ny + N + h * 2;  x0 = nx/2‐100 + Math.random() * 100; ec = 0; }  obj.style.top  = y0‐h; obj.style.left = x0‐w; } }
-function CObj(N,img,w,h){  this.obj = document.createElement("img"); this.obj.src = img.src;  this.obj.style.position = "absolute"; this.obj.style.left =‐1000;  document.body.appendChild(this.obj); this.N  = N; this.x0 = 0; this.y0 =‐1000;  this.v  = 1 + Math.round((80 / h) * Math.random()); this.p  = 1 + Math.round((w / 8) * Math.random()); this.xx = 0; this.yy = 0; this.ec = 0; this.w  = w; this.h  = h;  this.movbulb = movbulb; }  function resize(){  nx = document.body.offsetWidth; ny = document.body.offsetHeight; }  onresize = resize;  document.onmousemove = function(e){ if (window.event) e = window.event;  xm = document.body.scrollLeft+(e.x || e.clientX); ym = document.body.scrollTop+(e.y || e.clientY); }  function run(){  for(i in object)object[i].movbulb(); setTimeout(run, 16); }  onload = function() {  PIC = document.getElementById("bubbles").getElementsByTagName("img"); resize();  for(nbf=0;nbf<nbfm;nbf++){ sf = PIC[nbf%PIC.length];  object[nbf] = new CObj(nbf,sf,sf.width/2,sf.height/2); } run(); }
-</script> </head> <body>  <div id="bubbles" style="visibility:hidden">  <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/smile.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/biggrin.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/eek.gif"> <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/rolleyes.gif"> </div> </body> </html>
-clear
-fg
-vim bubble.ejs 
-vim ../app.js 
-vim ../routes/iyada.js 
-vim iyadamain.ejs 
-ls
-cd ..
-ls
-git status
-vim lib/db.js 
-git diff
-git diff --color
-git status
-ga 
-ga .
-gm 
-ls
-git log
-clear
-ls
-git status
-cd ..
-ls
-cd
-ls
-git status
-git add .bashrc-git .vim*
-gm
-git push
-clear
-ls
-vim README.md 
-cd
-ls
-cd git/sicp/
-ls
-cd chapter1/
-ls
-cd part3/
-ls
-vim sin.scm 
-ls
-vim power.scm 
-vim multiple.scm 
-ls
-cd ../part4/
-ls
-s
-ls
-cd 
-ls
-cd git/banana/banana/
-ls
-vim /home/bkapps/.bashrc-git 
-source ~/.bashrc-git 
-ls
-cd
-ls
-git status
-git add .bash* 
-gm
-git push
-cd -
-ls
-vim app.js 
-cd lib/
-ls
-vim db.js 
-fg
-vim db.js 
-git status
-git diff
-fg
-clear
-vim /home/bkapps/.bashrc-git 
-gd
-git checkout db.js
-ls
-gst
-git log
-man git diff
-gd c2a221d6
-gd  c2a221d601264732df91843494a57876ce077b01
-git diff  c2a221d601264732df91843494a57876ce077b01
-git diff 0680b2b9bcbdc64803985300cc38be13315ed650
-gd 0680b2b9bcbdc64803985300cc38be13315ed650
-fg
-vim db.js 
-ls
-cd ..
-ls
-vim views/iyada/list.ejs 
-vim public/javascripts/hot-query.js 
-vim public/javascripts/banana.iyada.list.js 
-ag db.js
-vim lib/db.js 
-ag  insertDecidedOrder
-ag db 
-clear
-vim public/javascripts/banana.iyada.list.js 
-ag  insertDecidedOrder
-vim routes/iyada/list.js 
-fg
-cd routes/
-ls
-cd iyada/
-ls
-cd ../..
-fg
-vim views/iyada/list.ejs 
-fg
-av find
-ag find
-fg
-ag  findRestaurant
-vim routes/iyada/detail.js 
-fg
-vim views/iyada/list.ejs 
-fg
-ls
-vim routes/iyada/list.js 
-ls
-cd public/javascripts/
-ls
-vim jquery.googleSuggest.js 
-cd ..
-ls
-cd ../routes/
-ls
-cd iyada/
-ls
-vim detail.js 
-vim list.js 
-cd ..
-ls
-vim report.js 
-fg
-vim report.js 
-fg
-rm -rf iyada/bubble.js 
-ls
-cd ..
-vim views/iyada/list.ejs 
-cat public/javascripts/show_hot_queries.js 
-rm -rf public/javascripts/show_hot_queries.js 
-ls
-fg
-vim routes/iyada/list.js 
-ls
-condb.sh 
-cd git/banana/banana/
-vim views/iyada/list.ejs 
-vim routes/iyada/list.js 
-fg
-ls
-r(json);
- 92                 console.log('err is: ', err );         |   20         }
-fg
-ls -alt
-vim routes/iyada/list.js 
-rm -rf routes/iyada/.list.js.swp 
-vim routes/iyada/list.js 
-vim app.js 
-v routes/report.js 
-fg
-vim routes/iyada/list.js 
-vim app.js 
-fg
-clear
-git diff
-clear 
-gd
-fg
-gst
-git checkout app.js
-gd
-fg
-vim views/iyada/list.ejs 
-gd
-gst
-gd public/javascripts/hot-query.js 
-ga .
-gm
-git log
-gl
-vim /home/bkapps/.bashrc-git 
-clear
-ls
-fg
-exit
-ls
-cd git/banana/banana/
-ls
-ls -lst
-cd views/
-ls
-cd iyada/
-ls
 cd ..
 ls
 find . -name image
@@ -998,3 +438,563 @@ gps
 fg
 gpl
 gl
+ls
+git status
+ls
+vim .gitignore_global 
+find . -name .*ignore*
+find . -name .*ignore* .
+man find 
+find . -maxpath 0 -name .*ignore
+find . -maxdepth 0 -name .*ignore
+find . -maxdepth 0 -name .*ignore*
+find . -maxdepth 1 -name .*ignore*
+find . -maxdepth 2 -name .*ignore*
+find . -maxdepth 3 -name .*ignore*
+gb
+gst
+ga .bash* .vim*
+gm
+gps
+clear
+ls
+cd git/touch-skin/
+ls
+gpl
+gl
+clear
+ls
+pwd
+cd ~/bin/
+ls
+vim start-server
+fg
+chx start-server 
+source ~/.bashrc-git 
+chx start-server 
+cd
+start-server 
+fg
+cd -
+vim start-server 
+start-server 
+clear
+ls
+cd 
+ls
+cd git/touch-skin/
+ls
+v
+ruby
+fg
+ag ミクコレ色パターンが設定されていません
+fg
+perl
+re
+fg
+gd
+v
+clear
+gd
+gst
+ga .
+gm
+gps
+v
+fg
+gst
+gl
+gst
+ga .
+gm
+gps
+clear
+ls
+pls
+gpl
+clear
+ls
+cat ~/.bashrc-git 
+clear
+ls
+vim /home/bkapps/.git/config 
+vim /home/bkapps/.gitconfig 
+ls
+vim db-schema/DB_TOUCHSKIN__touchskin.sql 
+gl
+gpl
+gst
+clear
+gpl
+stop-server 
+start-s
+start-server 
+gst
+start-server 
+ls
+cd git/touch-skin/
+ls
+gl
+fg
+cd git/banana/banana/
+ls
+vim views/iyada/list.ejs 
+g
+gst
+rm -rf views/test.ejs 
+ga .
+gm
+ls
+cd 
+ls
+cd git/touch-skin/
+ls
+gst
+gpl
+vim
+cd lib/Mixi/Skin/
+ls
+cd Touch/
+ls
+vim Admin.pm 
+ls
+vim DB.pm 
+vim DB/Skin.pm 
+vim
+vim ../Config.pm 
+fg
+vim /home/bkapps/.vimrc
+fg
+vim
+v ~/.vimrc
+fg
+vim 
+fg
+git log
+git pull
+gl
+gst
+git pull
+fg
+gst
+git clean -f
+gst
+cd ../../..
+cd ..
+git clean -f
+gst
+ga .
+gm
+gps
+" Indent comments and expressions
+NeoBundle 'godlygeek/tabular'
+vnoremap <Leader>t=  :Tabular /=/<CR>
+vnoremap <Leader>th  :Tabular /=>/<CR>
+vnoremap <Leader>t#  :Tabular /#/<CR>
+vnoremap <Leader>t\| :Tabular /\|/<CR>
+" JavaScript-style
+vnoremap <Leader>t:  :Tabular /:/<CR>
+" YAML-style
+vnoremap <Leader>t;  :Tabular/:\zs/<CR>
+vnoremap <Leader>t,  :Tabular/,\zs/<CR>
+
+vnoremap <Leader>t<Space> :Tabular multiple_spaces<CR>
+autocmd VimEnter * :AddTabularPipeline multiple_spaces / \{2,}/
+    \ map(a:lines, "substitute(v:val, ' \{2,}', '  ', 'g')")
+vnoremap <Leader>t:  :Tabular /:/<CR>
+ls
+gb
+git checkout touch-theme
+git log
+clear
+ls
+clear
+ls
+git remote -v
+gb
+git checkout COREDEVSOCIAL-420__develop
+git fetch
+git checkout  origin/COREDEVSOCIAL-420__develop
+git checkout  COREDEVSOCIAL-420__develop
+gb
+vim /home/bkapps/.bashrc
+vim /home/bkapps/.bashrc-git 
+go
+source ~/.bashrc-git 
+ls
+gd
+clear
+fg
+ls
+vim lib/Mixi/Skin.pm 
+gb
+gl
+gb
+gl
+man git diff
+gd
+man git diff
+gd --cache
+gd --cached
+gd HEAD
+gd HEAD^5 HEAD
+git fetch
+gl
+gd 448355abbb3fb022ac0e67f9e348b41144ce8de8
+gl
+gd  da7769eb69800b966250d4446106e4190405a614
+clear
+gd  da7769eb69800b966250d4446106e4190405a614
+clear
+ls
+pwd
+gpl
+gst
+gl
+clear
+gl
+gd
+ls
+clear
+ls
+cd ~/git/banana/banana/
+ls
+gl
+vim readme 
+cat readme 
+ls
+vim views/test.ejs
+<html>
+<head>
+<title>JS实现气泡从水中急速上升效果</title>
+<style type="text/css">
+body {cursor:crosshair;margin:0; padding:0; position:absolute; overflow:hidden; background:#FFF; left:0; top:0; width:100%; height:100%;}
+</style>
+<script type="text/javascript">
+var object = new Array();
+nbfm   = 60;
+var xm = 0;
+var ym = 9999;
+var nx = 0;
+var ny = 0;
+function movbulb(){  with (this) {
+  if(ec < 20){
+   if(Math.abs(x0 - xm) < 100 && Math.abs(y0 - ym) < 100){
+    xx = (xm - x0) / 8;
+    yy = (ym - y0) / 8;
+    ec++;
+   }
+  }
+  xx *= 0.99;
+  yy *= 0.99;
+  x0 = Math.round(x0 + Math.cos(y0 / 15) * p) + xx;
+  y0+= yy - v;
+  if(y0 < -h * 2 || x0 < -w * 2 || x0 > nx + w * 2){
+   y0 = ny + N + h * 2;
+   x0 = nx/2-100 + Math.random() * 100;
+   ec = 0;
+  }
+  obj.style.top  = y0 - h;
+  obj.style.left = x0 - w;
+ }
+}
+function CObj(N,img,w,h){
+ this.obj = document.createElement("img");
+ this.obj.src = img.src;
+ this.obj.style.position = "absolute";
+ this.obj.style.left = -1000;
+ document.body.appendChild(this.obj);
+ this.N  = N;
+ this.x0 = 0;
+ this.y0 = -1000;
+ this.v  = 1 + Math.round((80 / h) * Math.random());
+ this.p  = 1 + Math.round((w / 8) * Math.random());
+ this.xx = 0;
+ this.yy = 0;
+ this.ec = 0;
+ this.w  = w;
+ this.h  = h;
+ this.movbulb = movbulb;
+}
+function resize(){  nx = document.body.offsetWidth;  ny = document.body.offsetHeight; }
+onresize = resize;
+document.onmousemove = function(e){
+ if (window.event) e = window.event;
+ xm = document.body.scrollLeft+(e.x || e.clientX);
+ ym = document.body.scrollTop+(e.y || e.clientY);
+}
+function run(){  for(i in object)object[i].movbulb();
+ setTimeout(run, 16);
+}
+onload = function() {
+ PIC = document.getElementById("bubbles").getElementsByTagName("img");
+ resize();
+ for(nbf=0;nbf<nbfm;nbf++){
+  sf = PIC[nbf%PIC.length];
+  object[nbf] = new CObj(nbf,sf,sf.width/2,sf.height/2);
+ }
+ run();
+}
+</script>
+</head>
+<body>
+<div id="bubbles" style="visibility:hidden">
+ <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/smile.gif">
+ <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/biggrin.gif">
+ <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/eek.gif">
+ <img src="http://bbs.blueidea.com/static/image/smiley/blueidea/rolleyes.gif">
+</div>
+</body>
+clear
+vim views/test.ejs 
+lks
+ls
+vim views/iyada/list.ejs 
+cd git/banana/banana/
+ls
+node app.js 
+ls
+node app.js 
+ls
+cd ..
+ls
+pwd
+cd banana/
+ls
+node app.js 
+fg
+node app.js 
+clear
+node app.js 
+ls
+cd git/banana/banana/
+ls
+fg
+ls
+vim public/stylesheets/banana.css 
+vim public/javascripts/hot-query.js 
+ls
+fg
+cd git/touch-skin/
+ls
+gl
+gpl
+clear
+ls
+ag Todo
+clear
+gpl
+clear
+ls
+vim
+clear
+ag Todo
+gb
+git remote -v
+ls
+vim
+clear
+ag Todo
+v
+gb
+git checkout COREDEVSOCIAL-429
+gb
+git checkout COREDEVSOCIAL-429_manager__develop 
+man git reset
+gl
+gb
+git checkout COREDEVSOCIAL-429
+gl
+clear
+gb
+git checkout COREDEVSOCIAL-429_manager__develop 
+gl
+git relog
+git reflog
+gb
+git checkout COREDEVSOCIAL-429
+gl
+git checkout COREDEVSOCIAL-429_manager__develop 
+ls
+gb
+gitk
+gik
+tig
+man git
+gb
+git log --graph --decorate --format=oneline COREDEVSOCIAL-429 COREDEVSOCIAL-429_manager__develop origin/COREDEVSOCIAL-429 origin/COREDEVSOCIAL-429_manager__develop
+g fetch origin
+git fetch origin
+git log --graph --decorate --format=oneline COREDEVSOCIAL-429 COREDEVSOCIAL-429_manager__develop origin/COREDEVSOCIAL-429 origin/COREDEVSOCIAL-429_manager__develop
+gb
+gl
+gb
+git reset --hard origin/COREDEVSOCIAL-429
+gl
+ls
+gb
+git checout COREDEVSOCIAL-429
+git checkout COREDEVSOCIAL-429
+git reset --hard origin/COREDEVSOCIAL-429
+gl
+ls
+ag todo
+ag Todo
+fg
+v
+clear
+gst
+fg
+gd
+vim 
+v
+gd
+fg
+gd
+gst
+ga .
+gm
+gb
+gl
+gb
+git checkout COREDEVSOCIAL-429_manager__develop 
+git cherry-pick COREDEVSOCIAL-429 
+gl
+git checkout COREDEVSOCIAL-429
+gl
+git reset --hard 
+git reset --hard HEAD~1
+gl
+git checkout COREDEVSOCIAL-429_manager__develop 
+gst
+gps
+gl
+clear
+v
+find . -name home20*
+v
+clear
+gd
+man git diff
+cd static/css/smartphone/touch
+ls
+ls -lt
+clear
+gd
+gl
+ls
+gl
+gd .
+git diff
+man git diff
+gl .
+clear
+man git log 
+clear
+ls
+man git log
+git log
+clear
+gst
+v
+clear
+gd
+gst
+ga .
+gm
+ga .
+gst
+pwd
+cd -
+ga .
+gm
+v
+fg
+gps
+man gs
+clear
+ls
+clear
+ag ミクコレのステイタスは公開中です
+ag "ミクコレのステイタスは公開中です"
+gst
+clear
+ls
+v
+gpl
+clear
+ls
+ag contents_title
+pwd
+ag content_title
+ag content_title lib/Mixi/Skin/
+ag contents_title lib/Mixi/Skin/
+clear
+ag body_text_color
+v 
+fg
+vim db-schema/DB_TOUCHSKIN__touchskin.sql 
+ag todo
+clear
+ag Todo
+clear
+ag Todo
+ag TODO
+ag TODO*param
+git diff trunk/master...
+git remote -v
+git diff mixi/master...
+v
+ag has_warning
+ag has_warning(
+ag "has_warning("
+fg
+vim lib/Mixi/Skin/Config.pm 
+fg
+jobs -l
+fg 2
+fg 1
+jobs -l
+fg
+vim lib/Mixi/Skin/Config.pm 
+fg
+vim lib/Mixi/Skin/Config.pm 
+fg
+v
+fg
+gd
+fg
+v 
+gst
+ga .
+gm
+gps
+gst
+git pull --rebase
+gl
+gps
+gst
+fg
+v
+gst
+gd
+gst
+gco boofy/gear/skin/touch/manage_skin.pl
+gst
+gpl
+clear
+ls
+cd ../banana/banana/
+ls
+node app.js 
+cd git/touch-skin/
+stop-server 
+start-server 
+ls
+gd
+fg
+vim
+fg
+start-server 
+fg
+start-server 

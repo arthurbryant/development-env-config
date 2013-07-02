@@ -7,7 +7,7 @@
 <td>
 <select name="skin_type">
     <TMPL_LOOP NAME="all_skin_type">
-        <option value="<TMPL_VAR EXPR="form(key)">" <TMPL_IF EXPR="skin_type == key">selected=true</TMPL_IF>><TMPL_VAR EXPR="html(value)">
+        <option value="<TMPL_VAR EXPR="form(key)">" <TMPL_IF EXPR="skin_type == key">selected=true</TMPL_IF>><TMPL_VAR EXPR="html(value)"></option>
     </TMPL_LOOP>
 </select>
 </td>
@@ -39,7 +39,7 @@
 <td>
 <select name="genres" size=3 multiple=true>
     <TMPL_LOOP NAME="all_genres">
-        <option value="<TMPL_VAR EXPR="form(id)">" <TMPL_IF NAME="selected">selected=true</TMPL_IF>><TMPL_VAR EXPR="html(genre_name)">
+        <option value="<TMPL_VAR EXPR="form(id)">" <TMPL_IF NAME="selected">selected=true</TMPL_IF>><TMPL_VAR EXPR="html(genre_name)"></option>
     </TMPL_LOOP>
 </select>
 </td>
@@ -61,6 +61,7 @@
 </tr>
 </table>
 
+<TMPL_IF NAME="can_edit_style">
 <table>
 <tr>
 <th style="text-align:center;" colspan="2">スタイル情報</th>
@@ -71,74 +72,74 @@
 <td>
 <select name="skin_color_type">
     <TMPL_LOOP NAME="all_color_type">
-        <option value="<TMPL_VAR EXPR="form(key)">" <TMPL_IF EXPR="skin_color_type == key">selected=true</TMPL_IF>><TMPL_VAR EXPR="html(value)">
+        <option value="<TMPL_VAR EXPR="form(key)">" <TMPL_IF EXPR="skin_color_type == key">selected=true</TMPL_IF>><TMPL_VAR EXPR="html(value)"></option>
     </TMPL_LOOP>
 </select>
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEE">本文テキスト色</td>
+<td style="background:#EEE">本文テキスト色<span class="necessaryItem"> *</span></td>
 <td>
-<input type="text" name="skin_body_text_color" value="<TMPL_VAR EXPR="form(skin_body_text_color)">" size="20" />
+<input type="text" name="body_text_color" value="<TMPL_VAR EXPR="form(body_text_color)">" size="20" />
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEE">ユーザ名テキスト色</td>
+<td style="background:#EEE">ユーザ名テキスト色<span class="necessaryItem"> *</span></td>
 <td>
-<input type="text" name="skin_nickname_text_color" value="<TMPL_VAR EXPR="form(skin_nickname_text_color)">" size="20" />
+<input type="text" name="nickname_text_color" value="<TMPL_VAR EXPR="form(nickname_text_color)">" size="20" />
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEE">投稿日時テキスト色</td>
+<td style="background:#EEE">投稿日時テキスト色<span class="necessaryItem"> *</span></td>
 <td>
-<input type="text" name="skin_post_datetime_text_color" value="<TMPL_VAR EXPR="form(skin_post_datetime_text_color)">" size="20" />
+<input type="text" name="post_datetime_text_color" value="<TMPL_VAR EXPR="form(post_datetime_text_color)">" size="20" />
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEE">基本リンク色</td>
+<td style="background:#EEE">基本リンク色<span class="necessaryItem"> *</span></td>
 <td>
-<input type="text" name="skin_link_color" value="<TMPL_VAR EXPR="form(skin_link_color)">" size="20" />
+<input type="text" name="link_color" value="<TMPL_VAR EXPR="form(link_color)">" size="20" />
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEE">赤文字リンク色</td>
+<td style="background:#EEE">赤文字リンク色<span class="necessaryItem"> *</span></td>
 <td>
-<input type="text" name="skin_red_link_color" value="<TMPL_VAR EXPR="form(skin_red_link_color)">" size="20" />
+<input type="text" name="red_link_color" value="<TMPL_VAR EXPR="form(red_link_color)">" size="20" />
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEE">ボーダー色</td>
+<td style="background:#EEE">ボーダー色<span class="necessaryItem"> *</span></td>
 <td>
-<input type="text" name="skin_red_link_color" value="<TMPL_VAR EXPR="form(skin_red_link_color)">" size="20" />
+<input type="text" name="border_color" value="<TMPL_VAR EXPR="form(border_color)">" size="20" />
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEE">基本背景色</td>
+<td style="background:#EEE">基本背景色<span class="necessaryItem"> *</span></td>
 <td>
-<input type="text" name="skin_background_color" value="<TMPL_VAR EXPR="form(skin_background_color)">" size="20" />
+<input type="text" name="background_color" value="<TMPL_VAR EXPR="form(background_color)">" size="20" />
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEE">イイネボタン背景色</td>
+<td style="background:#EEE">イイネボタン背景色<span class="necessaryItem"> *</span></td>
 <td>
-<input type="text" name="skin_feedback_button_color" value="<TMPL_VAR EXPR="form(skin_feedback_button_color)">" size="20" />
+<input type="text" name="feedback_button_color" value="<TMPL_VAR EXPR="form(feedback_button_color)">" size="20" />
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEE">グラデーション</td>
+<td style="background:#EEE">グラデーション<span class="necessaryItem"> *</span></td>
 <td>
-<input type="text" name="skin_gradation_start_color" value="<TMPL_VAR EXPR="form(skin_gradation_start_color)">" size="20" />
+<input type="text" name="gradation_start_color" value="<TMPL_VAR EXPR="form(gradation_start_color)">" size="20" />
 →
-<input type="text" name="skin_gradation_end_color" value="<TMPL_VAR EXPR="form(skin_gradation_end_color)">" size="20" />
+<input type="text" name="gradation_end_color" value="<TMPL_VAR EXPR="form(gradation_end_color)">" size="20" />
 </td>
 </tr>
 
@@ -227,3 +228,4 @@
 </td>
 </tr>
 </table>
+</TMPL_IF>

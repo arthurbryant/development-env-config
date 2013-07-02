@@ -71,21 +71,31 @@ sub get_all_skins {
 sub add_skin {
     my $self = shift;
     my %args = Params::Validate::validate(@_, {
-        skin_color_type     => { type => SCALAR },
-        skin_type           => { type => SCALAR },
-        name                => { type => SCALAR },
-        open_datetime       => { type => SCALAR },
-        close_datetime      => { type => SCALAR },
-        memo                => { type => SCALAR },
-        genres              => { type => ARRAYREF | UNDEF,optional => 1 },
-        contents_id         => { type => SCALAR },
-        has_home_header_img => { type => SCALAR },
-        has_prof_header_img => { type => SCALAR },
-        has_bg_img          => { type => SCALAR },
-        has_border_img      => { type => SCALAR },
-        has_logo_jack       => { type => SCALAR },
-        has_banner_img      => { type => SCALAR },
-        banner_link         => { type => SCALAR },
+        skin_color_type          => { type => SCALAR },
+        skin_type                => { type => SCALAR },
+        name                     => { type => SCALAR },
+        open_datetime            => { type => SCALAR },
+        close_datetime           => { type => SCALAR },
+        memo                     => { type => SCALAR },
+        genres                   => { type => ARRAYREF | UNDEF,optional => 1 },
+        contents_id              => { type => SCALAR },
+        body_text_color          => { type => SCALAR },
+        nickname_text_color      => { type => SCALAR },
+        post_datetime_text_color => { type => SCALAR },
+        link_color               => { type => SCALAR },
+        red_link_color           => { type => SCALAR },
+        border_color             => { type => SCALAR },
+        background_color         => { type => SCALAR },
+        feedback_button_color    => { type => SCALAR },
+        gradation_start_color    => { type => SCALAR },
+        gradation_end_color      => { type => SCALAR },
+        has_home_header_img      => { type => SCALAR },
+        has_prof_header_img      => { type => SCALAR },
+        has_bg_img               => { type => SCALAR },
+        has_border_img           => { type => SCALAR },
+        has_logo_jack            => { type => SCALAR },
+        has_banner_img           => { type => SCALAR },
+        banner_link              => { type => SCALAR },
     });
 
     my $insert_id;
@@ -115,6 +125,106 @@ sub add_skin {
     }
     $db->end();
     return $insert_id;
+}
+
+sub _update_skin_data {
+    my ($self, %args) = @_;
+    my $skin = delete $args{skin};
+
+    use Data::Dumper;
+    warn Dumper $skin;
+    my $update_style_info = delete $args{update_style_info};
+
+    $args{update_staff} = _admin_user_name();
+
+    for(qw/skin_color_data status skin_version temporary_skin_info/){
+        $args{$_} ||= $skin->{$_};
+    }
+
+    my $db = $self->db(-Skin=> { role => 'm' });
+    $db->begin();
+    eval{
+        if ($update_style_info) {
+            $db->update_skin(%args);
+        } else {
+            $db->update_skin_basic_info(%args)
+        }
+        $db->delete_skin_genre_relation(skin_id => $args{id});
+        for(@{$args{genres} || []}){
+            $db->insert_skin_genre_relation(
+                skin_id  => $args{id},
+                genre_id => $_,
+            );
+        }
+    };
+    if($@){
+        $db->rollback();
+        Mixi::Log->new->warn("faild to edit_skin [$@]");
+        return;
+    }
+    $db->end();
+    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$args{id}]);
+    return 1;
+}
+
+sub edit_skin_basic_info {
+    my $self = shift;
+    my %args = $self->_validate_skin_basic_info(@_);
+
+    $self->_update_skin_data(%args);
+}
+
+sub _validate_skin_basic_info {
+    my $self = shift;
+    return Params::Validate::validate(@_, {
+        id                       => { type => SCALAR },
+        skin_type                => { type => SCALAR },
+        name                     => { type => SCALAR },
+        open_datetime            => { type => SCALAR },
+        close_datetime           => { type => SCALAR },
+        memo                     => { type => SCALAR },
+        skin                     => { type => HASHREF },
+        genres                   => { type => ARRAYREF | UNDEF,optional => 1 },
+        contents_id              => { type => SCALAR },
+    });
+}
+
+sub _validate_skin_style_info {
+    my $self = shift;
+    return Params::Validate::validate(@_, {
+        skin_color_type          => { type => SCALAR },
+        body_text_color          => { type => SCALAR },
+        nickname_text_color      => { type => SCALAR },
+        post_datetime_text_color => { type => SCALAR },
+        link_color               => { type => SCALAR },
+        red_link_color           => { type => SCALAR },
+        border_color             => { type => SCALAR },
+        background_color         => { type => SCALAR },
+        feedback_button_color    => { type => SCALAR },
+        gradation_start_color    => { type => SCALAR },
+        gradation_end_color      => { type => SCALAR },
+        has_home_header_img      => { type => SCALAR },
+        has_prof_header_img      => { type => SCALAR },
+        has_bg_img               => { type => SCALAR },
+        has_border_img           => { type => SCALAR },
+        has_logo_jack            => { type => SCALAR },
+        has_banner_img           => { type => SCALAR },
+        banner_link              => { type => SCALAR },
+    });
+}
+
+sub edit_skin_staging {
+    my ($self, %args) = @_;
+
+    my %basic_info = $self->_validate_skin_basic_info(%{$args{basic_info}});
+    my %style_info = $self->_validate_skin_style_info(%{$args{style_info}});
+
+    # Todo: add kin_ersion info in yaml
+    my $skin = $basic_info{skin};
+    my $engine = Mixi::Convert->new('YAML');
+    my $yaml = $engine->encode({%style_info, skin_version => $skin->{skin_version} + 1});
+
+    $self->_update_skin_data(%basic_info, temporary_skin_info => $yaml);
 }
 
 sub edit_skin {
@@ -149,34 +259,7 @@ sub edit_skin {
         banner_link              => { type => SCALAR },
     });
 
-    my $skin = delete $args{skin};
-
-    $args{update_staff} = _admin_user_name();
-
-    for(qw/regist_datetime regist_staff skin_color_data status skin_version temporary_skin_info/){
-        $args{$_} = $skin->{$_};
-    }
-
-    my $db = $self->db(-Skin=> { role => 'm' });
-    $db->begin();
-    eval{
-        $db->update_skin(%args);
-        $db->delete_skin_genre_relation(skin_id => $args{id});
-        for(@{$args{genres} || []}){
-            $db->insert_skin_genre_relation(
-                skin_id  => $args{id},
-                genre_id => $_,
-            );
-        }
-    };
-    if($@){
-        $db->rollback();
-        Mixi::Log->new->warn("faild to edit_skin [$@]");
-        return;
-    }
-    $db->end();
-    $self->delete_cached(-Format => [Mixi::Skin::Config::CACHE->{TOUCH_SKIN_DATA}->{KEY},$args{id}]);
-    return 1;
+    $self->_update_skin_data(%args, update_style_info => 1)
 }
 
 sub get_skin {
@@ -187,9 +270,9 @@ sub get_skin {
     $self->_set_admin_skin_info($skin);
 
     if($skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT}){
-        my $new_version = $self->_get_editing_skin_version($skin->{temporary_skin_info});
-        if($new_version){
-            $skin->{skin_version_staging} = $new_version;
+        my $editing_skin = $self->_get_editing_skin_data($skin->{temporary_skin_info});
+        if($editing_skin && $editing_skin->{skin_version}){
+            $skin->{skin_version_staging} = $editing_skin->{skin_version};
             $skin->{skin_base_staging}    = $self->_make_skin_base($skin->{id},$skin->{skin_version_staging});
         }
     }else{
@@ -256,12 +339,13 @@ sub set_to_open_and_commit_edit_data {
     my $skin = $args{skin};
     return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT};
 
-    my $new_version = $self->_get_editing_skin_version($skin->{temporary_skin_info});
+    my $editing_skin = $self->_get_editing_skin_data($skin->{temporary_skin_info});
+    return unless $editing_skin && $editing_skin->{skin_version};
 
     my $db = $self->db(-Skin=> { role => 'm' });
     $db->update_skin(
         %{$skin},
-        skin_version        => $new_version,
+        skin_version        => $editing_skin->{skin_version},
         status              => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
         temporary_skin_info => '',
     );

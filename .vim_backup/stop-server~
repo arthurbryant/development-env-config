@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+lsof -i:4242 | cut -d" " -f2 | xargs kill -9

@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+/home/bkapps/git/touch-skin/script/devel/server -p 4242

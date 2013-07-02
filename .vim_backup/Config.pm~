@@ -113,6 +113,7 @@ BEGIN {
             TIEUP     => 'タイアップ',
         },
         SKIN_MEMO_LIMIT => 4000,
+        CONTENT_ID_LIMIT => 32,
         VIA_SCRIPT_NAMES => {
             'show_friend.pl' => 1,
             'list_skin.pl'   => 2,

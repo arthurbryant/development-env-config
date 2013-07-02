@@ -1,9 +1,11 @@
 function addHotQuery(query){
+    console.dir(query);
     // Add hot query to search box
     var input = document.getElementById('input');
     if(input.value.length > 0){
         input.value += " ";
     }
     input.value += query;
+    this.fadeOut();
     // Todo: make the bubble disapear
 }

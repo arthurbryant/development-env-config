@@ -1,6 +1,4 @@
-# alias 
-alias cp='cp -i'
-alias rm='rm -i'
+# alias for git 
 alias ga="git add"
 alias gm="git commit"
 alias gb="git branch"
@@ -10,6 +8,11 @@ alias gps="git push"
 alias gpl="git pull"
 alias gst="git status"
 alias cmx="chmod +x"
-alias v="vim"
+alias gco="git checkout"
+
+# alias for linux command 
 alias cl="clear"
-alias go="git checkout"
+alias v="vim"
+alias cp='cp -i'
+alias rm='rm -i'
+alias chx="chmod +x"
