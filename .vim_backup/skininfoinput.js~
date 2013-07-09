@@ -1,0 +1,51 @@
+Namespace('jp.mixi.skin.touch.admin.widget.skininfoinput')
+.define(function(ns) {
+    /*global $j:false */
+    'use strict';
+
+    var SKIN_TYPE_VALUE_FREE = 0;
+    var SKIN_TYPE_VALUE_PAID = 1;
+    var SKIN_TYPE_VALUE_TIEUP = 3;
+    var registerSkinForm = function(element, dataset) {
+        var root = $j(element);
+        var backgroundImageState = root.find('.JS_backgroudImage input');
+        var bannerImageState = root.find('.JS_bannerImage input');
+        var bannerLinkInput = root.find('.JS_bannerLink');
+
+        var skinType = root.find('.JS_skinType');
+
+        var changeItemsState = function() {
+            var skinTypeValue = parseInt(skinType.val(), 10);
+            switch (skinTypeValue) {
+            case SKIN_TYPE_VALUE_FREE:
+                backgroundImageState.val(['0']);
+                backgroundImageState.prop('disabled', true);
+                bannerImageState.val(['0']);
+                bannerImageState.prop('disabled', true);
+                bannerLinkInput.val('');
+                bannerLinkInput.prop('disabled', true);
+                break;
+            case SKIN_TYPE_VALUE_PAID:
+                backgroundImageState.prop('disabled', false);
+                bannerImageState.val(['0']);
+                bannerImageState.prop('disabled', true);
+                bannerLinkInput.val('');
+                bannerLinkInput.prop('disabled', true);
+                break;
+            case SKIN_TYPE_VALUE_TIEUP:
+                backgroundImageState.prop('disabled', false);
+                bannerImageState.prop('disabled', false);
+                bannerLinkInput.prop('disabled', false);
+                break;
+            default:
+            }
+        };
+
+        skinType.on('change', changeItemsState);
+        changeItemsState();
+    };
+
+    ns.provide({
+        registerElement : registerSkinForm
+    });
+});

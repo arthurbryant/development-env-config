@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mysql --default-character-set=utf8 -uroot -hdev.mysql.lo.mixi.jp feng_zhang

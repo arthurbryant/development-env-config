@@ -8,27 +8,65 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/adgha
+~MSle0~/too
 
 # Last Substitute Search Pattern:
-~MSle0&TOUCH_SKIN_STATUS_DB
+~MSle0&'disabled'
 
 # Last Substitute String:
-$
+$'disabled', false
 
 # Command Line History (newest to oldest):
 :wq
-:w
-:vs public/stylesheets/banana.css
 :q
+:1
+:w
+:!mixi-prove %
+:t/
+:!mixi-prove
+:.!
+:set fenc=utf-8
+:.!fg
+:vs t/lib/Mixi/Skin/Touch/set_member_skin.t
+:file
+:save t/lib/Mixi/Skin/Touch/delete_member_skin.t
+:q!
+:set fileencoding=utf-8
+:jj
+:'<,'>q
+:%s/'disabled'/'disabled', false/gc
+:%s/'disabled'/true/gc
+:%s/removeprop/prop/gc
+:%s/attr/prop/gc
+:527
+:238
+:233
+:next
+:45
+:map <C-f>
+:Gdiff 85ef0e8d2de69f378f3816971056343c9967e3e1
+:Gdiff
+:ls
+:!ls
+:NeoBundleInstall
+:48
+:;w
+:e
+:vs public/javascripts/hot-query.js
+:sp public/javascripts/hot-query.js
+:vs public/stylesheets/banana.css
+:%s/"/'/g
+:GundoToggle
+:GUndo
+:Gundo
+:N
+:,$s/„ÅåË®≠ÂÆö„Åï„Çå„Å¶„ÅÑ„Åæ„Åõ„Çì„ÄÇ/„ÅØÂÖ•ÂäõÂøÖÈ†àÈ†ÖÁõÆ„Åß„Åô„ÄÇ/gc
 :vs views/test.ejs
 :204
 :set filetype=html
 :71
-:q!
 :342
 :224
-:1
 ://bbs.blueidea.com/static/image/smiley/blueidea/smile.gif"
 :filetype on
 :set paste
@@ -39,7 +77,6 @@ $
 :GundoShow
 :v
 :127
-:Gdiff
 :e Admin.pm
 :set timeout
 :help timeout
@@ -62,7 +99,6 @@ $
 :diffthis
 :e lib/Mixi/Skin.pm
 :e 
-:e
 :vs views/iyada/list.ejs
 :vs routes/report.js
 :qw
@@ -73,7 +109,6 @@ $
 :vs iyada/list.js
 :vs iyada/bubble.js
 :vs iyada/
-:sp public/javascripts/hot-query.js
 :vs public/javascripts/show_hot_queries.js
 :vs routes/iyada/bubble.js
 :vs routes/iyada/
@@ -82,143 +117,108 @@ $
 :vs ../public/javascripts/hot-query.js
 :2
 :.,.+1!-l
-:vs bubble.ejs
-:set ft=javascript
-:'<,'>s/}/}/g
-:'<,'>s/{/{/g
-:'<,'>s/{//g
-:'<,'>s/;/;/g
-:'<,'>s/;//g
-:s
-:set nonu
-:kk
-:source %
-://stackoverflow.com/questions/7187477/vim-smart-insert-semicolon
-:a!
-:GundoToggle
-:Gundo
-:gundo
-:jjk
-:NeoBundleInstall
-:vs mixi/.git/config
-:vs .bashrc
-:vs 
-:NeoComplCacheEnable
-:40
-:!mkdir -p t/static/js/jp/mixi/featuredcontents/ui/
-:w!
-:vs t/static/js/jp/mixi/featuredcontents/ui/nativesearchform.js
-:vs t/
-:cd ~/mixi/
-:vs searchform.js
-:vs ../part3/power.scm
-:set paster
-:vs ../part1/good-enough.scm
-:vs ../part1/compute-sequence.scm
-:1,3s/$/    \/\/commit here/g
-:1,3s/$/    comment here!/g
 
 # Search String History (newest to oldest):
-?/adgha
-?/adgh
-?/style
-?/img
-?/run
-?/console
-?/assign_genre_data
-? \<assign_edit\>
-?/\<assign_edit\>
-?/cancel
-?/genres
-? \<assign_common_form_data\>
-? \<assign_input_data\>
-?/edit_error
-?/-edit_error
-?/ger
+?/too
+?/merge
 ?/condition
-?/-edit
-?/warning
-?/validation
-?/warnings
-? \<set_can_edit_style\>
-? \<has_warnings\>
-?/content_id
-?/limit
-?/vi
-?/:q
-?/skin_param
-?/commit
-?/has_warnings
-?/\<skin_param\>
-?/valida
-?/validtaion
-? \<skin_param\>
-? \<skin_style_param\>
-?/skin
-?/skin_param_style
-? \<Mixi::Skin::Config::SKIN_MEMO_LIMIT\>
-?/number
-?/TODO
-?/contents_id
-?/skin_color_data
-?/skin_type
-?/todo
-?/genre
-?/relation
-?/Todo
-?/border
-?/contents_title
-?/ad
-?/set_to_open_edit
-?/->param
-?/para
-?/parame
-?/parameter
 ?/mode
-?/set_to_open
-?/dagdh
-?/open
-?/tou
-?/version
-?/224
-? \<_get_editing_skin_data\>
-? \<Caution:\>
-?/encod
-?/decode
-?/decod
-?/se
+?/skin_id
+? \<select_member_skin_id\>
+?/get
+?/delete_me
+?/delete_member
+?/adhga
+?/skin
+?/test
+?/set_member_skin
+? \<TOUCH_MEMBER_SKIN\>
+?/get_instance
+?/$s
+?/cls
+?/branch
+?/dumper
+?/data
+?/get_member
+? \<GENRE_ID\>
+? \<genre_id\>
+?/\<VALIDATION_RULE\>
+? \<VALIDATION_RULE\>
+? \<SKIN_ID\>
+?/get_skin
+? \<can_use_skin\>
+?/n
+? \<SKIN_TEST_ENVIRONMENT\>
+? \<is_skin_test_environment\>
+?/audien
+?/audi
+?/main
+?/Âà©Áî®Ë¶èÁ¥Ñ
+?/tmpl
+?/condi
+? 'disabled'
+? removeprop
+? attr
+?/attr
+?/todo
+?/tod
+?/Todo
+? \<_validate_skin_style_info\>
 ?/yaml
-? \<encode\>
-?/skin_version
-?/x0
-?/object
-?/nbfm
-? \<sf\>
-?/nu
-?/versio
-?/args
-? \<_update_skin_data\>
-? \<_admin_user_name\>
-?/tempora
-?/edit_skin_staging
-?/edit
-?/up
-?/edit_skin_stag
-?/deit_skin_stag
-?/staging
-? \<edit_skin_staging\>
-?/temp
-?/update_skin_ba
+? \<_get_editing_skin_data\>
+?/set_to_open_and
+?/set_to_open
+? \<set_to_open_and_commit_edit_data\>
+? \<Á¢∫Ë™çÂÆå‰∫ÜÁôªÈå≤\>
+?/set
+?/\<_get_editing_skin_data\>
+?/\<set_to_open_and_commit_edit_data\>
+?/skin_module
+?/list_skin
+?/ist
+? \<assign_show\>
+? (
+? \<_assign_staging_skin_info\>
 ?/temporary
-?/update_skin_basi
-? );
-?/validate
-?/update_style_info
-?/_update
-?/can_edit_style
-?/self
-?/can_edit
-?/u
+? \<assign_confirm\>
+?/staging
+?/templ
+?/has
+?/edit_skin_staging
+? \<edit_skin_staging\>
+? \<style_info\>
+?/base
+?/get_editing_skin_data
+?/show
+?/smartphone
+?/smartphon
+?/adgh
+?/tempor
+?/_get
+?/temper
+?/t
+?/temp
+?/conditi
+? \<editing_skin_param\>
+?/dum
+?/insert
+?/datetime
+?/current_time
+?/current_timestamp
+?/timestamp
+?/weaker
+?/1
+?/w
+?/body.red
+?/tab
+?/TMPL
+?/get_style
+?/touch_skin_base_path
+?/output
+?/css_tmp
+?/<C
+?/C-f
+?/weak
 
 # Expression History (newest to oldest):
 
@@ -227,482 +227,287 @@ $
 # Input Line History (newest to oldest):
 
 # Registers:
-"0@	LINE	0
-	            var Bubbles = document.getElementById("hotwords").getElementsByTagName("div");
+""0@	CHAR	0
+	 
 "1	LINE	0
-	                /*
-	                if(left == width){
-	                    clearInterval(id);
-	                }
-	                */
+	    member_id: 9998
 "2	LINE	0
-	            //var id = setInterval(setPosition, 10);
+	    member_id: 9997
 "3	LINE	0
-	            document.getElementsByTagName("");
+	    member_id: 9997
 "4	LINE	0
-	                
+	
 "5	LINE	0
-	            var left = 0;
+	
 "6	LINE	0
 	
 "7	LINE	0
-	                //element.style.right = height + 'px';
+	my $skin;
 "8	LINE	0
-	
+	ok($@,);
 "9	LINE	0
-	                left = 300;
+	bash: line 0: fg: no job control
+"f	CHAR	0
+	kkkkhkkkkkkkkkkkjiskin_jjjhhhhiskin_:wkkkjddkukjddkkpjjjjddkkp:wl:wÄkbÄkuÄkuq
+"j	CHAR	0
+	jjjjjjkkkkkkkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhllllli(hllx$i):wÄku::ÄkuÄkuq
 "k	CHAR	0
 	uuuujkkkj:wÄkbÄkb
 "q	CHAR	0
 	1421
 <wwwkjjkjk$hhhhhhhhhhhhhhhhhi{$ÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkrÄkr}hhhhhhhhhhhhhhhhhhwwwhhhhhhhhllllllllll:wkkkjjhllljkhhhhhhhhhhhhhhhhhhhhhhhhhhkddjkxjj:wkkkkkjlljjjkjjjllkkkkjlllhlllllllllllllllllllljkjjjhhhhhhhhhhhhhhhhhhkkkkjjjjjjjdduddkklklllllllwwhhhhhhhhhhhhi""Äkl Äkr x 4 ,ÄkbÄkb, vimÄkbÄkbÄkb$deskkkhhhhhhhhvllllllyjjjlllllllllhphhhhhhi, llllllliÄkr hhhhhhhhhhhlllllllllllllllllllllllllllllll:wkkkkkkkkjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkjjjkjkjkkkkkjjjjddkkkkkkkkkkk/#n/dagdhjjGkkkkkkkkkkkkkjjddddk:wjjjjjjjjjjkkkkklwwwwwwwwwjjjjj:wqÄkb:set nonukkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkjjj#!/usr/bin/perl## Author:zhangfeng  cst.feng@gmail.com  2012-07-17use warnings;use strict;use Data::Dumper;my %total_bytes;my $sum_bytes = "sum_bytes";while(<>){  next if(/^#.*/);  my ($source, $destination, $bytes) = split;  $total_bytes{$source}{$destination} += $bytes;  $total_bytes{$source}{$sum_bytes} += $bytes;}# sort by source and destination.my $src;foreach $src (sort { $total_bytes{$a}{$sum_bytes} <=> $total_bytes{$b}{$sum_bytes} } keys %total_bytes){  print $src, " => ", $total_bytes{$src}{$sum_bytes}, "\n";  foreach my $des (sort { $total_bytes{$src}{$a} <=> $total_bytes{$src}{$b}} keys %{$total_bytes{$src}})  {    print " " x 4, $des, " => ", $total_bytes{$src}{$des}, "\n";  }}kjjGj:qq
-""-	CHAR	0
-	innerText
+"-	CHAR	0
+	 
 
 # File marks:
-'0  2  0  ~/git/banana/banana/.git/COMMIT_EDITMSG
-'1  91  0  ~/git/banana/banana/views/iyada/list.ejs
-'2  47  1  ~/git/banana/banana/views/iyada/list.ejs
-'3  71  1  ~/git/banana/banana/views/test.ejs
-'4  649  0  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
-'5  1  13  ~/git/touch-skin/.git/COMMIT_EDITMSG
-'6  133  15  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
-'7  104  81  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
-'8  116  25  ~/git/touch-skin/lib/Mixi/Skin/Config.pm
-'9  70  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
+'0  1  13  ~/git/touch-skin/testa
+'1  11  1  ~/.git/config
+'2  14  1  ~/git/touch-skin/.git/config
+'3  22  1  ~/git/touch-skin/.git/config
+'4  736  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+'5  81  13  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/List.pm
+'6  41  8  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Manage.pm
+'7  1  0  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
+'8  1  34  ~/git/touch-skin/.git/COMMIT_EDITMSG
+'9  95  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
 
 # Jumplist (newest first):
--'  2  0  ~/git/banana/banana/.git/COMMIT_EDITMSG
--'  3  0  ~/git/banana/banana/.git/COMMIT_EDITMSG
--'  91  0  ~/git/banana/banana/views/iyada/list.ejs
--'  46  25  ~/git/banana/banana/views/iyada/list.ejs
--'  75  12  ~/git/banana/banana/views/iyada/list.ejs
--'  61  38  ~/git/banana/banana/views/iyada/list.ejs
--'  65  92  ~/git/banana/banana/views/iyada/list.ejs
--'  63  24  ~/git/banana/banana/views/iyada/list.ejs
--'  49  8  ~/git/banana/banana/views/iyada/list.ejs
--'  47  0  ~/git/banana/banana/views/iyada/list.ejs
--'  2  56  ~/git/banana/banana/views/iyada/list.ejs
--'  45  25  ~/git/banana/banana/views/iyada/list.ejs
--'  16  60  ~/git/banana/banana/views/iyada/list.ejs
--'  89  9  ~/git/banana/banana/views/iyada/list.ejs
--'  71  1  ~/git/banana/banana/views/test.ejs
--'  649  0  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  612  5  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  609  12  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  563  12  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  557  12  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  152  32  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  151  32  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  150  32  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  556  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  41  29  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  40  85  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  577  50  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  538  39  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  537  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  156  45  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  155  45  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  154  45  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  153  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  603  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  607  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  610  0  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  225  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  210  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  204  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  198  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  240  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  251  25  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  233  29  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  220  25  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  133  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
+-'  1  13  ~/git/touch-skin/testa
+-'  11  1  ~/.git/config
+-'  14  1  ~/git/touch-skin/.git/config
+-'  21  4  ~/git/touch-skin/.git/config
+-'  22  1  ~/git/touch-skin/.git/config
+-'  736  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+-'  752  68  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+-'  250  33  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+-'  1  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+-'  81  13  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/List.pm
+-'  12  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/List.pm
+-'  1  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/List.pm
+-'  41  8  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Manage.pm
+-'  35  8  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Manage.pm
+-'  112  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Manage.pm
+-'  18  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Manage.pm
+-'  1  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Manage.pm
 -'  1  0  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  1  13  ~/git/touch-skin/.git/COMMIT_EDITMSG
--'  340  42  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  339  38  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  315  40  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  314  38  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  250  40  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  249  38  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  219  40  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  218  38  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  37  28  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  11  4  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  7  4  ~/git/banana/banana/public/javascripts/hot-query.js
--'  8  3  ~/git/banana/banana/public/javascripts/hot-query.js
--'  1  12  ~/git/banana/banana/public/javascripts/hot-query.js
--'  2  16  ~/git/banana/banana/public/javascripts/hot-query.js
--'  4  11  ~/git/banana/banana/public/javascripts/hot-query.js
--'  1225  0  ~/git/banana/banana/public/stylesheets/banana.css
--'  1226  0  ~/git/banana/banana/public/stylesheets/banana.css
--'  871  14  ~/git/banana/banana/public/stylesheets/banana.css
--'  805  104  ~/git/banana/banana/public/stylesheets/banana.css
--'  1217  10  ~/git/banana/banana/public/stylesheets/banana.css
--'  580  16  ~/git/banana/banana/public/stylesheets/banana.css
--'  845  1  ~/git/banana/banana/public/stylesheets/banana.css
--'  790  16  ~/git/banana/banana/public/stylesheets/banana.css
--'  1200  0  ~/git/banana/banana/public/stylesheets/banana.css
--'  1218  0  ~/git/banana/banana/public/stylesheets/banana.css
--'  96  0  ~/git/banana/banana/views/test.ejs
--'  9  1  ~/git/banana/banana/views/test.ejs
--'  89  18  ~/git/banana/banana/views/test.ejs
--'  46  10  ~/git/banana/banana/views/test.ejs
--'  45  10  ~/git/banana/banana/views/test.ejs
--'  38  6  ~/git/banana/banana/views/test.ejs
--'  37  6  ~/git/banana/banana/views/test.ejs
--'  6  2  ~/git/banana/banana/views/test.ejs
--'  4  1  ~/git/banana/banana/views/test.ejs
--'  87  6  ~/git/banana/banana/views/test.ejs
--'  76  1  ~/git/banana/banana/views/test.ejs
--'  61  1  ~/git/banana/banana/views/test.ejs
--'  18  0  ~/git/banana/banana/public/stylesheets/banana.css
--'  1  0  ~/git/banana/banana/public/stylesheets/banana.css
--'  94  0  ~/git/banana/banana/views/test.ejs
--'  72  0  ~/git/banana/banana/views/test.ejs
--'  1  0  ~/git/banana/banana/views/test.ejs
--'  112  1  ~/git/banana/banana/views/iyada/list.ejs
--'  113  1  ~/git/banana/banana/views/iyada/list.ejs
--'  117  0  ~/git/banana/banana/views/iyada/list.ejs
--'  116  20  ~/git/banana/banana/views/iyada/list.ejs
--'  114  20  ~/git/banana/banana/views/iyada/list.ejs
--'  649  0  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  612  5  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  609  12  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  563  12  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
--'  557  12  ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
+-'  1  34  ~/git/touch-skin/.git/COMMIT_EDITMSG
+-'  3  0  ~/git/touch-skin/.git/COMMIT_EDITMSG
+-'  95  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
+-'  10  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
+-'  115  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
+-'  1  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
+-'  102  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
+-'  116  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
+-'  7  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
+-'  2  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
+-'  19  8  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/01.basic.t
+-'  1  0  ~/git/touch-skin/t/lib/Mixi/Skin/Admin/01.basic.t
+-'  26  16  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  21  33  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  22  39  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  12  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  211  20  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  219  55  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  193  0  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  25  21  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  28  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  268  0  ~/git/touch-skin/lib/Mixi/Skin.pm
+-'  152  8  ~/git/touch-skin/lib/Mixi/Skin.pm
+-'  205  20  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  186  4  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  18  47  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  6  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  17  1  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  16  24  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  15  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  8  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  1  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+-'  187  4  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  217  47  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  216  48  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  199  5  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  59  20  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  292  0  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  168  0  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  36  1  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/set_member_skin.t
+-'  39  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/set_member_skin.t
+-'  1  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/set_member_skin.t
+-'  17  0  ~/.bashrc-git
+-'  4  0  ~/.bashrc-git
+-'  4  0  ~/git/touch-skin/t/inc/Nove/Test/Mock/Cache/Memcached.pm
+-'  1  0  ~/git/touch-skin/t/inc/Nove/Test/Mock/Cache/Memcached.pm
+-'  6  0  ~/.bashrc-git
+-'  7  0  ~/git/python/c.py
+-'  2  0  ~/git/python/c.py
+-'  13  0  ~/git/python/reg.py
+-'  1  0  ~/git/python/reg.py
+-'  2  0  ~/git/python/.git/COMMIT_EDITMSG
+-'  1  0  ~/git/python/.git/COMMIT_EDITMSG
+-'  1  0  ~/git/python/c.py
+-'  11  1  ~/git/touch-skin/.git/config
+-'  1  0  ~/git/touch-skin/.git/config
+-'  212  0  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  76  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/get_skin.t
+-'  15  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/get_skin.t
+-'  74  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/get_skin.t
+-'  3  8  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/get_skin.t
+-'  47  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/get_skin.t
+-'  1  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/get_skin.t
+-'  75  46  ~/.vimrc
+-'  8  0  ~/.vimrc
+-'  1  5  ~/git/touch-skin/mmm
+-'  13  0  ~/.bashrc-git
+-'  41  9  ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+-'  34  0  ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+-'  348  26  ~/git/touch-skin/boofy/tmpl/skin/touch/show_skin.tmpl
+-'  38  46  ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+-'  84  0  ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+-'  12  0  ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+-'  87  0  ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+-'  5  0  ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+-'  1  0  ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+-'  340  9  ~/git/touch-skin/boofy/tmpl/skin/touch/show_skin.tmpl
+-'  1  0  ~/git/touch-skin/boofy/tmpl/skin/touch/show_skin.tmpl
+-'  11  1  ~/.git/config
+-'  14  1  ~/git/touch-skin/.git/config
 
 # Buffer list:
-%~/git/banana/banana/.git/COMMIT_EDITMSG	2	0
+%~/git/touch-skin/testa	1	13
 
 # History of marks within files (newest to oldest):
 
-> ~/git/banana/banana/.git/COMMIT_EDITMSG
-	"	2	0
-	^	2	0
-	.	1	18
-	+	1	12
-	+	8	0
-	+	6	20
-	+	1	18
+> ~/git/touch-skin/testa
+	"	1	13
+	^	1	14
+	.	1	13
+	+	1	13
 
-> ~/git/banana/banana/views/iyada/list.ejs
-	"	91	0
-	^	76	95
-	.	43	68
-	+	47	94
-	+	40	39
-	+	47	36
-	+	47	0
-	+	47	20
-	+	47	30
-	+	47	55
-	+	47	52
-	+	47	39
-	+	47	49
-	+	47	0
-	+	47	43
-	+	47	0
-	+	47	41
-	+	47	43
-	+	47	55
-	+	47	21
-	+	47	39
-	+	47	46
-	+	47	49
-	+	47	44
-	+	47	51
-	+	47	52
-	+	47	48
-	+	47	49
-	+	47	24
-	+	47	25
-	+	47	25
-	+	47	20
-	+	47	42
-	+	47	57
-	+	47	0
-	+	47	0
-	+	48	18
-	+	49	12
-	+	64	15
-	+	75	15
-	+	75	17
-	+	64	22
-	+	43	35
-	+	60	41
-	+	61	43
-	+	68	16
-	+	64	16
-	+	57	0
-	+	55	0
-	+	63	51
-	+	63	67
-	+	63	35
-	+	63	38
-	+	63	74
-	+	63	73
-	+	63	57
-	+	63	37
-	+	63	70
-	+	63	69
-	+	63	49
-	+	63	0
-	+	64	0
-	+	75	0
-	+	52	37
-	+	55	0
-	+	68	40
-	+	51	0
-	+	64	15
-	+	65	15
-	+	64	0
-	+	68	48
-	+	69	48
-	+	75	0
-	+	69	17
-	+	40	43
-	+	58	0
-	+	51	86
-	+	69	16
-	+	43	21
-	+	66	33
-	+	77	13
-	+	64	42
-	+	65	67
-	+	66	45
-	+	67	28
-	+	69	41
-	+	65	92
-	+	65	69
-	+	77	51
-	+	65	67
-	+	60	40
-	+	61	41
-	+	60	39
-	+	61	40
-	+	60	39
-	+	61	40
-	+	77	43
-	+	76	0
-	+	77	0
-	+	76	95
-	+	77	0
-	+	70	0
-	+	43	68
+> ~/.git/config
+	"	11	1
 
-> ~/git/banana/banana/views/test.ejs
-	"	77	32
-	^	96	7
-	.	77	0
-	+	141	61
-	+	146	78
-	+	142	36
-	+	96	0
-	+	77	0
+> ~/git/touch-skin/.git/config
+	"	14	1
+	^	22	14
+	.	22	0
+	+	21	6
+	+	22	0
 
-> ~/git/banana/banana/public/stylesheets/banana.css
-	"	1208	0
-	^	1203	9
-	.	1209	0
-	+	1211	18
-	+	1211	68
-	+	1211	0
-	+	1201	18
-	+	1201	0
-	+	1201	46
-	+	1201	0
-	+	1210	0
-	+	1201	7
-	+	1207	3
-	+	1208	21
-	+	1209	13
-	+	1209	10
-	+	1209	14
-	+	1202	21
-	+	1209	8
-	+	1209	9
-	+	1209	9
-	+	1209	0
-	+	1209	10
-	+	1201	0
-	+	1211	0
-	+	1172	36
-	+	15	7
-	+	24	14
-	+	1209	9
-	+	1207	6
-	+	1209	0
-	+	1205	15
-	+	19	3
-	+	1201	7
-	+	1207	7
-	+	1201	0
-	+	1207	0
-	+	1205	0
-	+	1211	0
-	+	690	0
-	+	1211	0
-	+	1199	0
-	+	1202	0
-	+	1203	0
-	+	1205	0
-	+	1208	0
-	+	1209	0
-	+	1209	0
-	+	1201	0
-	+	1207	0
-	+	1205	0
-	+	1203	8
-	+	1204	7
-	+	1203	11
-	+	1204	12
-	+	1203	10
-	+	1204	11
-	+	1209	8
-	+	1203	7
-	+	1204	8
-	+	1209	6
-	+	1209	0
-	+	1209	12
-	+	1209	0
-	+	1209	0
-	+	1208	0
-	+	1207	8
-	+	1209	6
-	+	1209	5
-	+	1204	9
-	+	1209	0
-	+	1209	9
-	+	1209	0
-	+	1209	10
-	+	1209	6
-	+	1209	6
-	+	1209	6
-	+	1209	6
-	+	1209	4
-	+	1209	3
-	+	1209	12
-	+	1209	2
-	+	1209	9
-	+	1203	8
-	+	1209	0
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+	"	736	0
+	^	250	35
+	.	250	0
+	+	250	0
 
-> ~/git/banana/banana/public/javascripts/hot-query.js
-	"	7	4
-	.	8	0
-	+	2	33
-	+	2	36
-	+	2	0
-	+	8	36
-	+	8	18
-	+	2	20
-	+	8	0
-	+	8	0
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/List.pm
+	"	81	13
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Manage.pm
+	"	41	8
 
 > ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
-	"	649	0
-	.	559	0
-	+	129	0
-	+	126	0
-	+	123	0
-	+	117	15
-	+	118	37
-	+	123	18
-	+	124	42
-	+	118	48
-	+	115	48
-	+	127	48
-	+	130	48
-	+	123	22
-	+	124	42
-	+	126	16
-	+	127	45
-	+	129	8
-	+	126	11
-	+	129	22
-	+	130	42
-	+	120	13
-	+	121	38
-	+	223	62
-	+	223	16
-	+	224	11
-	+	224	0
-	+	223	0
-	+	223	60
-	+	224	0
-	+	224	25
-	+	223	0
-	+	254	63
-	+	319	63
-	+	344	63
-	+	103	63
-	+	104	81
-	+	224	0
-	+	223	60
-	+	223	0
-	+	223	77
-	+	254	0
-	+	254	0
-	+	223	0
-	+	254	0
-	+	254	56
-	+	254	0
-	+	314	47
-	+	316	34
-	+	319	0
-	+	339	0
-	+	344	0
-	+	339	56
-	+	219	11
-	+	219	18
-	+	219	11
-	+	219	52
-	+	219	0
-	+	219	0
-	+	219	11
-	+	219	11
-	+	222	15
-	+	222	15
-	+	222	11
-	+	219	0
-	+	223	0
-	+	219	51
-	+	223	0
-	+	216	0
-	+	214	42
-	+	217	0
-	+	216	34
-	+	219	0
-	+	215	0
-	+	216	0
-	+	218	0
-	+	216	54
-	+	218	63
-	+	219	12
-	+	222	0
-	+	220	0
-	+	221	12
-	+	222	0
-	+	223	0
-	+	245	41
-	+	254	0
-	+	247	54
-	+	247	8
-	+	247	0
-	+	249	0
-	+	247	8
-	+	249	8
-	+	247	54
-	+	133	23
-	+	134	0
-	+	133	15
-	+	606	0
-	+	607	28
-	+	561	0
-	+	557	0
-	+	560	0
-	+	559	0
+	"	1	0
+	^	665	29
+	.	653	0
+	+	119	96
+	+	119	0
+	+	120	0
+	+	120	0
+	+	125	0
+	+	126	20
+	+	132	0
+	+	133	20
+	+	146	0
+	+	147	20
+	+	153	0
+	+	154	20
+	+	160	0
+	+	161	20
+	+	167	0
+	+	168	20
+	+	174	0
+	+	175	20
+	+	181	0
+	+	182	20
+	+	188	0
+	+	189	20
+	+	195	0
+	+	196	20
+	+	428	0
+	+	409	0
+	+	407	0
+	+	402	0
+	+	397	0
+	+	407	0
+	+	408	0
+	+	136	13
+	+	138	41
+	+	139	44
+	+	141	38
+	+	360	53
+	+	453	53
+	+	141	0
+	+	356	0
+	+	375	0
+	+	695	0
+	+	692	103
+	+	693	115
+	+	694	0
+	+	694	106
+	+	695	107
+	+	695	0
+	+	468	0
+	+	24	0
+	+	629	0
+	+	633	16
+	+	635	34
+	+	639	0
+	+	650	18
+	+	649	0
+	+	668	0
+	+	631	10
+	+	632	25
+	+	630	0
+	+	653	0
+	+	667	0
+	+	653	0
+	+	629	0
+	+	633	0
+	+	655	0
+	+	633	0
+	+	633	0
+	+	639	0
+	+	641	0
+	+	641	0
+	+	645	0
+	+	639	0
+	+	639	17
+	+	639	11
+	+	636	0
+	+	639	0
+	+	638	0
+	+	633	0
+	+	651	0
+	+	654	0
+	+	655	0
+	+	655	27
+	+	663	0
+	+	653	102
+	+	655	0
+	+	664	17
+	+	666	0
+	+	666	0
+	+	666	0
+	+	666	0
+	+	666	0
+	+	666	0
+	+	665	0
+	+	666	0
+	+	665	122
+	+	665	30
+	+	664	26
+	+	665	164
+	+	653	0
+	+	653	0
 
 > ~/git/touch-skin/ControlP
 	"	9	0
@@ -790,7 +595,7 @@ $
 	+	1	0
 	+	1	0
 	+	1	0
-	+	17	0
+	+	1	0
 	+	1	0
 	+	1	0
 	+	1	0
@@ -809,177 +614,293 @@ $
 	+	2	0
 
 > ~/git/touch-skin/.git/COMMIT_EDITMSG
-	"	1	13
-	^	2	0
-	.	1	14
+	"	1	34
+	^	1	35
+	.	1	34
 	+	1	36
-	+	23	0
+	+	1	0
 	+	1	0
 	+	1	18
-	+	20	0
+	+	1	0
 	+	1	55
-	+	19	0
+	+	1	0
 	+	1	34
 	+	1	50
-	+	9	0
+	+	1	0
 	+	1	48
-	+	3	0
-	+	1	14
+	+	1	0
+	+	1	9
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	7
+	+	1	0
+	+	1	59
+	+	1	0
+	+	1	53
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	18
+	+	1	0
+	+	1	22
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	6
+	+	1	9
+	+	1	0
+	+	1	38
+	+	1	7
+	+	1	0
+	+	1	0
+	+	1	33
+	+	1	33
+	+	1	28
+	+	1	44
+	+	1	45
+	+	5	0
+	+	1	26
+	+	5	0
+	+	1	34
 
-> ~/git/touch-skin/lib/Mixi/Skin/Config.pm
-	"	116	25
-	^	116	26
-	.	116	25
-	+	133	17
-	+	137	17
-	+	134	38
-	+	138	32
-	+	148	0
-	+	60	0
-	+	47	0
-	+	37	0
-	+	38	0
-	+	39	0
-	+	38	25
-	+	116	25
+> ~/git/touch-skin/t/lib/Mixi/Skin/Admin/02.get_add_edit_skin.t
+	"	95	0
+
+> ~/git/touch-skin/t/lib/Mixi/Skin/Admin/01.basic.t
+	"	20	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/DB/Skin.pm
+	"	130	46
+	^	224	29
+	.	560	0
+	+	140	0
+	+	155	0
+	+	172	0
+	+	182	0
+	+	480	34
+	+	480	35
+	+	481	38
+	+	482	8
+	+	480	22
+	+	481	0
+	+	218	34
+	+	219	0
+	+	219	0
+	+	218	37
+	+	229	16
+	+	229	15
+	+	229	0
+	+	227	0
+	+	228	11
+	+	229	0
+	+	228	8
+	+	256	8
+	+	245	22
+	+	256	8
+	+	228	10
+	+	217	35
+	+	227	39
+	+	286	0
+	+	285	35
+	+	246	0
+	+	298	0
+	+	298	0
+	+	329	0
+	+	269	0
+	+	297	38
+	+	302	0
+	+	300	16
+	+	307	24
+	+	297	16
+	+	327	13
+	+	297	16
+	+	327	14
+	+	328	4
+	+	297	7
+	+	328	7
+	+	297	4
+	+	328	4
+	+	298	0
+	+	266	32
+	+	266	8
+	+	198	32
+	+	199	8
+	+	228	4
+	+	229	0
+	+	256	4
+	+	297	14
+	+	301	19
+	+	308	26
+	+	263	13
+	+	266	30
+	+	197	18
+	+	198	30
+	+	278	34
+	+	277	27
+	+	291	26
+	+	266	11
+	+	264	0
+	+	266	0
+	+	265	16
+	+	221	17
+	+	251	13
+	+	326	17
+	+	359	13
+	+	222	23
+	+	223	30
+	+	224	26
+	+	225	29
+	+	224	25
+	+	226	37
+	+	227	36
+	+	229	0
+	+	334	0
+	+	266	0
+	+	560	0
+	+	560	0
+	+	560	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/DB.pm
+	"	1	0
 
 > ~/git/touch-skin/db-schema/DB_TOUCHSKIN__touchskin.sql
-	"	43	0
-	^	10	34
-	.	183	0
-	+	95	26
-	+	81	0
-	+	83	26
-	+	94	0
-	+	83	49
-	+	93	25
-	+	84	0
-	+	93	1
-	+	84	26
-	+	85	31
-	+	84	31
-	+	83	35
-	+	84	35
-	+	83	35
-	+	85	35
-	+	93	2
-	+	85	2
-	+	86	0
-	+	93	1
-	+	86	35
-	+	85	35
-	+	93	2
-	+	87	0
-	+	93	1
-	+	87	35
-	+	93	2
-	+	88	0
-	+	89	0
-	+	93	1
-	+	89	35
-	+	88	35
-	+	93	2
-	+	90	0
-	+	93	1
-	+	90	35
-	+	91	35
-	+	92	35
-	+	86	35
-	+	87	35
-	+	88	0
-	+	71	0
-	+	70	0
-	+	71	50
-	+	78	0
-	+	72	0
-	+	73	0
-	+	74	0
-	+	75	0
-	+	76	0
-	+	77	0
+	"	108	0
+	^	38	58
+	.	14	0
+	+	75	1
 	+	72	26
+	+	73	31
 	+	72	31
-	+	73	31
-	+	72	2
-	+	73	31
-	+	74	17
-	+	75	21
-	+	76	23
-	+	77	28
-	+	78	26
-	+	73	2
-	+	74	2
+	+	71	35
+	+	72	35
+	+	71	35
+	+	73	35
 	+	75	2
-	+	76	2
-	+	77	2
-	+	78	1
-	+	80	0
-	+	78	23
-	+	79	1
-	+	73	31
-	+	72	31
-	+	73	31
-	+	75	31
-	+	76	31
-	+	77	31
-	+	78	23
-	+	79	21
-	+	78	31
-	+	79	31
-	+	81	0
+	+	73	2
+	+	74	0
+	+	75	1
+	+	74	35
+	+	73	35
+	+	75	2
+	+	75	0
+	+	75	1
+	+	75	35
+	+	75	2
+	+	75	0
+	+	75	0
+	+	75	1
+	+	75	35
+	+	75	35
+	+	75	2
+	+	75	0
+	+	75	1
+	+	75	35
+	+	75	35
+	+	75	35
+	+	74	35
+	+	75	35
+	+	75	0
+	+	58	0
+	+	57	0
+	+	58	50
+	+	66	0
+	+	59	0
+	+	60	0
+	+	62	0
+	+	63	0
+	+	64	0
+	+	65	0
+	+	59	26
+	+	59	31
+	+	60	31
+	+	59	2
+	+	60	31
+	+	62	17
+	+	63	21
+	+	64	23
+	+	65	28
+	+	66	26
+	+	60	2
+	+	62	2
+	+	63	2
+	+	64	2
+	+	65	2
+	+	66	1
 	+	68	0
-	+	70	5
-	+	71	0
+	+	66	23
+	+	67	1
+	+	60	31
+	+	59	31
+	+	60	31
+	+	63	31
+	+	64	31
+	+	65	31
+	+	66	23
+	+	67	21
+	+	66	31
+	+	67	31
+	+	69	0
+	+	55	0
+	+	57	5
+	+	58	0
 	+	10	0
-	+	183	0
-
-> ~/git/touch-skin/boofy/tmpl/skin/touch/skin_form_parts.tmpl
-	"	18	3
-	.	231	0
-	+	119	0
-	+	82	49
-	+	89	55
-	+	96	55
-	+	103	46
-	+	110	49
-	+	117	43
-	+	124	43
-	+	131	55
-	+	138	49
-	+	64	30
-	+	145	0
-	+	231	0
+	+	109	0
+	+	61	7
+	+	69	0
+	+	55	0
+	+	61	0
+	+	40	58
+	+	9	0
+	+	39	61
+	+	40	57
+	+	39	0
+	+	38	0
+	+	41	0
+	+	38	48
+	+	36	48
+	+	78	1
+	+	89	51
+	+	90	52
+	+	91	61
+	+	92	40
+	+	75	0
+	+	109	0
+	+	109	0
+	+	14	0
 
 > ~/git/touch-skin/lib/Mixi/Skin/Touch/Admin.pm
-	"	540	8
-	.	222	0
-	+	181	70
-	+	236	80
-	+	255	65
-	+	275	65
-	+	293	65
-	+	320	70
-	+	347	68
-	+	347	71
-	+	365	70
-	+	552	70
-	+	132	50
-	+	132	50
+	"	555	4
+	.	537	0
+	+	256	65
+	+	276	65
+	+	294	65
+	+	321	70
+	+	348	68
+	+	348	71
+	+	367	70
+	+	536	70
+	+	133	50
+	+	133	50
 	+	136	0
 	+	136	33
-	+	124	0
-	+	138	35
-	+	143	32
-	+	144	31
-	+	136	35
-	+	137	33
-	+	138	32
+	+	125	0
 	+	137	35
-	+	138	0
-	+	146	0
-	+	146	0
-	+	145	32
-	+	152	0
+	+	142	32
+	+	143	31
+	+	136	35
+	+	136	33
+	+	137	32
+	+	136	35
+	+	137	0
+	+	145	0
+	+	145	0
+	+	144	32
+	+	151	0
 	+	226	54
 	+	225	4
 	+	223	44
@@ -1003,35 +924,1422 @@ $
 	+	225	21
 	+	222	28
 	+	225	0
-	+	133	0
+	+	134	0
 	+	136	0
-	+	135	21
-	+	142	0
-	+	141	39
+	+	136	21
+	+	141	0
+	+	140	39
+	+	140	0
+	+	139	11
+	+	140	12
+	+	140	11
+	+	141	0
+	+	140	0
 	+	141	0
 	+	140	11
-	+	141	12
-	+	141	11
-	+	142	0
+	+	140	22
+	+	140	0
 	+	141	0
-	+	142	0
-	+	141	11
-	+	141	22
-	+	141	0
-	+	142	0
-	+	141	8
+	+	140	8
 	+	225	0
 	+	219	0
 	+	222	19
 	+	224	82
-	+	344	0
-	+	347	0
-	+	339	21
-	+	339	20
+	+	345	0
+	+	348	0
+	+	340	21
+	+	340	20
 	+	222	0
 	+	222	0
-	+	339	0
+	+	340	0
 	+	222	0
+	+	85	13
+	+	199	13
+	+	247	13
+	+	100	0
+	+	214	0
+	+	262	0
+	+	136	0
+	+	226	0
+	+	223	27
+	+	223	4
+	+	223	31
+	+	350	33
+	+	349	0
+	+	348	0
+	+	356	64
+	+	352	22
+	+	353	0
+	+	350	0
+	+	356	0
+	+	223	0
+	+	532	0
+	+	537	0
+	+	537	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Test.pm
+	"	2	4
+	^	29	55
+	.	22	0
+	+	22	0
+	+	37	0
+	+	107	0
+	+	29	54
+	+	18	45
+	+	22	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+	"	93	4
+	^	193	21
+	.	193	13
+	+	244	0
+	+	244	48
+	+	244	53
+	+	221	0
+	+	218	0
+	+	218	0
+	+	221	0
+	+	219	0
+	+	207	0
+	+	214	0
+	+	220	0
+	+	218	0
+	+	211	53
+	+	212	47
+	+	182	70
+	+	200	70
+	+	62	20
+	+	262	0
+	+	244	48
+	+	236	4
+	+	136	4
+	+	244	19
+	+	244	17
+	+	237	0
+	+	238	0
+	+	238	0
+	+	137	0
+	+	140	0
+	+	238	0
+	+	244	0
+	+	244	0
+	+	244	0
+	+	140	0
+	+	141	0
+	+	138	22
+	+	140	0
+	+	240	0
+	+	244	0
+	+	240	77
+	+	244	0
+	+	244	0
+	+	145	49
+	+	146	0
+	+	139	21
+	+	236	0
+	+	136	0
+	+	236	0
+	+	141	0
+	+	235	0
+	+	150	22
+	+	155	0
+	+	151	0
+	+	156	0
+	+	155	26
+	+	151	18
+	+	152	12
+	+	155	7
+	+	152	14
+	+	155	0
+	+	153	22
+	+	161	0
+	+	162	0
+	+	154	0
+	+	153	17
+	+	153	0
+	+	159	7
+	+	43	0
+	+	139	4
+	+	140	0
+	+	140	0
+	+	140	0
+	+	139	0
+	+	138	0
+	+	148	0
+	+	150	0
+	+	150	21
+	+	150	0
+	+	150	4
+	+	148	4
+	+	150	0
+	+	148	4
+	+	149	10
+	+	212	21
+	+	212	0
+	+	211	0
+	+	211	17
+	+	211	62
+	+	140	0
+	+	211	0
+	+	212	0
+	+	211	62
+	+	187	0
+	+	187	0
+	+	194	0
+	+	196	0
+	+	196	0
+	+	195	0
+	+	193	13
+	b	205	0
+	e	205	0
+
+> ~/git/touch-skin/t/lib/Mixi/Skin/Touch/get_skin.t
+	"	52	18
+	^	75	0
+	.	52	18
+	+	3	5
+	+	3	0
+	+	3	0
+	+	15	0
+	+	76	12
+	+	75	0
+	+	52	18
+
+> ~/git/touch-skin/t/fixtures/DB_TOUCHSKIN.yaml
+	"	9	28
+	^	68	8
+	.	68	7
+	+	5	4
+	+	8	0
+	+	5	8
+	+	8	8
+	+	6	0
+	+	4	0
+	+	9	0
+	+	7	0
+	+	4	4
+	+	6	3
+	+	8	7
+	+	6	7
+	+	5	7
+	+	3	3
+	+	62	0
+	+	62	0
+	+	68	0
+	+	69	0
+	+	68	7
+
+> ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+	"	29	0
+	^	29	0
+	.	29	0
+	+	39	0
+	+	38	51
+	+	39	93
+	+	39	75
+	+	35	45
+	+	30	3
+	+	46	0
+	+	30	10
+	+	30	29
+	+	45	0
+	+	32	0
+	+	30	34
+	+	29	0
+
+> fugitive:///home/bkapps/git/touch-skin/.git//91384348c91d37b2f79410c6c3520d9b16c89ee4/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+	"	30	0
+
+> fugitive:///home/bkapps/git/touch-skin/.git//0/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+	"	1	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Style.pm
+	"	32	0
+	.	32	0
+	+	16	0
+	+	25	67
+	+	32	21
+	+	32	35
+	+	32	0
+	+	32	25
+	+	32	29
+	+	32	28
+	+	32	35
+	+	32	16
+	+	32	0
+	+	32	10
+	+	32	12
+	+	32	4
+	+	32	0
+	+	32	11
+	+	32	18
+	+	32	15
+	+	32	3
+	+	32	11
+	+	32	39
+	+	32	0
+	+	32	77
+	+	32	0
+	+	32	19
+	+	32	36
+	+	32	72
+	+	32	0
+
+> ~/git/touch-skin/.git/rebase-merge/git-rebase-todo
+	"	1	0
+	^	17	2
+	.	1	0
+	+	1	0
+	+	7	0
+	+	8	0
+	+	6	0
+	+	2	10
+	+	6	1
+	+	6	0
+	+	7	0
+	+	6	0
+	+	3	0
+	+	2	0
+	+	1	1
+	+	2	0
+	+	1	0
+	+	2	0
+	+	1	0
+	+	2	1
+	+	3	1
+	+	4	1
+	+	7	1
+	+	10	0
+	+	9	1
+	+	13	1
+	+	14	1
+	+	10	0
+	+	5	0
+	+	1	0
+	+	4	0
+	+	5	1
+	+	6	1
+	+	3	0
+	+	8	1
+	+	9	0
+	+	8	0
+	+	9	1
+	+	10	0
+	+	11	1
+	+	10	0
+	+	12	0
+	+	13	1
+	+	14	1
+	+	15	1
+	+	16	1
+	+	17	1
+	+	1	0
+
+> ~/bin/condb.sh
+	"	3	44
+	.	3	44
+	+	3	44
+
+> ~/git/touch-skin/t/lib/Mixi/Skin/Touch/delete_member_skin.t
+	"	26	16
+	^	26	17
+	.	26	16
+	+	29	0
+	+	8	0
+	+	6	0
+	+	9	0
+	+	15	0
+	+	14	0
+	+	16	0
+	+	28	12
+	+	27	0
+	+	16	24
+	+	25	51
+	+	25	55
+	+	25	0
+	+	17	0
+	+	25	0
+	+	26	0
+	+	18	55
+	+	6	0
+	+	6	0
+	+	4	19
+	+	19	0
+	+	18	9
+	+	25	2
+	+	19	6
+	+	18	0
+	+	19	0
+	+	18	9
+	+	17	0
+	+	25	0
+	+	20	0
+	+	24	50
+	+	26	0
+	+	21	0
+	+	20	8
+	+	21	0
+	+	25	0
+	+	22	39
+	+	21	0
+	+	22	18
+	+	23	0
+	+	26	16
+
+> ~/git/touch-skin/t/lib/Mixi/Skin/04.delete.t
+	"	19	0
+
+> ~/git/touch-skin/t/lib/Mixi/Skin/Touch/set_member_skin.t
+	"	22	38
+	^	38	39
+	.	36	0
+	+	36	0
+	+	37	0
+	+	36	0
+	+	36	12
+	+	36	11
+	+	36	0
+	+	36	64
+	+	16	61
+	+	38	68
+	+	36	0
+
+> ~/git/touch-skin/lib/Mixi/Skin.pm
+	"	268	0
+	^	456	3
+	.	456	2
+	+	456	2
+
+> ~/.bashrc-git
+	"	17	0
+	^	4	23
+	.	4	22
+	+	1	6
+	+	2	0
+	+	4	19
+	+	5	25
+	+	10	18
+	+	9	8
+	+	11	11
+	+	6	16
+	+	7	17
+	+	8	0
+	+	7	8
+	+	8	18
+	+	11	14
+	+	11	21
+	+	18	10
+	+	2	0
+	+	19	0
+	+	11	0
+	+	18	0
+	+	11	0
+	+	17	0
+	+	15	0
+	+	11	7
+	+	1	14
+	+	16	24
+	+	18	0
+	+	21	18
+	+	12	19
+	+	22	7
+	+	23	26
+	+	12	22
+	+	13	25
+	+	24	21
+	+	15	0
+	+	13	24
+	+	14	29
+	+	6	24
+	+	4	22
+
+> ~/git/touch-skin/t/inc/Nove/Test/Mock/Cache/Memcached.pm
+	"	4	0
+
+> ~/git/python/c.py
+	"	7	0
+	.	8	0
+	+	1	0
+	+	8	0
+
+> ~/git/python/reg.py
+	"	13	0
+
+> ~/git/python/.git/COMMIT_EDITMSG
+	"	2	0
+	^	2	0
+	.	2	0
+	+	1	19
+	+	2	0
+
+> ~/.vimrc
+	"	75	46
+	^	174	35
+	.	141	0
+	+	141	23
+	+	141	39
+	+	141	39
+	+	141	39
+	+	141	39
+	+	141	39
+	+	141	39
+	+	141	28
+	+	141	75
+	+	141	17
+	+	141	0
+	+	141	0
+	+	141	68
+	+	141	134
+	+	141	7
+	+	141	11
+	+	141	7
+	+	141	6
+	+	141	0
+	+	141	9
+	+	141	0
+	+	141	42
+	+	141	68
+	+	141	71
+	+	141	141
+	+	141	0
+	+	141	4
+	+	141	0
+	+	141	0
+	+	141	4
+	+	141	4
+	+	141	0
+	+	141	0
+	+	141	5
+	+	141	0
+	+	141	0
+	+	141	0
+	+	141	70
+	+	143	57
+	+	151	0
+	+	48	12
+	+	47	0
+	+	145	41
+	+	147	33
+	+	141	0
+	+	198	0
+	+	149	51
+	+	150	46
+	+	181	33
+	+	188	20
+	+	189	39
+	+	195	65
+	+	196	62
+	+	196	0
+	+	152	33
+	+	179	0
+	+	164	0
+	+	165	0
+	+	164	26
+	+	165	0
+	+	166	0
+	+	88	0
+	+	90	0
+	+	92	0
+	+	94	0
+	+	184	0
+	+	179	0
+	+	171	48
+	+	170	8
+	+	178	31
+	+	179	13
+	+	170	8
+	+	181	0
+	+	184	0
+	+	181	0
+	+	184	0
+	+	181	0
+	+	184	0
+	+	181	0
+	+	184	0
+	+	181	0
+	+	182	0
+	+	179	0
+	+	181	0
+	+	181	0
+	+	179	0
+	+	180	0
+	+	183	0
+	+	179	0
+	+	178	0
+	+	170	8
+	+	175	10
+	+	176	36
+	+	175	0
+	+	176	0
+	+	175	0
+	+	176	0
+	+	175	1
+	+	174	0
+	+	141	0
+
+> ~/git/touch-skin/mmm
+	"	1	5
+	^	1	6
+	.	1	5
+	+	1	5
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/show_skin.tmpl
+	"	348	26
+	^	377	44
+	.	360	29
+	+	122	0
+	+	128	0
+	+	124	30
+	+	126	30
+	+	123	50
+	+	125	47
+	+	124	40
+	+	125	47
+	+	98	47
+	+	105	41
+	+	112	42
+	+	119	40
+	+	126	42
+	+	133	35
+	+	140	42
+	+	147	37
+	+	154	41
+	+	161	49
+	+	168	48
+	+	175	102
+	+	182	73
+	+	377	43
+	+	473	0
+	+	182	72
+	+	98	40
+	+	105	41
+	+	112	42
+	+	119	40
+	+	126	42
+	+	133	35
+	+	140	42
+	+	147	37
+	+	154	41
+	+	161	49
+	+	168	48
+	+	175	102
+	+	377	36
+	+	419	143
+	+	420	36
+	+	429	36
+	+	428	0
+	+	428	165
+	+	216	0
+	+	215	34
+	+	244	34
+	+	273	25
+	+	302	37
+	+	331	28
+	+	360	29
+
+> ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+	"	320	38
+	.	187	0
+	+	187	0
+
+> ~/git/touch-skin/tmpl/device/touch/home/smart/root.tmpl
+	"	53	0
+	.	85	0
+	+	85	0
+
+> ~/git/touch-skin/home.pl
+	"	1	0
+
+> ~/git/touch-skin/static/js/jp/mixi/skin/touch/admin/widget/skininfoinput.js
+	"	22	54
+	^	29	47
+	.	38	0
+	+	25	52
+	+	26	37
+	+	27	0
+	+	28	0
+	+	27	0
+	+	26	0
+	+	30	0
+	+	31	0
+	+	15	20
+	+	41	33
+	+	15	20
+	+	14	44
+	+	15	24
+	+	14	45
+	+	15	0
+	+	14	46
+	+	15	27
+	+	15	52
+	+	24	21
+	+	29	21
+	+	42	38
+	+	5	27
+	+	6	0
+	+	7	0
+	+	6	27
+	+	7	24
+	+	6	27
+	+	7	28
+	+	15	52
+	+	24	21
+	+	29	21
+	+	24	41
+	+	29	41
+	+	42	34
+	+	24	42
+	+	42	49
+	+	15	31
+	+	15	31
+	+	15	31
+	+	16	12
+	+	41	0
+	+	42	51
+	+	6	31
+	+	7	32
+	+	22	0
+	+	24	0
+	+	26	0
+	+	31	0
+	+	33	0
+	+	36	0
+	+	37	0
+	+	38	0
+	+	29	0
+	+	36	0
+	+	37	0
+	+	38	0
+	+	22	0
+	+	24	0
+	+	26	0
+	+	31	0
+	+	33	0
+	+	29	0
+	+	36	0
+	+	37	0
+	+	38	0
+
+> ~/git/touch-skin/manage_skin.pl
+	"	3	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Config.pm
+	"	145	36
+	^	145	37
+	.	145	36
+	+	133	17
+	+	137	17
+	+	134	38
+	+	138	32
+	+	150	0
+	+	60	0
+	+	47	0
+	+	37	0
+	+	38	0
+	+	39	0
+	+	38	25
+	+	116	25
+	+	113	0
+	+	145	0
+	+	143	0
+	+	143	96
+	+	146	54
+	+	144	0
+	+	144	0
+	+	144	0
+	+	144	0
+	+	144	0
+	+	143	0
+	+	143	96
+	+	145	54
+	+	143	102
+	+	143	0
+	+	143	108
+	+	144	0
+	+	146	0
+	+	151	0
+	+	145	36
+
+> ~/git/bash/.git/COMMIT_EDITMSG
+	"	2	0
+	^	2	0
+	.	1	4
+	+	1	4
+
+> ~/git/bash/mount-file-sv.sh
+	"	16	7
+	^	16	8
+	.	16	7
+	+	16	7
+
+> ~/git/touch-skin/.gitignore
+	"	3	0
+
+> ~/git/touch-skin/param
+	"	26	0
+
+> ~/git/touch-skin/tmpl/device/touch/sp_skin/_customized_design.tmpl
+	"	7	0
+	^	6	71
+	.	6	70
+	+	4	0
+	+	4	0
+	+	2	0
+	+	4	1
+	+	5	0
+	+	4	0
+	+	4	4
+	+	5	56
+	+	7	0
+	+	6	0
+	+	8	0
+	+	4	0
+	+	3	0
+	+	5	41
+	+	6	70
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/skin_form_parts.tmpl
+	"	55	0
+	^	112	0
+	.	112	0
+	+	127	0
+	+	83	49
+	+	90	55
+	+	97	55
+	+	104	46
+	+	118	49
+	+	125	43
+	+	132	43
+	+	139	55
+	+	146	49
+	+	65	30
+	+	153	0
+	+	239	0
+	+	2	0
+	+	1	31
+	+	228	24
+	+	241	4
+	+	242	28
+	+	241	0
+	+	189	27
+	+	12	0
+	+	106	0
+	+	107	28
+	+	107	109
+	+	107	97
+	+	107	52
+	+	107	98
+	+	108	0
+	+	107	52
+	+	109	77
+	+	112	0
+
+> ~/git/touch-skin/lib/Mixi/Template/Touch/DesignScheme.pm
+	"	21	25
+	^	20	38
+	.	20	0
+	+	20	0
+
+> ~/git/touch-skin/lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
+	"	56	1
+	.	43	0
+	+	43	25
+	+	43	0
+	+	43	25
+	+	43	0
+
+> ~/git/touch-skin/static/css/smartphone/touch/home2011.css
+	"	53	0
+	^	11861	2
+	.	11861	1
+	+	11861	1
+
+> ~/git/touch-skin/tmpl/fan/includes/_customized_design.tmpl
+	"	41	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/ControlP
+	"	10	0
+	.	2	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	15	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	2	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Style/None.pm
+	"	47	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Style/Classic.pm
+	"	1	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Style.pm
+	"	88	4
+
+> ~/git/touch-skin/static/css/basic/skin/gray/mixicollection.css
+	"	50	0
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/add_confirm_skin.tmpl
+	"	70	25
+	^	163	84
+	.	163	83
+	+	73	0
+	+	73	0
+	+	73	49
+	+	73	0
+	+	73	0
+	+	68	0
+	+	69	52
+	+	70	30
+	+	163	83
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/edit_confirm_skin.tmpl
+	"	168	31
+	^	168	84
+	.	168	83
+	+	69	0
+	+	73	0
+	+	71	30
+	+	70	52
+	+	168	83
+
+> ~/git/touch-skin/tmp_rename.sh
+	"	3	0
+
+> fugitive:///home/bkapps/git/touch-skin/.git//0/boofy/gear/skin/touch/manage_skin.pl
+	"	747	0
+
+> fugitive:///home/bkapps/git/touch-skin/.git//85ef0e8d2de69f378f3816971056343c9967e3e1/boofy/gear/skin/touch/manage_skin.pl
+	"	145	8
+
+> ~/.gitconfig
+	"	8	0
+	.	9	0
+	+	8	6
+	+	8	0
+	+	8	0
+	+	7	4
+	+	7	0
+	+	8	0
+	+	9	0
+
+> ~/git/banana/banana/.git/COMMIT_EDITMSG
+	"	2	0
+	^	2	0
+	.	1	22
+	+	1	12
+	+	11	0
+	+	9	20
+	+	1	22
+
+> ~/git/banana/banana/views/iyada/list.ejs
+	"	69	29
+	^	69	30
+	.	69	29
+	+	111	13
+	+	55	20
+	+	53	46
+	+	62	50
+	+	71	49
+	+	62	52
+	+	73	19
+	+	71	23
+	+	61	0
+	+	63	23
+	+	64	23
+	+	71	27
+	+	74	39
+	+	77	77
+	+	79	48
+	+	62	63
+	+	68	34
+	+	71	0
+	+	57	33
+	+	60	32
+	+	63	25
+	+	57	76
+	+	58	44
+	+	79	49
+	+	52	57
+	+	79	73
+	+	73	19
+	+	77	56
+	+	79	43
+	+	73	20
+	+	43	64
+	+	73	0
+	+	94	36
+	+	73	21
+	+	94	34
+	+	43	67
+	+	78	46
+	+	80	54
+	+	68	29
+	+	71	0
+	+	79	25
+	+	80	21
+	+	68	28
+	+	77	77
+	+	75	38
+	+	77	23
+	+	75	38
+	+	77	87
+	+	59	52
+	+	59	32
+	+	59	60
+	+	59	0
+	+	59	44
+	+	59	0
+	+	56	0
+	+	59	0
+	+	62	53
+	+	68	29
+	+	71	64
+	+	76	26
+	+	75	28
+	+	77	46
+	+	76	70
+	+	80	64
+	+	80	33
+	+	59	17
+	+	59	17
+	+	80	21
+	+	80	21
+	+	78	24
+	+	71	29
+	+	64	29
+	+	68	28
+	+	68	115
+	+	54	44
+	+	68	124
+	+	59	42
+	+	59	44
+	+	94	32
+	+	94	0
+	+	59	0
+	+	68	97
+	+	79	0
+	+	57	76
+	+	59	61
+	+	68	36
+	+	66	42
+	+	68	54
+	+	66	105
+	+	68	42
+	+	67	70
+	+	68	64
+	+	71	0
+	+	68	0
+	+	80	0
+	+	59	0
+	+	68	0
+	+	70	126
+	+	66	29
+	+	69	29
+
+> ~/git/touch-skin/rename.sh
+	"	1	0
+	^	3	13
+	.	3	12
+	+	2	0
+	+	3	89
+	+	3	12
+
+> ~/git/touch-skin/testfile
+	"	1	0
+
+> ~/git/touch-skin/static/js/jp/mixi/skin/touch/admin/widget/skinformparts.js
+	"	1	0
+	^	20	39
+	.	20	42
+	+	9	28
+	+	10	27
+	+	9	28
+	+	10	27
+	+	31	0
+	+	8	46
+	+	9	29
+	+	10	28
+	+	8	47
+	+	9	44
+	+	10	43
+	+	9	52
+	+	10	55
+	+	9	28
+	+	10	27
+	+	22	0
+	+	21	66
+	+	1	0
+	+	21	40
+	+	21	0
+	+	21	75
+	+	21	34
+	+	21	57
+	+	21	0
+	+	21	54
+	+	21	51
+	+	16	0
+	+	16	51
+	+	8	69
+	+	9	62
+	+	10	56
+	+	16	41
+	+	17	0
+	+	16	49
+	+	21	0
+	+	18	20
+	+	19	20
+	+	21	0
+	+	20	42
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/edit_skin.tmpl
+	"	25	34
+	^	28	1
+	.	29	0
+	+	29	0
+	+	29	0
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/header.tmpl
+	"	15	4
+	^	13	0
+	.	13	0
+	+	6	9
+	+	16	0
+	+	16	82
+	+	16	0
+	+	20	0
+	+	15	0
+	+	16	0
+	+	15	0
+	+	15	24
+	+	15	24
+	+	15	0
+	+	12	0
+	+	13	0
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/footer.tmpl
+	"	12	6
+
+> ~/git/touch-skin/tmpl/promotion/voice_component/_voiceballoon.tmpl
+	"	15	16
+
+> ~/git/banana/banana/public/javascripts/hot-query.js
+	"	5	4
+	.	5	0
+	+	2	33
+	+	2	36
+	+	2	0
+	+	11	36
+	+	11	18
+	+	2	20
+	+	11	0
+	+	11	0
+	+	4	9
+	+	1	21
+	+	4	13
+	+	5	19
+	+	10	13
+	+	12	10
+	+	10	28
+	+	6	32
+	+	7	12
+	+	8	13
+	+	10	23
+	+	12	20
+	+	1	27
+	+	4	24
+	+	12	12
+	+	3	25
+	+	4	21
+	+	12	9
+	+	4	39
+	+	5	0
+
+> ~/git/banana/banana/public/stylesheets/banana.css
+	"	1204	0
+	^	1217	18
+	.	1217	17
+	+	1206	18
+	+	1206	68
+	+	1206	0
+	+	1205	18
+	+	1205	0
+	+	1205	46
+	+	1205	0
+	+	1205	0
+	+	1205	7
+	+	1205	3
+	+	1205	21
+	+	1205	13
+	+	1205	10
+	+	1205	14
+	+	1205	21
+	+	1205	8
+	+	1205	9
+	+	1205	9
+	+	1205	0
+	+	1205	10
+	+	1205	0
+	+	1206	0
+	+	1172	36
+	+	15	7
+	+	24	14
+	+	1205	9
+	+	1205	6
+	+	1205	0
+	+	1205	15
+	+	19	3
+	+	1205	7
+	+	1205	7
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1206	0
+	+	690	0
+	+	1206	0
+	+	1199	0
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1205	8
+	+	1205	7
+	+	1205	11
+	+	1205	12
+	+	1205	10
+	+	1205	11
+	+	1205	8
+	+	1205	7
+	+	1205	8
+	+	1205	6
+	+	1205	0
+	+	1205	12
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1205	8
+	+	1205	6
+	+	1205	5
+	+	1205	9
+	+	1205	0
+	+	1205	9
+	+	1205	0
+	+	1205	10
+	+	1205	6
+	+	1205	6
+	+	1205	6
+	+	1205	6
+	+	1205	4
+	+	1205	3
+	+	1205	12
+	+	1205	2
+	+	1205	9
+	+	1205	8
+	+	1205	0
+	+	1205	0
+	+	1205	0
+	+	1201	11
+	+	1202	0
+	+	1201	0
+	+	1202	17
+	+	1206	18
+	+	1202	18
+	+	1203	22
+	+	1219	0
+	+	1217	17
+
+> ~/git/touch-skin/boofy/gear/platform/interest/js/utils.js
+	"	1	34
+
+> /boofy/gear/platform/interest/js/utils.js
+	"	1	0
+
+> ~/.vim_backup/manage_skin.pl~
+	"	210	4
+	^	709	52
+	.	211	0
+	+	415	0
+	+	395	0
+	+	415	0
+	+	395	33
+	+	390	0
+	+	386	0
+	+	709	0
+	+	709	48
+	+	710	0
+	+	709	73
+	+	710	39
+	+	709	50
+	+	710	88
+	+	709	25
+	+	211	0
+
+> ~/git/touch-skin/boofy/gear/skin/manage_skin.pl
+	"	201	0
+
+> ~/ControlP
+	"	1	0
+	.	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+
+> ~/__Gundo_Preview__
+	"	1	0
+	.	1	0
+	+	1	0
+
+> ~/__Gundo__
+	"	16	1
+	.	1	0
+	+	1	0
+
+> ~/README.md
+	"	3	0
+	^	2	0
+	.	3	0
+	+	2	6
+	+	4	0
+	+	2	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	4	0
+	+	3	0
+
+> ~/git/touch-skin/.git/MERGE_MSG
+	"	1	0
+
+> ~/git/touch-skin/_devel_secret_keys/skin/secret_key_touchskin.txt
+	"	1	13
+	^	1	14
+	.	1	13
+	+	1	13
+
+> ~/git/touch-skin/_devel_secret_keys/skin/secret_key_pcskin.txt
+	"	1	0
+
+> ~/git/touch-skin/lib/FormValidator/Simple/Validator.pm
+	"	25	0
+
+> ~/git/touch-skin/lib/Mixi/Mobile/Skin/Admin.pm
+	"	1	0
+
+> ~/.git/COMMIT_EDITMSG
+	"	2	0
+	^	2	0
+	.	1	14
+	+	1	1
+	+	7	0
+	+	1	14
+
+> ~/git/banana/banana/views/test.ejs
+	"	77	32
+	^	96	7
+	.	77	0
+	+	141	61
+	+	146	78
+	+	142	36
+	+	96	0
+	+	77	0
 
 > ~/git/touch-skin/static/css/smartphone/touch/ControlP
 	"	9	0
@@ -1049,85 +2357,6 @@ $
 	+	1	0
 	+	2	0
 
-> ~/git/touch-skin/static/css/smartphone/touch/home2011.css
-	"	12237	0
-	^	11861	2
-	.	11861	1
-	+	11861	1
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
-	"	270	4
-	^	158	8
-	.	158	7
-	+	241	0
-	+	241	48
-	+	241	53
-	+	218	0
-	+	215	0
-	+	215	0
-	+	218	0
-	+	216	0
-	+	204	0
-	+	211	0
-	+	217	0
-	+	215	0
-	+	208	53
-	+	209	47
-	+	181	70
-	+	197	70
-	+	62	20
-	+	259	0
-	+	241	48
-	+	233	4
-	+	136	4
-	+	241	19
-	+	241	17
-	+	234	0
-	+	235	0
-	+	235	0
-	+	137	0
-	+	140	0
-	+	235	0
-	+	241	0
-	+	241	0
-	+	241	0
-	+	140	0
-	+	141	0
-	+	138	22
-	+	140	0
-	+	237	0
-	+	241	0
-	+	237	77
-	+	241	0
-	+	241	0
-	+	145	49
-	+	146	0
-	+	139	21
-	+	233	0
-	+	136	0
-	+	233	0
-	+	141	0
-	+	232	0
-	+	149	22
-	+	154	0
-	+	150	0
-	+	155	0
-	+	154	26
-	+	150	18
-	+	151	12
-	+	154	7
-	+	151	14
-	+	154	0
-	+	152	22
-	+	160	0
-	+	161	0
-	+	153	0
-	+	152	17
-	+	152	0
-	+	158	7
-	b	202	0
-	e	202	0
-
 > ~/git/banana/banana/readme
 	"	19	4
 	.	20	0
@@ -1144,83 +2373,6 @@ $
 	+	18	4
 	+	19	4
 	+	20	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/DB/Skin.pm
-	"	263	16
-	^	263	17
-	.	263	16
-	+	140	0
-	+	155	0
-	+	172	0
-	+	182	0
-	+	478	34
-	+	478	35
-	+	479	38
-	+	480	8
-	+	478	22
-	+	479	0
-	+	218	34
-	+	219	0
-	+	219	0
-	+	218	37
-	+	228	16
-	+	228	15
-	+	228	0
-	+	226	0
-	+	227	11
-	+	228	0
-	+	227	8
-	+	254	8
-	+	244	22
-	+	254	8
-	+	227	10
-	+	217	35
-	+	226	39
-	+	286	0
-	+	285	35
-	+	245	0
-	+	298	0
-	+	298	0
-	+	328	0
-	+	269	0
-	+	297	38
-	+	302	0
-	+	300	16
-	+	307	24
-	+	297	16
-	+	326	13
-	+	297	16
-	+	326	14
-	+	327	4
-	+	297	7
-	+	327	7
-	+	297	4
-	+	327	4
-	+	298	0
-	+	264	32
-	+	265	8
-	+	198	32
-	+	199	8
-	+	227	4
-	+	228	0
-	+	254	4
-	+	297	14
-	+	301	19
-	+	308	26
-	+	261	13
-	+	264	30
-	+	197	18
-	+	198	30
-	+	278	34
-	+	277	27
-	+	291	26
-	+	264	11
-	+	262	0
-	+	264	0
-	+	263	16
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/DB.pm
-	"	1	0
 
 > ~/git/touch-skin/lib/Mixi/Skin/ControlP
 	"	7	0
@@ -1332,28 +2484,6 @@ $
 	.	57	0
 	+	57	0
 
-> ~/git/touch-skin/manage_skin.pl
-	"	3	0
-
-> ~/git/touch-skin/boofy/tmpl/skin/touch/edit_skin.tmpl
-	"	20	23
-
-> ~/.gitconfig
-	"	2	0
-	.	8	0
-	+	8	6
-	+	8	0
-	+	8	0
-	+	7	4
-	+	7	0
-	+	8	0
-
-> ~/.git/config
-	"	11	0
-
-> ~/git/touch-skin/boofy/tmpl/skin/touch/edit_confirm_skin.tmpl
-	"	168	8
-
 > ~/git/touch-skin/Makefile
 	"	1	0
 
@@ -1374,823 +2504,11 @@ $
 	+	3	43
 	+	3	0
 
-> ~/.bashrc-git
-	"	18	18
-	^	18	19
-	.	18	18
-	+	1	6
-	+	2	0
-	+	4	19
-	+	5	25
-	+	10	18
-	+	9	8
-	+	11	11
-	+	6	16
-	+	7	17
-	+	8	0
-	+	7	8
-	+	8	18
-	+	11	14
-	+	11	21
-	+	15	10
-	+	2	0
-	+	16	0
-	+	11	0
-	+	15	0
-	+	11	0
-	+	14	0
-	+	12	0
-	+	11	7
-	+	1	14
-	+	13	24
-	+	15	0
-	+	18	18
-
 > ~/.bash-g
 	"	1	0
-
-> ~/.git/COMMIT_EDITMSG
-	"	2	0
-	^	2	0
-	.	1	9
-	+	1	1
-	+	6	0
-	+	1	9
 
 > ~/.gitignore_global
 	"	2	0
 	^	2	5
 	.	2	0
 	+	2	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Test.pm
-	"	53	0
-	^	29	55
-	.	29	54
-	+	22	0
-	+	37	0
-	+	107	0
-	+	29	54
-
-> ~/git/touch-skin/lib/Mixi/Skin/Style.pm
-	"	1	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Style.pm
-	"	25	74
-	^	25	68
-	.	25	67
-	+	16	0
-	+	25	67
-
-> ~/git/touch-skin/lib/Mixi/Skin/__Gundo_Preview__
-	"	1	0
-	.	1	0
-	+	1	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/__Gundo__
-	"	40	1
-	.	1	0
-	+	1	0
-
-> ~/git/touch-skin/boofy/gear/skin/manage_skin.pl
-	"	178	4
-
-> ~/.vimrc
-	"	31	59
-	^	94	0
-	.	188	0
-	+	18	0
-	+	4	38
-	+	5	34
-	+	4	32
-	+	97	0
-	+	204	0
-	+	101	88
-	+	97	0
-	+	98	31
-	+	99	35
-	+	102	40
-	+	204	0
-	+	205	0
-	+	204	0
-	+	157	0
-	+	157	0
-	+	157	0
-	+	140	0
-	+	139	0
-	+	138	0
-	+	137	0
-	+	140	0
-	+	157	0
-	+	132	0
-	+	157	0
-	+	157	0
-	+	157	4
-	+	157	0
-	+	157	0
-	+	140	0
-	+	123	0
-	+	141	0
-	+	157	0
-	+	157	4
-	+	157	23
-	+	157	39
-	+	157	39
-	+	157	39
-	+	157	39
-	+	157	39
-	+	157	39
-	+	157	28
-	+	157	75
-	+	157	17
-	+	142	0
-	+	155	0
-	+	151	68
-	+	151	134
-	+	143	7
-	+	143	11
-	+	143	7
-	+	143	6
-	+	144	0
-	+	143	9
-	+	144	0
-	+	151	42
-	+	151	68
-	+	151	71
-	+	151	141
-	+	143	0
-	+	156	4
-	+	157	0
-	+	156	0
-	+	157	4
-	+	157	4
-	+	157	0
-	+	156	0
-	+	156	5
-	+	156	0
-	+	155	0
-	+	154	0
-	+	158	70
-	+	160	57
-	+	168	0
-	+	48	12
-	+	47	0
-	+	162	41
-	+	164	33
-	+	157	0
-	+	202	0
-	+	166	51
-	+	167	46
-	+	186	33
-	+	192	20
-	+	193	39
-	+	199	65
-	+	200	62
-	+	200	0
-	+	169	33
-	+	185	0
-	+	181	0
-	+	182	0
-	+	181	26
-	+	182	0
-	+	183	0
-	+	88	0
-	+	90	0
-	+	92	0
-	+	94	0
-	+	188	0
-
-> ~/git/touch-skin/static/css/smartphone/touch/home2013.css
-	"	1	0
-
-> ~/git/touch-skin/lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-	"	43	12
-	.	43	0
-	+	43	25
-	+	43	0
-	+	43	25
-	+	43	0
-
-> ~/git/touch-skin/lib/Mixi/Template/Touch/DesignScheme.pm
-	"	20	4
-
-> ~/git/touch-skin/lib/Mixi/Template/Role/SoftLaunch.pm
-	"	27	14
-
-> ~/git/touch-skin/lib/Mixi/News/Controller.pm
-	"	308	28
-
-> ~/git/touch-skin/db-schema/DB_TOUCHSKIN_touchskin.sql
-	"	16	0
-	.	17	0
-	+	17	0
-
-> ~/git/touch-skin/lib/Mixi/Skin.pm
-	"	1	0
-
-> fugitive:///home/bkapps/git/touch-skin/.git//0/lib/Mixi/Skin.pm
-	"	440	0
-
-> ~/.bashrc
-	"	29	0
-	^	44	7
-	.	39	0
-	+	45	10
-	+	42	0
-	+	45	0
-	+	42	30
-	+	45	0
-	+	29	0
-	+	29	19
-	+	29	0
-	+	29	0
-	+	29	0
-	+	44	6
-	+	37	0
-	+	39	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/ControlP
-	"	10	0
-	.	2	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	20	0
-	+	11	0
-	+	2	0
-
-> /usr/share/vim/vim73/doc/options.txt.gz
-	"	7148	17
-	.	8117	0
-	+	8117	0
-
-> /usr/share/vim/vim73/doc/map.txt.gz
-	"	495	10
-	.	1433	0
-	+	1433	0
-
-> ~/git/touch-skin/boofy/tmpl/skin/touch/add_confirm_skin.tmpl
-	"	117	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/DB/ControlP
-	"	7	0
-	.	2	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	2	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/DB/Skin.pm
-	"	504	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/DB.pm
-	"	1	0
-
-> ~/git/touch-skin/boofy/gear/mobile/add_mobile_skin.pl
-	"	58	39
-
-> ~/bin/condb.sh
-	"	3	74
-
-> ~/git/touch-skin/lib/Mixi/AccessBlock/Adapter/Procedure/Internal/DumpData.pm
-	"	1	0
-
-> lib/Mixi/Skin.pm
-	"	1	0
-
-> ~/git/banana/banana/routes/iyada/list.js
-	"	27	39
-	^	27	49
-	.	27	48
-	+	67	21
-	+	55	20
-	+	67	0
-	+	55	55
-	+	67	34
-	+	66	67
-	+	56	37
-	+	55	62
-	+	56	18
-	+	55	21
-	+	57	0
-	+	66	115
-	+	68	0
-	+	67	5
-	+	68	17
-	+	69	7
-	+	66	74
-	+	30	0
-	+	30	50
-	+	30	0
-	+	30	0
-	+	30	0
-	+	30	0
-	+	30	23
-	+	30	0
-	+	15	0
-	+	17	67
-	+	22	0
-	+	28	9
-	+	22	44
-	+	23	12
-	+	17	79
-	+	23	48
-	+	24	27
-	+	25	27
-	+	20	29
-	+	21	0
-	+	17	51
-	+	30	0
-	+	15	4
-	+	15	4
-	+	17	4
-	+	7	0
-	+	15	0
-	+	14	0
-	+	15	0
-	+	17	47
-	+	17	44
-	+	17	47
-	+	17	36
-	+	23	13
-	+	7	1
-	+	30	5
-	+	7	0
-	+	30	0
-	+	17	46
-	+	23	12
-	+	30	0
-	+	24	0
-	+	30	4
-	+	6	0
-	+	7	1
-	+	30	5
-	+	7	0
-	+	30	0
-	+	18	9
-	+	30	5
-	+	17	33
-	+	18	0
-	+	30	35
-	+	18	0
-	+	30	0
-	+	19	9
-	+	26	13
-	+	17	36
-	+	30	0
-	+	27	48
-
-> ~/git/banana/banana/routes/report.js
-	"	31	0
-
-> ~/git/banana/banana/app.js
-	"	12	3
-	^	8	4
-	.	8	3
-	+	6	16
-	+	6	0
-	+	6	0
-	+	6	0
-	+	6	0
-	+	6	0
-	+	6	0
-	+	6	0
-	+	6	0
-	+	6	25
-	+	6	0
-	+	11	36
-	+	39	34
-	+	41	38
-	+	6	0
-	+	12	30
-	+	48	0
-	+	40	23
-	+	12	34
-	+	40	39
-	+	12	41
-	+	40	35
-	+	41	0
-	+	44	0
-	+	42	34
-	+	44	0
-	+	41	0
-	+	46	0
-	+	13	36
-	+	47	30
-	+	43	6
-	+	16	39
-	+	8	3
-
-> ~/git/banana/banana/lib/db.js
-	"	86	0
-	^	103	37
-	.	103	36
-	+	5	28
-	+	15	0
-	+	18	0
-	+	6	0
-	+	15	5
-	+	16	0
-	+	15	0
-	+	21	0
-	+	13	0
-	+	14	22
-	+	18	36
-	+	21	0
-	+	14	24
-	+	36	36
-	+	40	0
-	+	36	0
-	+	37	0
-	+	37	0
-	+	18	30
-	+	68	0
-	+	69	0
-	+	71	0
-	+	18	30
-	+	17	0
-	+	121	0
-	+	103	32
-	+	120	0
-	+	104	42
-	+	106	0
-	+	108	0
-	+	105	33
-	+	107	39
-	+	121	0
-	+	105	39
-	+	75	0
-	+	103	36
-
-> ~/git/banana/banana/routes/iyada/bubble.js
-	"	1	0
-	^	2	2
-	.	2	0
-	+	1	27
-	+	2	37
-	+	2	0
-	+	2	20
-	+	2	25
-	+	2	0
-
-> ~/git/banana/banana/routes/iyada/detail.js
-	"	2	0
-
-> ~/git/banana/banana/public/javascripts/jquery.googleSuggest.js
-	"	45	4
-
-> ~/git/banana/banana/public/javascripts/show_hot_queries.js
-	"	4	25
-	^	7	19
-	.	7	18
-	+	8	0
-	+	1	29
-	+	2	0
-	+	8	0
-	+	2	0
-	+	8	0
-	+	5	3
-	+	3	4
-	+	6	0
-	+	1	11
-	+	3	10
-	+	1	0
-	+	7	18
-
-> ~/git/banana/banana/public/javascripts/banana.iyada.list.js
-	"	128	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Controller/Manage.pm
-	"	16	1
-	^	16	2
-	.	16	1
-	+	16	1
-
-> ~/git/touch-skin/lib/Cache/Memcached.pm
-	"	14	0
-
-> ~/git/touch-skin/lib/Cache/Cache.pm
-	"	125	18
-
-> ~/git/touch-skin/boofy/tmpl/skin/touch/show_skin.tmpl
-	"	1	20
-
-> ~/git/touch-skin/boofy/tmpl/skin/touch/header.tmpl
-	"	6	11
-	^	6	12
-	.	6	9
-	+	6	9
-
-> ~/git/touch-skin/static/css/basic/home.css
-	"	6087	0
-
-> ~/git/touch-skin/db-schema/DB_PCSKIN__pcskin.sql
-	"	167	0
-
-> ~/git/sicp/chapter1/part3/multiple.scm
-	"	13	4
-	^	18	7
-	.	19	11
-	+	3	11
-	+	20	0
-	+	10	0
-	+	4	17
-	+	6	0
-	+	5	9
-	+	5	0
-	+	7	18
-	+	9	0
-	+	8	9
-	+	10	13
-	+	17	0
-	+	11	5
-	+	10	13
-	+	11	19
-	+	16	4
-	+	12	0
-	+	13	0
-	+	12	14
-	+	14	44
-	+	15	27
-	+	18	6
-	+	12	16
-	+	13	6
-	+	14	11
-	+	18	6
-	+	19	11
-
-> ~/git/sicp/chapter1/part3/power.scm
-	"	17	0
-	^	17	19
-	.	17	14
-	+	3	12
-	+	18	0
-	+	4	17
-	+	6	0
-	+	5	17
-	+	4	16
-	+	5	20
-	+	7	26
-	+	13	0
-	+	8	18
-	+	5	20
-	+	8	21
-	+	10	10
-	+	12	4
-	+	9	0
-	+	10	13
-	+	10	48
-	+	11	40
-	+	17	9
-	+	14	0
-	+	17	14
-
-> ~/git/sicp/chapter1/part3/sin.scm
-	"	1	0
-
-> ~/README.md
-	"	1	0
-
-> ~/git/touch-skin/boofy/tmpl/skin/touch/leftmenu.tmpl
-	"	7	36
-	^	5	37
-	.	7	36
-	+	5	51
-	+	6	0
-	+	7	0
-	+	6	51
-	+	7	60
-	+	5	51
-	+	6	41
-	+	7	35
-	+	6	34
-	+	5	34
-	+	6	34
-	+	5	34
-	+	6	26
-	+	7	35
-	+	6	35
-	+	5	36
-	+	6	36
-	+	7	36
-	+	5	36
-	+	6	36
-	+	5	35
-	+	6	36
-	+	7	36
-	+	5	36
-	+	6	36
-	+	7	36
-	+	11	0
-	+	7	36
-
-> ~/git/touch-skin/boofy/tmpl/skin/touch/list_skin_simple.tmpl
-	"	11	44
-
-> ~/git/touch-skin/boofy/gear/skin/touch/list_skin.pl
-	"	51	17
-	^	54	22
-	.	54	0
-	+	54	0
-
-> ~/git/touch-skin/boofy/tmpl/sales/list_ad_leftmenu.tmpl
-	"	5	3
-
-> ~/git/touch-skin/boofy/gear/mobile/list_mobile_skin.pl
-	"	15	0
-
-> ~/git/banana/banana/views/report.ejs
-	"	4	0
-
-> ~/git/banana/banana/.gitignore
-	"	2	11
-	^	2	14
-	.	2	13
-	+	2	0
-	+	3	0
-	+	2	13
-
-> ~/git/banana/banana/views/index.ejs
-	"	15	0
-
-> ~/git/banana/banana/views/iyadamain.ejs
-	"	57	24
-	^	57	25
-	.	57	25
-	+	55	9
-	+	54	9
-	+	53	8
-	+	54	38
-	+	55	17
-	+	56	33
-	+	57	0
-	+	58	13
-	+	57	25
-
-> ~/git/banana/banana/views/bubble.ejs
-	"	67	6
-	.	6	0
-	+	102	305
-	+	111	842
-	+	112	1027
-	+	112	399
-	+	112	0
-	+	1	3
-	+	1	0
-	+	1	126
-	+	1	0
-	+	1	787
-	+	1	1039
-	+	1	405
-	+	1	7
-	+	1	6
-	+	1	185
-	+	1	564
-	+	1	1055
-	+	88	403
-	+	88	0
-	+	1	6
-	+	84	0
-	+	5	37
-	+	6	0
-	+	12	0
-	+	19	0
-	+	6	0
-
-> ~/git/banana/banana/routes/iyada.js
-	"	6	8
-
-> ~/git/banana/banana/routes/detail_menu.js
-	"	28	32
-
-> ~/git/banana/banana/routes/bubble.js
-	"	2	16
-	^	2	22
-	.	1	0
-	+	1	0
-	+	2	21
-	+	4	0
-	+	1	0
-
-> ~/git/touch-skin/lib/Mixi/Template/Register/Mobile.pm
-	"	198	0
-
-> ~/git/bash/mount-file-sv.sh
-	"	14	57
-	^	14	58
-	.	14	57
-	+	14	57
-
-> ~/a.pl
-	"	5	4
-	^	5	7
-	.	5	0
-	+	7	0
-	+	1	0
-	+	1	31
-	+	1	4
-	+	1	4
-	+	1	0
-	+	7	0
-	+	4	5
-	+	6	0
-	+	5	0
-
-> ~/__Gundo_Preview__
-	"	1	0
-	.	1	0
-	+	1	0
-
-> ~/__Gundo__
-	"	22	1
-	.	1	0
-	+	1	0
-
-> ~/a.js
-	"	1	0
-	^	1	0
-	.	1	0
-	+	1	0
-
-> ~/a
-	"	1	0
-	^	1	0
-	.	1	0
-	+	5	0
-	+	1	0

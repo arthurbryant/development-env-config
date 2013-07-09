@@ -79,20 +79,22 @@ sub add_skin {
         memo                     => { type => SCALAR },
         genres                   => { type => ARRAYREF | UNDEF,optional => 1 },
         contents_id              => { type => SCALAR },
-        body_text_color          => { type => SCALAR },
-        nickname_text_color      => { type => SCALAR },
-        post_datetime_text_color => { type => SCALAR },
+        basic_text_color         => { type => SCALAR },
+        strong_text_color        => { type => SCALAR },
+        weak_text_color          => { type => SCALAR },
+        weaker_text_color        => { type => SCALAR },
         link_color               => { type => SCALAR },
-        red_link_color           => { type => SCALAR },
+        strong_link_color        => { type => SCALAR },
         border_color             => { type => SCALAR },
         background_color         => { type => SCALAR },
-        feedback_button_color    => { type => SCALAR },
+        partial_background_color => { type => SCALAR },
+        contents_title_bg_color  => { type => SCALAR },
         gradation_start_color    => { type => SCALAR },
         gradation_end_color      => { type => SCALAR },
         has_home_header_img      => { type => SCALAR },
         has_prof_header_img      => { type => SCALAR },
         has_bg_img               => { type => SCALAR },
-        has_border_img           => { type => SCALAR },
+        has_contents_title_img   => { type => SCALAR },
         has_logo_jack            => { type => SCALAR },
         has_banner_img           => { type => SCALAR },
         banner_link              => { type => SCALAR },
@@ -131,8 +133,6 @@ sub _update_skin_data {
     my ($self, %args) = @_;
     my $skin = delete $args{skin};
 
-    use Data::Dumper;
-    warn Dumper $skin;
     my $update_style_info = delete $args{update_style_info};
 
     $args{update_staff} = _admin_user_name();
@@ -193,20 +193,22 @@ sub _validate_skin_style_info {
     my $self = shift;
     return Params::Validate::validate(@_, {
         skin_color_type          => { type => SCALAR },
-        body_text_color          => { type => SCALAR },
-        nickname_text_color      => { type => SCALAR },
-        post_datetime_text_color => { type => SCALAR },
+        basic_text_color         => { type => SCALAR },
+        strong_text_color        => { type => SCALAR },
+        weak_text_color          => { type => SCALAR },
+        weaker_text_color        => { type => SCALAR },
         link_color               => { type => SCALAR },
-        red_link_color           => { type => SCALAR },
+        strong_link_color        => { type => SCALAR },
         border_color             => { type => SCALAR },
         background_color         => { type => SCALAR },
-        feedback_button_color    => { type => SCALAR },
+        partial_background_color => { type => SCALAR },
+        contents_title_bg_color  => { type => SCALAR },
         gradation_start_color    => { type => SCALAR },
         gradation_end_color      => { type => SCALAR },
         has_home_header_img      => { type => SCALAR },
         has_prof_header_img      => { type => SCALAR },
         has_bg_img               => { type => SCALAR },
-        has_border_img           => { type => SCALAR },
+        has_contents_title_img   => { type => SCALAR },
         has_logo_jack            => { type => SCALAR },
         has_banner_img           => { type => SCALAR },
         banner_link              => { type => SCALAR },
@@ -219,7 +221,6 @@ sub edit_skin_staging {
     my %basic_info = $self->_validate_skin_basic_info(%{$args{basic_info}});
     my %style_info = $self->_validate_skin_style_info(%{$args{style_info}});
 
-    # Todo: add kin_ersion info in yaml
     my $skin = $basic_info{skin};
     my $engine = Mixi::Convert->new('YAML');
     my $yaml = $engine->encode({%style_info, skin_version => $skin->{skin_version} + 1});
@@ -240,20 +241,22 @@ sub edit_skin {
         skin                     => { type => HASHREF },
         genres                   => { type => ARRAYREF | UNDEF,optional => 1 },
         contents_id              => { type => SCALAR },
-        body_text_color          => { type => SCALAR },
-        nickname_text_color      => { type => SCALAR },
-        post_datetime_text_color => { type => SCALAR },
+        basic_text_color         => { type => SCALAR },
+        strong_text_color        => { type => SCALAR },
+        weak_text_color          => { type => SCALAR },
+        weaker_text_color        => { type => SCALAR },
         link_color               => { type => SCALAR },
-        red_link_color           => { type => SCALAR },
+        strong_link_color        => { type => SCALAR },
         border_color             => { type => SCALAR },
         background_color         => { type => SCALAR },
-        feedback_button_color    => { type => SCALAR },
+        partial_background_color => { type => SCALAR },
+        contents_title_bg_color  => { type => SCALAR },
         gradation_start_color    => { type => SCALAR },
         gradation_end_color      => { type => SCALAR },
         has_home_header_img      => { type => SCALAR },
         has_prof_header_img      => { type => SCALAR },
         has_bg_img               => { type => SCALAR },
-        has_border_img           => { type => SCALAR },
+        has_contents_title_img   => { type => SCALAR },
         has_logo_jack            => { type => SCALAR },
         has_banner_img           => { type => SCALAR },
         banner_link              => { type => SCALAR },
@@ -343,9 +346,10 @@ sub set_to_open_and_commit_edit_data {
     return unless $editing_skin && $editing_skin->{skin_version};
 
     my $db = $self->db(-Skin=> { role => 'm' });
+
     $db->update_skin(
         %{$skin},
-        skin_version        => $editing_skin->{skin_version},
+        %{$editing_skin},
         status              => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
         temporary_skin_info => '',
     );
@@ -693,6 +697,11 @@ sub get_edit_skin_count {
     $skins = $self->get_skins(admin_status => 6);
     $result{closed_edit_count} = scalar @{$skins};
     return \%result;
+}
+
+sub get_editing_skin_data {
+    my ($class, $skin_info) = @_;
+    return $class->_get_editing_skin_data($skin_info);
 }
 
 1;

@@ -5,4 +5,18 @@
 	logallrefupdates = true
 [remote "origin"]
 	fetch = +refs/heads/*:refs/remotes/origin/*
-	url = ssh://git@git.lo.mixi.jp/users/kenta.shoji/lecture-js-2013.git
+	url = ssh://git@git.lo.mixi.jp/projects/touch-skin.git
+[remote "mixi"]
+	url = git@git.lo.mixi.jp:mixi/mixi.git
+	fetch = +refs/heads/*:refs/remotes/mixi/*
+[branch "COREDEVSOCIAL-429_manager__develop"]
+	remote = origin
+	merge = refs/heads/COREDEVSOCIAL-429_manager__develop
+[branch "COREDEVSOCIAL-420__develop"]
+	remote = origin
+	merge = refs/heads/COREDEVSOCIAL-420__develop
+[branch "COREDEVSOCIAL-429"]
+	remote = origin
+	merge = refs/heads/COREDEVSOCIAL-429
+[push]
+	default = tracking

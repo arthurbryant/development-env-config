@@ -1,0 +1,27 @@
+use strict;
+use warnings;
+use Test::More;
+use Test::Exception;
+use Mixi::Test;
+use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TOUCHSKIN/;
+use Nove::Test::Fixtures::Memcached;
+
+BEGIN {
+    use_ok 'Mixi::Skin::Touch';
+}
+use Mixi::Skin::Config;
+
+my $f = Mixi::Test::Fixtures->get_fixture_object('DB_TOUCHSKIN');
+
+my $s = Mixi::Skin::Touch->get_instance();
+
+dies_ok { $s->delete_member_skin(member_id => 'hogehoge') } '数字以外を渡すと死ぬ';
+
+my $skin;
+$skin = $s->get_member_skin(member_id => $f->test_member1->{member_id});
+isnt($skin,undef,'スキンがあるはず');
+$s->delete_member_skin(member_id => $f->test_member1->{member_id});
+$skin = $s->get_member_skin(member_id => $f->test_member1->{member_id});
+is($skin,undef,'スキン設定の削除');
+
+done_testing;

@@ -10,5 +10,8 @@ vim-quickrun
 vim-repeat
 vim-smartinput
 vim-surround
+vim-textobj-indent
+vim-textobj-user
 vim-unimpaired
 vim-visualstar
+vim-yankstack

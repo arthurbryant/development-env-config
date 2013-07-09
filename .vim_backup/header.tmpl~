@@ -3,14 +3,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=euc-jp" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<title>PCミクコレ管理ツール</title>
+<title>Touchミクコレ管理ツール</title>
 
 <style type="text/css" media="screen">
 <TMPL_INCLUDE NAME="style.css">
 </style>
 
 <script src="/static/js/lib/prototype-effects-1.6.0.2-1.8.1-compress.js"></script>
+
+<TMPL_VAR EXPR="add_js('lib/namespace-brook-compress.js', 'UTF-8')">
+<TMPL_VAR EXPR="add_js('lib/jquery-1.7.1.min-noconflict-compress.js','UTF-8')">
+
 </head>
 <body>
 <div>
-

@@ -85,13 +85,13 @@ set iskeyword+=:
 call pathogen#infect()
 
 "JsBeautfy
-map <c-f> :call JsBeautify()<cr>
+"map <c-f> :call JsBeautify()<cr>
 " or
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+"autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 " for html
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+"autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 " for css or scss
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+"autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kien/ctrlp.vim'
@@ -183,6 +183,19 @@ vnoremap <Leader>t<Space> :Tabular multiple_spaces<CR>
 "    \ map(a:lines, "substitute(v:val, ' \{2,}', '  ', 'g')")
 "    \   | tabular#TabularizeStrings(a:lines, '  ', 'l0')
 
-filetype plugin on
+NeoBundle 'maxbrunsfeld/vim-yankstack'
+nmap <C-m> <Plug>yankstack_substitute_older_paste
+nmap <C-n> <Plug>yankstack_substitute_newer_paste
+
+" framework for all belows
+NeoBundle 'kana/vim-textobj-user'
+" [ai][iI]
+NeoBundle 'kana/vim-textobj-indent'
+
+"let g:ctrlp_map = '<Leader><C-p>'
+let mapleader = ','
+
 filetype indent on
+filetype plugin on
+
 syntax on

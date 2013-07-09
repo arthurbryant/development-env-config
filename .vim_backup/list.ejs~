@@ -43,37 +43,72 @@
                 <div class="image hotword" onclick='addHotQuery(this);'>
                         <h5><%= data[i].query %></h5>
                         <img src="/images/bubble.png" alt=""/>
-                    </div>
+                </div>
                 <%}%>
             </div>
             <script type="text/javascript">
             //Todo: impl animation
-            var Bubbles = document.getElementById("hotwords").getElementsByTagName("div");
-            console.dir(Bubbles.length);
-            console.dir(Bubbles);
-            for(var i = 0; i < Bubbles.length; ++i) {
-                setPosition(Bubbles[i]);
-                resize(Bubbles[i]);
-            }
-            function resize(element) {
-                console.dir(element);
-                element.style.width = "90px";
-                element.style.height = "90px";
-            }
-            function setPosition(element) {
+            jQuery.fn.move = function(vertSpeed, horiSpeed, index) {
+                var windowHeight = this.parent().height();
+                var thisHeight = this.height();
+                var thisWidth = this.width();
+                var current = this;
+
+                var parentWidth = (this.parent().width() - this.width()) / 2;
+                var rand = Math.random() * (1000 * index);
+                setInterval(function() {
+                    current.css({
+                        marginTop: function(index, value) {
+                            return parseFloat(value) + vertSpeed;
+                        },
+                        marginLeft: function(index, value) {
+                            /*
+                            var distance = Math.sin(new Date().getTime() / (horiSpeed * 1000) + rand) + 1;
+                            var delta = distance < 1 ? 0 : -thisHeight; 
+                            return distance * parentWidth + delta;
+                            */
+                            return (Math.sin(new Date().getTime() / (horiSpeed * 1000) + rand) + 1) * parentWidth - thisHeight;
+                        }
+                    });
+                }, 15);
+                setInterval(function(){
+                    var vertHeight = parseFloat(current.css("margin-top"));
+                    var horiWidth = parseFloat(current.css("margin-left"));
+                    if( vertHeight < 0 || vertHeight > windowHeight - thisHeight) {
+                        vertSpeed = -vertSpeed;
+                    }
+                }, 250);
+            };
+            var hotwordsHeight = $("#hotwords").height();
+            var Bubbles = $("#hotwords div");
+            Bubbles.each(function() {
+                // Set bubble size
+                $(this).css("width", "90px");
+                // Set bubble start position
                 var width = Math.random() * window.innerWidth;
-                var height = Math.random() * window.innerHeight / 18;
-                console.dir(window.innerHeight);
-                console.dir(height);
-                element.style.marginLeft = width + 'px';
-                element.style.marginBottom= height + 'px';
-                /*
-                if(left == width){
-                    clearInterval(id);
+                var height = Math.random() * hotwordsHeight;
+                $(this).css("left", width + 'px');
+                $(this).css("top", height + 'px');
+                // Move bubbles
+                var index = 1;
+                $(this).move(0.5, 5, index);
+            });
+            /*
+            function move(element, speed) {
+                // Todo: get the top property of element
+                var top = 300;
+                function frame() {
+                    element.style.top = top + 'px';
+                    top = top - speed;
+                    if(top <= 0) {
+                        clearInterval(id);
+                    }
+                    var left = (Math.sin(new Date().getTime() / 1000 + rand) + 1) * hotwordsHeight;
+                    element.style.left = left + 'px';
                 }
-                */
+                var id = setInterval(frame, 1000);
             }
-            document.getElementById("hotwords").getElementsByTagName("h5").style.margin = '10px';
+            */
            </script>
 
             <div class="form">

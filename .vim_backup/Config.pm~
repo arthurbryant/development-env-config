@@ -113,7 +113,7 @@ BEGIN {
             TIEUP     => 'タイアップ',
         },
         SKIN_MEMO_LIMIT => 4000,
-        CONTENT_ID_LIMIT => 32,
+        CONTENT_ID_LENGTH_LIMIT => 32,
         VIA_SCRIPT_NAMES => {
             'show_friend.pl' => 1,
             'list_skin.pl'   => 2,
@@ -140,9 +140,9 @@ BEGIN {
             },
         },
         PCSKIN_SECRET       => Mixi::Config::SecretKeys->slurp('skin/secret_key_pcskin.txt'),
-        TOUCH_SKIN_SECRET   => Mixi::Config::SecretKeys->slurp('skin/secret_key_pcskin.txt'),#FIXME to be replaced
+        TOUCH_SKIN_SECRET   => Mixi::Config::SecretKeys->slurp('skin/secret_key_touchskin.txt', {'chomp' => 1}),
         SKIN_BASE_PATH          => '/img/pc_skin',
-        TOUCH_SKIN_BASE_PATH    => 'smartphone/touch',#FIXME replace with '/img/touch_skin/' in PRODUCTION
+        TOUCH_SKIN_BASE_PATH    => '/smartphone/touch',#FIXME replace with '/img/touch_skin/' in PRODUCTION
         PREVIEW_DATA => {
             friends_data => [
                 {

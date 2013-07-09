@@ -1,0 +1,39 @@
+Namespace('jp.mixi.skin.touch.admin.widget.skinformparts')
+.define(function(ns) {
+    'use strict';
+    /*global $j:false */
+
+    var registerSkinForm = function(element, dataset) {
+        var root = $j(element);
+        var backgroundImageState = root.find('.JS_backgroudImage input');
+        var bannerImageState = root.find('.JS_bannerImage input');
+        var bannerLinkInput = root.find('.JS_bannerLink');
+
+        var changeItemsState = function() {
+            var currentState;
+            switch (currentState) {
+                case 'free':
+                    backgroundImageState.val(['0']);
+                    backgroundImageState.attr('disabled', 'disabled');
+                    bannerImageState.val(['0']);
+                    bannerImageState.attr('disabled', 'disabled');
+                    bannerLinkInput.val('');
+                    bannerLinkInput.attr('disabled', 'disabled');
+                    break;
+                case 'tieup':
+                    break;
+                case 'paid':
+                    break;
+                default:
+            }
+        };
+
+        var skinType = root.find('.JS_skinType');
+        skinType.on('change', changeItemsState);
+        changeItemsState();
+    };
+
+    ns.provide({
+        registerElement : registerSkinForm
+    });
+});

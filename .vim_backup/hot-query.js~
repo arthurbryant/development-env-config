@@ -1,11 +1,14 @@
-function addHotQuery(query){
-    console.dir(query);
+function addHotQuery(element){
     // Add hot query to search box
-    var input = document.getElementById('input');
-    if(input.value.length > 0){
-        input.value += " ";
+    var bubble = $(element);
+    var query = bubble.find("h5").text();
+    console.dir(query);
+    var input = $('#input');
+    var inputValue = input.val();
+    if(inputValue.length > 0){
+        inputValue += " ";
     }
-    input.value += query;
-    this.fadeOut();
+    input.val(inputValue + query);
     // Todo: make the bubble disapear
+    bubble.remove();
 }

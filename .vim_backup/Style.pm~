@@ -22,11 +22,36 @@ sub get_css {
     my @css_files;
     my $colorvariation_type = lc( Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$skin->{skin_color_type}} );
 
-    push @css_files, Mixi::Skin::Config::TOUCH_SKIN_BASE_PATH . $colorvariation_type . '.css' if $colorvariation_type;
+    push @css_files, Mixi::Skin::Config::TOUCH_SKIN_BASE_PATH . '/' . $colorvariation_type . '.css' if $colorvariation_type;
 
     push @css_files, $skin->{skin_base} . '/mixicollection.css';
 
     return @css_files;
 }
 
+<<<<<<< HEAD
+=======
+sub _get_filled_css {
+    my ($self, $css_tmpl_file) = @_;
+    my $tmpl = Mixi::Template->new(
+        file => $css_tmpl_file,
+        type => 'user::html',
+        charset => "utf8",
+    );
+    $tmpl->param(
+        %{$self->skin}
+    );
+    return $tmpl->output();
+}
+
+sub create_css_file {
+    # Todo: change to the right path
+    my $tmp_css_file = "tmpl/device/touch/sp_skin/_customized_design.tmpl";
+    # Todo: fill css_data to css_file
+    my $css_data = _get_filled_css($tmp_css_file);
+
+    return $css_data;
+}
+
+>>>>>>> c04a529... Load css (WIP)
 1;

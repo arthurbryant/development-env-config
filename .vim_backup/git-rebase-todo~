@@ -1,9 +1,23 @@
-pick efa53f6 10行全書き換えからチェンジ.
-pick 33737f1 add L5 never delete
-pick 7f4199f 3rd
-pick 6dab290 キャラクターに目線を追加
+pick 0cc1eea Add create_css_file to Style.pm (WIP)
+pick abf4ed2 Add sample css tmpl file
+pick c04a529 Load css (WIP)
+pick 0b34ef5 delete dumper
+pick 0f116e2 Show staging skin data (WIP)
+pick 12a52c7 show staging data in show_skin.pl
+pick bd07830 Apply staging skin info to production
+pick be38c9c refactoring: change attr to prop
+pick 5206035 Add tieup footer banner to home.pl (WIP)
+pick b4de5c0 Add tieup footer banner to home.pl (WIP2)
+pick 1faeb4a Add test for M::Skin::Touch (WIP)
+pick 64d85ea Fix validation in get_skin
+pick 090bcf9 BugFix: remove unused code
+pick c655ecd Add test for M::Skin::Touch (WIP2)
+pick 1476472 Add test for set_member_skin
+pick 7d885a7 Fix set_member_skin test
+pick 1ef6969 Add delete_member_skin test
+pick 7fd48e9 Add Mixi::Skin::Touch::Admin test
 
-# Rebase d57bbf4..ec988f5 onto d57bbf4
+# Rebase 8bea68b..7fd48e9 onto 8bea68b
 #
 # Commands:
 #  p, pick = use commit

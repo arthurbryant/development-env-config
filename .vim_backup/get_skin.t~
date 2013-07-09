@@ -1,0 +1,76 @@
+use strict;
+use warnings;
+use Test::More;
+use Test::Exception;
+use Mixi::Test;
+use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TOUCHSKIN/;
+
+BEGIN {
+    use_ok 'Mixi::Skin::Touch';
+}
+use Mixi::Skin::Config;
+
+my $f = Mixi::Test::Fixtures->get_fixture_object('DB_TOUCHSKIN');
+
+my $s = Mixi::Skin::Touch->get_instance();
+my $skin;
+
+#touchskin_skin_data:
+
+$skin = $s->get_skin(id => 0);
+is($skin, undef, '0が与えられた場合はundef');
+
+$skin = $s->get_skin(id => 99999);
+is($skin, undef, '存在しないレコードの場合はundef');
+
+dies_ok { $skin = $s->get_skin(id => 'hogehoge') } '数字以外を渡すと死ぬ';
+
+dies_ok { $skin = $s->get_skin(id => '') } '空文字を渡すと死ぬ';
+
+dies_ok { $skin = $s->get_skin(id => undef) } 'undefを渡すと死ぬ';
+
+$skin = $s->get_skin(id => $f->registration_test->{id});
+is($skin, undef, '登録中のミクコレは取得不可');
+
+$skin = $s->get_skin(id => $f->force_closed_test->{id});
+is($skin, undef, '強制終了のミクコレは取得不可');
+
+$skin = $s->get_skin(id => $f->open_edit_test->{id});
+isnt($skin, undef, '公開中修正のミクコレは取得可');
+
+$skin = $s->get_skin(id => $f->open_test->{id});
+isnt($skin, undef, '公開中のミクコレは取得可');
+
+is(
+    $s->_make_skin_base($f->open_test->{id},$f->open_test->{skin_version}),
+    $skin->{skin_base},
+    'get_skinでちゃんと_make_skin_baseをよんでるか'
+);
+
+#get_publi_skins
+my $result = $s->get_public_skins();
+my $skins  = $result->{rows};
+
+my @result = grep {
+    $_->{status} != Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN} && $_->{status} != Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT} ||
+    $_->{id} == $f->registration_test->{id}     ||
+    $_->{id} == $f->force_closed_test->{id}     ||
+    $_->{id} == $f->closed_test->{id}           ||
+    $_->{id} == $f->waiting_to_open_test->{id}
+} @$skins;
+
+ok(
+    scalar @result == 0,
+    '公開中または公開中修正状態のミクコレのみが一覧表示されているか'
+);
+
+#公開開始、終了前後の境界値チェックはAdminのほうで
+
+#pcskin_member_skin_relation:
+
+$skin = $s->get_member_skin(member_id => 0);
+is($skin, undef, '存在しないレコードの場合はundef');
+
+dies_ok { $skin = $s->get_member_skin(member_id => 'hogehoge') } '数字以外を渡すと死ぬ';
+
+done_testing;

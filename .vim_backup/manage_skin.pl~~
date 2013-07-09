@@ -21,6 +21,7 @@ use Date::Calc qw(
 use Mixi::Pages;
 use Mixi::Skin::Touch::Admin;
 use Mixi::Skin::Config;
+use Data::Dumper;
 use Mixi::Log;
 
 use constant {
@@ -28,7 +29,6 @@ use constant {
     GENRE_NAME_LENGTH_LIMIT => 40,
     SKIN_NAME_LIMIT         => 40,
     SKIN_COLOR_LIMIT        => 255,
-    BANNER_LINK_LIMIT       => 255,
 };
 
 __PACKAGE__->auth_type(AUTH_UNREQUIRED);
@@ -112,89 +112,82 @@ __PACKAGE__->validation_and_warnings(
             [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR()}]
                 => 'ミクコレ色パターンは入力必須項目です。',
         ],
-        basic_text_color => [
+        body_text_color => [
             ['NOT_BLANK']
-                => 'テキスト色（基本）は入力必須項目です。',
-            ['ASCII'] => 'テキスト色（基本）は半角で入力してください。',
+                => '本文テキスト色は入力必須項目です。',
+            ['ASCII'] => '本文テキスト色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'テキスト色（基本）は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => '本文テキスト色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
-        strong_text_color => [
+        nickname_text_color => [
             ['NOT_BLANK']
-                => 'テキスト色（強調）は入力必須項目です。',
-            ['ASCII'] => 'テキスト色（強調）は半角で入力してください。',
+                => 'ユーザ名テキスト色は入力必須項目です。',
+            ['ASCII'] => 'ユーザ名テキスト色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'テキスト色（強調）は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => 'ユーザ名テキスト色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
-        weak_text_color => [
+        post_datetime_text_color => [
             ['NOT_BLANK']
-                => 'テキスト色（案内）は入力必須項目です。',
-            ['ASCII'] => 'テキスト色（案内）は半角で入力してください。',
+                => '投稿日時テキスト色は入力必須項目です。',
+            ['ASCII'] => '投稿日時テキスト色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'テキスト色（案内）は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
-        ],
-        weaker_text_color => [
-            ['NOT_BLANK']
-                => 'テキスト色（補足）は入力必須項目です。',
-            ['ASCII'] => 'テキスト色（補足）は半角で入力してください。',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'テキスト色（補足）は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => '投稿日時テキスト色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
         link_color => [
             ['NOT_BLANK']
-                => 'リンク色（基本）は入力必須項目です。',
-            ['ASCII'] => 'リンク色（基本）は半角で入力してください。',
+                => '基本リンク色は入力必須項目です。',
+            ['ASCII'] => '基本リンク色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'リンク色（基本）は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => '基本リンク色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
-        strong_link_color => [
+        red_link_color => [
             ['NOT_BLANK']
-                => 'リンク色（強調）は入力必須項目です。',
-            ['ASCII'] => 'リンク色（強調）は半角で入力してください。',
+                => '赤文字リンク色は入力必須項目です。',
+            ['ASCII'] => '赤文字リンク色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'リンク色（強調）は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => '赤文字リンク色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
         border_color => [
             ['NOT_BLANK']
                 => 'ボーダー色は入力必須項目です。',
             ['ASCII'] => 'ボーダー色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'ボーダー色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => 'ボーダー色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
         background_color => [
             ['NOT_BLANK']
-                => '全体背景色は入力必須項目です。',
-            ['ASCII'] => '全体背景色は半角で入力してください。',
+                => '基本背景色は入力必須項目です。',
+            ['ASCII'] => '基本背景色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '全体背景色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => '基本背景色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
-        partial_background_color => [
+        feedback_button_color => [
             ['NOT_BLANK']
-                => '部分背景色は入力必須項目です。',
-            ['ASCII'] => '部分背景色は半角で入力してください。',
+                => 'イイネボタン背景色は入力必須項目です。',
+            ['ASCII'] => 'イイネボタン背景色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '部分背景色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => 'イイネボタン背景色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
         contents_title_bg_color => [
             ['NOT_BLANK']
                 => 'コンテンツタイトル背景色は入力必須項目です。',
             ['ASCII'] => 'コンテンツタイトル背景色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'コンテンツタイトル背景色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => 'コンテンツタイトル背景色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
         gradation_start_color => [
             ['NOT_BLANK']
                 => 'グラデーション開始色は入力必須項目です。',
             ['ASCII'] => 'グラデーション開始色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'グラデーション開始色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => 'グラデーション開始色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
         gradation_end_color => [
             ['NOT_BLANK']
                 => 'グラデーション終了色は入力必須項目です。',
             ['ASCII'] => 'グラデーション終了色は半角で入力してください。',
             ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'グラデーション終了色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してください。',
+                => 'グラデーション終了色は' . SKIN_COLOR_LIMIT() .'文字以内で入力してく ださい。',
         ],
         has_home_header_img => [
             [IN_ARRAY => (0, 1)] => 'home_header画像の値が不正です。',
@@ -205,7 +198,7 @@ __PACKAGE__->validation_and_warnings(
         has_bg_img => [
             [IN_ARRAY => (0, 1)] => 'bg画像の値が不正です。',
         ],
-        has_contents_title_img => [
+        has_border_img => [
             [IN_ARRAY => (0, 1)] => 'border画像の値が不正です。',
         ],
         has_logo_jack_img => [
@@ -214,12 +207,8 @@ __PACKAGE__->validation_and_warnings(
         has_banner_img => [
             [IN_ARRAY => (0, 1)] => 'banner画像の値が不正です。',
         ],
-        banner_link => [
-            ['HTTP_URL'] => 'リンク先のURLが不正です。',
-            ['LENGTH', 0, BANNER_LINK_LIMIT()]
-                => 'リンク先は' . BANNER_LINK_LIMIT() .'文字以内で入力してください。',
-        ],
     ],
+    # TODO: add validation 
     set_user_skin => [
         member_id  => [
             ['NOT_BLANK'] => "ユーザIDを入力してください。",
@@ -354,22 +343,21 @@ __PACKAGE__->conditions(
         );
         my %style_info = (
             skin_color_type          => $self->param->{skin_color_type},
-            basic_text_color         => $self->param->{basic_text_color},
-            strong_text_color        => $self->param->{strong_text_color},
-            weak_text_color          => $self->param->{weak_text_color},
-            weaker_text_color        => $self->param->{weaker_text_color},
+            body_text_color          => $self->param->{body_text_color},
+            nickname_text_color      => $self->param->{nickname_text_color},
+            post_datetime_text_color => $self->param->{post_datetime_text_color},
             link_color               => $self->param->{link_color},
-            strong_link_color        => $self->param->{strong_link_color},
+            red_link_color           => $self->param->{red_link_color},
             border_color             => $self->param->{border_color},
             background_color         => $self->param->{background_color},
-            partial_background_color => $self->param->{partial_background_color},
+            feedback_button_color    => $self->param->{feedback_button_color},
             contents_title_bg_color  => $self->param->{contents_title_bg_color},
             gradation_start_color    => $self->param->{gradation_start_color},
             gradation_end_color      => $self->param->{gradation_end_color},
             has_home_header_img      => $self->param->{has_home_header_img},
             has_prof_header_img      => $self->param->{has_prof_header_img},
             has_bg_img               => $self->param->{has_bg_img},
-            has_contents_title_img   => $self->param->{has_contents_title_img},
+            has_border_img           => $self->param->{has_border_img},
             has_logo_jack            => $self->param->{has_logo_jack},
             has_banner_img           => $self->param->{has_banner_img},
             banner_link              => $self->param->{banner_link} || '',
@@ -405,7 +393,6 @@ __PACKAGE__->conditions(
     -add_confirm => sub {
         my $self = shift;
         $self->set_can_edit_style;
-
         if (my $warnings = $self->has_warnings('skin_param', 'skin_style_param')) {
             $self->template->add_error($warnings);
             $self->mode("add_error");
@@ -447,22 +434,21 @@ __PACKAGE__->conditions(
             memo                     => $self->param->{memo},
             genres                   => $self->param->{genres} || [],
             contents_id              => $self->param->{contents_id} || '',
-            basic_text_color         => $self->param->{basic_text_color},
-            strong_text_color        => $self->param->{strong_text_color},
-            weak_text_color          => $self->param->{weak_text_color},
-            weaker_text_color        => $self->param->{weaker_text_color},
+            body_text_color          => $self->param->{body_text_color},
+            nickname_text_color      => $self->param->{nickname_text_color},
+            post_datetime_text_color => $self->param->{post_datetime_text_color},
             link_color               => $self->param->{link_color},
-            strong_link_color        => $self->param->{strong_link_color},
+            red_link_color           => $self->param->{red_link_color},
             border_color             => $self->param->{border_color},
             background_color         => $self->param->{background_color},
-            partial_background_color => $self->param->{partial_background_color},
+            feedback_button_color    => $self->param->{feedback_button_color},
             contents_title_bg_color  => $self->param->{contents_title_bg_color},
             gradation_start_color    => $self->param->{gradation_start_color},
             gradation_end_color      => $self->param->{gradation_end_color},
             has_home_header_img      => $self->param->{has_home_header_img},
             has_prof_header_img      => $self->param->{has_prof_header_img},
             has_bg_img               => $self->param->{has_bg_img},
-            has_contents_title_img   => $self->param->{has_contents_title_img},
+            has_border_img           => $self->param->{has_border_img},
             has_logo_jack            => $self->param->{has_logo_jack},
             has_banner_img           => $self->param->{has_banner_img},
             banner_link              => $self->param->{banner_link} || '',
@@ -626,44 +612,15 @@ sub assign_common_form_data {
 
 sub assign_show {
     my $self = shift;
-    my $skin = $self->stash->{skin};
-
-    $self->_assign_production_skin_info();
-    $self->_assign_staging_skin_info();
-}
-
-sub _assign_production_skin_info {
-    my $self = shift;
-    my $skin = $self->stash->{skin};
-
-    $self->template->param(
-        %$skin,
-        genre => join (",",map {
-            $_->{genre_name};
-        } @{$skin->{genres}}),
-        skin_type       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE->{$skin->{skin_type}}},
-        skin_color_type => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$skin->{skin_color_type}}},
-        post_key        => $self->post_key->encode([qw/_TIMESTAMP_/]),
-    );
-}
-
-sub _assign_staging_skin_info {
-    my $self = shift;
-    my $skin = $self->stash->{skin};
-    my $editing_skin = Mixi::Skin::Touch::Admin->get_editing_skin_data($skin->{temporary_skin_info}) || $skin;
-
-    my @staging_keys = map {
-        $_ . '_staging'
-    } keys %$editing_skin;
-
-    my %editing_skin_param;
-    @editing_skin_param{@staging_keys} = values %$editing_skin;
-    use Data::Dumper;
-    warn Dumper %editing_skin_param;
-    $self->template->param(
-        %editing_skin_param,
-        skin_color_type_staging => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$editing_skin_param{skin_color_type_staging}}},
-    );
+    warn Dumper $self->stash->{skin};
+    $self->template->param(%{ $self->stash->{skin}},(
+            genre => join (",",map {
+                $_->{genre_name}; 
+            } @{$self->stash->{skin}->{genres}}),
+            skin_type       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE->{$self->stash->{skin}->{skin_type}}},
+            skin_color_type => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$self->stash->{skin}->{skin_color_type}}},
+            post_key        => $self->post_key->encode([qw/_TIMESTAMP_/]),
+    ));
 }
 
 sub assign_add {
@@ -702,13 +659,13 @@ sub assign_confirm {
     );
 
     $self->template->param(
-        skin_color_type_forview        => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$self->param->{skin_color_type}}},
-        has_home_header_img_forview    => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_home_header_img}},
-        has_prof_header_img_forview    => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_prof_header_img}},
-        has_bg_img_forview             => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_bg_img}},
-        has_contents_title_img_forview => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_contents_title_img}},
-        has_logo_jack_forview          => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_logo_jack}},
-        has_banner_img_forview         => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_banner_img     }},
+        skin_color_type_forview => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$self->param->{skin_color_type}}},
+        has_home_header_img_forview  => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_home_header_img}},
+        has_prof_header_img_forview  => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_prof_header_img}},
+        has_bg_img_forview           => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_bg_img         }},
+        has_border_img_forview       => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_border_img     }},
+        has_logo_jack_forview        => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_logo_jack      }},
+        has_banner_img_forview       => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_banner_img     }},
     ) if $self->stash->{can_edit_style};
 }
 

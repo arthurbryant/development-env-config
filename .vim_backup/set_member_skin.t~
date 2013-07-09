@@ -1,0 +1,49 @@
+use strict;
+use warnings;
+use Test::More;
+use Mixi::Test;
+use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TOUCHSKIN/;
+use Nove::Test::Fixtures::Memcached;
+
+BEGIN {
+    use_ok 'Mixi::Skin::Touch';
+}
+use Mixi::Skin::Config;
+
+my $f = Mixi::Test::Fixtures->get_fixture_object('DB_TOUCHSKIN');
+
+Nove::Test::Fixtures::Memcached->setup_fixture({
+    "touch_skin:member_skin:" . $f->test_member1->{member_id} => 'fake_data',
+});
+
+my $s = Mixi::Skin::Touch->get_instance();
+my $skin;
+
+$skin = $s->get_skin(id => $f->closed_test->{id});
+is(
+  $s->set_member_skin(member_id => $f->test_member2->{member_id},skin => $skin),
+  undef,
+  '公開中だが公開期間外なので設定不可'
+);
+
+$skin = $s->get_skin(id => $f->open_test->{id});
+is(
+  $s->set_member_skin(member_id => $f->test_member1->{member_id},skin => $skin,via_script_name => 'hoge_skin.pl'),
+  1,
+  '公開中かつ公開期間内なので設定可'
+);
+
+is(
+    Nove::Test::Fixtures::Memcached->memcached_instance
+        ->{"touch_skin:member_skin:" . $f->test_member1->{member_id}},
+    undef,
+    'memcachedがクリアされたか'
+);
+
+is_deeply(
+  $s->get_member_skin(member_id => $f->test_member1->{member_id}),
+  $skin,
+  '設定されているか'
+);
+
+done_testing;

@@ -46,9 +46,9 @@ CREATE TABLE touchskin_skin_data (
   id                      INT(10)       UNSIGNED AUTO_INCREMENT,
   skin_type               TINYINT(3)    UNSIGNED NOT NULL DEFAULT 0,
   status                  TINYINT(3)    UNSIGNED NOT NULL DEFAULT 0,
-  name                    VARCHAR(255)  NOT NULL DEFAULT '',
+  name                    VARCHAR(255)  NOT NULL,
   regist_staff            VARCHAR(255)  NOT NULL,
-  regist_datetime         TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  regist_datetime         DATETIME      NOT NULL,
   update_staff            VARCHAR(255)  NOT NULL,
   update_datetime         TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   open_datetime           DATETIME      NOT NULL,
@@ -62,53 +62,33 @@ CREATE TABLE touchskin_skin_data (
   has_home_header_img     TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
   has_prof_header_img     TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
   has_bg_img              TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
-  has_border_img          TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
+  has_contents_title_img  TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
   has_logo_jack           TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
   has_banner_img          TINYINT(1)    UNSIGNED NOT NULL DEFAULT 0,
   banner_link             VARCHAR(255)  NOT NULL DEFAULT '',
 
   -- color items
-  body_text_color               VARCHAR(255)   NOT NULL,
-  nickname_text_color           VARCHAR(255)   NOT NULL,
-  post_datetime_text_color      VARCHAR(255)   NOT NULL,
-  link_color                    VARCHAR(255)   NOT NULL,
-  red_link_color                VARCHAR(255)   NOT NULL,
-  border_color                  VARCHAR(255)   NOT NULL,
-  background_color              VARCHAR(255)   NOT NULL,
-  feedback_button_color         VARCHAR(255)   NOT NULL,
-  gradation_start_color         VARCHAR(255)   NOT NULL,
-  gradation_end_color           VARCHAR(255)   NOT NULL,
+  basic_text_color          VARCHAR(255)  NOT NULL,
+  strong_text_color         VARCHAR(255)  NOT NULL,
+  weak_text_color           VARCHAR(255)  NOT NULL,
+  weaker_text_color         VARCHAR(255)  NOT NULL,
+  link_color                VARCHAR(255)  NOT NULL,
+  strong_link_color         VARCHAR(255)  NOT NULL,
+  border_color              VARCHAR(255)  NOT NULL,
+  background_color          VARCHAR(255)  NOT NULL,
+  partial_background_color  VARCHAR(255)  NOT NULL,
+  contents_title_bg_color   VARCHAR(255)  NOT NULL,
+  gradation_start_color     VARCHAR(255)  NOT NULL,
+  gradation_end_color       VARCHAR(255)  NOT NULL,
 
   PRIMARY KEY (id),
   KEY key_1 (skin_type,status,close_datetime,open_datetime)
 ) ENGINE=InnoDB DEFAULT CHARSET=ujis;
 
---
--- ミクコレ着用履歴
--- 
--- =========================================================
--- start_datetime               ミクコレ着用開始日
--- end_datetime                 ミクコレ着用終了日
--- script_id                    ミクコレ適用元 (0:show_friend.pl、1:edit_skin.pl etc )
--- extra_id                     適用元のその他のパラメータ？(mobileミクコレと構成を合わせるため残す)
--- =========================================================
---
-
-DROP TABLE IF EXISTS touchskin_member_skin_log;
-CREATE TABLE touchskin_member_skin_log (
-  member_id       INT(10)       UNSIGNED NOT NULL,
-  skin_id         INT(10)       UNSIGNED NOT NULL,
-  start_datetime  DATETIME      NOT NULL,
-  end_datetime    DATETIME      DEFAULT NULL,
-  script_id       TINYINT(3)    UNSIGNED NOT NULL, 
-  extra_id        INT(10)       NOT NULL DEFAULT 0,
-  PRIMARY KEY (member_id,start_datetime),
-  KEY key_1 (skin_id,start_datetime)
-) ENGINE=InnoDB DEFAULT CHARSET=ujis;
 
 --
 -- ジャンル情報
--- 
+--
 -- =========================================================
 -- genre_name                   ジャンル名
 -- display                      y:公開、n:非公開
@@ -119,10 +99,10 @@ CREATE TABLE touchskin_member_skin_log (
 DROP TABLE IF EXISTS touchskin_genre_data;
 CREATE TABLE touchskin_genre_data (
   id              INT(10)       UNSIGNED NOT NULL AUTO_INCREMENT,
-  genre_name      VARCHAR(255)  NOT NULL DEFAULT '',                   
-  display         ENUM('n','y') NOT NULL DEFAULT 'n',                  
-  priority        INT(10)       UNSIGNED NOT NULL DEFAULT '0',         
-  regist_staff    VARCHAR(255)  NOT NULL,                              
+  genre_name      VARCHAR(255)  NOT NULL DEFAULT '',
+  display         ENUM('n','y') NOT NULL DEFAULT 'n',
+  priority        INT(10)       UNSIGNED NOT NULL DEFAULT '0',
+  regist_staff    VARCHAR(255)  NOT NULL,
   regist_datetime DATETIME      NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (id),
   KEY display (display,priority)
@@ -140,31 +120,10 @@ CREATE TABLE touchskin_skin_genre_relation (
   KEY key_1 (skin_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=ujis;
 
---
--- スキン適用状況の集計テーブル
---
--- touchskin_member_skin_relationとtouchskin_member_skin_logから集計して格納します。
--- cronにて実行予定
---
--- =========================================================
--- date                         集計日
--- skin_id
--- use_count                    適用数
--- =========================================================
---
-
-DROP TABLE IF EXISTS `touchskin_skin_count_date`;
-CREATE TABLE `touchskin_skin_count_date` (
-  `date` date NOT NULL,
-  `skin_id` int(10) unsigned NOT NULL,
-  `use_count` int(10) unsigned NOT NULL,
-  PRIMARY KEY  (`skin_id`,`date`),
-  KEY key_1 (`date`,`use_count`)
-) ENGINE=InnoDB DEFAULT CHARSET=ujis;
 
 --
 -- スキン適用履歴情報の集計テーブル
--- 
+--
 --
 -- =========================================================
 -- date                 集計日

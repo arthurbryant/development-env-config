@@ -138,23 +138,6 @@ else
     let g:Powerline_symbols = 'unicode'
 endif
 
-
-" http://stackoverflow.com/questions/7187477/vim-smart-insert-semicolon
-vmap <C-F>; :normal A;<Esc><CR>
-nmap <C-F>; :call Semicolonfun(';')<CR>
-imap <C-F>; <C-R>=Semicolonfun(';')<CR>
-vmap <C-F>, :normal A,<Esc><CR>
-nmap <C-F>, :call Semicolonfun(',')<CR>
-imap <C-F>, <C-R>=Semicolonfun(',')<CR>
-vmap <C-F>: :normal A:<Esc><CR>
-nmap <C-F>: :call Semicolonfun(':')<CR>
-imap <C-F>: <C-R>=Semicolonfun(':')<CR>
-function! Semicolonfun(char)
-    call setline(line('.'), substitute(getline('.'), '\s*$', a:char, ''))
-    return ''
-endfunction
-
-
 set list                    " highlight garbage characters (see below)
 set listchars=tab:»-,trail:\ ,extends:»,precedes:«,nbsp:%
 highlight SpecialKey   ctermbg=darkyellow guibg=darkyellow"
@@ -183,6 +166,19 @@ vnoremap <Leader>t<Space> :Tabular multiple_spaces<CR>
 "    \ map(a:lines, "substitute(v:val, ' \{2,}', '  ', 'g')")
 "    \   | tabular#TabularizeStrings(a:lines, '  ', 'l0')
 
-filetype plugin on
+NeoBundle 'maxbrunsfeld/vim-yankstack'
+nmap <C-m> <Plug>yankstack_substitute_older_paste
+nmap <C-n> <Plug>yankstack_substitute_newer_paste
+
+" framework for all belows
+NeoBundle 'kana/vim-textobj-user'
+" [ai][iI]
+NeoBundle 'kana/vim-textobj-indent'
+
+"let g:ctrlp_map = '<Leader><C-p>'
+let mapleader = ','
+
 filetype indent on
+filetype plugin on
+
 syntax on

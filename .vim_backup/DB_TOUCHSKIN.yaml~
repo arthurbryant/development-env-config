@@ -1,0 +1,72 @@
+database: DB_TOUCHSKIN
+touchskin_member_skin_relation:
+    test_member1:
+        member_id: 9997
+        skin_id: 4
+    test_member2:
+        member_id: 9998
+        skin_id: 4
+touchskin_member_skin_relation_for_test:
+touchskin_skin_data:
+    registration_test:
+        id: 1
+        skin_type: 0
+        status: 0
+    force_closed_test:
+        id: 2
+        skin_type: 0
+        status: 3
+    open_edit_test:
+        id: 3
+        skin_type: 0
+        status: 2
+        skin_version: 1
+        temporary_skin_info: "---\nskin_version: 2\n"
+        open_datetime: '1970-01-01 00:00:00'
+        close_datetime: '9999-01-01 00:00:00'
+    open_test:
+        id: 4
+        skin_type: 0
+        skin_color_type: 0
+        status: 1
+        name: 'name'
+        memo: 'memo'
+        skin_version: 1
+        open_datetime: '1970-01-01 00:00:00'
+        close_datetime: '9999-01-01 00:00:00'
+    closed_test:
+        id: 5
+        skin_type: 0
+        status: 1
+        skin_version: 1
+        open_datetime: '1970-01-01 00:00:00'
+        close_datetime: '1971-01-01 00:00:00'
+    open_test2:
+        id: 6
+        skin_type: 0
+        status: 1
+        skin_version: 1
+        open_datetime: '1970-01-01 00:00:00'
+        close_datetime: '9999-01-01 00:00:00'
+    waiting_to_open_test:
+        id: 7
+        skin_type: 0
+        status: 1
+        skin_version: 1
+        open_datetime:  '9998-01-01 00:00:00'
+        close_datetime:  '9999-01-01 00:00:00'
+touchskin_member_skin_log:
+touchskin_skin_genre_relation:
+touchskin_genre_data:
+    test_genre1:
+        id: 1
+        genre_name: 'test1'
+        display: 'y'
+        priority: 0
+        regist_staff: 'shinya.tempaku'
+    test_genre2:
+        id: 2
+        genre_name: 'test2'
+        display: 'y'
+        priority: 10
+        regist_staff: 'shinya.tempaku'
