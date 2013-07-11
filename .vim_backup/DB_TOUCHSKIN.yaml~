@@ -6,7 +6,6 @@ touchskin_member_skin_relation:
     test_member2:
         member_id: 9998
         skin_id: 4
-touchskin_member_skin_relation_for_test:
 touchskin_skin_data:
     registration_test:
         id: 1
@@ -24,6 +23,7 @@ touchskin_skin_data:
         temporary_skin_info: "---\nskin_version: 2\n"
         open_datetime: '1970-01-01 00:00:00'
         close_datetime: '9999-01-01 00:00:00'
+        basic_text_color: '#001122'
     open_test:
         id: 4
         skin_type: 0
@@ -34,6 +34,7 @@ touchskin_skin_data:
         skin_version: 1
         open_datetime: '1970-01-01 00:00:00'
         close_datetime: '9999-01-01 00:00:00'
+        basic_text_color: '#004422'
     closed_test:
         id: 5
         skin_type: 0
@@ -48,6 +49,7 @@ touchskin_skin_data:
         skin_version: 1
         open_datetime: '1970-01-01 00:00:00'
         close_datetime: '9999-01-01 00:00:00'
+        basic_text_color: '#111111'
     waiting_to_open_test:
         id: 7
         skin_type: 0
@@ -55,7 +57,18 @@ touchskin_skin_data:
         skin_version: 1
         open_datetime:  '9998-01-01 00:00:00'
         close_datetime:  '9999-01-01 00:00:00'
+<<<<<<< HEAD
+    deluxe_open_test:
+        id: 8
+        skin_type: 1
+        status: 1
+        skin_version: 1
+        open_datetime: '1970-01-01 00:00:00'
+        close_datetime: '9999-01-01 00:00:00'
+        basic_text_color: '#222222'
 touchskin_member_skin_log:
+=======
+>>>>>>> 113d2e4... Fix Mixi::Skin::Touch test and fixture yaml
 touchskin_skin_genre_relation:
 touchskin_genre_data:
     test_genre1:
@@ -64,9 +77,25 @@ touchskin_genre_data:
         display: 'y'
         priority: 0
         regist_staff: 'shinya.tempaku'
+        regist_datetime: '1970-01-01 00:00:00'
     test_genre2:
         id: 2
         genre_name: 'test2'
         display: 'y'
         priority: 10
         regist_staff: 'shinya.tempaku'
+        regist_datetime: '1980-01-01 00:00:00'
+    test_genre3_not_public:
+        id: 3
+        genre_name: 'test3'
+        display: 'n'
+        priority: 5
+        regist_staff: 'yuya.presto'
+        regist_datetime: '1990-01-01 00:00:00'
+    test_genre4:
+        id: 4
+        genre_name: 'test4'
+        display: 'y'
+        priority: 5
+        regist_staff: 'yuya.presto'
+        regist_datetime: '2000-01-01 00:00:00'

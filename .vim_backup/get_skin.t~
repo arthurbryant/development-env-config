@@ -2,8 +2,10 @@ use strict;
 use warnings;
 use Test::More;
 use Test::Exception;
+use Test::Deep;
 use Mixi::Test;
 use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TOUCHSKIN/;
+use Nove::Test::Fixtures::Memcached;
 
 BEGIN {
     use_ok 'Mixi::Skin::Touch';
@@ -66,11 +68,142 @@ ok(
 
 #公開開始、終了前後の境界値チェックはAdminのほうで
 
+<<<<<<< HEAD
 #pcskin_member_skin_relation:
 
 $skin = $s->get_member_skin(member_id => 0);
 is($skin, undef, '存在しないレコードの場合はundef');
+=======
+    my @result = grep {
+        $_->{status} != Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN} && $_->{status} != Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT} ||
+        $_->{skin_type} != Mixi::Skin::Config::TOUCH_SKIN_TYPE->{SIMPLE} ||
+        $_->{id} == $f->registration_test->{id}     ||
+        $_->{id} == $f->force_closed_test->{id}     ||
+        $_->{id} == $f->closed_test->{id}           ||
+        $_->{id} == $f->waiting_to_open_test->{id}
+    } @$skins;
 
-dies_ok { $skin = $s->get_member_skin(member_id => 'hogehoge') } '数字以外を渡すと死ぬ';
+    cmp_ok(
+        scalar @result, '==', 0,
+        '公開中または公開中修正状態の無料ミクコレのみが一覧表示されているか'
+    );
+>>>>>>> 14b2202... Add get_all_public_skins_by_genre test, fix other tests
+
+};
+
+subtest 'get_public_skins_by_genre_and_skin_type' => sub {
+
+    my $result = $s->get_public_skins_by_genre_and_skin_type(genre_id => 1);
+    my $count = $result->{count};
+    my $skins = $result->{rows};
+    is($count, 2, 'genre_idが1の場合はミクコレは2個ある');
+
+    cmp_deeply($skins,
+        [
+            superhashof({
+                id => $f->open_test->{id},
+                skin_type => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{SIMPLE},
+                status => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+                basic_text_color => '#004422',
+            }),
+            superhashof({
+                id => $f->open_edit_test->{id},
+                skin_type => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{SIMPLE},
+                status => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT},
+                basic_text_color => '#001122',
+            }),
+        ],
+        '正しいミクコレ情報が返却されているか'
+
+    );
+};
+
+subtest 'get_all_public_skins' => sub {
+
+    my $result = $s->get_all_public_skins();
+    my $count = $result->{count};
+    my $skins = $result->{rows};
+    is($count, 4, '公開中のミクコレは4個ある');
+
+    cmp_deeply($skins,
+        [
+            superhashof({
+                id               => $f->deluxe_open_test->{id},
+                skin_type        => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{DELUXE},
+                status           => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+                basic_text_color => '#222222',
+            }),
+            superhashof({
+                id               => $f->open_test2->{id},
+                skin_type        => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{SIMPLE},
+                status           => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+                basic_text_color => '#111111',
+            }),
+            superhashof({
+                id               => $f->open_test->{id},
+                skin_type        => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{SIMPLE},
+                status           => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+                basic_text_color => '#004422',
+            }),
+            superhashof({
+                id               => $f->open_edit_test->{id},
+                skin_type        => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{SIMPLE},
+                status           => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT},
+                basic_text_color => '#001122',
+            }),
+        ],
+        '正しいミクコレ情報が返却されているか'
+    );
+};
+
+subtest 'get_all_public_skins_by_genre' => sub {
+
+    my $result = $s->get_all_public_skins_by_genre(genre_id => $f->test_genre2->{id});
+    my $count = $result->{count};
+    my $skins = $result->{rows};
+    is($count, 2, 'ジャンル内で公開中のミクコレは2個ある');
+
+    cmp_deeply($skins,
+        [
+            superhashof({
+                id               => $f->deluxe_open_test->{id},
+                skin_type        => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{DELUXE},
+                status           => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+                basic_text_color => '#222222',
+            }),
+            superhashof({
+                id               => $f->open_test->{id},
+                skin_type        => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{SIMPLE},
+                status           => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+                basic_text_color => '#004422',
+            }),
+        ],
+        '正しいミクコレ情報が返却されているか'
+    );
+};
+
+subtest 'get_public_skins_by_genre_and_skin_type' => sub {
+    my $result = $s->get_public_skins_by_genre_and_skin_type(genre_id => 1);
+    my $count = $result->{count};
+    my $skins = $result->{rows};
+    is($count, 2, 'genre_idが1の場合はミクコレは2個ある');
+
+    my $expected = [$f->open_edit_test, $f->open_test];
+    use Data::Dumper;
+    warn Dumper bag(@$expected);
+    warn Dumper $skins;
+    cmp_deeply($skins, bag(@$expected), 'skin data should be the same');
+};
+
+subtest 'get_member_skin' => sub {
+
+    #公開開始、終了前後の境界値チェックはAdminのほうで
+
+    $skin = $s->get_member_skin(member_id => 0);
+    is($skin, undef, '存在しないレコードの場合はundef');
+
+    dies_ok { $skin = $s->get_member_skin(member_id => 'hogehoge') } '数字以外を渡すと死ぬ';
+
+};
 
 done_testing;

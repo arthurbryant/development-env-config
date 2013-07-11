@@ -1,442 +1,3 @@
-ag body_text_color
-ag body_text_color -l
-sed -e 's/body_text_color/basic_text_color'  `ag body_text_color -l` 
-sed -e 's/body_text_color/basic_text_color/g'  `ag body_text_color -l` 
-sed -ie 's/body_text_color/basic_text_color/g'  `ag body_text_color  
-sed -ie 's/body_text_color/basic_text_color/g'  `ag body_text_color`  
-gst
-sed -ie 's/body_text_color/basic_text_color/g'  `ag -f body_text_color`  
-gst
-sed -ie 's/body_text_color/basic_text_color/g'  `ag -l body_text_color`  
-gst
-gd
-fg
-ag nickname_text_color
-ag nickname_text_color | wc -l
-ag nickname_text_color -l | wc -l
-gst
-gb
-fg
-gst
-git clean -f
-ag nickname_text_color -l | wc -l
-[Ased -i -e 's/nickname_text_color/strong_text_color/g'  `ag -l post_datetime_text_color`  
-gst
-gd
-fg
-ag post_datetime_text_color
-vim rename.sh
-fg
-chx rename.sh 
-fg
-cd git/banana/banana/
-ls
-node app.js 
-cd ../../touch-skin/
-start-server 
-cd git/touch-skin/
-ls
-gst
-v rename.sh 
-v 
-./rename.sh  post_datetime_text_color  weak_text_color
-gd
-fg
-ag red_link_color
-./rename.sh red_link_color strong_link_color
-fg
-ag feedback_button_color
-ag feedback_button_color | wc -l
-gst
-ag feedback_button_color -l | wc -l
-./rename.sh feedback_button_color partial_background_color
-gd
-fg
-gst
-fg
-v
-ag has_border_img
-./rename.sh has_border_img has_contents_title_img
-clear
-gst
-gd
-gst
-ga -u .
-gst
-gm
-gps
-gb
-git pull -rebase
-git pull --rebase
-gps
-clear
-gst
-fg
-cat rename.sh 
-fg
-ag 
-fg
-ag 本文テキスト色
-ag "本文テキスト色"
-ag `echo 本文テキスト色`
-ag `echo 本文テキスト色 | nkf -e`
-ag `echo 本文テキスト色 | nkf -e` -l | wc -l
-fg
-ag `echo 本文テキスト色 | nkf -e` -l | wc -l
-ag `echo 本文テキスト色 | nkf -e` -l
-gb
-fg
-ls
-file edit_mylist.pl 
-gpl
-gl
-ls
-vim rename.sh 
-gl
-gd 1be1296e6af887bcec9cb5f1e1f5d88f2a832638
-vim tmp_rename.sh 
-jobs -l;
-fg 2
-fg 1
-fg 2
-fg
-ag 本文テキスト色
-ag `echo 本文テキスト色 | nkf -e`
-ag `echo 本文テキスト色 | nkf -e` | -l
-ag `echo 本文テキスト色 | nkf -e` -l | wc -l 
-./tmp_rename.sh 本文テキスト色 テキスト色（基本）
-gd
-vim ./boofy/tmpl/skin/touch/skin_form_parts.tmpl
-fg
-ag `echo ユーザ名テキスト色 | nkf -e` -l | wc -l 
-./tmp_rename.sh ユーザ名テキスト色 テキスト色（強調)
-./tmp_rename.sh ユーザ名テキスト色 テキスト色（強調）
-gd
-fg
-ag `echo 投稿日時テキスト色 | nkf -e` -l | wc -l 
-./tmp_rename.sh 投稿日時テキスト色 テキスト色（案内）
-fg
-ag `echo 基本リンク色 | nkf -e` -l | wc -l 
-./tmp_rename.sh 基本リンク色 リンク色（基本）
-fg
-ag `echo 赤文字リンク色 | nkf -e` -l | wc -l 
-./tmp_rename.sh 赤文字リンク色 リンク色（強調）
-fg
-ag `echo 基本背景色 | nkf -e` -l | wc -l 
-./tmp_rename.sh 基本背景色 全体背景色
-fg
-ag `echo イイネボタン背景色 | nkf -e` -l | wc -l 
-./tmp_rename.sh イイネボタン背景色 部分背景色
-fg
-gd
-PAGER="lv -c" gd
-PAGER="lv -c" git diff
-PAGER="lv -c -Ia" git diff
-PAGER="lv -c -Ia -Ou8" git diff
-echo $LANG
-PAGER="lv -c -Iej -Ou8" git diff
-PAGER="lv -c -Iej -Ou8" git diff --color
-gst
-ga -u .
-gl
-gm
-gps
-clear
-ls
-history
-ls
-history > command.log
-ls
-cd git/banana/banana/
-ls
-fg
-vim views/iyada/list.ejs 
-fg
-gst
-gl
-gst
-ga .
-gm
-gr
-git remote add ssh://git@git.lo.mixi.jp/users/feng.zhang/banana.git
-gb
-git remote add banana ssh://git@git.lo.mixi.jp/users/feng.zhang/banana.git
-gr
-man git push
-git push banana banana 
-cd git/banana/banana/
-node app.js 
-cd git/banana/banana/
-ls
-vim views/test.ejs 
-fg
-vim views/test.ejs 
-vim public/stylesheets/banana.css 
-rm -rf public/stylesheets/.banana.css.swp 
-rm views/.test.ejs.swp 
-vim views/test.ejs 
-rm views/.test.ejs.swp 
-vim views/test.ejs 
-vim public/stylesheets/banana.css 
-vim public/javascripts/hot-query.js 
-fg
-ls
-cd 
-ls
-gst
-ga .vim* .bash*
-gm
-gps
-ls
-cd git/touch-skin/
-ls
-clear
-ls
-exit
-cd git/banana/banana/
-ls
-fg
-vim views/iyada/list.ejs 
-rm -rf views/iyada/.list.ejs.swp 
-fg
-vim views/iyada/list.ejs 
-jobs -l
-fg
-gd
-clear
-gl
-gst
-fg
-git checkout public/javascripts/hot-query.js
-ga .
-gm
-gl
-fg
-exit
-cd git/touch-skin/
-ls
-v
-ag weak_text_color
-ag weak_text_color -l | wc -l
-fg
-ag `echo テキスト色（強調）| nkf -e` -l | wc -l
-fg
-v
-fg
-v
-history
-ag `echo テキスト色（補足）| nkf -e` -l | wc -l
-ag weaker_text
-ag weaker_text -l | wc -l
-ag weak_text -l | wc -l
-fg
-gd
-gst
-ga -u .
-gm
-gps
-gpl
-cat ~/.bashrc-git 
-vim ~/.bashrc-git 
-sg
-vv
-v
-vv
-v
-clear
-gl
-git diff --name-only 85ef0e8d2de69f378f3816971056343c9967e3e1
-git diff --name-only 85ef0e8d2de69f378f3816971056343c9967e3e1 | xargs v
-git diff --name-only 85ef0e8d2de69f378f3816971056343c9967e3e1 | xargs vim
-clear
-fg
-cea
-cd git/banana/
-cd banana/
-node app.js 
-cd ../../touch-skin/
-stop-server 
-start-server 
-]
-start-server 
-cd git/touch-skin/
-ls
-gst
-ga -u .
-gm
-gps
-vim
-vv
-cd lib/Mixi/Skin/
-ls
-cd Style/
-ls
-cd ..
-find . -name mixicollection*
-find . -name *mixicoll*
-gpl
-ls
-pwd
-vim Style.pm 
-find . -name mixicollection.css
-fg
-pwd
-cd -
-ls
-pwd
-cd ../../..
-ls
-cd .
-cd ..
-find . -name mixicollection.css
-vim static/css/basic/skin/gray/mixicollection.css 
-fg
-ls
-cd lib/Mixi/Skin/
-ls
-cd Style/
-ls
-vim Classic.pm 
-v None.pm 
-cd ..
-ls
-cd Touch/DB/
-ls
-cd ..
-ls
-gl
-gls
-clear
-gls
-gl
-gd a214b5fe0f6a25319744c2362a67caf741c255c1
-vim Style.pm 
-cd -
-cd ../..
-cd ..
-fg
-ag TOUCH_SKIN_BASE_PATH
-ag Mixi::Skin::Config
-clear
-fg
-gst
-gd
-ga .
-gl
-gm
-gps
-fg
-ls
-pls
-gpl
-fg
-v
-ag get_css
-fg
-ag get_skin_css
-fg
-ag get_style
-fg
-v 
- v ./lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-fg
- v ./lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-find . -name home20*
-vim ./static/css/smartphone/touch/home2011.css
-vim tmpl/fan/includes/_customized_design.tmpl 
-fg
-mkdir tmpl/device/touch/sp_skin/
-ls
-fg
-cp  tmpl/fan/includes/_customized_design.tmpl tmpl/device/touch/sp_skin/
-fg
-vim tmpl/device/touch/sp_skin/_customized_design.tmpl 
-jobs -l
-fg
-fg 2
-jobs -l
-fg 2
-fg 1
-fg
-v
-gst
-ga .
-gst
-gl
-gm
-gps
-ag $self->param
-ag "$self->param"
-ag -i "$self->param"
-ag -iw "$self->param"
-ag -iw "\$self->param"
-ag -iw '$self->param'
-ag -i '$self->param'
-ag -i '\$self->param'
-ag skin_option
-gpl
-ls
-clear
-ls
-fg
-gl
-git log -1 HEAD
-git config --global alias.last 'log -1 HEAD'
-git last
-vim .gitconfig 
-git last
-gitka
-gitk
-vim .gitconfig 
-vim .bashrc-git 
-sg
-gls
-gl
-clear
-cd git/touch-skin/
-ls
-gl
-gls
-v
-vim /home/bkapps/bin/condb.sh 
-cat /home/bkapps/bin/condb.sh 
-mysql --default-character-set=utf8 -uroot -hdev.mysql.lo.mixi.jp touchskin
-mysql --default-character-set=utf8 -u root -h mysql.lo.mixi.jp touchskin
-pwd
-cd db-schema/
-ls
-mysql --default-character-set=utf8 -u root -h mysql.lo.mixi.jp touchskin  < DB_TOUCHSKIN__touchskin.sql 
-vim DB_TOUCHSKIN__touchskin.sql 
-fg
-mysql --default-character-set=utf8 -u root -h mysql.lo.mixi.jp touchskin  < DB_TOUCHSKIN__touchskin.sql 
-fg
-vim DB_TOUCHSKIN__touchskin.sql 
-mysql --default-character-set=utf8 -u root -h mysql.lo.mixi.jp touchskin 
-fg
-mysql --default-character-set=utf8 -u root -h mysql.lo.mixi.jp touchskin 
-mysql --default-character-set=utf8 -u root -h mysql.lo.mixi.jp touchskin  < DB_TOUCHSKIN__touchskin.sql 
-fg
-mysql --default-character-set=utf8 -u root -h mysql.lo.mixi.jp touchskin  < DB_TOUCHSKIN__touchskin.sql 
-fg
-mysql --default-character-set=utf8 -u root -h mysql.lo.mixi.jp touchskin  < DB_TOUCHSKIN__touchskin.sql 
-fg
-mysql --default-character-set=utf8 -u root -h mysql.lo.mixi.jp touchskin  < DB_TOUCHSKIN__touchskin.sql 
-cd ..
-ls
-v
-gst
-git add db-schema/DB_TOUCHSKIN__touchskin.sql
-gm
-gst
-vim param 
-rm -rf param 
-ls
-gst
-gd
-gst
-ga .
-gm
-git commit --amend
 gl
 gps
 clear
@@ -998,3 +559,442 @@ ls
 vim lib/Mixi/Skin/Touch/Controller/Manage.pm 
 vim lib/Mixi/Skin/Touch/Controller/List.pm 
 vim lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm 
+cd git/touch-skin/
+ls
+cl
+gpl
+gst
+cl
+gl
+ls
+cl
+ag get_all_public_skin
+vim t/lib/Mixi/Skin/Touch/get_skin.t 
+gst
+gd
+gd --chec
+gd --check
+ga .
+gm 
+gps
+vim t/lib/Mixi/Skin/Touch/get_skin.t 
+fg
+gst
+clear
+ls
+gst
+gd
+ga .
+gm
+fg
+gps
+fg
+v
+gpl
+gd
+gd --cached
+gls
+gl
+gd 036b314aba41136abd96c8989457c8ad483c2e6d
+clear
+ls
+fg
+ls
+gpl
+gl
+v
+v t/lib/Mixi/Skin/Touch/get_public_genres.t 
+ls
+gst
+gd
+ga .
+gm
+gl
+fg
+ls
+mv t/lib/Mixi/Skin/Touch/get_public_genres.t t/lib/Mixi/Skin/Touch/get_genre.t
+gst
+ga .
+gl
+fg
+gm
+gps
+cl
+ls
+gl
+git diff help
+git help diff
+cl
+gpl
+gl
+v
+ls
+fg
+v
+ag get_public_skin_by_skin_type
+fg
+ls
+gpl
+gl
+fg
+clear
+ls
+v
+v t/lib/Mixi/Skin/Touch/get_staging_skin.t
+fg
+gst
+gd
+ga .
+gd
+top
+ls
+gst
+gd
+gd --cached
+gm
+gps
+ls
+fg
+cl
+gpl
+ls
+fg
+v
+echo $SKIN_TEST_ENVIRONMENT
+fg
+perl
+fg
+gpl
+gpls
+gpl
+ls
+clear
+fg
+v
+gd --check
+fg
+gst
+gd
+gst
+git clean -f
+gst
+ga .
+gl
+gd
+gm
+gd -cached
+gd --cached
+fg
+gst
+git reset lib/Mixi/Skin/Touch.pm
+gst
+gm
+gst
+ga .
+gm
+gps
+git pull --rebase
+gps
+gl
+cls
+
+v
+ag select_all_public_skins
+vim ./lib/Mixi/Skin/Touch.pm
+ag get_all_public_skins
+vim ./lib/Mixi/Skin/Touch/Controller/List.pm
+ls
+cl
+gpl
+ls
+gl
+gls
+gpl
+gls
+gl
+clear
+gpl
+ls
+gl
+gpl
+git fetch
+git rebase -i origin/COREDEVSOCIAL-429
+gd
+git mergetool 
+git rebase --continue
+git mergetool 
+git rebase --continue
+git mergetool 
+git rebase --skip
+git mergetool 
+git rebase --abort
+gl
+gpl
+git rebase -i origin/COREDEVSOCIAL-429
+gl
+gl --oneline
+git rebase -i origin/COREDEVSOCIAL-429
+gl --oneline
+gb
+git push 
+git push -f 
+clear
+ls
+gb
+git push origin HEAD:COREDEVSOCIAL-429
+ls
+gl
+ls
+cd git/touch-skin/
+stop-server 
+start-server 
+stop-server 
+start-server 
+cd git/touch-skin/
+ls
+vg
+cd
+sg
+cdw
+ls
+codereview.pl 
+codereview.pl  .
+gb
+gr
+gb -all
+gb --all
+clear
+git diff origin/master... --name-only
+gb --all
+git diff mixi/master... --name-only
+git fetch mixi
+gb
+gr 
+gb --all
+git diff mixi/master... --name-only
+codereview.pl `git diff mixi/master... --name-only`
+clear
+codereview.pl `git diff mixi/master... --name-only`
+vim boofy/tmpl/skin/touch/show_skin.tmpl
+fg
+ag skin_base
+cls
+cl
+codereview.pl `git diff mixi/master... --name-only`
+fg
+ag CONFIG_IMG_BASE
+fg
+cdw
+git pull
+git fetch
+vim boofy/gear/skin/touch/manage_genre.pl
+ls
+gst
+ga boofy/gear/skin/touch/manage_genre.pl 
+gst
+ga lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
+gst
+git clean
+git clean -f
+gst
+gd
+gd --cached
+ga .
+gm
+gps
+ls
+git rm boofy/gear/skin/touch/view_log.pl
+v lib/Mixi/Skin/Touch/Admin.pm
+ag ":types"
+fg
+v lib/Mixi/Skin/Touch/Controller/Admin/List.pm
+v lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+gst
+gd
+gst
+ga .
+gm
+gps
+fg
+v lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+ls
+gpl
+gl
+git fetch
+v boofy/tmpl/skin/touch/show_skin.tmpl
+fg
+v lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
+v lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
+mv t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/Purchase.pm t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/Purchase.t
+gst
+git checkout t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/Purchase.pm
+gst
+git clean
+git clean -f
+v t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/Purchase.pm
+v boofy/tmpl/skin/touch/set_user_skin_confirm.tmpl
+v boofy/tmpl/skin/touch/show_skin.tmpl
+dasdasksdfasdkfhadsklgkfdjfhkasdflashfkd
+v /img/func_intro/client_appli/Android_cap_03.png
+fg
+gpl
+ls
+v
+v boofy/tmpl/skin/touch/show_skin.tmpl
+gl
+fg
+jjjjjk
+gb
+gco COREDEVSOCIAL-429_manager__develo
+scp db-schema/DB_TOUCHSKIN__touchskin.sql 
+cat db-schema/DB_TOUCHSKIN__touchskin.sql 
+cl
+pwd
+cd lib/Mixi/Skin/Touch/DB/
+pwd
+ls
+clear
+ls
+vim Skin.pm 
+gst
+vim Skin.pm 
+exit
+cd git/tou
+cd git/touch-skin/
+ls
+stop-server 
+start-s
+start-server 
+exit
+ls
+cdw
+gst
+gl
+git diff -p 375ba9b5d677cccb75d5c96b88c5bd2072c9ed76
+ls
+vim review.sql
+ag limit lib/Mixi/Skin/
+ag limit lib/Mixi/Skin/DB/
+ag limit lib/Mixi/Skin/DB/Skin.pm 
+vim lib/Mixi/Skin/DB/Skin.pm 
+ag select_public_skins_by_genre
+vim ./lib/Mixi/Skin.pm
+fg
+g
+fg
+ag select_all_genres_with_limit
+vim ./lib/Mixi/Skin/Touch/Admin.pm
+v
+stop-server 
+start-server 
+ls
+cdw
+ls
+v
+gpl
+gl
+git log -p HEAD~2
+start-server 
+cdw
+ls
+histor
+history
+git diff mixi/master... --name-only
+codereview.pl `git diff mixi/master... --name-only`
+v boofy/tmpl/skin/touch/show_skin.tmpl
+fg
+v boofy/tmpl/skin/touch/show_skin.tmpl
+rm  boofy/tmpl/skin/touch/.show_skin.tmpl.swp
+fg
+gst
+gd
+gst
+ga .
+gm
+gps
+clear
+ls
+fg
+codereview.pl `git diff mixi/master... --name-only`
+vim tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+fg
+git diff
+gl
+gl --full
+man git log
+git diff --name-only
+gl
+git diff HEAD~1 --name-only
+git log -p  boofy/tmpl/skin/touch/show_skin.tmpl
+gpl
+vim boofy/tmpl/skin/touch/show_skin.tmpl
+gst
+cl
+ls
+clear
+ls
+gps
+gst
+gpl
+git reset --hard origin/COREDEVSOCIAL-429_manager__develop 
+gpl
+ls
+gf
+v db-schema/DB_TOUCH_SKIN_PURCHASE__touch_skin_purchase.sql 
+ls
+gb
+git checkout COREDEVSOCIAL-429
+git fetch
+gl
+git pull
+gl
+make remote-test 
+ls
+gb
+gr
+gr --all
+git remote --all
+git remote -a
+man git remote
+gb -all
+gb --all
+git fetch
+gb --all
+ls
+mv ~/review.sql .
+vim review.sql 
+vim add_explain.sql 
+cat ~/bin/condb.sh 
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin < add_explain.sql 
+vim add_explain.sql 
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin < add_explain.sql 
+fg
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin < add_explain.sql 
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin
+vim add_explain.sql 
+fg
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin
+fg
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin
+fg
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
+vim add_explain.sql 
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
+fg
+ls
+vim explain.txt 
+vim add_explain.sql 
+pwd
+gst
+gd
+gst
+gpl
+gst
+ga lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+gd
+gd --cached
+gm
+gps
+ls
+gl
+gst

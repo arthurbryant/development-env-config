@@ -1,0 +1,58 @@
+use strict;
+use warnings;
+use Test::More;
+use Test::Exception;
+use Test::Deep;
+use Mixi::Test;
+use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TOUCHSKIN/;
+use Nove::Test::Fixtures::Memcached;
+
+BEGIN {
+    use_ok 'Mixi::Skin::Touch';
+}
+use Mixi::Skin::Config;
+
+my $f = Mixi::Test::Fixtures->get_fixture_object('DB_TOUCHSKIN');
+
+my $s = Mixi::Skin::Touch->get_instance();
+my $skin;
+
+subtest 'get_public_genres' => sub {
+
+    my $result = $s->get_public_genres();
+
+    cmp_deeply($result,
+        [
+            {
+                id         => $f->test_genre2->{id},
+                genre_name => 'test2',
+            },
+            {
+                id         => $f->test_genre4->{id},
+                genre_name => 'test4',
+            },
+            {
+                id         => $f->test_genre1->{id},
+                genre_name => 'test1',
+            },
+        ],
+        '正しいミクコレ情報が返却されているか'
+    );
+};
+
+subtest 'get_genre' => sub {
+    my $result = $s->get_genre(id => $f->test_genre1->{id});
+
+    cmp_deeply($result,
+        {
+            id           => $f->test_genre1->{id},
+            genre_name   => $f->test_genre1->{genre_name},
+            display      => $f->test_genre1->{display},
+            priority     => $f->test_genre1->{priority},
+            regist_staff => $f->test_genre1->{regist_staff},
+            regist_datetime => $f->test_genre1->{regist_datetime},
+        },
+        '正しいミクコレ情報が返却されているか'
+    );
+};
+done_testing;

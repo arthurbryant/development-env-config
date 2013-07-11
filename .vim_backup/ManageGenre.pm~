@@ -1,0 +1,233 @@
+package Mixi::Skin::Touch::Controller::Admin::ManageGenre;
+
+use strict;
+use warnings;
+
+use Mixi::Pages;
+use Mixi::Skin::Touch::Admin;
+
+use constant {
+    PER_PAGE => 30,
+    GENRE_NAME_LENGTH_LIMIT => 40,
+};
+
+__PACKAGE__->auth_type(AUTH_UNREQUIRED);
+__PACKAGE__->is_admin(1);
+__PACKAGE__->charset('euc-jp');
+
+__PACKAGE__->initial_params(
+    page     => 1,
+);
+__PACKAGE__->validation_and_warnings(
+    _default => [
+        page => [['POSITIVEINT']                        => 'invalid parameter'],
+        mode => [[IN_ARRAY => qw/show add edit delete/] => 'invalid parameter'],
+        id   => [['UINT']                               => 'invalid parameter'],
+    ],
+    genre_param => [
+        genre_name => [
+            ['NOT_BLANK'] => 'ジャンル名は入力必須項目です。',
+            ['LENGTH',0, GENRE_NAME_LENGTH_LIMIT] => 'ジャンル名は全角'. GENRE_NAME_LENGTH_LIMIT/2 .'文字以内で入力してください。',
+        ],
+        display    => [
+            ['NOT_BLANK']         => 'ステイタスを設定してください。',
+            [IN_ARRAY => qw|y n|] => 'ステイタスの値が不正です。',
+        ],
+        priority   => [
+            ['UINT']              => '優先度は半角数字で入力してください。'
+        ],
+    ],
+    commit => [
+        post_key => [
+            ['NOT_BLANK'] => 'invalid postkey',
+            [POSTKEY => qw/_TIMESTAMP_/] => 'invalid postkey',
+        ]
+    ],
+);
+
+__PACKAGE__->assign(
+    _default   => [\&assign_common],
+    add_error  => [\&assign_common,\&assign_input_data],
+    show       => [\&assign_show],
+    edit_error => [\&assign_show,\&assign_input_data],
+);
+__PACKAGE__->templates(
+    _default   => 'touch/list_genre.tmpl',
+    add_error  => 'touch/list_genre.tmpl',
+    show       => 'touch/show_genre.tmpl',
+    edit_error => 'touch/show_genre.tmpl',
+);
+
+__PACKAGE__->conditions(
+    _prepare => sub {
+        my $self = shift;
+
+        for(keys %{$self->param}){
+            $self->param->{$_} = trim($self->param->{$_});
+        }
+
+        return $self->alert if $self->has_error;
+        $self->stash->{skin_module} = Mixi::Skin::Touch::Admin->new();
+        $self->template->param(%{$self->stash->{skin_module}->get_edit_skin_count()});
+    },
+    -add => sub {
+        my $self = shift;
+
+        if (my $warnings = $self->has_warnings('commit')) {
+            $self->template->add_error($warnings);
+            $self->mode("add_error");
+            return FIXED;
+        }
+
+        if (my $warnings = $self->has_warnings('genre_param')) {
+            $self->template->add_error($warnings);
+            $self->mode("add_error");
+            return FIXED;
+        }
+
+        my $result = $self->stash->{skin_module}->add_genre(
+            genre_name => $self->param->{genre_name},
+            display    => $self->param->{display},
+            priority   => $self->param->{priority},
+        );
+        unless($result){
+            $self->template->add_error({
+                messages => {
+                    info => "入力したジャンル名は既に登録されています。",
+                },
+                order => ['info'],
+            });
+            $self->mode("add_error");
+            return FIXED;
+        }
+
+        return $self->redirect('manage_genre.pl');
+    },
+    -show => sub {
+        my $self = shift;
+        return $self->alert unless defined $self->param->{id};
+
+        $self->stash->{genre} = $self->stash->{skin_module}->get_genre(id => $self->param->{id});
+
+        return $self->alert unless defined $self->stash->{genre};
+        return FIXED;
+    },
+    -edit => sub {
+        my $self = shift;
+
+        if (my $warnings = $self->has_warnings('commit')) {
+            $self->template->add_error($warnings);
+            $self->mode("edit_error");
+            return FIXED;
+        }
+
+        return $self->alert unless defined $self->param->{id};
+        $self->stash->{genre} = $self->stash->{skin_module}->get_genre(id => $self->param->{id});
+        return $self->alert unless defined $self->stash->{genre};
+
+        if (my $warnings = $self->has_warnings('genre_param')) {
+            $self->template->add_error($warnings);
+            $self->mode("edit_error");
+            return FIXED;
+        }
+
+        my $result = $self->stash->{skin_module}->edit_genre(
+            id         => $self->param->{id},
+            genre_name => $self->param->{genre_name},
+            display    => $self->param->{display},
+            priority   => $self->param->{priority},
+        );
+        unless($result){
+            $self->template->add_error({
+                messages => {
+                    info => "入力したジャンル名は既に登録されています。",
+                },
+                order => ['info'],
+            });
+            $self->mode("edit_error");
+            return FIXED;
+        }
+
+        return $self->redirect('manage_genre.pl');
+    },
+    '-delete' => sub {
+        my $self = shift;
+        return $self->alert if $self->has_warnings('commit');
+        return $self->alert unless defined $self->param->{id};
+        $self->stash->{skin_module}->delete_genre(id => $self->param->{id});
+        return $self->redirect('manage_genre.pl');
+    },
+);
+
+sub assign_common {
+    my $self = shift;
+    my $genres = $self->stash->{skin_module}->get_all_genres(
+        offset => ($self->param->{page} - 1) * PER_PAGE,
+        limit  => PER_PAGE + 1,
+    );
+
+    for(@$genres){
+        if($_->{display} eq 'y'){
+            $_->{display_forview} = "公開";
+        }else{
+            $_->{display_forview} = "非公開";
+        }
+    }
+
+    if(scalar @$genres > PER_PAGE){
+        pop @$genres;
+        $self->template->param(
+            has_next_page => 1,
+        );
+    }
+
+    $self->template->param(
+        genres    => $genres,
+        page      => $self->param->{page},
+        page_from => ($self->param->{page} - 1) * PER_PAGE,
+        page_to   => ($self->param->{page} - 1) * PER_PAGE + (scalar @$genres) -1,
+        post_key => $self->post_key->encode([qw/_TIMESTAMP_/]),
+    );
+
+    #default parameter
+    $self->template->param(
+        display  => 'n',
+    );
+}
+
+sub assign_show {
+    my $self = shift;
+
+    #ジャンルが公開中かつ公開中のミクコレと紐づいている場合に注意を喚起するメッセージを表示
+    my $has_skin = $self->stash->{skin_module}->genre_has_skins(
+        genre_id => $self->stash->{genre}->{id},
+    );
+    if($has_skin && $self->stash->{genre}->{display} eq 'y'){
+        $self->template->param(has_skin => 1);
+    }
+
+    $self->template->param(
+        %{ $self->stash->{genre} || {} },
+        post_key => $self->post_key->encode([qw/_TIMESTAMP_/]),
+    );
+}
+
+sub assign_input_data {
+    my $self = shift;
+    $self->template->param(
+        genre_name => $self->param->{genre_name},
+        display    => $self->param->{display},
+        priority   => $self->param->{priority},
+    );
+}
+
+sub trim {
+    my @out = @_;
+    for (@out) {
+        s/^[\s\n]+//;
+        s/[\s\n]+\z//;
+    }
+    return wantarray ? @out : $out[0];
+}
+
+1;

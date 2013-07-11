@@ -1,193 +1,195 @@
 <TMPL_INCLUDE NAME="header.tmpl">
 <TMPL_INCLUDE NAME="leftmenu.tmpl">
 
+<TMPL_VAR EXPR="add_js('jp/mixi/skin/touch/admin/widget/showskinactions.js', 'UTF-8')">
+
 <div id="main_area">
-<h1>¥ß¥¯¥³¥ì¥Ç¥¶¥¤¥ó¾ğÊó»²¾È</h1>
+<h1>ãƒŸã‚¯ã‚³ãƒ¬ãƒ‡ã‚¶ã‚¤ãƒ³æƒ…å ±å‚ç…§</h1>
 <div class="panel">
 <table>
 <tr>
-<th style="text-align:center;" colspan="2">´ğËÜ¾ğÊó</th>
+<th style="text-align:center;" colspan="2">åŸºæœ¬æƒ…å ±</th>
 </tr>
 <tr>
-<td width="300" style="background:#EEE;">¥ß¥¯¥³¥ìID</td>
-<td><TMPL_VAR EXPR="html(id)"></td>
+<td width="300" style="background:#EEE;">ãƒŸã‚¯ã‚³ãƒ¬ID</td>
+<td><TMPL_VAR EXPR="html_escape(id)"></td>
 </tr>
 <tr>
-<td style="background:#EEE;">¥¹¥Æ¥¤¥¿¥¹</td>
-<td><TMPL_VAR EXPR="html(admin_status_text)"></td>
+<td style="background:#EEE;">ã‚¹ãƒ†ã‚¤ã‚¿ã‚¹</td>
+<td><TMPL_VAR EXPR="html_escape(admin_status_text)"></td>
 </tr>
 <tr>
-<td style="background:#EEE;">¥ß¥¯¥³¥ì¼ïÊÌ</td>
-<td><TMPL_VAR EXPR="html(skin_type)"></td>
+<td style="background:#EEE;">ãƒŸã‚¯ã‚³ãƒ¬ç¨®åˆ¥</td>
+<td><TMPL_VAR EXPR="html_escape(skin_type)"></td>
 </tr>
 <tr>
-<td style="background:#EEE;">¥ß¥¯¥³¥ìÌ¾</td>
-<td><TMPL_VAR EXPR="html(name)"></td>
-</tr>
-
-<tr>
-<td style="background:#EEE;">¸ø³«³«»ÏÆü</td>
-<td><TMPL_VAR EXPR="html(open_datetime)"></td>
+<td style="background:#EEE;">ãƒŸã‚¯ã‚³ãƒ¬å</td>
+<td><TMPL_VAR EXPR="html_escape(name)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¸ø³«½ªÎ»Æü</td>
-<td><TMPL_VAR EXPR="html(close_datetime)"></td>
+<td style="background:#EEE;">å…¬é–‹é–‹å§‹æ—¥</td>
+<td><TMPL_VAR EXPR="html_escape(open_datetime)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥á¥â</td>
-<td><TMPL_VAR EXPR="html(memo)"></td>
+<td style="background:#EEE;">å…¬é–‹çµ‚äº†æ—¥</td>
+<td><TMPL_VAR EXPR="html_escape(close_datetime)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥¸¥ã¥ó¥ë</td>
-<td><TMPL_VAR EXPR="html(genre)"></td>
+<td style="background:#EEE;">ãƒ¡ãƒ¢</td>
+<td><TMPL_VAR EXPR="html_escape(memo)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE">¥³¥ó¥Æ¥ó¥ÄID</td>
-<td><TMPL_VAR EXPR="html(contents_id)"></td>
+<td style="background:#EEE;">ã‚¸ãƒ£ãƒ³ãƒ«</td>
+<td><TMPL_VAR EXPR="html_escape(genre)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">ÅĞÏ¿Æü»ş</td>
-<td><TMPL_VAR EXPR="html(regist_datetime)"></td>
+<td style="background:#EEE">ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ID</td>
+<td><TMPL_VAR EXPR="html_escape(contents_id)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">ÅĞÏ¿¼Ô</td>
-<td><TMPL_VAR EXPR="html(regist_staff)"></td>
+<td style="background:#EEE;">ç™»éŒ²æ—¥æ™‚</td>
+<td><TMPL_VAR EXPR="html_escape(regist_datetime)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¹¹¿·Æü»ş</td>
-<td><TMPL_VAR EXPR="html(update_datetime)"></td>
+<td style="background:#EEE;">ç™»éŒ²è€…</td>
+<td><TMPL_VAR EXPR="html_escape(regist_staff)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¹¹¿·¼Ô</td>
-<td><TMPL_VAR EXPR="html(update_staff)"></td>
+<td style="background:#EEE;">æ›´æ–°æ—¥æ™‚</td>
+<td><TMPL_VAR EXPR="html_escape(update_datetime)"></td>
+</tr>
+
+<tr>
+<td style="background:#EEE;">æ›´æ–°è€…</td>
+<td><TMPL_VAR EXPR="html_escape(update_staff)"></td>
 </tr>
 </table>
 
 <table>
 <tr>
-<th style="text-align:center;" colspan="2">¥¹¥¿¥¤¥ë¾ğÊó(ËÜÈÖ´Ä¶­)</th>
-<th style="text-align:center;" colspan="2">¥¹¥¿¥¤¥ë¾ğÊó(¥¹¥Æ¡¼¥¸¥ó¥°´Ä¶­)</th>
+<th style="text-align:center;" colspan="2">ã‚¹ã‚¿ã‚¤ãƒ«æƒ…å ±(æœ¬ç•ªç’°å¢ƒ)</th>
+<th style="text-align:center;" colspan="2">ã‚¹ã‚¿ã‚¤ãƒ«æƒ…å ±(ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ³ã‚°ç’°å¢ƒ)</th>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥Ğ¡¼¥¸¥ç¥ó</td>
-<td><TMPL_VAR EXPR="html(skin_version)"></td>
-<td style="background:#EEE;">¥Ğ¡¼¥¸¥ç¥ó</td>
-<td><TMPL_VAR EXPR="html(skin_version_staging)"></td>
+<td style="background:#EEE;">ãƒãƒ¼ã‚¸ãƒ§ãƒ³</td>
+<td><TMPL_VAR EXPR="html_escape(skin_version)"></td>
+<td style="background:#EEE;">ãƒãƒ¼ã‚¸ãƒ§ãƒ³</td>
+<td><TMPL_VAR EXPR="html_escape(skin_version_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥ß¥¯¥³¥ìÇ¼ÉÊÊªÇÛÃÖ¾ì½ê</td>
-<td><TMPL_VAR EXPR="html(skin_base)"></td>
-<td style="background:#EEE;">¥ß¥¯¥³¥ìÇ¼ÉÊÊªÇÛÃÖ¾ì½ê</td>
-<td><TMPL_VAR EXPR="html(skin_base_staging)"></td>
+<td style="background:#EEE;">ãƒŸã‚¯ã‚³ãƒ¬ç´å“ç‰©é…ç½®å ´æ‰€</td>
+<td><TMPL_VAR EXPR="html_escape(skin_base)"></td>
+<td style="background:#EEE;">ãƒŸã‚¯ã‚³ãƒ¬ç´å“ç‰©é…ç½®å ´æ‰€</td>
+<td><TMPL_VAR EXPR="html_escape(skin_base_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">´ğËÜ¿§¥Ñ¥¿¡¼¥ó</td>
-<td><TMPL_VAR EXPR="html(skin_color_type)"></td>
-<td style="background:#EEE;">´ğËÜ¿§¥Ñ¥¿¡¼¥ó</td>
-<td><TMPL_VAR EXPR="html(skin_color_type_staging)"></td>
+<td style="background:#EEE;">åŸºæœ¬è‰²ãƒ‘ã‚¿ãƒ¼ãƒ³</td>
+<td><TMPL_VAR EXPR="html_escape(skin_color_type)"></td>
+<td style="background:#EEE;">åŸºæœ¬è‰²ãƒ‘ã‚¿ãƒ¼ãƒ³</td>
+<td><TMPL_VAR EXPR="html_escape(skin_color_type_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥Æ¥­¥¹¥È¿§¡Ê´ğËÜ¡Ë</td>
-<td><TMPL_VAR EXPR="html(basic_text_color)"></td>
-<td style="background:#EEE;">¥Æ¥­¥¹¥È¿§¡Ê´ğËÜ¡Ë</td>
-<td><TMPL_VAR EXPR="html(basic_text_color_staging)"></td>
+<td style="background:#EEE;">ãƒ†ã‚­ã‚¹ãƒˆè‰²ï¼ˆåŸºæœ¬ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(basic_text_color)"></td>
+<td style="background:#EEE;">ãƒ†ã‚­ã‚¹ãƒˆè‰²ï¼ˆåŸºæœ¬ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(basic_text_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥Æ¥­¥¹¥È¿§¡Ê¶¯Ä´¡Ë</td>
-<td><TMPL_VAR EXPR="html(strong_text_color)"></td>
-<td style="background:#EEE;">¥Æ¥­¥¹¥È¿§¡Ê¶¯Ä´¡Ë</td>
-<td><TMPL_VAR EXPR="html(strong_text_color_staging)"></td>
+<td style="background:#EEE;">ãƒ†ã‚­ã‚¹ãƒˆè‰²ï¼ˆå¼·èª¿ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(strong_text_color)"></td>
+<td style="background:#EEE;">ãƒ†ã‚­ã‚¹ãƒˆè‰²ï¼ˆå¼·èª¿ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(strong_text_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥Æ¥­¥¹¥È¿§¡Ê°ÆÆâ¡Ë</td>
-<td><TMPL_VAR EXPR="html(weak_text_color)"></td>
-<td style="background:#EEE;">¥Æ¥­¥¹¥È¿§¡Ê°ÆÆâ¡Ë</td>
-<td><TMPL_VAR EXPR="html(weak_text_color_staging)"></td>
+<td style="background:#EEE;">ãƒ†ã‚­ã‚¹ãƒˆè‰²ï¼ˆæ¡ˆå†…ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(weak_text_color)"></td>
+<td style="background:#EEE;">ãƒ†ã‚­ã‚¹ãƒˆè‰²ï¼ˆæ¡ˆå†…ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(weak_text_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥Æ¥­¥¹¥È¿§¡ÊÊäÂ­¡Ë</td>
-<td><TMPL_VAR EXPR="html(weaker_text_color)"></td>
-<td style="background:#EEE;">¥Æ¥­¥¹¥È¿§¡ÊÊäÂ­¡Ë</td>
-<td><TMPL_VAR EXPR="html(weaker_text_color_staging)"></td>
+<td style="background:#EEE;">ãƒ†ã‚­ã‚¹ãƒˆè‰²ï¼ˆè£œè¶³ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(weaker_text_color)"></td>
+<td style="background:#EEE;">ãƒ†ã‚­ã‚¹ãƒˆè‰²ï¼ˆè£œè¶³ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(weaker_text_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥ê¥ó¥¯¿§¡Ê´ğËÜ¡Ë</td>
-<td><TMPL_VAR EXPR="html(link_color)"></td>
-<td style="background:#EEE;">¥ê¥ó¥¯¿§¡Ê´ğËÜ¡Ë</td>
-<td><TMPL_VAR EXPR="html(link_color_staging)"></td>
+<td style="background:#EEE;">ãƒªãƒ³ã‚¯è‰²ï¼ˆåŸºæœ¬ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(link_color)"></td>
+<td style="background:#EEE;">ãƒªãƒ³ã‚¯è‰²ï¼ˆåŸºæœ¬ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(link_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥ê¥ó¥¯¿§¡Ê¶¯Ä´¡Ë</td>
-<td><TMPL_VAR EXPR="html(strong_link_color)"></td>
-<td style="background:#EEE;">¥ê¥ó¥¯¿§¡Ê¶¯Ä´¡Ë</td>
-<td><TMPL_VAR EXPR="html(strong_link_color_staging)"></td>
+<td style="background:#EEE;">ãƒªãƒ³ã‚¯è‰²ï¼ˆå¼·èª¿ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(strong_link_color)"></td>
+<td style="background:#EEE;">ãƒªãƒ³ã‚¯è‰²ï¼ˆå¼·èª¿ï¼‰</td>
+<td><TMPL_VAR EXPR="html_escape(strong_link_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥Ü¡¼¥À¡¼¿§</td>
-<td><TMPL_VAR EXPR="html(border_color)"></td>
-<td style="background:#EEE;">¥Ü¡¼¥À¡¼¿§</td>
-<td><TMPL_VAR EXPR="html(border_color_staging)"></td>
+<td style="background:#EEE;">ãƒœãƒ¼ãƒ€ãƒ¼è‰²</td>
+<td><TMPL_VAR EXPR="html_escape(border_color)"></td>
+<td style="background:#EEE;">ãƒœãƒ¼ãƒ€ãƒ¼è‰²</td>
+<td><TMPL_VAR EXPR="html_escape(border_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">Á´ÂÎÇØ·Ê¿§</td>
-<td><TMPL_VAR EXPR="html(background_color)"></td>
-<td style="background:#EEE;">Á´ÂÎÇØ·Ê¿§</td>
-<td><TMPL_VAR EXPR="html(background_color_staging)"></td>
+<td style="background:#EEE;">å…¨ä½“èƒŒæ™¯è‰²</td>
+<td><TMPL_VAR EXPR="html_escape(background_color)"></td>
+<td style="background:#EEE;">å…¨ä½“èƒŒæ™¯è‰²</td>
+<td><TMPL_VAR EXPR="html_escape(background_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">ÉôÊ¬ÇØ·Ê¿§</td>
-<td><TMPL_VAR EXPR="html(partial_background_color)"></td>
-<td style="background:#EEE;">ÉôÊ¬ÇØ·Ê¿§</td>
-<td><TMPL_VAR EXPR="html(partial_background_color_staging)"></td>
+<td style="background:#EEE;">éƒ¨åˆ†èƒŒæ™¯è‰²</td>
+<td><TMPL_VAR EXPR="html_escape(partial_background_color)"></td>
+<td style="background:#EEE;">éƒ¨åˆ†èƒŒæ™¯è‰²</td>
+<td><TMPL_VAR EXPR="html_escape(partial_background_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥³¥ó¥Æ¥ó¥Ä¥¿¥¤¥È¥ëÇØ·Ê¿§</td>
-<td><TMPL_VAR EXPR="html(contents_title_bg_color)"></td>
-<td style="background:#EEE;">¥³¥ó¥Æ¥ó¥Ä¥¿¥¤¥È¥ëÇØ·Ê¿§</td>
-<td><TMPL_VAR EXPR="html(contents_title_bg_color_staging)"></td>
+<td style="background:#EEE;">ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒˆãƒ«èƒŒæ™¯è‰²</td>
+<td><TMPL_VAR EXPR="html_escape(contents_title_bg_color)"></td>
+<td style="background:#EEE;">ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¿ã‚¤ãƒˆãƒ«èƒŒæ™¯è‰²</td>
+<td><TMPL_VAR EXPR="html_escape(contents_title_bg_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEE;">¥°¥é¥Ç¡¼¥·¥ç¥ó</td>
-<td><TMPL_VAR EXPR="html(gradation_start_color)"> ¢ª <TMPL_VAR EXPR="html(gradation_end_color)"></td>
-<td style="background:#EEE;">¥°¥é¥Ç¡¼¥·¥ç¥ó</td>
-<td><TMPL_VAR EXPR="html(gradation_start_color_staging)"> ¢ª <TMPL_VAR EXPR="html(gradation_end_color_staging)"></td>
+<td style="background:#EEE;">ã‚°ãƒ©ãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³</td>
+<td><TMPL_VAR EXPR="html_escape(gradation_start_color)"> â†’ <TMPL_VAR EXPR="html_escape(gradation_end_color)"></td>
+<td style="background:#EEE;">ã‚°ãƒ©ãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³</td>
+<td><TMPL_VAR EXPR="html_escape(gradation_start_color_staging)"> â†’ <TMPL_VAR EXPR="html_escape(gradation_end_color_staging)"></td>
 </tr>
 
 <tr>
-<td style="background:#EEEEEE">¥µ¥à¥Í¥¤¥ë²èÁü</td>
+<td style="background:#EEEEEE">ã‚µãƒ ãƒã‚¤ãƒ«ç”»åƒ</td>
 <td>
-    <img id="JS_mikukoreImg" src="https://img.mixi.net<TMPL_VAR NAME="skin_base">/thumb_small.jpg" />
+    <img id="JS_mikukoreImg" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base)'>/thumb_small.jpg" />
     <script type="text/javascript" language="javascript" charset="utf-8">
         $('JS_mikukoreImg').onerror = function(){
             this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
         };
     </script>
 </td>
-<td style="background:#EEEEEE">¥µ¥à¥Í¥¤¥ë²èÁü</td>
+<td style="background:#EEEEEE">ã‚µãƒ ãƒã‚¤ãƒ«ç”»åƒ</td>
 <td>
-    <img id="JS_mikukoreImgStaging" src="https://img.mixi.net<TMPL_VAR NAME="skin_base_staging">/thumb_small.jpg" />
+    <img id="JS_mikukoreImgStaging" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base_staging)'>/thumb_small.jpg" />
     <script type="text/javascript" language="javascript" charset="utf-8">
         $('JS_mikukoreImgStaging').onerror = function(){
             this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
@@ -197,212 +199,212 @@
 </tr>
 
 <tr>
-<td style="background:#EEEEEE">home_header²èÁü</td>
+<td style="background:#EEEEEE">Homeãƒ˜ãƒƒãƒ€ãƒ¼ç”»åƒ</td>
 <td>
 <TMPL_IF name="has_home_header_img">
-<img id="home_header_img" src="https://img.mixi.net<TMPL_VAR NAME='skin_base'>/home_header_img.jpg" />
+<img id="home_header_img" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base)'>/home_header_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('home_header_img').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
-<td style="background:#EEEEEE">home_header²èÁü</td>
+<td style="background:#EEEEEE">Homeãƒ˜ãƒƒãƒ€ãƒ¼ç”»åƒ</td>
 <td>
-<TMPL_IF name="has_home_header_img">
-<img id="home_header_img_staging" src="https://img.mixi.net<TMPL_VAR NAME='skin_base_staging'>/home_header_img.jpg" />
+<TMPL_IF name="has_home_header_img_staging">
+<img id="home_header_img_staging" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base_staging)'>/home_header_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('home_header_img_staging').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEEEEE">prof_header²èÁü</td>
+<td style="background:#EEEEEE">ãƒ—ãƒ­ãƒ•ãƒ˜ãƒƒãƒ€ãƒ¼ç”»åƒ</td>
 <td>
 <TMPL_IF name="has_prof_header_img">
-<img id="prof_header_img" src="https://img.mixi.net<TMPL_VAR NAME='skin_base'>/prof_header_img.jpg" />
+<img id="prof_header_img" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base)'>/prof_header_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('prof_header_img').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
-<td style="background:#EEEEEE">prof_header²èÁü</td>
+<td style="background:#EEEEEE">ãƒ—ãƒ­ãƒ•ãƒ˜ãƒƒãƒ€ãƒ¼ç”»åƒ</td>
 <td>
-<TMPL_IF name="has_prof_header_img">
-<img id="prof_header_img_staging" src="https://img.mixi.net<TMPL_VAR NAME='skin_base_staging'>/prof_header_img.jpg" />
+<TMPL_IF name="has_prof_header_img_staging">
+<img id="prof_header_img_staging" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base_staging)'>/prof_header_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('prof_header_img_staging').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEEEEE">bg²èÁü</td>
+<td style="background:#EEEEEE">å…¨ä½“èƒŒæ™¯ç”»åƒ</td>
 <td>
 <TMPL_IF name="has_bg_img">
-<img id="bg_img" src="https://img.mixi.net<TMPL_VAR NAME='skin_base'>/bg_img.jpg" />
+<img id="bg_img" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base)'>/bg_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('bg_img').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
-<td style="background:#EEEEEE">bg²èÁü</td>
+<td style="background:#EEEEEE">å…¨ä½“èƒŒæ™¯ç”»åƒ</td>
 <td>
-<TMPL_IF name="has_bg_img">
-<img id="bg_img_staging" src="https://img.mixi.net<TMPL_VAR NAME='skin_base_staging'>/bg_img.jpg" />
+<TMPL_IF name="has_bg_img_staging">
+<img id="bg_img_staging" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base_staging)'>/bg_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('bg_img_staging').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEEEEE">border²èÁü</td>
+<td style="background:#EEEEEE">ã‚¿ã‚¤ãƒˆãƒ«èƒŒæ™¯ç”»åƒ</td>
 <td>
 <TMPL_IF name="has_contents_title_img">
-<img id="border_img" src="https://img.mixi.net<TMPL_VAR NAME='skin_base'>/border_img.jpg" />
+<img id="border_img" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base)'>/border_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('border_img').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
-<td style="background:#EEEEEE">border²èÁü</td>
+<td style="background:#EEEEEE">ã‚¿ã‚¤ãƒˆãƒ«èƒŒæ™¯ç”»åƒ</td>
 <td>
-<TMPL_IF name="has_contents_title_img">
-<img id="border_img_staging" src="https://img.mixi.net<TMPL_VAR NAME='skin_base_staging'>/border_img.jpg" />
+<TMPL_IF name="has_contents_title_img_staging">
+<img id="border_img_staging" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base_staging)'>/border_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('border_img_staging').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEEEEE">logo_jack²èÁü</td>
+<td style="background:#EEEEEE">ãƒ­ã‚´ã‚¸ãƒ£ãƒƒã‚¯ç”»åƒ</td>
 <td>
 <TMPL_IF name="has_logo_jack">
-<img id="logo_jack" src="https://img.mixi.net<TMPL_VAR NAME='skin_base'>/logo_jack.jpg" />
+<img id="logo_jack" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base)'>/logo_jack.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('logo_jack').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
-<td style="background:#EEEEEE">logo_jack²èÁü</td>
+<td style="background:#EEEEEE">ãƒ­ã‚´ã‚¸ãƒ£ãƒƒã‚¯ç”»åƒ</td>
 <td>
-<TMPL_IF name="has_logo_jack">
-<img id="logo_jack_staging" src="https://img.mixi.net<TMPL_VAR NAME='skin_base_staging'>/logo_jack.jpg" />
+<TMPL_IF name="has_logo_jack_staging">
+<img id="logo_jack_staging" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base_staging)'>/logo_jack.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('logo_jack_staging').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEEEEE">banner²èÁü</td>
+<td style="background:#EEEEEE">ãƒãƒŠãƒ¼ç”»åƒ</td>
 <td>
 <TMPL_IF name="has_banner_img">
-<img id="banner_img" src="https://img.mixi.net<TMPL_VAR NAME='skin_base'>/banner_img.jpg" />
+<img id="banner_img" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base)'>/banner_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('banner_img').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
-<td style="background:#EEEEEE">banner²èÁü</td>
+<td style="background:#EEEEEE">ãƒãƒŠãƒ¼ç”»åƒ</td>
 <td>
-<TMPL_IF name="has_banner_img">
-<img id="banner_img_staging" src="https://img.mixi.net<TMPL_VAR NAME='skin_base_staging'>/banner_img.jpg" />
+<TMPL_IF name="has_banner_img_staging">
+<img id="banner_img_staging" src="https://img.mixi.net<TMPL_VAR EXPR='html_escape(skin_base_staging)'>/banner_img.jpg" />
 <script type="text/javascript" language="javascript" charset="utf-8">
 $('banner_img_staging').onerror = function(){
     this.src = 'https://img.mixi.net/img/basic/common/noimage_member76.gif';
 };
 </script>
 <TMPL_ELSE>
-¤Ê¤·
+ãªã—
 </TMPL_IF>
 </td>
 </tr>
 
 <tr>
-<td style="background:#EEEEEE">¥ê¥ó¥¯Àè</td>
-<td><TMPL_VAR EXPR="html(banner_link)"></td>
-<td style="background:#EEEEEE">¥ê¥ó¥¯Àè</td>
-<td><TMPL_VAR EXPR="html(banner_link_staging)"></td>
+<td style="background:#EEEEEE">ãƒªãƒ³ã‚¯å…ˆ</td>
+<td><TMPL_VAR EXPR="html_escape(banner_link)"></td>
+<td style="background:#EEEEEE">ãƒªãƒ³ã‚¯å…ˆ</td>
+<td><TMPL_VAR EXPR="html_escape(banner_link_staging)"></td>
 </tr>
 </table>
 </div>
 
-<h3>Áàºî</h3>
+<h3>æ“ä½œ</h3>
 <div class="panel">
-<ul>
-<li><a href="manage_skin.pl?mode=edit&id=<TMPL_VAR EXPR="form(id)">">¥ß¥¯¥³¥ì¤òÊÑ¹¹¤¹¤ë</a></li>
-<li><a href="manage_skin.pl?mode=set_user_skin&id=<TMPL_VAR EXPR="form(id)">">¥¹¥Æ¡¼¥¸¥ó¥°³ÎÇ§¥æ¡¼¥¶¤òÅĞÏ¿¤¹¤ë</a></li>
+<ul class="widget" data-widget-namespace="jp.mixi.skin.touch.admin.widget.showskinactions">
+<li><a href="manage_skin.pl?mode=edit&id=<TMPL_VAR EXPR="html_escape(id)">">ãƒŸã‚¯ã‚³ãƒ¬ã‚’å¤‰æ›´ã™ã‚‹</a></li>
+<li><a href="manage_skin.pl?mode=set_user_skin&id=<TMPL_VAR EXPR="html_escape(id)">">ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ³ã‚°ç¢ºèªãƒ¦ãƒ¼ã‚¶ã‚’ç™»éŒ²ã™ã‚‹</a></li>
 
 <TMPL_IF EXPR="admin_status eq '0'"><!-- REGISTRATION -->
-<li><a id="set_to_open" href="manage_skin.pl?mode=set_to_open&id=<TMPL_VAR EXPR="form(id)">&post_key=<TMPL_VAR EXPR="form(post_key)">">¥¹¥Æ¡¼¥¸¥ó¥°³ÎÇ§´°Î»ÅĞÏ¿¤¹¤ë</a></li>
+<li><a class="JS_set_to_open" href="manage_skin.pl?mode=set_to_open&id=<TMPL_VAR EXPR="html_escape(id)">&post_key=<TMPL_VAR EXPR="html_escape(post_key)">">ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ³ã‚°ç¢ºèªå®Œäº†ç™»éŒ²ã™ã‚‹</a></li>
 </TMPL_IF>
 <TMPL_IF EXPR="admin_status eq '1'">
-<li><a id="set_to_registration" href="manage_skin.pl?mode=set_to_registration&id=<TMPL_VAR EXPR="form(id)">&post_key=<TMPL_VAR EXPR="form(post_key)">">¥¹¥Æ¡¼¥¸¥ó¥°³ÎÇ§´°Î»¤ò¼è¤ê¾Ã¤¹</a></li>
+<li><a class="JS_set_to_registration" href="manage_skin.pl?mode=set_to_registration&id=<TMPL_VAR EXPR="html_escape(id)">&post_key=<TMPL_VAR EXPR="html_escape(post_key)">">ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ³ã‚°ç¢ºèªå®Œäº†ã‚’å–ã‚Šæ¶ˆã™</a></li>
 </TMPL_IF>
 
 <TMPL_IF EXPR="admin_status eq '2' || admin_status eq '4' || admin_status eq '6' "><!-- CAN_OPEN_EDIT -->
-<li><a id="commit_edit_data" href="manage_skin.pl?mode=set_to_open_and_commit_edit_data&id=<TMPL_VAR EXPR="form(id)">&post_key=<TMPL_VAR EXPR="form(post_key)">">¥ß¥¯¥³¥ì¥Ç¥¶¥¤¥ó¤ÎÊÑ¹¹¤òËÜÈÖ¤ËÈ¿±Ç¤¹¤ë</a></li>
-<li><a id="cancel_edit_data" href="manage_skin.pl?mode=cancel_open_edit&id=<TMPL_VAR EXPR="form(id)">&post_key=<TMPL_VAR EXPR="form(post_key)">">¥ß¥¯¥³¥ì¥Ç¥¶¥¤¥ó¤ÎÊÑ¹¹¤ò¥­¥ã¥ó¥»¥ë¤¹¤ë</a></li>
+<li><a class="JS_commit_edit_data" href="manage_skin.pl?mode=set_to_open_and_commit_edit_data&id=<TMPL_VAR EXPR="html_escape(id)">&post_key=<TMPL_VAR EXPR="html_escape(post_key)">">ãƒŸã‚¯ã‚³ãƒ¬ãƒ‡ã‚¶ã‚¤ãƒ³ã®å¤‰æ›´ã‚’æœ¬ç•ªã«åæ˜ ã™ã‚‹</a></li>
+<li><a class="JS_cancel_edit_data" href="manage_skin.pl?mode=cancel_open_edit&id=<TMPL_VAR EXPR="html_escape(id)">&post_key=<TMPL_VAR EXPR="html_escape(post_key)">">ãƒŸã‚¯ã‚³ãƒ¬ãƒ‡ã‚¶ã‚¤ãƒ³ã®å¤‰æ›´ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹</a></li>
 </TMPL_IF>
 
 <TMPL_IF EXPR="admin_status eq '1' || admin_status eq '3' || admin_status eq '5' "><!-- CAN_OPEN-->
-<li><a id="set_to_open_edit" href="manage_skin.pl?mode=set_to_open_edit&id=<TMPL_VAR EXPR="form(id)">&post_key=<TMPL_VAR EXPR="form(post_key)">">¥ß¥¯¥³¥ì¥Ç¥¶¥¤¥ó¤ÎÊÑ¹¹¤ò³«»Ï¤¹¤ë</a></li>
+<li><a class="JS_set_to_open_edit" href="manage_skin.pl?mode=set_to_open_edit&id=<TMPL_VAR EXPR="html_escape(id)">&post_key=<TMPL_VAR EXPR="html_escape(post_key)">">ãƒŸã‚¯ã‚³ãƒ¬ãƒ‡ã‚¶ã‚¤ãƒ³ã®å¤‰æ›´ã‚’é–‹å§‹ã™ã‚‹</a></li>
 </TMPL_IF>
 
 <TMPL_IF EXPR="admin_status eq '7'"><!-- FORCE_CLOSED -->
-<li><a id="reopen_force_closed" href="manage_skin.pl?mode=set_to_open&id=<TMPL_VAR EXPR="form(id)">&post_key=<TMPL_VAR EXPR="form(post_key)">">¶¯À©½ªÎ»¤òºÆ³«¤¹¤ë</a></li>
+<li><a class="JS_reopen_force_closed" href="manage_skin.pl?mode=set_to_open&id=<TMPL_VAR EXPR="html_escape(id)">&post_key=<TMPL_VAR EXPR="html_escape(post_key)">">å¼·åˆ¶çµ‚äº†ã‚’å†é–‹ã™ã‚‹</a></li>
 </TMPL_IF>
 
 </ul>
@@ -411,66 +413,7 @@ $('banner_img_staging').onerror = function(){
 
 </div>
 
-<script type="text/javascript" language="javascript" charset="utf-8">
-// <![CDATA[
 
-if($('set_to_open')){
-    $('set_to_open').observe('click',function(evt){
-        var message = '¥¹¥Æ¡¼¥¸¥ó¥°¤Ç¤Î³ÎÇ§¤ÏÂç¾æÉ×¤Ç¤¹¤«¡©ÌäÂê¤¬¤Ê¤±¤ì¤Ğ¡ÖOK¡×¥Ü¥¿¥ó¤ò²¡¤·¤Æ¤¯¤À¤µ¤¤¡£';
-        if(!window.confirm(message)){
-            evt.stop();
-        }
-    });
-}
 
-if($('set_to_open_edit')){
-    $('set_to_open_edit').observe('click',function(evt){
-        var message = '¥ß¥¯¥³¥ì¥Ç¥¶¥¤¥ó¤Î½¤Àµ¤òÅĞÏ¿¤·¤Ş¤¹¡£½¤ÀµÅĞÏ¿¸å¡¢»ØÄê¤µ¤ì¤¿¾ì½ê¤Ëcss¥Õ¥¡¥¤¥ë¤òÇÛÃÖ¤·¤Æ¤¯¤À¤µ¤¤¡£';
-        if(!window.confirm(message)){
-            evt.stop();
-        }
-    });
-}
-
-if($('set_to_registration')){
-    $('set_to_registration').observe('click',function(evt){
-        var message = '¥¹¥Æ¡¼¥¸¥ó¥°³ÎÇ§´°Î»¤ò¼è¤ê¾Ã¤·¤Ş¤¹¤«¡©ÌäÂê¤Ê¤±¤ì¤Ğ¡ÖOK¡×¥Ü¥¿¥ó¤ò²¡¤·¤Æ¤¯¤À¤µ¤¤¡£¥¹¥Æ¥¤¥¿¥¹¤¬¡ÖÅĞÏ¿Ãæ¡×¤ËÌá¤ê¤Ş¤¹¡£';
-        if(!window.confirm(message)){ 
-            evt.stop();
-        }
-    });
-}
-
-if($('commit_edit_data')){
-    $('commit_edit_data').observe('click',function(evt){
-        var message = '¥¹¥Æ¡¼¥¸¥ó¥°¤Ç¤Î³ÎÇ§¤ÏÂç¾æÉ×¤Ç¤¹¤«¡©ÌäÂê¤Ê¤±¤ì¤Ğ¡ÖOK¡×¥Ü¥¿¥ó¤ò²¡¤·¤Æ¤¯¤À¤µ¤¤¡£½¤ÀµÃæ¤Î¥Ç¡¼¥¿¤¬ËÜÈÖ¤ËÈ¿±Ç¤µ¤ì¤Ş¤¹¡£';
-        if(!window.confirm(message)){ 
-            evt.stop();
-        }
-    });
-}
-
-if($('cancel_edit_data')){
-    $('cancel_edit_data').observe('click',function(evt){
-        var message = '¸ø³«¤·¤Ê¤¬¤éÊÔ½¸¤·¤Æ¤¤¤ë¥Ç¡¼¥¿¤ò¥­¥ã¥ó¥»¥ë¤·¤Ş¤¹¡£ÌäÂê¤Ê¤±¤ì¤Ğ¡ÖOK¡×¥Ü¥¿¥ó¤ò²¡¤·¤Æ¤¯¤À¤µ¤¤¡£';
-        if(!window.confirm(message)){ 
-            evt.stop();
-        }
-    });
-}
-
-if($('reopen_force_closed')){
-    $('reopen_force_closed').observe('click',function(evt){
-        var message = '°Ê²¼¤Î¥ß¥¯¥³¥ì¶¯À©½ªÎ»¤òºÆ³«¤·¤Ş¤¹¤«¡©ºÆ³«¤·¤¿¾ì¹ç¡¢¸ø³«³«»ÏÆü»ş¤¬Í­¸ú¤Ç¤¢¤ì¤Ğ¡¢Â¨ºÂ¤Ë¥æ¡¼¥¶¡¼¤ØÄó¶¡¤µ¤ì¤Ş¤¹¡£';
-        if(!window.confirm(message)){ 
-            evt.stop();
-        }
-    });
-}
-
-// ]]>
-</script>
-                
 
 <TMPL_INCLUDE NAME="footer.tmpl">
-

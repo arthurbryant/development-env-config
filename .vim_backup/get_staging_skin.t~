@@ -1,0 +1,28 @@
+use strict;
+use warnings;
+use Test::More;
+use Test::MockObject::Extends;
+use Mixi::Test;
+use Mixi::Test::Fixtures -checker => 'strict';
+use Nove::Test::Fixtures::Memcached;
+
+BEGIN {
+    use_ok 'Mixi::Skin::Touch';
+}
+use Mixi::Skin::Config;
+
+my $s = Mixi::Skin::Touch->get_instance();
+
+subtest 'get_staging_skin' => sub {
+    my $mock_obj = Test::MockObject::Extends->new($s);
+    $mock_obj->mock('_get_skin', sub {
+        my ($self, $mock_id) = @_;
+        is($mock_id, 1, '正しいIDを渡す');
+        my $mock_skin = {skin_version => 1};
+        return $mock_skin;
+    });
+    my $id = 1;
+    my $skin = $mock_obj->get_staging_skin($id);
+};
+
+done_testing;

@@ -5,6 +5,11 @@
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
-#	modified:   lib/Mixi/Skin/Touch/Admin.pm
-#	modified:   lib/Mixi/Skin/Touch/DB/Skin.pm
+#	modified:   lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
 #
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	add_explain.sql
+#	explain.txt
+#	review.sql

@@ -1,49 +1,50 @@
 package Mixi::Skin::Touch;
+
 use strict;
 use warnings;
-
 use base qw/
     Class::Accessor::Fast
     Mixi::Sales::Cached
 /;
 
+#::<<other>>
+use Carp qw(croak);
 use Scalar::Util qw/blessed/;
+use Params::Validate;
 use Digest::HMAC_SHA1 qw(
     hmac_sha1_hex
 );
-use Carp qw(croak);
-use Params::Validate qw(:types);
 
+#::<<core library>>
 use Nove::Core::Datetime qw/
     in_duration
 /;
 
+#::<<common library>>
 use Mixi::Log;
 use Mixi::Convert;
-use Nove::Core::Service::Backdoor;
 use Mixi::Exception qw(throw);
 
+#::<<application>>
 use Mixi::Skin::Config;
-use Mixi::Skin::Touch::Style;
 use Mixi::Skin::Touch::DB;
+use Mixi::Skin::Touch::Style;
 
-use Mixi::ProfileActivity;
-use Mixi::ProfileActivity::Config;
+#::CONSTANTS
+use constant VALIDATION_RULE => {
+    SKIN_ID   => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+    GENRE_ID  => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+    MEMBER_ID => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+};
 
 __PACKAGE__->mk_accessors(qw/
     skin_type
 /);
 
-use constant VALIDATION_RULE => {
-    SKIN_ID   => { type => SCALAR, regex => qr/^\d+\z/  },
-    GENRE_ID  => { type => SCALAR, regex => qr/^\d+\z/  },
-    MEMBER_ID => { type => SCALAR, regex => qr/^\d+\z/  },
-};
-
 sub get_skin_css {
     my $class = shift;
     my %args = Params::Validate::validate(@_,{
-        skin    => { type => HASHREF | UNDEF },
+        skin    => { type => Params::Validate::HASHREF | Params::Validate::UNDEF },
     });
 
     my $styler = Mixi::Skin::Touch::Style->new(
@@ -89,14 +90,24 @@ sub get_public_genres {
     return $self->db(-Skin=> { role => 's' })->select_public_genres();
 }
 
-sub get_public_skins {
+sub get_public_skins_by_skin_type {
     my $self = shift;
     my %args = Params::Validate::validate(@_,{
-        offset => { type => SCALAR | UNDEF,optional => 1 },
-        count  => { type => SCALAR | UNDEF,optional => 1 },
+        offset => {
+            type => Params::Validate::SCALAR | Params::Validate::UNDEF,
+            optional => 1
+        },
+        count  => {
+            type => Params::Validate::SCALAR | Params::Validate::UNDEF,
+            optional => 1
+        },
     });
 
-    my $skins = $self->db(-Skin=> { role => 's' })->select_public_skins((%args,skin_type => $self->skin_type));
+    my $skins = $self->db(
+        -Skin=> { role => 's' })->select_public_skins_by_skin_type(
+            %args,
+            skin_type => $self->skin_type
+        );
     for(@{$skins || [] }){
         $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
     }
@@ -108,15 +119,76 @@ sub get_public_skins {
     };
 }
 
-sub get_public_skins_by_genre {
+sub get_all_public_skins {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_,{
+        offset => {
+            type => Params::Validate::SCALAR | Params::Validate::UNDEF,
+            optional => 1
+        },
+        count  => {
+            type => Params::Validate::SCALAR | Params::Validate::UNDEF,
+            optional => 1
+        },
+    });
+    my $skins = $self->db(-Skin=> { role => 's' })->select_all_public_skins(%args);
+    for(@{$skins || [] }){
+        $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
+    }
+    my $count = @$skins;
+
+    return {
+        count => $count,
+        rows  => $skins,
+    };
+}
+
+sub get_all_public_skins_by_genre {
     my $self = shift;
     my %args = Params::Validate::validate(@_,{
         genre_id => VALIDATION_RULE->{GENRE_ID},
-        offset   => { type => SCALAR | UNDEF,optional => 1 },
-        count    => { type => SCALAR | UNDEF,optional => 1 },
+        offset   => {
+            type => Params::Validate::SCALAR | Params::Validate::UNDEF,
+            optional => 1
+        },
+        count    => {
+            type => Params::Validate::SCALAR | Params::Validate::UNDEF,
+            optional => 1
+        },
     });
 
-    my $skins = $self->db(-Skin=> { role => 's' })->select_public_skins_by_genre((%args,skin_type => $self->skin_type));
+    my $skins = $self->db(-Skin=> { role => 's' })->select_all_public_skins_by_genre(
+        %args,
+    );
+    for(@{$skins || [] }){
+        $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
+    }
+    my $count = $self->db(-Skin=> { role => 's' })->select_found_rows();
+
+    return {
+        count => $count,
+        rows  => $skins,
+    };
+}
+
+sub get_public_skins_by_genre_and_skin_type {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_,{
+        genre_id => VALIDATION_RULE->{GENRE_ID},
+        offset   => {
+            type => Params::Validate::SCALAR | Params::Validate::UNDEF,
+            optional => 1
+        },
+        count    => {
+            type => Params::Validate::SCALAR | Params::Validate::UNDEF,
+            optional => 1
+        },
+    });
+
+    my $skins = $self->db(-Skin=> { role => 's' })->select_public_skins_by_genre_and_skin_type(
+        %args,
+        skin_type => $self->skin_type
+    );
     for(@{$skins || [] }){
         $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
     }
@@ -137,7 +209,11 @@ sub get_skin {
     my $id = $args{id};
     return unless $id;
 
-    return $self->get_staging_skin if $self->is_skin_test_environment;
+    if ($self->is_skin_test_environment) {
+        my $skin = $self->get_staging_skin($id);
+        return unless $self->can_use_skin($skin);
+        return $skin;
+    }
 
     ## @KEY: touch_skin:skin_data:<SKIN_ID> TOUCHスキン情報
     my $skin = $self->call_cached(-Format => {
@@ -190,7 +266,7 @@ sub set_member_skin {
 }
 
 sub delete_member_skin {
-    my ($self, %args) = @_;
+    my $self = shift;
     my %args = Params::Validate::validate(@_, { member_id => VALIDATION_RULE->{MEMBER_ID} });
 
     my $db = $self->db(-Skin=> { role => 'm' });

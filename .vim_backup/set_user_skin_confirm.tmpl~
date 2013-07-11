@@ -1,0 +1,56 @@
+<TMPL_INCLUDE NAME="header.tmpl">
+<TMPL_INCLUDE NAME="leftmenu.tmpl">
+
+<div id="main_area">
+<h1>ステージング確認ユーザ登録(確認)</h1>
+<p>
+ID:<TMPL_VAR EXPR="html_escape(member_id)">のユーザにこのミクコレを強制的に設定します。<br />
+このユーザで間違いありませんか？<br />
+<a target="_blank" href="http://mixi.jp/show_profile.pl?id=<TMPL_VAR EXPR="html_escape(member_id)">" ><TMPL_VAR NAME="url_mixi_prefix">/show_profile.pl?id=<TMPL_VAR EXPR="html_escape(member_id)"> </a>
+</p>
+
+<form action="manage_skin.pl" method="POST">
+<input type="hidden" name="mode" value="set_user_skin_commit" />
+<input type="hidden" name="id" value="<TMPL_VAR EXPR="html_escape(id)">" />
+<input type="hidden" name="member_id" value="<TMPL_VAR EXPR="html_escape(member_id)">" />
+<input type="hidden" name="post_key" value="<TMPL_VAR EXPR="html_escape(post_key)">" />
+<input type="submit" value="登録する" /></p>
+</form>
+
+<h3>ミクコレ情報</h3>
+
+<table>
+<tr>
+<td>ステイタス</td>
+<td><TMPL_VAR EXPR="html_escape(admin_status_text)"></td>
+</tr>
+<tr>
+<td>ミクコレID</td>
+<td><TMPL_VAR EXPR="html_escape(id)"></td>
+</tr>
+<tr>
+<td>ミクコレ種別</td>
+<td><TMPL_VAR EXPR="html_escape(skin_type)"></td>
+</tr>
+<tr>
+<td>ミクコレ名</td>
+<td><TMPL_VAR EXPR="html_escape(name)"></td>
+</tr>
+<tr>
+<td>公開開始日</td>
+<td><TMPL_VAR EXPR="html_escape(open_datetime)"></td>
+</tr>
+<tr>
+<td>公開終了日</td>
+<td><TMPL_VAR EXPR="html_escape(close_datetime)"></td>
+</tr>
+<tr>
+<td>ミクコレ色パターン</td>
+<td><TMPL_VAR EXPR="html_escape(skin_color_type)"></td>
+</tr>
+</table>
+
+</div>
+
+<TMPL_INCLUDE NAME="footer.tmpl">
+

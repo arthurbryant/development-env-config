@@ -1,23 +1,20 @@
-pick 0cc1eea Add create_css_file to Style.pm (WIP)
-pick abf4ed2 Add sample css tmpl file
-pick c04a529 Load css (WIP)
-pick 0b34ef5 delete dumper
-pick 0f116e2 Show staging skin data (WIP)
-pick 12a52c7 show staging data in show_skin.pl
-pick bd07830 Apply staging skin info to production
-pick be38c9c refactoring: change attr to prop
-pick 5206035 Add tieup footer banner to home.pl (WIP)
-pick b4de5c0 Add tieup footer banner to home.pl (WIP2)
-pick 1faeb4a Add test for M::Skin::Touch (WIP)
-pick 64d85ea Fix validation in get_skin
-pick 090bcf9 BugFix: remove unused code
-pick c655ecd Add test for M::Skin::Touch (WIP2)
-pick 1476472 Add test for set_member_skin
-pick 7d885a7 Fix set_member_skin test
-pick 1ef6969 Add delete_member_skin test
-pick 7fd48e9 Add Mixi::Skin::Touch::Admin test
+pick b917360 delete unused db table and query
+pick db4256e delete whitespace
+pick 6802fcf Fix Mixi::Skin::Touch test and fixture yaml
+pick 3c4afe8 Refactor: move admin controllers to *.pm files
+pick b920d67 delete unused report and count code
+pick 07a86df IEでmodeがうまく渡らない問題に対応
+pick 7a7d2f2 Escapeをhtml_escapeに統一
+pick 952656a 画像周りの項目名、プルダウンの並び順を修正
+pick 3ccbf35 add test for get_public_skins_by_genre_and_skin_type (WIP)
+pick 7124224 add test for get_genre
+pick 901908c Add get_skin and get_staging_skin test, bugfix
+pick c18b80a Fix admin_status and admin list_skin page title
+pick c3fbaf6 Delete unused select_public_skins_for_test
+pick 08507fc Add index to touchskin_skin_data
+pick 1e76d8b UUV対策
 
-# Rebase 8bea68b..7fd48e9 onto 8bea68b
+# Rebase cc24718..1e76d8b onto cc24718
 #
 # Commands:
 #  p, pick = use commit

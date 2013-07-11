@@ -1,7 +1,7 @@
 # alias for git 
 alias ga="git add"
 alias gm="git commit"
-alias gb="git branch"
+alias gb="git branch -v"
 alias gd="git diff --color"
 alias gl="git log --graph"
 alias gps="git push"

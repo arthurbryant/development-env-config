@@ -7,9 +7,9 @@ use Mixi::Skin::Config;
 use Date::Calc qw(Today_and_Now);
 
 use Nove::Core::Datetime;
-use Mixi::Log;
-use Mixi::Convert;
-use Params::Validate qw(:types);
+use Nove::Core::Log;
+use Nove::Core::Settings::Converter;
+use Params::Validate qw(SCALAR UNDEF ARRAYREF HASHREF);
 
 sub get_skins {
     my $self = shift;
@@ -31,11 +31,11 @@ sub get_skins {
 
     my $skins;
     if(defined $args{genre_id} && $args{genre_id} ne ""){
-        $skins = $self->db(-Skin=> { role => 's' })->select_skins_by_genre(%args,(
+        $skins = $self->db({ role => 's' })->select_skins_by_genre(%args,(
             skin_type => $self->skin_type,
         ));
     }else{
-        $skins = $self->db(-Skin=> { role => 's' })->select_skins(%args,(
+        $skins = $self->db({ role => 's' })->select_skins(%args,(
             skin_type => $self->skin_type,
         ));
     }
@@ -61,11 +61,6 @@ sub get_skins {
     }
 
     return $skins;
-}
-
-sub get_all_skins {
-    my $self = shift;
-    return $self->db(-Skin=> { role => 's' })->select_all_skins();
 }
 
 sub add_skin {
@@ -101,7 +96,7 @@ sub add_skin {
     });
 
     my $insert_id;
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->begin();
     eval {
         $insert_id = $db->insert_skin(
@@ -122,7 +117,7 @@ sub add_skin {
     };
     if($@){
         $db->rollback();
-        Mixi::Log->new->warn("faild to add_skin [$@]");
+        Nove::Core::Log->warn("faild to add_skin [$@]");
         return;
     }
     $db->end();
@@ -141,7 +136,7 @@ sub _update_skin_data {
         $args{$_} ||= $skin->{$_};
     }
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->begin();
     eval{
         if ($update_style_info) {
@@ -159,7 +154,7 @@ sub _update_skin_data {
     };
     if($@){
         $db->rollback();
-        Mixi::Log->new->warn("faild to edit_skin [$@]");
+        Nove::Core::Log->warn("faild to edit_skin [$@]");
         return;
     }
     $db->end();
@@ -222,8 +217,8 @@ sub edit_skin_staging {
     my %style_info = $self->_validate_skin_style_info(%{$args{style_info}});
 
     my $skin = $basic_info{skin};
-    my $engine = Mixi::Convert->new('YAML');
-    my $yaml = $engine->encode({%style_info, skin_version => $skin->{skin_version} + 1});
+    my $engine = Nove::Core::Settings::Converter->new('YAML');
+    my $yaml = $engine->encode({%style_info, skin_version => ($skin->{skin_version} + 1)});
 
     $self->_update_skin_data(%basic_info, temporary_skin_info => $yaml);
 }
@@ -300,12 +295,12 @@ sub set_to_open_edit {
     my $skin = $args{skin};
     return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN};
 
-    my $engine  = Mixi::Convert->new('YAML');
+    my $engine  = Nove::Core::Settings::Converter->new('YAML');
     my $yaml = $engine->encode({
         skin_version    => $skin->{skin_version} + 1,
     });
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->update_skin_status_and_temp(
         id                  => $skin->{id},
         status              => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT},
@@ -323,7 +318,7 @@ sub set_to_open {
     my $skin = $args{skin};
     return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{REGISTRATION} || $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{FORCE_CLOSED};
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->update_skin_status_and_temp(
         id                  => $skin->{id},
         status              => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
@@ -345,7 +340,7 @@ sub set_to_open_and_commit_edit_data {
     my $editing_skin = $self->_get_editing_skin_data($skin->{temporary_skin_info});
     return unless $editing_skin && $editing_skin->{skin_version};
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
 
     $db->update_skin(
         %{$skin},
@@ -364,7 +359,7 @@ sub cancel_open_edit {
     my $skin = $args{skin};
     return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT};
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->update_skin_status_and_temp(
         id                  => $skin->{id},
         status              => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
@@ -381,7 +376,7 @@ sub set_to_force_close {
 
     my $skin = $args{skin};
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->begin();
     eval {
         $db->update_skin_status_and_temp(
@@ -394,7 +389,7 @@ sub set_to_force_close {
     };
     if($@){
         $db->rollback();
-        Mixi::Log->new->warn("faild to set_to_force_close [$@]");
+        Nove::Core::Log->warn("faild to set_to_force_close [$@]");
         return;
     }
     $db->end();
@@ -408,7 +403,7 @@ sub set_to_delete {
 
     my $skin = $args{skin};
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->begin();
     eval {
         $db->update_skin_status_and_temp(
@@ -421,7 +416,7 @@ sub set_to_delete {
     };
     if($@){
         $db->rollback();
-        Mixi::Log->new->warn("faild to set_to_delete [$@]");
+        Nove::Core::Log->warn("faild to set_to_delete [$@]");
         return;
     }
     $db->end();
@@ -436,7 +431,7 @@ sub set_to_registration {
     my $skin = $args{skin};
     return unless $skin->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN};
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->update_skin_status_and_temp(
         id                  => $skin->{id},
         status              => Mixi::Skin::Config::SKIN_STATUS_DB->{REGISTRATION},
@@ -454,7 +449,7 @@ sub get_all_genres {
         limit  => { type => SCALAR | UNDEF,optional => 1 },
     });
 
-    my $db = $self->db(-Skin=> { role => 's' });
+    my $db = $self->db({ role => 's' });
     if($args{limit} && $args{offset}){
         return $db->select_all_genres_with_limit(%args);
     }else{
@@ -466,7 +461,7 @@ sub genre_has_skins {
     my $self = shift;
     my %args = Params::Validate::validate(@_, { genre_id => { type => SCALAR } });
 
-    my $db = $self->db(-Skin=> { role => 's' });
+    my $db = $self->db({ role => 's' });
     return $db->select_public_skins_count_by_genre(
         genre_id  => $args{genre_id}
     ); 
@@ -482,7 +477,7 @@ sub add_genre {
     #同名のジャンル登録を禁止
     return if $self->get_genre_by_name(genre_name => $args{genre_name}); 
 
-    return $self->db(-Skin=> { role => 'm' })->insert_genre(
+    return $self->db({ role => 'm' })->insert_genre(
         %args,
         regist_datetime => sprintf("%04d-%02d-%02d %02d:%02d:%02d",Date::Calc::Today_and_Now()),
         regist_staff    => _admin_user_name(),
@@ -492,7 +487,7 @@ sub add_genre {
 sub get_genre_by_name {
     my $self = shift;
     my %args = Params::Validate::validate(@_, { genre_name => { type => SCALAR } });
-    return $self->db(-Skin=> { role => 's' })->select_genre_by_name(%args);
+    return $self->db({ role => 's' })->select_genre_by_name(%args);
 }
 
 sub edit_genre {
@@ -508,14 +503,14 @@ sub edit_genre {
     my $genre = $self->get_genre_by_name(genre_name => $args{genre_name}); 
     return if $genre && $genre->{id} != $args{id};
 
-    return $self->db(-Skin=> { role => 'm' })->update_genre(%args);
+    return $self->db({ role => 'm' })->update_genre(%args);
 }
 
 sub delete_genre {
     my $self = shift;
     my %args = Params::Validate::validate(@_, { id => { type => SCALAR } });
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->begin();
     eval {
         $db->delete_genre(%args);
@@ -527,80 +522,6 @@ sub delete_genre {
     }
     $db->end();
     return 1;
-}
-
-sub get_skin_use_count {
-    my $self = shift;
-    my %args = Params::Validate::validate(@_, { date => { type => SCALAR } });
-    return $self->db(-Skin=> { role => 's' })->select_skin_use_count(%args);
-}
-
-sub get_skin_use_count_by_skin {
-    my $self = shift;
-    my %args = Params::Validate::validate(@_, {
-        skin_id => { type => SCALAR },
-        start   => { type => SCALAR },
-        end     => { type => SCALAR },
-        offset  => { type => SCALAR },
-        limit   => { type => SCALAR },
-    });
-    return $self->db(-Skin=> { role => 's' })->select_skin_use_count_by_skin(%args);
-}
-
-sub count_skin_members {
-    my $self = shift;
-    return $self->db(-Skin=> { role => 's' })->count_skin_members();
-}
-
-sub set_skin_use_count {
-    my $self = shift;
-    my %args = Params::Validate::validate(@_, {
-        skin_id   => { type => SCALAR },
-        date      => { type => SCALAR },
-        use_count => { type => SCALAR },
-    });
-    return $self->db(-Skin=> { role => 'm' })->insert_skin_use_count(%args);
-}
-
-sub get_skin_log {
-    my $self = shift;
-    my %args = Params::Validate::validate(@_, {
-        skin_id => { type => SCALAR },
-        start   => { type => SCALAR },
-        end     => { type => SCALAR },
-    });
-    return $self->db(-Skin=> { role => 's' })->select_skin_log(%args);
-}
-
-sub get_skin_log_by_member_id {
-    my $self = shift;
-    my %args = Params::Validate::validate(@_, {
-        member_id => { type => SCALAR },
-        datetime  => { type => SCALAR },
-    });
-    return $self->db(-Skin=> { role => 's' })->select_skin_log_by_member_id(%args);
-}
-
-sub get_skin_monthly_report {
-    my $self = shift;
-    my %args = Params::Validate::validate(@_, {
-        skin_id => { type => SCALAR },
-        date    => { type => SCALAR },
-    });
-    return $self->db(-Skin=> { role => 's' })->select_skin_monthly_report(%args);
-}
-
-sub set_skin_monthly_report {
-    my $self = shift;
-    my %args = Params::Validate::validate(@_, {
-        skin_id     => { type => SCALAR },
-        date        => { type => SCALAR },
-        script_data => { type => SCALAR },
-        count       => { type => SCALAR },
-        uu_count    => { type => SCALAR },
-        avg_date    => { type => SCALAR },
-    });
-    return $self->db(-Skin => { role => 'm' })->insert_skin_monthly_report(%args);
 }
 
 #管理ツールでは全てのステイタスのスキンが利用可
@@ -625,7 +546,7 @@ sub set_member_skin {
 
     my $new_skin = $args{skin};
 
-    my $db = $self->db(-Skin=> { role => 'm' });
+    my $db = $self->db({ role => 'm' });
     $db->insert_member_skin_relation(
         member_id => $args{member_id},
         skin_id   => $new_skin->{id},
@@ -636,7 +557,7 @@ sub set_member_skin {
 
 sub _set_admin_skin_info {
     my ($self,$skin) = @_;
-    my $db = $self->db(-Skin=> { role => 's' });
+    my $db = $self->db({ role => 's' });
     my $genres = $db->select_genre_by_skin_id(
         skin_id => $skin->{id},
     );
@@ -689,14 +610,8 @@ sub _get_skin_admin_status {
 
 sub get_edit_skin_count {
     my $self = shift;
-    my %result;
-    my $skins = $self->get_skins(admin_status => 2);
-    $result{waiting_to_open_edit_count} = scalar @{$skins};
-    $skins = $self->get_skins(admin_status => 4);
-    $result{open_edit_count} = scalar @{$skins};
-    $skins = $self->get_skins(admin_status => 6);
-    $result{closed_edit_count} = scalar @{$skins};
-    return \%result;
+
+    $self->db({ role => 's' })->count_edit_skins_per_admin_status();
 }
 
 sub get_editing_skin_data {
