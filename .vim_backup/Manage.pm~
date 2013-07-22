@@ -1,761 +1,219 @@
-package Mixi::Skin::Touch::Controller::Admin::Manage;
+package Mixi::Skin::Touch::Controller::Manage;
 
 use strict;
 use warnings;
+use utf8;
 
-use Date::Calc qw(
-    Today
-    Today_and_Now
-    check_date
-    check_time
-    Mktime
-);
 
-use List::MoreUtils;
+#::<<common library>>
+use Mixi::String qw/
+    count_time
+/;
 
+#::<<service>>
+use Mixi::Service::Procedure::InternalGateway;
+
+#::<<framework>>
 use Mixi::Pages;
-use Mixi::Skin::Touch::Admin;
-use Mixi::Skin::Config;
+use Mixi::Config qw/URL_MIXI_PREFIX/;
 
+#::<<application>>
+use Mixi::Skin::Touch;
+use Mixi::Skin::Config;
+use Mixi::Skin::Touch::Purchase;
+
+#::BAD-DEPENDENCIES
+use Mixi::LastLogin;
+use Mixi::Member::ProfileImage::MemberSingle;
+
+=encoding utf-8
+
+=head1 NAME
+
+ Mixi::Skin::Touch::Controller::Manage - touchç‰ˆãƒŸã‚¯ã‚³ãƒ¬ storeãƒŸã‚¯ã‚³ãƒ¬æ¤œç´¢
+
+=head1 DESCRIPTION
+
+  ãƒŸã‚¯ã‚³ãƒ¬ store å„ãƒŸã‚¯ã‚³ãƒ¬è©³ç´°ç”»é¢
+
+=cut
+
+#::CONSTANTS
 use constant {
-    PER_PAGE                => 30,
-    GENRE_NAME_LENGTH_LIMIT => 40,
-    SKIN_NAME_LIMIT         => 40,
-    SKIN_COLOR_LIMIT        => 255,
-    BANNER_LINK_LIMIT       => 255,
+    TITLE  => 'ãƒŸã‚¯ã‚³ãƒ¬æ¤œç´¢',
+    PARAMS => {
+        SERVICE              => 'basic_internal',
+        SUB_SERVICE_ID       => 103,
+        SUB_SERVICE_OWNER_ID => 'mixi',
+        SELLER_ID            => 'mixi',
+        USER_ORDER_ID        => 'dummy',
+        FINISH_URL           => 'http://mixi.jp',
+        ITEM_TYPE            => 'digital_item',
+        PUCHASE_TYPE         => 'mixi',
+        IS_SANDBOX           => 1,
+        DEVICE               => 'touch',
+        AUTO_SETTLEMENT      => 0,
+        IGNORE_AUTHORIZATION => 1,
+        AMOUNT               => 100, #æœ‰æ–™ãƒŸã‚¯ã‚³ãƒ¬ã¯100å††ã®ã¿ãªã®ã§ã“ã“ã«å®šç¾©
+        COUNT                => 1,   #è¤‡æ•°è³¼å…¥ä¸å¯ãªã®ã§ã“ã“ã§å®šç¾©
+    },
 };
 
-__PACKAGE__->auth_type(AUTH_UNREQUIRED);
-__PACKAGE__->is_admin(1);
-__PACKAGE__->charset('euc-jp');
-__PACKAGE__->initial_params(
-    has_bg_img     => 0,
-    has_banner_img => 0,
-    banner_link    => '',
-);
+__PACKAGE__->use_perlstring(1);
+__PACKAGE__->auth_type(AUTH_REQUIRED);
+__PACKAGE__->template_type([qw/user::touch user::pcsite /]);
 
 __PACKAGE__->validation_and_warnings(
-    _default => [
-        mode => [[IN_ARRAY => qw/
-            show add edit delete add_confirm add_cancel add_commit edit_confirm edit_cancel edit_commit
-            set_to_open_edit cancel_open_edit set_to_open set_to_open_and_commit_edit_data
-            set_to_delete set_to_force_close set_user_skin set_user_skin_confirm set_user_skin_commit set_to_registration/] => 'invalid parameter'],
-        id => [['UINT'] => 'invalid parameter' ],
-        genres => [
-            ['CUSTOM',sub {
-                my ($validator, $data) = @_;
-                my $self = $validator->options->{self};
-                my @genres;
-                if(ref $data eq 'ARRAY'){
-                    @genres = grep { /\d/ } @$data;
-                }else{
-                    @genres = grep { /\d/ } split / /,$data;
-                }
-                $self->param->{genres} = \@genres;
-            }] => 'invalid parameter',
+    '_default' => [
+        id => [
+            'NOT_BLANK' => '',
+            'UINT'      => '',
+        ],
+        mode => [
+            ['IN_ARRAY', qw/main purchase/] => '',
         ],
     ],
-    skin_param => [
-        skin_type => [
-            ['NOT_BLANK']
-                => '¥ß¥¯¥³¥ì¼ïÊÌ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡£',
-            [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE()}]
-                => '¥ß¥¯¥³¥ì¼ïÊÌ¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-        ],
-        name => [
-            ['NOT_BLANK']
-                => '¥ß¥¯¥³¥ìÌ¾¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['LENGTH', 0, SKIN_NAME_LIMIT()]
-                => '¥ß¥¯¥³¥ìÌ¾¤ÏÁ´³Ñ' . (SKIN_NAME_LIMIT() / 2) .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        open_datetime => [
-            ['NOT_BLANK']
-                => '¸ø³«³«»ÏÆü»þ¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            [REGEX => qr/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\z/]
-                => '¸ø³«³«»ÏÆü»þ¤Ï YYYY-MM-DD hh:mm:ss ¤Î¥Õ¥©¡¼¥Þ¥Ã¥È¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['CUSTOM',sub {
-                my ($validator, $data) = @_;
-                my $self = $validator->options->{self};
-                my @datetime = $data =~ /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})\z/;
-                $self->stash->{parsed_open_datetime} = \@datetime;
-                return check_date($datetime[0],$datetime[1],$datetime[2]) && check_time($datetime[3],$datetime[4],$datetime[5]) && ($datetime[0] >= 1970);
-            }] => '¸ø³«³«»ÏÆü»þ¤ËÆþÎÏ¤µ¤ì¤¿ÆüÉÕ¤ÏÉÔÀµ¤Ç¤¹¡£',
-        ],
-        close_datetime => [
-            ['NOT_BLANK']
-                => '¸ø³«½ªÎ»Æü»þ¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            [REGEX => qr/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\z/]
-                => '¸ø³«½ªÎ»Æü»þ¤Ï YYYY-MM-DD hh:mm:ss ¤Î¥Õ¥©¡¼¥Þ¥Ã¥È¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['CUSTOM',sub {
-                my ($validator, $data) = @_;
-                my $self = $validator->options->{self};
-                my @datetime = $data =~ /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})\z/;
-                $self->stash->{parsed_close_datetime} = \@datetime;
-                return check_date($datetime[0],$datetime[1],$datetime[2]) && check_time($datetime[3],$datetime[4],$datetime[5]) && ($datetime[0] >= 1970);
-            }] => '¸ø³«½ªÎ»Æü»þ¤ËÆþÎÏ¤µ¤ì¤¿ÆüÉÕ¤ÏÉÔÀµ¤Ç¤¹¡£',
-        ],
-        memo => [
-            ['LENGTH', 0, Mixi::Skin::Config::SKIN_MEMO_LIMIT()]
-                => '¥á¥â¤ÏÁ´³Ñ' . (Mixi::Skin::Config::SKIN_MEMO_LIMIT()/2) .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        contents_id => [
-            ['ASCII'] => '¥³¥ó¥Æ¥ó¥ÄID¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, Mixi::Skin::Config::CONTENT_ID_LENGTH_LIMIT()]
-                => '¥³¥ó¥Æ¥ó¥ÄID¤Ï' . Mixi::Skin::Config::CONTENT_ID_LENGTH_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-    ],
-    skin_style_param => [
-        skin_color_type => [
-            ['NOT_BLANK']
-                => '¥ß¥¯¥³¥ì¿§¥Ñ¥¿¡¼¥ó¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡£',
-            [IN_ARRAY => keys %{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR()}]
-                => '¥ß¥¯¥³¥ì¿§¥Ñ¥¿¡¼¥ó¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-        ],
-        basic_text_color => [
-            ['NOT_BLANK']
-                => '¥Æ¥­¥¹¥È¿§¡Ê´ðËÜ¡Ë¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥Æ¥­¥¹¥È¿§¡Ê´ðËÜ¡Ë¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥Æ¥­¥¹¥È¿§¡Ê´ðËÜ¡Ë¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        strong_text_color => [
-            ['NOT_BLANK']
-                => '¥Æ¥­¥¹¥È¿§¡Ê¶¯Ä´¡Ë¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥Æ¥­¥¹¥È¿§¡Ê¶¯Ä´¡Ë¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥Æ¥­¥¹¥È¿§¡Ê¶¯Ä´¡Ë¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        weak_text_color => [
-            ['NOT_BLANK']
-                => '¥Æ¥­¥¹¥È¿§¡Ê°ÆÆâ¡Ë¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥Æ¥­¥¹¥È¿§¡Ê°ÆÆâ¡Ë¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥Æ¥­¥¹¥È¿§¡Ê°ÆÆâ¡Ë¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        weaker_text_color => [
-            ['NOT_BLANK']
-                => '¥Æ¥­¥¹¥È¿§¡ÊÊäÂ­¡Ë¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥Æ¥­¥¹¥È¿§¡ÊÊäÂ­¡Ë¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥Æ¥­¥¹¥È¿§¡ÊÊäÂ­¡Ë¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        link_color => [
-            ['NOT_BLANK']
-                => '¥ê¥ó¥¯¿§¡Ê´ðËÜ¡Ë¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥ê¥ó¥¯¿§¡Ê´ðËÜ¡Ë¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥ê¥ó¥¯¿§¡Ê´ðËÜ¡Ë¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        strong_link_color => [
-            ['NOT_BLANK']
-                => '¥ê¥ó¥¯¿§¡Ê¶¯Ä´¡Ë¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥ê¥ó¥¯¿§¡Ê¶¯Ä´¡Ë¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥ê¥ó¥¯¿§¡Ê¶¯Ä´¡Ë¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        border_color => [
-            ['NOT_BLANK']
-                => '¥Ü¡¼¥À¡¼¿§¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥Ü¡¼¥À¡¼¿§¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥Ü¡¼¥À¡¼¿§¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        background_color => [
-            ['NOT_BLANK']
-                => 'Á´ÂÎÇØ·Ê¿§¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => 'Á´ÂÎÇØ·Ê¿§¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'Á´ÂÎÇØ·Ê¿§¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        partial_background_color => [
-            ['NOT_BLANK']
-                => 'ÉôÊ¬ÇØ·Ê¿§¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => 'ÉôÊ¬ÇØ·Ê¿§¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => 'ÉôÊ¬ÇØ·Ê¿§¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        contents_title_bg_color => [
-            ['NOT_BLANK']
-                => '¥³¥ó¥Æ¥ó¥Ä¥¿¥¤¥È¥ëÇØ·Ê¿§¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥³¥ó¥Æ¥ó¥Ä¥¿¥¤¥È¥ëÇØ·Ê¿§¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥³¥ó¥Æ¥ó¥Ä¥¿¥¤¥È¥ëÇØ·Ê¿§¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        gradation_start_color => [
-            ['NOT_BLANK']
-                => '¥°¥é¥Ç¡¼¥·¥ç¥ó³«»Ï¿§¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥°¥é¥Ç¡¼¥·¥ç¥ó³«»Ï¿§¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥°¥é¥Ç¡¼¥·¥ç¥ó³«»Ï¿§¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        gradation_end_color => [
-            ['NOT_BLANK']
-                => '¥°¥é¥Ç¡¼¥·¥ç¥ó½ªÎ»¿§¤ÏÆþÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['ASCII'] => '¥°¥é¥Ç¡¼¥·¥ç¥ó½ªÎ»¿§¤ÏÈ¾³Ñ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            ['LENGTH', 0, SKIN_COLOR_LIMIT()]
-                => '¥°¥é¥Ç¡¼¥·¥ç¥ó½ªÎ»¿§¤Ï' . SKIN_COLOR_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-        has_home_header_img => [
-            [IN_ARRAY => (0, 1)] => 'Home¥Ø¥Ã¥À¡¼²èÁü¤ÎÃÍ¤¬ÉÔÀµ¤Ç¤¹¡£',
-        ],
-        has_prof_header_img => [
-            [IN_ARRAY => (0, 1)] => '¥×¥í¥Õ¥Ø¥Ã¥À¡¼²èÁü¤ÎÃÍ¤¬ÉÔÀµ¤Ç¤¹¡£',
-        ],
-        has_bg_img => [
-            [IN_ARRAY => (0, 1)] => 'Á´ÂÎÇØ·Ê²èÁü¤ÎÃÍ¤¬ÉÔÀµ¤Ç¤¹¡£',
-        ],
-        has_contents_title_img => [
-            [IN_ARRAY => (0, 1)] => '¥¿¥¤¥È¥ëÇØ·Ê²èÁü¤ÎÃÍ¤¬ÉÔÀµ¤Ç¤¹¡£',
-        ],
-        has_logo_jack_img => [
-            [IN_ARRAY => (0, 1)] => '¥í¥´¥¸¥ã¥Ã¥¯²èÁü¤ÎÃÍ¤¬ÉÔÀµ¤Ç¤¹¡£',
-        ],
-        has_banner_img => [
-            [IN_ARRAY => (0, 1)] => '¥Ð¥Ê¡¼²èÁü¤ÎÃÍ¤¬ÉÔÀµ¤Ç¤¹¡£',
-        ],
-        banner_link => [
-            ['HTTP_URL'] => '¥ê¥ó¥¯Àè¤ÎURL¤¬ÉÔÀµ¤Ç¤¹¡£',
-            ['LENGTH', 0, BANNER_LINK_LIMIT()]
-                => '¥ê¥ó¥¯Àè¤Ï' . BANNER_LINK_LIMIT() .'Ê¸»ú°ÊÆâ¤ÇÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
-        ],
-    ],
-    set_user_skin => [
-        member_id  => [
-            ['NOT_BLANK'] => "¥æ¡¼¥¶ID¤òÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£",
-            ['UINT']      => "¥æ¡¼¥¶ID¤ÎÃÍ¤¬ÉÔÀµ¤Ç¤¹¡£",
-        ],
-    ],
-    commit => [
-        post_key => [
-            ['NOT_BLANK'] => 'invalid postkey',
-            [POSTKEY => qw/_TIMESTAMP_/] => 'invalid postkey',
-        ]
-    ],
-);
-
-__PACKAGE__->assign(
-    show                  => [\&assign_show],
-    edit                  => [\&assign_edit,\&assign_common_form_data,],
-    edit_error            => [\&assign_edit,\&assign_common_form_data,\&assign_input_data,],
-    edit_cancel           => [\&assign_edit,\&assign_common_form_data,\&assign_input_data,],
-    edit_confirm          => [\&assign_confirm,],
-    add                   => [\&assign_add,\&assign_common_form_data,],
-    add_error             => [\&assign_add,\&assign_common_form_data,\&assign_input_data,],
-    add_cancel            => [\&assign_add,\&assign_common_form_data,\&assign_input_data,],
-    add_confirm           => [\&assign_confirm,],
-    set_user_skin         => [\&assign_set_user_skin,],
-    set_user_skin_confirm => [\&assign_set_user_skin,],
-);
-
-__PACKAGE__->templates(
-    show                  => 'touch/show_skin.tmpl',
-    edit                  => 'touch/edit_skin.tmpl',
-    edit_error            => 'touch/edit_skin.tmpl',
-    edit_cancel           => 'touch/edit_skin.tmpl',
-    edit_confirm          => 'touch/edit_confirm_skin.tmpl',
-    add                   => 'touch/add_skin.tmpl',
-    add_error             => 'touch/add_skin.tmpl',
-    add_cancel            => 'touch/add_skin.tmpl',
-    add_confirm           => 'touch/add_confirm_skin.tmpl',
-    set_user_skin         => 'touch/set_user_skin.tmpl',
-    set_user_skin_confirm => 'touch/set_user_skin_confirm.tmpl',
 );
 
 __PACKAGE__->conditions(
     _prepare => sub {
         my $self = shift;
-        for(keys %{$self->param}){
-            $self->param->{$_} = trim($self->param->{$_});
+        return $self->alert if($self->has_error);
+
+        if(!$self->device->is_touch_screen){
+            return $self->redirect(URL_MIXI_PREFIX . 'list_skin.pl');
         }
-
-        return $self->alert if $self->has_error;
-
-        $self->stash->{skin_module} = Mixi::Skin::Touch::Admin->new();
-
-        if($self->param->{id}){
-            $self->stash->{skin} = $self->stash->{skin_module}->get_skin(id => $self->param->{id});
-        }
-
-        $self->template->param(%{$self->stash->{skin_module}->get_edit_skin_count()});
+        $self->stash->{point} = $self->_get_point;
     },
-    -show => sub {
-        my $self = shift;
-        return $self->alert unless defined $self->stash->{skin};
-        return FIXED;
-    },
-    -edit => sub {
-        my $self = shift;
-        return $self->alert unless defined $self->stash->{skin};
-        $self->set_can_edit_style;
-        return FIXED;
-    },
-    -edit_cancel => sub {
-        my $self = shift;
-        return $self->alert unless defined $self->stash->{skin};
-        $self->set_can_edit_style;
-        return FIXED;
-    },
-    -edit_confirm => sub {
-        my $self = shift;
-        return $self->alert unless defined $self->stash->{skin};
-        $self->set_can_edit_style;
-        my @validation_modes = ('skin_param');
-        if($self->stash->{can_edit_style}) {
-            push @validation_modes, 'skin_style_param';
-        }
-        if (my $warnings = $self->has_warnings(@validation_modes)) {
-            $self->template->add_error($warnings);
-            $self->mode("edit_error");
-            return FIXED;
-        }
 
-        $self->mode("edit_error") if $self->has_datetime_error;
-        return FIXED;
-    },
-    -edit_commit => sub {
+    -main => sub {
         my $self = shift;
+        my $skin_module = Mixi::Skin::Touch->get_instance();
 
-        return $self->alert unless defined $self->stash->{skin};
-        $self->set_can_edit_style;
-        my @validation_modes = qw/commit skin_param/;
-        if($self->stash->{can_edit_style}) {
-            push @validation_modes, 'skin_style_param';
-        }
-        if (my $warnings = $self->has_warnings(@validation_modes)) {
-            $self->template->add_error($warnings);
-            $self->mode("edit_error");
-            return FIXED;
-        }
-
-        my %basic_info = (
-            id                       => $self->stash->{skin}->{id},
-            skin_type                => $self->param->{skin_type},
-            name                     => $self->param->{name},
-            open_datetime            => $self->param->{open_datetime},
-            close_datetime           => $self->param->{close_datetime},
-            memo                     => $self->param->{memo},
-            genres                   => $self->param->{genres} || [],
-            skin                     => $self->stash->{skin},
-            contents_id              => $self->param->{contents_id} || '',
+        my $new_skin = $skin_module->get_skin(
+            id => $self->param->{id}
         );
-        my %style_info = (
-            skin_color_type          => $self->param->{skin_color_type},
-            basic_text_color         => $self->param->{basic_text_color},
-            strong_text_color        => $self->param->{strong_text_color},
-            weak_text_color          => $self->param->{weak_text_color},
-            weaker_text_color        => $self->param->{weaker_text_color},
-            link_color               => $self->param->{link_color},
-            strong_link_color        => $self->param->{strong_link_color},
-            border_color             => $self->param->{border_color},
-            background_color         => $self->param->{background_color},
-            partial_background_color => $self->param->{partial_background_color},
-            contents_title_bg_color  => $self->param->{contents_title_bg_color},
-            gradation_start_color    => $self->param->{gradation_start_color},
-            gradation_end_color      => $self->param->{gradation_end_color},
-            has_home_header_img      => $self->param->{has_home_header_img},
-            has_prof_header_img      => $self->param->{has_prof_header_img},
-            has_bg_img               => $self->param->{has_bg_img},
-            has_contents_title_img   => $self->param->{has_contents_title_img},
-            has_logo_jack            => $self->param->{has_logo_jack},
-            has_banner_img           => $self->param->{has_banner_img},
-            banner_link              => $self->param->{banner_link} || '',
+        return $self->alert unless $new_skin;
+        return $self->alert unless $skin_module->can_set_skin($new_skin);
+
+        my $is_purchased = $self->_is_purchased($self->param->{id});
+
+        $self->stash->{new_skin} = $new_skin;
+        $self->stash->{is_purchased} = $is_purchased;
+
+        return FIXED;
+    },
+
+    -purchase => sub {
+        my $self = shift;
+        my $skin_module = Mixi::Skin::Touch->get_instance();
+
+        my $purchase_skin = $skin_module->get_skin(
+            id => $self->param->{id}
         );
-        #¥ß¥¯¥³¥ì¾ðÊóÊÑ¹¹
-        my $is_updated;
-        if($self->stash->{can_edit_staging_style}) {
-            $is_updated = $self->stash->{skin_module}->edit_skin_staging(
-                basic_info => \%basic_info,
-                style_info => \%style_info,
-            );
-        }
-        elsif($self->stash->{can_edit_style}) {
-            $is_updated = $self->stash->{skin_module}->edit_skin(%basic_info, %style_info);
-        }
-        else {
-            $is_updated = $self->stash->{skin_module}->edit_skin_basic_info(%basic_info);
-        }
-        return $self->alert unless $is_updated;
+        return $self->alert unless $purchase_skin;
+        return $self->alert unless $skin_module->can_set_skin($purchase_skin);
+        return $self->alert unless $purchase_skin->{skin_type};
 
-        return $self->redirect('list_skin.pl',( skin_type => $self->param->{skin_type} ));
+        my $is_purchased = $self->_is_purchased($self->param->{id});
+        return $self->alert if $is_purchased;
+
+        my $result = $self->_create_payment_segment($purchase_skin);
+        return $self->alert unless $result;
+
+        return $self->redirect($result->{result}->{transaction_url});
     },
-    -add => sub {
-        my $self = shift;
-        $self->set_can_edit_style;
-        return FIXED;
-    },
-    -add_cancel => sub {
-        my $self = shift;
-        $self->set_can_edit_style;
-        return FIXED;
-    },
-    -add_confirm => sub {
-        my $self = shift;
-        $self->set_can_edit_style;
-
-        if (my $warnings = $self->has_warnings('skin_param', 'skin_style_param')) {
-            $self->template->add_error($warnings);
-            $self->mode("add_error");
-            return FIXED;
-        }
-
-        $self->mode("add_error") if $self->has_datetime_error;
-        return FIXED;
-    },
-    -add_commit => sub {
-        my $self = shift;
-
-        if (my $warnings = $self->has_warnings('commit', 'skin_param', 'skin_style_param')) {
-            $self->template->add_error($warnings);
-            $self->mode("add_error");
-            return FIXED;
-        }
-
-        #¥ß¥¯¥³¥ì¾ðÊóÊÝÂ¸
-        my $insert_id = $self->stash->{skin_module}->add_skin(
-            skin_color_type          => $self->param->{skin_color_type},
-            skin_type                => $self->param->{skin_type},
-            name                     => $self->param->{name},
-            open_datetime            => $self->param->{open_datetime},
-            close_datetime           => $self->param->{close_datetime},
-            memo                     => $self->param->{memo},
-            genres                   => $self->param->{genres} || [],
-            contents_id              => $self->param->{contents_id} || '',
-            basic_text_color         => $self->param->{basic_text_color},
-            strong_text_color        => $self->param->{strong_text_color},
-            weak_text_color          => $self->param->{weak_text_color},
-            weaker_text_color        => $self->param->{weaker_text_color},
-            link_color               => $self->param->{link_color},
-            strong_link_color        => $self->param->{strong_link_color},
-            border_color             => $self->param->{border_color},
-            background_color         => $self->param->{background_color},
-            partial_background_color => $self->param->{partial_background_color},
-            contents_title_bg_color  => $self->param->{contents_title_bg_color},
-            gradation_start_color    => $self->param->{gradation_start_color},
-            gradation_end_color      => $self->param->{gradation_end_color},
-            has_home_header_img      => $self->param->{has_home_header_img},
-            has_prof_header_img      => $self->param->{has_prof_header_img},
-            has_bg_img               => $self->param->{has_bg_img},
-            has_contents_title_img   => $self->param->{has_contents_title_img},
-            has_logo_jack            => $self->param->{has_logo_jack},
-            has_banner_img           => $self->param->{has_banner_img},
-            banner_link              => $self->param->{banner_link} || '',
-        );
-
-        $self->alert unless $insert_id;
-
-        return $self->redirect('list_skin.pl',( skin_type => $self->param->{skin_type} ));
-    },
-    -set_to_delete => sub {
-        my $self = shift;
-        return $self->alert if $self->has_warnings('commit');
-        return $self->alert unless defined $self->stash->{skin};
-
-        #ºï½ü¤¹¤ë
-        $self->stash->{skin_module}->set_to_delete(skin => $self->stash->{skin});
-
-        return $self->redirect('list_skin.pl',( skin_type => $self->stash->{skin}->{skin_type} ));
-    },
-    -set_to_force_close => sub {
-        my $self = shift;
-        return $self->alert if $self->has_warnings('commit');
-        return $self->alert unless defined $self->stash->{skin};
-
-        #¶¯À©½ªÎ»¤¹¤ë
-        $self->stash->{skin_module}->set_to_force_close(skin => $self->stash->{skin});
-
-        return $self->redirect('list_skin.pl',( skin_type => $self->stash->{skin}->{skin_type} ));
-    },
-    -set_to_open_and_commit_edit_data => sub {
-        my $self = shift;
-        return $self->alert if $self->has_warnings('commit');
-        return $self->alert unless defined $self->stash->{skin};
-
-        #¸ø³«Ãæ(½¤Àµ)¤ÎÊÑ¹¹¤òËÜÈÖ¤ËÈ¿±Ç¤¹¤ë
-        $self->stash->{skin_module}->set_to_open_and_commit_edit_data(skin => $self->stash->{skin});
-
-        return $self->redirect('list_skin.pl',( skin_type => $self->stash->{skin}->{skin_type} ));
-    },
-    -set_to_open => sub {
-        my $self = shift;
-        return $self->alert if $self->has_warnings('commit');
-        return $self->alert unless defined $self->stash->{skin};
-
-        #¥¹¥Æ¡¼¥¸¥ó¥°³ÎÇ§´°Î»ÅÐÏ¿
-        $self->stash->{skin_module}->set_to_open(skin => $self->stash->{skin});
-
-        return $self->redirect('list_skin.pl',( skin_type => $self->stash->{skin}->{skin_type} ));
-    },
-    -cancel_open_edit => sub {
-        my $self = shift;
-        return $self->alert if $self->has_warnings('commit');
-        return $self->alert unless defined $self->stash->{skin};
-
-        #¸ø³«Ãæ¡Ê½¤Àµ¡Ë¤ÎÊÑ¹¹¤ò¥­¥ã¥ó¥»¥ë¤¹¤ë
-        $self->stash->{skin_module}->cancel_open_edit(skin => $self->stash->{skin});
-
-        return $self->redirect('list_skin.pl',( skin_type => $self->stash->{skin}->{skin_type} ));
-    },
-    -set_to_open_edit => sub {
-        my $self = shift;
-        return $self->alert if $self->has_warnings('commit');
-        return $self->alert unless defined $self->stash->{skin};
-
-        #¸ø³«Ãæ¡Ê½¤Àµ¡ËÅÐÏ¿
-        my $skin = $self->stash->{skin};
-        $self->stash->{skin_module}->set_to_open_edit(skin => $skin);
-
-        return $self->redirect('manage_skin.pl',( mode => "edit", id => $skin->{id} ));
-    },
-    -set_to_registration => sub {
-        my $self = shift;
-        return $self->alert if $self->has_warnings('commit');
-        return $self->alert unless defined $self->stash->{skin};
-
-        #ÅÐÏ¿Ãæ¤Î¥¹¥Æ¥¤¥¿¥¹¤ËÌá¤¹(¸ø³«ÂÔ¤Á¾õÂÖ¤Î¤È¤­¤Ë½¤Àµ¤ÎÉ¬Í×¤¬Æþ¤ê¡¢¤Þ¤¿½¤Àµ¤¬´°Î»¤¹¤ë¤Þ¤Ç¸ø³«¤·¤¿¤¯¤Ê¤¤¤È¤­¤Ë)
-        $self->stash->{skin_module}->set_to_registration(skin => $self->stash->{skin});
-
-        return $self->redirect('list_skin.pl',( skin_type => $self->stash->{skin}->{skin_type} ));
-    },
-    -set_user_skin => sub {
-        my $self = shift;
-        return $self->alert unless defined $self->stash->{skin};
-        return FIXED;
-    },
-    -set_user_skin_confirm => sub {
-        my $self = shift;
-        return $self->alert unless defined $self->stash->{skin};
-
-        if (my $warnings = $self->has_warnings('set_user_skin')) {
-            $self->template->add_error($warnings);
-            $self->mode("set_user_skin");
-            return FIXED;
-        }
-
-        my $member_info = $self->_get_member_info($self->param->{member_id});
-
-        unless($member_info){
-            $self->template->add_error({
-                messages => {
-                    member_info => "»ØÄê¤µ¤ì¤¿¥æ¡¼¥¶ID¤Ç¥æ¡¼¥¶¾ðÊó¤ò¼èÆÀ¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿¡£ID¤ò¤â¤¦°ìÅÙ³ÎÇ§¤·¤Æ¤¯¤À¤µ¤¤¡£",
-                },
-                order => ['member_info'],
-            });
-            $self->mode("set_user_skin");
-            return FIXED;
-        }
-
-        return FIXED;
-    },
-    -set_user_skin_commit => sub {
-        my $self = shift;
-
-        if (my $warnings = $self->has_warnings('commit')) {
-            $self->template->add_error($warnings);
-            $self->mode("set_user_skin");
-            return FIXED;
-        }
-
-        return $self->alert unless defined $self->stash->{skin};
-        if (my $warnings = $self->has_warnings('set_user_skin')) {
-            $self->template->add_error($warnings);
-            $self->mode("set_user_skin");
-            return FIXED;
-        }
-
-        #insert member skin relation
-        my $flag = $self->stash->{skin_module}->set_member_skin(
-            skin      => $self->stash->{skin},
-            member_id => $self->param->{member_id},
-        );
-        return $self->alert unless $flag;
-
-        return $self->redirect('list_skin.pl',( skin_type => $self->stash->{skin}->{skin_type} ));
-    }
 );
 
-sub has_datetime_error {
+__PACKAGE__->templates(
+    main => 'skin/manage.tmpl',
+);
+
+__PACKAGE__->assign(
+    main => [\&assign_common, \&assign_main],
+);
+
+
+sub assign_common {
     my $self = shift;
+    $self->template->set_title(TITLE);
+}
 
-    my @result = Delta_DHMS(@{$self->stash->{parsed_open_datetime}},@{$self->stash->{parsed_close_datetime}});
-    return 0 if List::MoreUtils::all {$_ >= 0} @result;
 
-    $self->template->add_error({
-        messages => {
-            info => "¸ø³«³«»ÏÆü»þ < ¸ø³«½ªÎ»Æü»þ¤È¤Ê¤ë¤è¤¦¤ËÆüÉÕ¤òÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£",
+sub assign_main {
+    my $self  = shift;
+    my $point = $self->stash->{point};
+
+    $self->template->param(
+        %{ Mixi::Skin::Config::PREVIEW_DATA() },
+        now_point      => $point->{point},
+        can_view_point => $point->{is_success},
+        is_purchased   => $self->stash->{is_purchased},
+        post_key       => $self->post_key->encode([qw/_MEMBER_ID_ _TIMESTAMP_/]),
+        map {
+            ( "$_" => $self->stash->{new_skin}->{$_} )
+        } keys %{$self->stash->{new_skin}},
+    );
+}
+
+sub _get_point {
+    my $self  = shift;
+    my $point = Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.payment.point.get', {
+            requester_id => $self->member->{id},
+        }
+    );
+    return $point;
+}
+
+sub _is_purchased {
+    my ($self, $skin_id) = @_;
+
+    my $result = Mixi::Skin::Touch::Purchase->select_purchase_info_by_member_id_and_product_id(
+        member_id  => $self->member->{id},
+        product_id => $skin_id,
+    );
+
+    return defined $result ? 1 : 0;
+}
+
+sub _create_payment_segment {
+    my ($self, $skin_info) = @_;
+
+    my $result = Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.payment.paymentsegment.client.ebisu.service.paytype.once.create' => {
+            params => {
+                service              => PARAMS->{SERVICE},
+                sub_service_id       => PARAMS->{SUB_SERVICE_ID},
+                sub_service_owner_id => PARAMS->{SUB_SERVICE_OWNER_ID},
+                seller_id            => PARAMS->{SELLER_ID},
+                extend_params        => {},
+                finish_url           => PARAMS->{FINISH_URL},
+                user_order_id   => PARAMS->{USER_ORDER_ID},
+                usable_methods  => ['mixi_point'],
+                item_type       => PARAMS->{ITEM_TYPE},
+                purchaser_type  => PARAMS->{PUCHASE_TYPE},
+                purchaser_id    => $self->member->{id},
+                is_sandbox      => PARAMS->{IS_SANDBOX},
+                items           => [{
+                    sku_id => $skin_info->{id},
+                    price  => PARAMS->{AMOUNT},
+                    count  => PARAMS->{COUNT},
+                    description => $skin_info->{name},
+                }],
+                title           => $skin_info->{name},
+                amount          => PARAMS->{AMOUNT},
+                device          => PARAMS->{DEVICE},
+                auto_settlement => PARAMS->{AUTO_SETTLEMENT},
+                memo            => '',
+                memo_for_mixi   => '',
+                method_params   => {},
+                ignore_authorization => PARAMS->{IGNORE_AUTHORIZATION},
+                commission_params => (),
+            },
         },
-        order => ['info'],
-    });
-    return 1;
-}
-
-sub assign_common_form_data {
-    my $self = shift;
-    my @all_skin_type = map {
-        {
-            key   => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{$_},
-            value => Mixi::Skin::Config::SKIN_TYPE_LABEL->{$_},
-        }
-    } sort {
-        Mixi::Skin::Config::TOUCH_SKIN_TYPE->{$a} <=> Mixi::Skin::Config::TOUCH_SKIN_TYPE->{$b}
-    } keys %{Mixi::Skin::Config::TOUCH_SKIN_TYPE()};
-
-    my @all_color_type = map {
-        {
-            key   => Mixi::Skin::Config::TOUCH_SKIN_COLOR->{$_},
-            value => Mixi::Skin::Config::SKIN_COLOR_LABEL->{$_},
-        }
-    } sort {
-        Mixi::Skin::Config::TOUCH_SKIN_COLOR->{$a} <=> Mixi::Skin::Config::TOUCH_SKIN_COLOR->{$b}
-    } keys %{Mixi::Skin::Config::TOUCH_SKIN_COLOR()};
-
-    $self->template->param(
-        all_skin_type  => \@all_skin_type,
-        all_color_type => \@all_color_type,
     );
-}
-
-sub assign_show {
-    my $self = shift;
-    my $skin = $self->stash->{skin};
-
-    $self->_assign_production_skin_info();
-    $self->_assign_staging_skin_info();
-}
-
-sub _assign_production_skin_info {
-    my $self = shift;
-    my $skin = $self->stash->{skin};
-
-    $self->template->param(
-        %$skin,
-        genre => join (",",map {
-            $_->{genre_name};
-        } @{$skin->{genres}}),
-        skin_type       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE->{$skin->{skin_type}}},
-        skin_color_type => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$skin->{skin_color_type}}},
-        post_key        => $self->post_key->encode([qw/_TIMESTAMP_/]),
-    );
-}
-
-sub _assign_staging_skin_info {
-    my $self = shift;
-    my $skin = $self->stash->{skin};
-    my $editing_skin = Mixi::Skin::Touch::Admin->get_editing_skin_data($skin->{temporary_skin_info}) || $skin;
-
-    my @staging_keys = map {
-        $_ . '_staging'
-    } keys %$editing_skin;
-
-    my %editing_skin_param;
-    @editing_skin_param{@staging_keys} = values %$editing_skin;
-
-    $self->template->param(
-        %editing_skin_param,
-        skin_color_type_staging => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$editing_skin_param{skin_color_type_staging}}},
-    );
-}
-
-sub assign_add {
-    my $self = shift;
-    $self->_assign_genre_data();
-
-    $self->template->param(
-        open_datetime  => sprintf('%04d-%02d-%02d 15:00:00',Today()),
-        close_datetime => "9999-12-31 23:59:59",
-    );
-}
-
-sub assign_edit {
-    my $self = shift;
-    $self->template->param(
-        %{$self->stash->{skin}},
-        post_key => $self->post_key->encode([qw/_TIMESTAMP_/]),
-    );
-    $self->_assign_genre_data([map { $_->{id} } @{$self->stash->{skin}->{genres}}] || []);
-}
-
-sub assign_confirm {
-    my $self = shift;
-
-    my $genres_forview = join ' ',map {
-        my $genre = $self->stash->{skin_module}->get_genre(id => $_);
-        $genre->{genre_name};
-    } @{$self->param->{genres} || []};
-
-    $self->template->param(
-        %{$self->param},
-        genres                  => join (' ',@{$self->param->{genres} || []}),
-        genres_forview          => $genres_forview,
-        skin_type_forview       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE->{$self->param->{skin_type}}},
-        post_key                => $self->post_key->encode([qw/_TIMESTAMP_/]),
-    );
-
-    $self->template->param(
-        skin_color_type_forview        => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$self->param->{skin_color_type}}},
-        has_home_header_img_forview    => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_home_header_img}},
-        has_prof_header_img_forview    => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_prof_header_img}},
-        has_bg_img_forview             => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_bg_img}},
-        has_contents_title_img_forview => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_contents_title_img}},
-        has_logo_jack_forview          => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_logo_jack}},
-        has_banner_img_forview         => Mixi::Skin::Config::HAS_IMG_LABEL->{$self->param->{has_banner_img}},
-    ) if $self->stash->{can_edit_style};
-}
-
-sub assign_set_user_skin {
-    my $self = shift;
-    $self->template->param(%{ $self->stash->{skin}},(
-        genre => join (",",map {
-            $_->{genre_name};
-        } @{$self->stash->{skin}->{genres}}),
-        skin_type       => Mixi::Skin::Config::SKIN_TYPE_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_TYPE->{$self->stash->{skin}->{skin_type}}},
-        skin_color_type => Mixi::Skin::Config::SKIN_COLOR_LABEL->{Mixi::Skin::Config::REVERSED_TOUCH_SKIN_COLOR->{$self->stash->{skin}->{skin_color_type}}},
-        member_id       => $self->param->{member_id},
-        post_key        => $self->post_key->encode([qw/_TIMESTAMP_/]),
-    ));
-}
-
-sub assign_input_data {
-    my $self = shift;
-
-    my %param = %{$self->param};
-    delete $param{genres};
-    $self->template->param(%param);
-    $self->_assign_genre_data($self->param->{genres} || []);
-}
-
-sub _assign_genre_data {
-    my ($self,$genres) = @_;
-    my $all_genres = $self->stash->{skin_module}->get_all_genres();
-    my %tmp = map { $_ => 1 } @{$genres || []};
-    for(@$all_genres){
-        $_->{selected} = 1 if exists $tmp{$_->{id}};
-    }
-    $self->template->param(
-        all_genres => $all_genres,
-    );
-}
-
-sub set_can_edit_style {
-    my $self = shift;
-
-    my $can_edit_style = !($self->stash->{skin} &&
-        $self->stash->{skin}->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN});
-    $self->stash->{can_edit_style} = $can_edit_style;
-    $self->template->param(can_edit_style => $can_edit_style);
-
-    my $can_edit_staging_style = ($self->stash->{skin} &&
-        $self->stash->{skin}->{status} == Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT});
-    $self->stash->{can_edit_staging_style} = $can_edit_staging_style;
-    $self->template->param(can_edit_staging_style => $can_edit_staging_style);
-}
-
-sub trim {
-    my @out = @_;
-    for (@out) {
-        s/^[\s\n]+//;
-        s/[\s\n]+\z//;
-    }
-    return wantarray ? @out : $out[0];
+    return $result;
 }
 
 1;

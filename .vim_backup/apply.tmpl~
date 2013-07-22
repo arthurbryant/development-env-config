@@ -1,0 +1,84 @@
+<TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/_list.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/home.css')">
+<TMPL_INCLUDE EXPR="common('header.tmpl')">
+<TMPL_INCLUDE EXPR="common('navi.tmpl')">
+
+<STRIP>
+  <!--[mainArea]-->
+  <div id="mainArea">
+    <!--[cpContentsTitle01]-->
+    <div class="cpContentsTitle01">
+      <div class="lContents">
+        <div class="titleMain onesProfile">
+          <h2>ミクコレを<TMPL_IF NAME="is_purchased">購入<TMPL_ELSE>設定</TMPL_IF>する</h2>
+        <!--/titleMain-->
+        </div>
+      <!--/lContents-->
+      </div>
+    <!--/cpContentsTitle01-->
+    </div>
+    <!--/[cpContentsTitle01]-->
+    <!--[gMikukoreStore01]-->
+    <div class="gBaseComponent01 gMikukoreStore01">
+      <div class="cpHeading04">
+        <h3><TMPL_IF NAME="is_purchased">購入<TMPL_ELSE>設定</TMPL_IF>内容</h3>
+      </div>
+      <ul class="gUtilityLink01">
+        <li>
+          <a href="./list_payment_method.pl?mgfrom=top_charge">
+            ポイントをチャージする
+            <div class="cpSimpleTable02">
+              <dl>
+                <dt>残高 ： </dt>
+                <dd>
+                  <img class="cpMonetarySign01 mixipoint" src="<TMPL_VAR NAME="CONFIG_IMG_BASE">/img/smartphone/touch/icon/mixipoint001.gif" alt="mixiポイント" />
+                  <span><TMPL_VAR EXPR="html_escape(now_point)">pt</span>
+                </dd>
+              </dl>
+            <!--/cpSimpleTable02-->
+            </div>
+          </a>
+        </li>
+      <!--/gUtilityLink01-->
+      </ul>
+      <!--[gResponseBox02]-->
+      <div class="gResponseBox02">
+        <div class="contents">
+          <p><TMPL_VAR EXPR="html_escape(name)">のデザインを<TMPL_IF NAME="is_purchased">購入<TMPL_ELSE>設定</TMPL_IF>しました。</p>
+        </div>
+      <!--/gResponseBox02-->
+      </div>
+      <!--/[gResponseBox02]-->
+      <div class="pMixiCheck01">
+        <p class="sub">このミクコレをチェックする</p>
+        <p class="button">
+            <a
+                href="<TMPL_VAR NAME='url_mixi_prefix'>share.pl"
+                class="mixi-check-button"
+                data-button="button-1"
+                data-key="ce877d8d05ff83b518912a1d4a4b5b6e296066a6"
+                data-url="http://mixi.jp/promotion.pl?id=school&page=1">
+                mixiチェック
+            </a>
+            <TMPL_IF EXPR="0"><!-- TODO --></TMPL_IF>
+            <script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script>
+        </p>
+      </div>
+      <div class="lContents">
+        <ul class="gUtilityLink01">
+          <li><a href="#">このカテゴリの別のデザインを探す</a></li>
+          <li><a href="<TMPL_VAR NAME='url_mixi_prefix'>home.pl">ホームに戻る</a></li>
+        </ul>
+      <!--/lContents-->
+      </div>
+    <!--/gMikukoreStore-->
+    </div>
+    <!--/[gMikukoreStore]-->
+    <TMPL_INCLUDE NAME="./include/_skin_menu.tmpl">
+  <!--/mainArea-->
+  </div>
+  <!--/[mainArea]-->
+</STRIP>
+<TMPL_INCLUDE EXPR="common('footer.tmpl')">
+<TMPL_INCLUDE EXPR="common('end.tmpl')">

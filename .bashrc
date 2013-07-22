@@ -41,4 +41,5 @@ export MIXI_ROOT=/home/bkapps/git/pages_practice_2013
 export PATH=/home/bkapps/software/bin:/home/bkapps/install/activepython/bin:$PATH
 export PATH=~/node_modules/.bin:$PATH
 
-source .bashrc-git
+source ~/.bashrc-git
+source ~/.perlrc

@@ -1,0 +1,126 @@
+<TMPL_VAR EXPR="add_js('mixi/touch/mixi.js','UTF-8')">
+<!DOCTYPE html>
+<html class="osIOS browserSafari browserSafari65 pagePromotionJpMixi domainJpMixi">
+<head>
+<link rel="apple-touch-icon-precomposed" href="<TMPL_VAR EXPR=CONFIG_IMG_BASE>/img/smartphone/touch/favicon/x001_prec.png" />
+<!-- header meta values -->
+<meta http-equiv="Content-Type" content="text/html; charset=euc-jp"  />
+<meta name="keywords" content="mixiパーク,ミクシィ,mixipark,スマートフォン,似顔絵"  />
+<meta property="og:title" content="mixiパーク"  />
+<meta property="og:type" content="website"  />
+<meta property="og:url" content="<TMPL_VAR EXPR=url_mixi_prefix>promotion.pl?id=mixi_park"  />
+<meta property="og:image" content="<TMPL_VAR EXPR=CONFIG_IMG_BASE>/img/func_intro/park/img_park001.png"  />
+<meta property="og:site_name" content="mixiパーク"  />
+<meta property="og:locale" content="ja_JP"  />
+<meta name="mixi-check-title" content="mixiパーク"  />
+<meta name="mixi-check-description" content="色々なソーシャルゲームで友達自身がでてきたら面白いですよね？を実現します。そっくりな分身をつかってみんなで遊ぼう。スマートフォン史上最高レベルの3D似顔絵プラットフォーム「mixiパーク」"  />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"  />
+<meta name="application-name" content="mixi"  />
+<meta name="msapplication-starturl" content="/home.pl?from=pin"  />
+<meta name="msapplication-navbutton-color" content="#E0C074"  />
+<meta name="msapplication-window" content="width=100%;height=100%"  />
+<meta name="msapplication-tooltip" content="友人とコミュニケーションを楽しもう！"  />
+<meta name="description" lang="ja" content="mixiパークは「スマートフォンで友達と遊ぶ」をキーワードに展開する新しい3D似顔絵コミュニケーションプラットフォームです。"  />
+
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-title" content="mixi" />
+<!-- / header meta values -->
+
+<title>[mixi] mixiパーク</title>
+<link rel="stylesheet" type="text/css" href="<TMPL_VAR EXPR=CONFIG_IMG_BASE>/static/css/smartphone/touch/common.css" />
+<link rel="stylesheet" type="text/css" href="<TMPL_VAR EXPR=CONFIG_IMG_BASE>/static/css/smartphone/touch/_list.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/smartphone/touch/appli.css" />
+<link rel="stylesheet" type="text/css" href="<TMPL_VAR EXPR=CONFIG_IMG_BASE>/static/css/smartphone/touch/promotion.css" />
+<link rel="stylesheet" type="text/css" href="<TMPL_VAR EXPR=CONFIG_IMG_BASE>/static/css/smartphone/touch/promotion/park_lp.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/smartphone/touch/promotion/park_lp02.css" />
+
+</head>
+
+<TMPL_UNLESS EXPR=is_run_appli>
+<TMPL_VAR EXPR="add_js('mixi/touch/promotion/touch_slide.js', 'UTF-8')">
+<TMPL_ELSE>
+<script type="text/javascript" charset="UTF-8" src="<TMPL_VAR EXPR="html_escape(url_mixi_static_prefix)">js/application/touch.js"></script>
+<script type="text/javascript">
+(function(){
+    
+    window.onload=function(){
+        gadgets.window.adjustHeight();
+    };
+})();
+</script>
+</TMPL_UNLESS>
+<body>
+<TMPL_UNLESS EXPR=is_run_appli>
+<TMPL_INCLUDE NAME="prevent_clickjack.tmpl">
+</TMPL_UNLESS>
+
+<div id="page" class="login">
+<div id="displayContainer">
+<div id="mainDisplay" <TMPL_IF EXPR=is_run_appli> class="runAppli"</TMPL_IF> >
+
+
+<TMPL_UNLESS EXPR=is_run_appli>
+<!--[headerArea]-->
+<div id="headerArea">
+
+<div class="pHeader01">
+<h1><a id="pagetop" href="<TMPL_VAR EXPR=url_mixi_prefix>promotion.pl?id=mixi_park"><img src="<TMPL_VAR EXPR=CONFIG_IMG_BASE>/img/smartphone/touch/func_intro/park/logo_park001.png" alt="mixiパーク" height="19" /></a></h1>
+
+<ul class="topNavigation01"><!--
+--><li class="mixiTop"><p><a href="<TMPL_VAR EXPR=url_mixi_prefix>home.pl"><span>ホーム</span></a></p></li><!--
+--></ul>
+
+<!--/pHeader01--></div>
+<!--/headerArea--></div>
+<!--/[headerArea]-->
+</TMPL_UNLESS>
+
+<!--[mainArea]-->
+<div id="mainArea" class="parkLP">
+
+
+
+<!--[cPromoMain01]-->
+<section class="cPromoMain01">
+
+
+
+<!--[cPromotionTitle01]-->
+<section class="cPromotionTitle01">
+<!--/cPromotionTitle01--></section>
+<!--/[cPromotionTitle01]-->
+
+
+<!-- start -->
+<div style="background-color:white;">
+mixiパークをご利用いただきありがとうございました。<br />
+mixiパークは、2013年3月31日(日)24:00をもって、サービスを終了させていただきました。<br />
+<br />
+ご利用いだいているユーザーの皆さまにはご迷惑をおかけすることとなり、深くお詫び申し上げます。<br />
+<br />
+未使用のプレミアムPコインにつきましては返金の受付を行います。<br />
+返金の具体的なお手続きにつきましては弊社ホームページにてお知らせをいたしますので、そちらをご確認ください。<br />
+プレミアムPコインを服装アイテムと交換をされた場合返金の対象となりませんのでご了承ください。<br />
+<br />
+これまでmixiパークをご愛顧いただきまして、誠にありがとうございました。<br />
+<br />
+<a href="http://mixi.co.jp/mixipark/"<TMPL_IF EXPR=is_run_appli> target="_top"</TMPL_IF>>詳細及びお問い合わせ</a><br />
+<br />
+mixi運営事務局<br />
+</div>
+<!-- end -->
+
+
+
+<TMPL_UNLESS EXPR=is_run_appli>
+<TMPL_INCLUDE EXPR="common('footer.tmpl')">
+<TMPL_ELSE>
+<!--/mainArea--></div>
+<!--/[mainArea]-->
+<!--/mainDisplay--></div>
+<!--/displayContainer--></div>
+</TMPL_UNLESS>
+<!--[init UIComponent]-->
+<!--/initUIComponent-->
+<TMPL_INCLUDE EXPR="common('end.tmpl')">
+

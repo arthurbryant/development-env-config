@@ -1,0 +1,66 @@
+use strict;
+use warnings;
+
+use Test::More;
+use Test::MockModule;
+use Test::MockObject::Extends;
+use Mixi::Test;
+use Mixi::Test::Fixtures -checker => 'strict', qw(
+    factory/DB_TOUCH_SKIN_PURCHASE
+);
+use Mixi::Skin::Touch::Purchase;
+use Mixi::Skin::Touch::DB::Purchase;
+
+my $test_entry = &test_entry();
+
+Test::MockObject->fake_module('Mixi::Skin::Touch::DB::Purchase' =>
+    'select_purchase_info_by_member_id' => sub {
+        my $self = shift;
+        return $test_entry;
+    },
+);
+
+subtest "validate" => sub {
+    eval {
+        Mixi::Skin::Touch::Purchase->select_purchase_info_by_member_id();
+    };
+    ok($@, 'member_id is null');
+
+    eval {
+        Mixi::Skin::Touch::Purchase->select_purchase_info_by_member_id(
+            member_id => 'hogehoge',
+        );
+    };
+    ok($@, 'member_id is not number');
+};
+
+subtest "nomal" => sub {
+    my $purchase_info = Mixi::Skin::Touch::Purchase->select_purchase_info_by_member_id(
+        member_id => 123456789,
+    );
+
+    my $purchase_content = $purchase_info->content;
+    is (scalar @$purchase_content, 2, 'select is ok');
+    is ($purchase_info->{total_rows}, 2, 'select is ok');
+    isa_ok ($purchase_info, 'HASH');
+    isa_ok ($purchase_content, 'ARRAY');
+};
+
+sub test_entry {
+
+    my $entry1 = {
+        order_id    => 4242,
+        product_id  => 1234,
+        member_id   => 123456789,
+        purchase_at => '2013-07-11 10:00:00'
+    };
+    my $entry2 = {
+        order_id    => 4243,
+        product_id  => 6789,
+        member_id   => 123456789,
+        purchase_at => '2013-07-07 23:40:00'
+    };
+    return [$entry1, $entry2];
+};
+
+done_testing;

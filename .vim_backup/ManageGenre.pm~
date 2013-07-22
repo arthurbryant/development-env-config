@@ -2,6 +2,7 @@ package Mixi::Skin::Touch::Controller::Admin::ManageGenre;
 
 use strict;
 use warnings;
+use utf8;
 
 use Mixi::Pages;
 use Mixi::Skin::Touch::Admin;
@@ -11,10 +12,10 @@ use constant {
     GENRE_NAME_LENGTH_LIMIT => 40,
 };
 
+__PACKAGE__->use_perlstring(1);
 __PACKAGE__->auth_type(AUTH_UNREQUIRED);
 __PACKAGE__->is_admin(1);
 __PACKAGE__->charset('euc-jp');
-
 __PACKAGE__->initial_params(
     page     => 1,
 );
@@ -26,15 +27,15 @@ __PACKAGE__->validation_and_warnings(
     ],
     genre_param => [
         genre_name => [
-            ['NOT_BLANK'] => '¥¸¥ã¥ó¥ëÌ¾¤ÏÆşÎÏÉ¬¿Ü¹àÌÜ¤Ç¤¹¡£',
-            ['LENGTH',0, GENRE_NAME_LENGTH_LIMIT] => '¥¸¥ã¥ó¥ëÌ¾¤ÏÁ´³Ñ'. GENRE_NAME_LENGTH_LIMIT/2 .'Ê¸»ú°ÊÆâ¤ÇÆşÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£',
+            ['NOT_BLANK'] => 'ã‚¸ãƒ£ãƒ³ãƒ«åã¯å…¥åŠ›å¿…é ˆé …ç›®ã§ã™ã€‚',
+            ['LENGTH',0, GENRE_NAME_LENGTH_LIMIT] => 'ã‚¸ãƒ£ãƒ³ãƒ«åã¯å…¨è§’'. (GENRE_NAME_LENGTH_LIMIT/2) .'æ–‡å­—ä»¥å†…ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚',
         ],
         display    => [
-            ['NOT_BLANK']         => '¥¹¥Æ¥¤¥¿¥¹¤òÀßÄê¤·¤Æ¤¯¤À¤µ¤¤¡£',
-            [IN_ARRAY => qw|y n|] => '¥¹¥Æ¥¤¥¿¥¹¤ÎÃÍ¤¬ÉÔÀµ¤Ç¤¹¡£',
+            ['NOT_BLANK']         => 'ã‚¹ãƒ†ã‚¤ã‚¿ã‚¹ã‚’è¨­å®šã—ã¦ãã ã•ã„ã€‚',
+            [IN_ARRAY => qw|y n|] => 'ã‚¹ãƒ†ã‚¤ã‚¿ã‚¹ã®å€¤ãŒä¸æ­£ã§ã™ã€‚',
         ],
         priority   => [
-            ['UINT']              => 'Í¥ÀèÅÙ¤ÏÈ¾³Ñ¿ô»ú¤ÇÆşÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£'
+            ['UINT']              => 'å„ªå…ˆåº¦ã¯åŠè§’æ•°å­—ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚'
         ],
     ],
     commit => [
@@ -93,7 +94,7 @@ __PACKAGE__->conditions(
         unless($result){
             $self->template->add_error({
                 messages => {
-                    info => "ÆşÎÏ¤·¤¿¥¸¥ã¥ó¥ëÌ¾¤Ï´û¤ËÅĞÏ¿¤µ¤ì¤Æ¤¤¤Ş¤¹¡£",
+                    info => "å…¥åŠ›ã—ãŸã‚¸ãƒ£ãƒ³ãƒ«åã¯æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã™ã€‚",
                 },
                 order => ['info'],
             });
@@ -140,7 +141,7 @@ __PACKAGE__->conditions(
         unless($result){
             $self->template->add_error({
                 messages => {
-                    info => "ÆşÎÏ¤·¤¿¥¸¥ã¥ó¥ëÌ¾¤Ï´û¤ËÅĞÏ¿¤µ¤ì¤Æ¤¤¤Ş¤¹¡£",
+                    info => "å…¥åŠ›ã—ãŸã‚¸ãƒ£ãƒ³ãƒ«åã¯æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã™ã€‚",
                 },
                 order => ['info'],
             });
@@ -168,9 +169,9 @@ sub assign_common {
 
     for(@$genres){
         if($_->{display} eq 'y'){
-            $_->{display_forview} = "¸ø³«";
+            $_->{display_forview} = "å…¬é–‹";
         }else{
-            $_->{display_forview} = "Èó¸ø³«";
+            $_->{display_forview} = "éå…¬é–‹";
         }
     }
 
@@ -186,7 +187,7 @@ sub assign_common {
         page      => $self->param->{page},
         page_from => ($self->param->{page} - 1) * PER_PAGE,
         page_to   => ($self->param->{page} - 1) * PER_PAGE + (scalar @$genres) -1,
-        post_key => $self->post_key->encode([qw/_TIMESTAMP_/]),
+        post_key => $self->post_key->encode([qw/_MEMBER_ID_ _TIMESTAMP_/]),
     );
 
     #default parameter
@@ -198,7 +199,7 @@ sub assign_common {
 sub assign_show {
     my $self = shift;
 
-    #¥¸¥ã¥ó¥ë¤¬¸ø³«Ãæ¤«¤Ä¸ø³«Ãæ¤Î¥ß¥¯¥³¥ì¤ÈÉ³¤Å¤¤¤Æ¤¤¤ë¾ì¹ç¤ËÃí°Õ¤ò´­µ¯¤¹¤ë¥á¥Ã¥»¡¼¥¸¤òÉ½¼¨
+    #ã‚¸ãƒ£ãƒ³ãƒ«ãŒå…¬é–‹ä¸­ã‹ã¤å…¬é–‹ä¸­ã®ãƒŸã‚¯ã‚³ãƒ¬ã¨ç´ã¥ã„ã¦ã„ã‚‹å ´åˆã«æ³¨æ„ã‚’å–šèµ·ã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º
     my $has_skin = $self->stash->{skin_module}->genre_has_skins(
         genre_id => $self->stash->{genre}->{id},
     );

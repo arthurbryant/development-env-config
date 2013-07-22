@@ -1,0 +1,62 @@
+use strict;
+use warnings;
+use utf8;
+
+use Test::More;
+use Test::Deep;
+use Test::Exception;
+
+use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TOUCHSKIN/;
+use Mixi::Test::Fixtures::Memcached;
+use Mixi::Test::Mock::UserEvent;
+
+use Mixi::Service::Procedure::InternalGateway;
+
+my $f = Mixi::Test::Fixtures->get_fixture_object('DB_TOUCHSKIN');
+
+my $self_member_id   = $f->test_member1->{member_id};
+my $others_member_id = $f->test_member3->{member_id};
+
+subtest 'with self member_id' => sub {
+    my $result = Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.skin.touch.getByMemberId' => {
+            params => {
+                member_id => $self_member_id,
+            }
+        }
+    );
+
+    cmp_deeply($result, superhashof({
+        basic_text_color => $f->open_test->{basic_text_color},
+        skin_base        => ignore(),
+        skin_color_type  => 'black',
+    }), 'should return skin base path and color info');
+};
+
+subtest 'with others member_id' => sub {
+    my $result = Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.skin.touch.getByMemberId' => {
+            params => {
+                member_id => $others_member_id,
+            }
+        }
+    );
+
+    cmp_deeply($result, superhashof({
+        basic_text_color => $f->open_edit_test->{basic_text_color},
+        skin_base        => ignore(),
+    }), 'should return skin base path and color info');
+};
+
+subtest 'without member_id' => sub {
+    throws_ok {
+        Mixi::Service::Procedure::InternalGateway->call(
+            'jp.mixi.skin.touch.getByMemberId' => {
+                requester_id => $self_member_id, # even with requester_id
+                params => {}
+            }
+        );
+    } qr/invalid params/, 'should die with invalid params error'
+};
+
+done_testing;

@@ -1,0 +1,93 @@
+<TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/payment.css')">
+<link rel="stylesheet" type="text/css" href="/static/css/smartphone/touch/_list.css?1234567890">
+<TMPL_INCLUDE EXPR="common('header.tmpl')">
+<TMPL_INCLUDE EXPR="common('navi_top_only.tmpl')">
+<!--[cInputPayWay01]-->
+<div class="gBaseComponent01 gEditForm01 cInputPayWay01">
+
+<div class="cpHeading04"><h3>ポイント不足</h3></div>
+
+
+<!--[gResponseBox01]-->
+<div class="gResponseBox01">
+<div class="contents">
+<p>mixiポイントが不足しています。</p>
+</div>
+<!--/gResponseBox01--></div>
+<!--/[gResponseBox01]-->
+
+
+<div class="lContents"><ul class="lInputColumns01 modeConfirm inline">
+
+
+<li><div class="columnHead"><h4>現在の状況</h4></div>
+<div class="columnBody"><div class="cpSimpleTable01">
+<dl>
+<dt>ポイント残高：</dt><dd><img class="cpMonetarySign01 mixipoint" src="/img/smartphone/touch/icon/mixipoint001.gif" alt="mixiポイント" /><TMPL_VAR EXPR="html_escape(current_point)"> pt</dd>
+</dl>
+<dl>
+<dt>必要ポイント：</dt><dd><img class="cpMonetarySign01 mixipoint" src="/img/smartphone/touch/icon/mixipoint001.gif" alt="mixiポイント" /><TMPL_VAR EXPR="html_escape(amount)"> pt</dd>
+</dl>
+<dl>
+<dt>不足ポイント：</dt><dd><img class="cpMonetarySign01 mixipoint" src="/img/smartphone/touch/icon/mixipoint001.gif" alt="mixiポイント" /><strong><TMPL_VAR EXPR="html_escape(want_point)"> pt</strong></dd>
+</dl>
+</div>
+<!--/columnBody--></div>
+</li>
+
+
+</ul>
+<!--/lContents--></div>
+
+<div class="cpHeading04"><h3>mixiポイントを手に入れる</h3></div>
+
+<div class="lContents"><ul class="lInputColumns01 modeConfirm">
+
+<li>
+<div class="columnBody">
+<p>mixiポイントはクレジットカードや携帯電話料金と一緒に支払うことなどでチャージできます。</p>
+<p><a href="<TMPL_VAR NAME=url_mixi_prefix>help.pl?mode=list&category=32">mixiポイントとは？</a></p>
+<!--/columnBody--></div>
+</li>
+
+</ul>
+<!--/lContents--></div>
+
+<!--[gFootPanel]-->
+<div class="gFootPanel modeConfirm">
+<form action="<TMPL_VAR EXPR="html_escape(mixi_point_charge_url)">" method="post" target="_blank">
+<p class="ctrlButtons"><input class="cpSubmitBtn02" type="submit" value="mixiポイントをチャージする" /></p>
+</form>
+<!--/gFootPanel--></div>
+<!--/[gFootPanel]-->
+
+<div class="cSubNoteDisplay01">
+<ul class="lSubNote">
+<li><p>mixiポイントはアプリやサイト利用のおまけでもらうこともできます。</p></li>
+</ul>
+<!--/cSubNoteDisplay01--></div>
+
+<ul class="gUtilityLink01">
+<li><a href="<TMPL_VAR NAME=url_mixi_prefix>redirector.pl?id=8545">無料でmixiポイントをもらう</a></li>
+</ul>
+
+<div class="cpHeading04"><h3>mixiポイントを手に入れたら</h3></div>
+
+<!--[gFootPanel]-->
+<div class="gFootPanel modeConfirm">
+<form action="mixi_point_pay_method_for_once.pl" method="post">
+<p>mixiポイントを手に入れた後、下の「続ける」ボタンを押してください。購入画面へ進みます。</p>
+<p class="ctrlButtons"><input class="cpSubmitBtn02" type="submit" value="続ける" /></p>
+<input type="hidden" name="order_id" value="<TMPL_VAR EXPR="html_escape(order_id)">" />
+</form>
+<!--/gFootPanel--></div>
+<!--/[gFootPanel]-->
+
+<!--/cInputPayWay01--></div>
+<!--/[cInputPayWay01]-->
+
+
+<TMPL_VAR EXPR="add_js('jp/mixi/payment/ebisu/payprocess/widget/safeback.js')">
+<TMPL_INCLUDE EXPR="common('footer.tmpl')">
+<TMPL_INCLUDE EXPR="common('end.tmpl')">

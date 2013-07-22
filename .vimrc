@@ -175,8 +175,19 @@ NeoBundle 'kana/vim-textobj-user'
 " [ai][iI]
 NeoBundle 'kana/vim-textobj-indent'
 
+NeoBundle 'vim-perl/vim-perl'
+
 "let g:ctrlp_map = '<Leader><C-p>'
 let mapleader = ','
+
+autocmd BufNewFile,BufRead *.json setf perl
+
+" [ai]g / a: includes index/key/arrow, i: symbol only
+NeoBundle 'vimtaku/vim-textobj-sigil'
+" [ai][kv]
+NeoBundle 'vimtaku/vim-textobj-keyvalue'
+" [ai]:
+NeoBundle 'vimtaku/vim-textobj-doublecolon'
 
 filetype indent on
 filetype plugin on

@@ -1,0 +1,133 @@
+<TMPL_IF EXPR="is_softlaunch_activated('touch_re_after')">
+<TMPL_INCLUDE NAME="../re/root.tmpl">
+<TMPL_ELSE>
+
+<TMPL_VAR EXPR="set_analysis_data('service:name','home')">
+<TMPL_IF EXPR="0"><!-- This page doesn't use common footer.tmpl, so added below touch_global_google_analytics tmpl --></TMPL_IF>
+<TMPL_INCLUDE EXPR="common('touch_global_google_analytics.tmpl')">
+
+<TMPL_IF EXPR="0"><!-- Let browser.js send _trackPageview with hashfragment --></TMPL_IF>
+<TMPL_VAR EXPR="add_google_analytics_param('touch_global_homeview', 'no_track_pageview', 1)">
+<TMPL_VAR EXPR="add_google_analytics_param('touch_spo',             'no_track_pageview', 1)">
+<TMPL_VAR EXPR="add_google_analytics_param('touch_spo_before',      'no_track_pageview', 1)">
+<TMPL_VAR EXPR="add_google_analytics_param('touch_spo_after',       'no_track_pageview', 1)">
+
+<TMPL_IF EXPR="userbranch_check('touch_post_form_and_voice_topic', 'touch_post_form_new1', login_member_id) || userbranch_check('touch_post_form_and_voice_topic', 'touch_post_form_new2', login_member_id) || userbranch_check('touch_post_form_and_voice_topic', 'touch_post_form_old', login_member_id)">
+  <TMPL_VAR EXPR="set_google_analytics('touch_home_new_post_ui_ab', '-no_sampling', 1)">
+</TMPL_IF>
+<TMPL_VAR EXPR="set_google_analytics('touch_home')">
+<TMPL_IF EXPR=is_redirect_login_access>
+<TMPL_VAR EXPR="set_google_analytics('reset_password_flow')">
+</TMPL_IF>
+<TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/home2011.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/global_menu.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/popuplayer.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/emoticon_palette.css')">
+<TMPL_VAR EXPR="add_css('emoticon_color.css')">
+<TMPL_INCLUDE EXPR="common('header.tmpl')">
+<TMPL_INCLUDE NAME="includes/_append_js.tmpl">
+<TMPL_INCLUDE NAME="group/includes/_append_window.tmpl">
+<TMPL_VAR EXPR="add_js('mixi/touch/checkin.production.js','UTF-8')">
+
+<TMPL_INCLUDE NAME="sp_skin/common_css.tmpl">
+<TMPL_INCLUDE NAME="sp_skin/home2011_css.tmpl">
+
+<body onload='if(!navigator.userAgent.match(/Android/i) && navigator.platform != "Win32"){setTimeout(function(){if(document.body.scrollTop) return;scrollTo(0,1);}, 100);}'<TMPL_IF EXPR="device_name ne 'Android'"> onunload=""</TMPL_IF>>
+<div
+class="login home2011 widget <TMPL_LOOP NAME="design_scheme_touch_skin_info">mikukore <TMPL_VAR NAME="skin_color_type"> <TMPL_IF NAME="has_home_header_img">mainVisual</TMPL_IF></TMPL_LOOP>"
+id="page" data-widget-namespace="jp.mixi.common.touch.widget.pageroot" data-page="home"><div id="mainDisplay">
+<!--[headerArea]-->
+<div id="headerArea"><br /><br /><!--/headerArea--></div>
+<!--/[headerArea]-->
+
+<!--[mainArea]-->
+<div id="mainArea">
+<TMPL_INCLUDE NAME="includes/_header_navi.tmpl">
+<!--[pMainScene01]-->
+<section
+    class="pMainScene01 widget"
+    data-widget-namespace="jp.mixi.home.browser"
+    data-default-id="#JS_default_plScene"
+    data-target-ref="section.pMainScene01"
+    data-page-class="plScene"
+    id="JS_mainScene"
+>
+
+<TMPL_INCLUDE NAME="includes/page/_guide.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_jserror.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_error.tmpl">
+<TMPL_IF NAME="is_beginner">
+    <TMPL_INCLUDE NAME="includes/beginner/page/_main.tmpl">
+<TMPL_ELSE>
+    <TMPL_INCLUDE NAME="includes/page/_main.tmpl">
+</TMPL_IF>
+<TMPL_INCLUDE NAME="includes/page/_navi.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_menu.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_postcomment.tmpl">
+<TMPL_IF EXPR="userbranch_check('touch_post_form_and_voice_topic', 'touch_post_form_new1', login_member_id) || userbranch_check('touch_post_form_and_voice_topic', 'touch_post_form_new2', login_member_id)">
+<TMPL_INCLUDE NAME="ab_test_post_ui/includes/page/_post.tmpl">
+<TMPL_ELSE>
+<TMPL_INCLUDE NAME="includes/page/_post.tmpl">
+</TMPL_IF>
+<TMPL_INCLUDE NAME="includes/page/_notify.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_voice.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_review.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_feedback.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_video.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_photo.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_album.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_diary.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_easyshare.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_schedule.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_platform_feed_application.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_visitor.tmpl">
+<TMPL_INCLUDE NAME="includes/page/_application_launcher.tmpl">
+
+<TMPL_IF EXPR="0"><!-- for badge blue notify a/b test --></TMPL_IF>
+<TMPL_INCLUDE NAME="includes/page/_reminder_notify.tmpl">
+
+<div class="gDialog01" data-type="bottom" style="display:none;">
+<div class="messageMain widget" data-widget-namespace="jp.co.mixi.ui.dialog.toast" data-text-ref="span" data-is-not-hide="1" data-precedent-images="<TMPL_VAR NAME=CONFIG_IMG_BASE ESCAPE=0>/img/smartphone/touch/home2011/icon/like006.gif">
+<p><span><mark class="gLikeSign01">イイネ！</mark>しました</span></p>
+</div>
+<!--/cInvitation01--></div>
+
+
+<!--/pMainScene01--></section>
+<!--/[pMainScene01]-->
+
+<!--/[mainArea]--></div>
+
+<div class="widget" data-widget-namespace="jp.co.mixi.ui.slideupwindow" data-parent-window-id="mainArea">
+<div class="JS_Container"
+    data-window-name="homeSlideUpWindow"
+    style="display:none;position:absolute;top:0;left:0;width:100%;height:500px;">
+    <div class="JS_selector" style="height:100%;background:#eee">
+    <p style="background:#eee">
+        + 新規グループ作成
+    </p>
+    </div><!--/JS_selector-->
+</div><!--/JS_Container-->
+<!--/widget--></div>
+
+<!--/[pFooterScene01]-->
+<!--/mainDisplay--></div>
+
+<!--[AdRetargetingTag]-->
+<TMPL_INCLUDE EXPR="common('ad/dac_thirdparty.tmpl')">
+<!--/AdRetargetingTag-->
+
+<!--[AdRoot]-->
+<TMPL_INCLUDE EXPR="common('ad/root.tmpl')">
+<!--/[AdRoot]-->
+
+<!--[gIphoneBalloon]-->
+<TMPL_IF EXPR="device_name eq 'iPhone'">
+<TMPL_INCLUDE NAME="includes/_iphone_balloon.tmpl">
+</TMPL_IF>
+<!--/[gIphoneBalloon]-->
+
+<TMPL_INCLUDE EXPR="common('end.tmpl')">
+
+</TMPL_IF> <!-- end of touch_re if statement -->

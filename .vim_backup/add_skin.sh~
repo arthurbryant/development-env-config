@@ -1,0 +1,39 @@
+#!/bin/sh
+echo "Usage $0 mikuore_name mikukore_number color"
+echo "Auto create mikukore name[0], name[1] ... name[mikukore_number]"
+num=$(($2+0))
+color=$3
+if [ $# -ne 2 ]
+then
+    echo "Usage $0 mikuore_name mikukore_number color"
+    exit -1
+fi
+echo $num
+for (( i=0; i<$num; i++ ))
+do
+        name=$1
+        name=$name$i
+        #echo $name
+        sql="insert into touchskin_skin_data (
+          name                    ,
+          regist_staff            ,
+          status                  ,
+          skin_color_type         ,
+          open_datetime           ,
+          regist_datetime         ,
+          basic_text_color          ,
+          strong_text_color         ,
+          weak_text_color           ,
+          weaker_text_color         ,
+          link_color                ,
+          strong_link_color         ,
+          border_color              ,
+          background_color          ,
+          partial_background_color  ,
+          contents_title_bg_color   ,
+          gradation_start_color     ,
+          gradation_end_color
+        )
+        values ('$name', 'feng zhang', 1, 0, now(), now(), $color, $color, $color, $color, $color, $color, $color, $color, $color, $color, $color, $color);"
+        echo $sql
+done

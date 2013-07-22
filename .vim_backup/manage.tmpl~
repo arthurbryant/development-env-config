@@ -1,0 +1,128 @@
+<TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/_list.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/home.css')">
+<TMPL_INCLUDE EXPR="common('header.tmpl')">
+<TMPL_INCLUDE EXPR="common('navi.tmpl')">
+
+<STRIP>
+  <!--[mainArea]-->
+  <div id="mainArea">
+    <!--[cpContentsTitle01]-->
+    <div class="cpContentsTitle01">
+      <div class="lContents">
+        <div class="titleMain onesProfile">
+          <TMPL_IF EXPR="skin_type && !is_purchased">
+            <h2>ミクコレを購入する</h2>
+          <TMPL_ELSE>
+            <h2>ミクコレを設定する</h2>
+          </TMPL_IF>
+        <!--/titleMain-->
+        </div>
+      <!--/lContents-->
+      </div>
+    <!--/cpContentsTitle01-->
+    </div>
+    <!--/[cpContentsTitle01]-->
+    <!--[gMikukoreStore01]-->
+    <div class="gBaseComponent01 gMikukoreStore01">
+      <div class="cpHeading04">
+        <TMPL_IF EXPR="skin_type && !is_purchased">
+          <h3>購入内容</h3>
+        <TMPL_ELSE>
+          <h3>設定内容</h3>
+        </TMPL_IF>
+      </div>
+      <ul class="gUtilityLink01">
+        <li><a href="./list_payment_method.pl?mgfrom=top_charge" target="_blank">
+          ポイントをチャージする
+          <div class="cpSimpleTable02">
+            <dl>
+              <dt>残高 ： </dt>
+              <dd><img class="cpMonetarySign01 mixipoint" src="<TMPL_VAR NAME="CONFIG_IMG_BASE">/img/smartphone/touch/icon/mixipoint001.gif" alt="mixiポイント" />
+                <span><TMPL_VAR EXPR="html_escape(now_point)">pt</span>
+              </dd>
+            </dl>
+          <!--/cpSimpleTable02-->
+          </div>
+        </a></li>
+      <!--/gUtilityLink01-->
+      </ul>
+      <!--[gResponseBox02]-->
+      <div class="gResponseBox02">
+        <div class="contents">
+          <TMPL_IF EXPR="skin_type && !is_purchased">
+            <p>以下のミクコレを購入します。よろしいですか？</p>
+          <TMPL_ELSE>
+            <p>以下のミクコレを設定します。よろしいですか？</p>
+          </TMPL_IF>
+        </div>
+      <!--/gResponseBox02-->
+      </div>
+      <!--/[gResponseBox02]-->
+      <div class="lContents">
+        <ul class="gPhotoAndText01 cMikukoreList01">
+          <li class="oneData">
+            <p class="photo">
+              <span><img src="<TMPL_VAR NAME="CONFIG_IMG_BASE"><TMPL_VAR EXPR="html_escape(skin_base)">/thumbnail001.jpg" alt="" /></span>
+            </p>
+            <p class="name"><TMPL_VAR EXPR="html_escape(name)"></p>
+              <p class="log">必要ポイント ： 
+                <img class="cpMonetarySign01 mixipoint" src="<TMPL_VAR NAME="CONFIG_IMG_BASE">/img/smartphone/touch/icon/mixipoint001.gif" alt="mixiポイント" />
+                <TMPL_IF NAME="is_purchased">
+                  購入済み
+                <TMPL_ELSIF NAME="skin_type">
+                  100pt
+                <TMPL_ELSE>
+                  <span class="free">FREE</span>
+                </TMPL_IF>
+              </p>
+          <!--/oneData-->
+          </li>
+        </ul>
+        <div class="pPreview01">
+          <img src="<TMPL_VAR NAME="CONFIG_IMG_BASE"><TMPL_VAR EXPR="html_escape(skin_base)">/preview001.jpg" width="280" height="480" alt="" />
+        </div>
+      <!--/lContents-->
+      </div>
+      <!--[gFootPanel]-->
+      <div class="gFootPanel modeConfirm">
+        <div class="ctrlButtons">
+            <TMPL_IF EXPR="skin_type && !is_purchased">
+                <form action="manage_touch_skin.pl" method="post">
+                  <input type="hidden" name="mode" value="purchase">
+                  <input type="hidden" name="id" value="<TMPL_VAR EXPR="html_escape(id)">">
+                  <input type="submit" value="購入する" class="cpSubmitBtn02" />
+                </form>
+            <TMPL_ELSE>
+                <form action="apply_touch_skin.pl" method="post">
+                  <input type="hidden" name="id" value="<TMPL_VAR EXPR="html_escape(id)">">
+                  <input type="hidden" name="post_key" value="<TMPL_VAR EXPR="html_escape(id)">">
+                  <input type="submit" value="設定する" class="cpSubmitBtn02" />
+                </form>
+            </TMPL_IF>
+            <form action="list_touch_skin.pl" method="get">
+                <input type="submit" value="選びなおす" class="cpCancelBtn02" />
+            </form>
+        </div>
+      <!--/gFootPanel-->
+      </div>
+      <!--/[gFootPanel]-->
+
+      <div class="pMixiCheck01">
+	<p class="sub">このミクコレをチェックする</p>
+	<p class="button"><a href="<TMPL_VAR NAME=url_mixi_prefix>share.pl" class="mixi-check-button" data-button="button-1" data-key="d36375a3ae26f38798d8a287752be99dc12ed94a" data-url="<TMPL_VAR NAME=url_mixi_prefix>manage_touch_skin.pl?id=<TMPL_VAR EXPR="html_escape(id)">">mixiチェック</a>
+	  <script type="text/javascript" src="http://static.mixi.jp/js/share.js" data-prefix-uri="http://dp0065.lo.mixi.jp:8888/"></script></p>
+      </div>
+
+    <!--/gMikukoreStore-->
+    </div>
+    <!--/[gMikukoreStore]-->
+    <TMPL_INCLUDE NAME="./include/_skin_menu.tmpl">
+  <!--/mainArea-->
+  </div>
+  <!--/[mainArea]-->
+</STRIP>
+
+
+<TMPL_INCLUDE EXPR="common('footer.tmpl')">
+<TMPL_INCLUDE EXPR="common('end.tmpl')">

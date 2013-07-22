@@ -18,7 +18,7 @@ my %hash2 = (
     age => 27,
 );
 warn Dumper $hash1;
-warn Dumper \$hash1;
+warn Dumper $hash1;
 warn Dumper \%hash2;
 
 &print_num_array(\@array);

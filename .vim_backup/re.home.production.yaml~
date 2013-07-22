@@ -1,0 +1,15 @@
+---
+destination : static/css/smartphone/touch/re.home.production.css
+dependency  :
+  - static/css/smartphone/touch/common.css
+  - static/css/smartphone/touch/_list.css
+  - static/css/smartphone/touch/home2013.css
+  - static/css/smartphone/touch/home2011.css
+  - static/css/smartphone/touch/community.css
+  - static/css/smartphone/touch/official.css
+  - static/css/smartphone/touch/log.css
+  - static/css/smartphone/touch/appli.css
+  - static/css/smartphone/touch/popuplayer.css
+  - static/css/smartphone/touch/emoticon_palette.css
+  - static/css/emoticon_color.css
+  - static/css/smartphone/touch/guide/new_touch.css

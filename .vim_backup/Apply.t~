@@ -1,0 +1,224 @@
+#!script/perl
+
+use strict;
+use warnings;
+use utf8;
+
+use Test::More;
+use Test::MockModule;
+
+use Mixi::Test;
+use Mixi::Test::Fixtures -checker => 'strict', qw(
+    DB_PAYMENT_CACHE
+    DB_BTA_COMMUNITY_CLUSTER
+    DB_SOFTLAUNCH
+    );
+use Mixi::Test::Fixtures::Memcached;
+use Mixi::Test::DataFactory qw(
+    Mixi::Skin::Touch::MemberSkin
+    Mixi::Skin::Touch::SkinData
+    Mixi::Skin::Touch::Purchase
+    Mixi::Member
+    Mixi::Member::Link
+);
+use Mixi::Test::Login::Cookie;
+
+use Plack::Test qw//;
+use Mixi::Pages::Runtime::PSGI;
+
+use URI;
+use HTTP::Request::Common qw/GET POST/;
+use Nove::Core::Encodings qw/decode encode/;
+
+use Mixi::Skin::Config;
+
+BEGIN {
+    use_ok('Mixi::Skin::Touch::Controller::Apply');
+}
+
+my $ua = q{Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03S) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Safari/535.19};
+
+my $skins = {
+    free => Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData' => {
+        id        => 1,
+        skin_type => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{SIMPLE},
+        status    => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+        name      => encode('euc-jp', '無料のやつ'),
+    }),
+    deluxe => Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData' => {
+        id        => 2,
+        skin_type => Mixi::Skin::Config::TOUCH_SKIN_TYPE->{DELUXE},
+        status    => Mixi::Skin::Config::SKIN_STATUS_DB->{CAN_OPEN},
+        name      => encode('euc-jp', '有料のやつ'),
+    }),
+};
+
+my $skin_db = Mixi::Skin::Touch::DB::Skin->new({ role => 's' });
+
+subtest 'without status param' => sub {
+
+    subtest 'with free(simple) skin id' => sub {
+        my $member_id = 10001;
+
+        my $message = decode('euc-jp', $skins->{free}->{name}) . 'のデザインを設定しました';
+        like(
+            _get_http_response_content_by_member_id($member_id, id => $skins->{free}->{id}),
+            qr{\Q$message\E},
+            'should show apply success message'
+        );
+        is(
+            $skin_db->select_member_skin_id(member_id => $member_id),
+            $skins->{free}->{id},
+            'member skin should be updated'
+        );
+    };
+
+    subtest 'with already paid(deluxe) skin id' => sub {
+        my $member_id = 10002;
+
+        Mixi::Test::DataFactory->make('Mixi::Skin::Touch::Purchase' => {
+            product_id  => $skins->{deluxe}->{id},
+            member_id   => $member_id,
+        });
+
+        my $message = decode('euc-jp', $skins->{deluxe}->{name}) . 'のデザインを設定しました';
+        like(
+            _get_http_response_content_by_member_id($member_id, id => $skins->{deluxe}->{id}),
+            qr{\Q$message\E},
+            'should show apply success message'
+        );
+        is(
+            $skin_db->select_member_skin_id(member_id => $member_id),
+            $skins->{deluxe}->{id},
+            'member skin should be updated'
+        );
+    };
+
+    subtest 'with not yet paid(deluxe) skin id' => sub {
+        my $member_id = 10003;
+
+        like(
+            _get_http_response_content_by_member_id($member_id, id => $skins->{deluxe}->{id}),
+            qr{\Qデータがありません\E},
+            'should show error message'
+        );
+        is(
+            $skin_db->select_member_skin_id(member_id => $member_id),
+            undef,
+            'member skin should not be updated'
+        );
+    }
+
+};
+
+subtest 'with status => "success"' => sub {
+
+    subtest 'with just paid(deluxe) order id' => sub {
+        my $member_id = 10101;
+        my $order_id  = 12345;
+
+        Mixi::Test::DataFactory->make('Mixi::Skin::Touch::Purchase' => {
+            order_id   => $order_id,
+            product_id => $skins->{deluxe}->{id},
+            member_id  => $member_id,
+        });
+
+        my $message = decode('euc-jp', $skins->{deluxe}->{name}) . 'のデザインを購入しました';
+        like(
+            _get_http_response_content_by_member_id($member_id, status => 'success', order_id => $order_id),
+            qr{\Q$message\E},
+            'should show purchase success message'
+        );
+        is(
+            $skin_db->select_member_skin_id(member_id => $member_id),
+            $skins->{deluxe}->{id},
+            'member skin should be updated'
+        );
+    };
+
+    subtest 'with not exist order id' => sub {
+        my $member_id = 10102;
+        my $order_id = 999999;
+
+        like(
+            _get_http_response_content_by_member_id($member_id, status => 'success', order_id => $order_id),
+            qr{\Qデータがありません\E},
+            'should show error message'
+        );
+        is(
+            $skin_db->select_member_skin_id(member_id => $member_id),
+            undef,
+            'member skin should not be updated'
+        );
+    };
+
+    subtest "with other member's order id" => sub {
+        my $member_id = 10103;
+        my $other_member_id = 10104;
+        my $other_member_order_id  = 92345;
+
+        Mixi::Test::DataFactory->make('Mixi::Skin::Touch::Purchase' => {
+            order_id   => $other_member_order_id,
+            product_id => $skins->{deluxe}->{id},
+            member_id  => $other_member_id,
+        });
+
+        like(
+            _get_http_response_content_by_member_id($member_id, status => 'success', order_id => $other_member_order_id),
+            qr{\Qデータがありません\E},
+            'should show error message'
+        );
+        is(
+            $skin_db->select_member_skin_id(member_id => $member_id),
+            undef,
+            'member skin should not be updated'
+        );
+
+    };
+
+};
+
+subtest 'with status => "cancel"' => sub {
+    my $member_id = 10201;
+    my $response = _get_http_response_by_member_id($member_id, status => 'cancel');
+
+    ok($response->is_redirect, 'should be redirected');
+    like($response->header('Location'), qr{\Q/list_touch_skin.pl\E$}, 'should be redirected to list_touch_skin.pl');
+};
+
+subtest 'with status => "error"' => sub {
+    my $member_id = 10201;
+
+    like(
+        _get_http_response_content_by_member_id($member_id, status => 'error'),
+        qr{\Q決済処理に失敗しました。\E},
+        'should show charge fail message'
+    );
+};
+
+sub _get_http_response_content_by_member_id {
+    my $member_id = shift;
+    my %params = @_;
+
+    my $response = _get_http_response_by_member_id($member_id, %params);
+    return decode('euc-jp', $response->content);
+}
+
+sub _get_http_response_by_member_id {
+    my $member_id = shift;
+    my %params = @_;
+
+    my $c = Mixi::Skin::Touch::Controller::Apply->new;
+
+    Plack::Test::test_psgi Mixi::Pages::Runtime::PSGI::application($c), sub {
+        my $cb = shift;
+        my $uri = URI->new('apply_touch_skin.pl');
+        $uri->query_form( %params );
+        my $cookie = Mixi::Test::Login::Cookie::create_login_cookie($member_id);
+        my $response = $cb->( GET $uri, Cookie => $cookie, 'User-Agent' => $ua );
+        return $response;
+    };
+}
+
+
+done_testing;

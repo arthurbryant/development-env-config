@@ -14,11 +14,12 @@ alias gls="git log -1 -p HEAD"
 alias gmls="git commit -c HEAD"
 
 # alias for linux command 
-alias cl="clear"
+alias cls="clear"
 alias v="vim"
 alias cp='cp -i'
 alias rm='rm -i'
 alias chx="chmod +x"
-alias sg="source ~/.bashrc-git"
+alias sb="source ~/.bashrc"
 alias vg="vim ~/.bashrc-git"
 alias vv="vim ~/.vimrc"
+alias cdw="cd ~/git/touch-skin"

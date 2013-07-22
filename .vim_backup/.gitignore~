@@ -1,3 +1,73 @@
-/public/images/menu
-/node_modules/
+.carton/
+local/
 
+*~
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+
+# /
+/log
+/TAGS
+
+# /script/devel/experimental/
+/script/devel/experimental/bulk_eval
+
+# /script/video/cron/data/
+/script/video/cron/data/video_*.tsv
+
+# /script/video/cron/log/
+/script/video/cron/log/*.log
+
+# /script/voice/twitter_crawler/run_script_samples/gearmand/
+/script/voice/twitter_crawler/run_script_samples/gearmand/supervise
+
+# /script/voice/twitter_crawler/run_script_samples/manager/
+/script/voice/twitter_crawler/run_script_samples/manager/supervise
+
+# /script/voice/twitter_crawler/run_script_samples/manager/log/
+/script/voice/twitter_crawler/run_script_samples/manager/log/supervise
+/script/voice/twitter_crawler/run_script_samples/manager/log/manager.log
+
+# /script/voice/twitter_crawler/run_script_samples/worker/
+/script/voice/twitter_crawler/run_script_samples/worker/supervise
+
+# /script/voice/twitter_crawler/run_script_samples/worker/log/
+/script/voice/twitter_crawler/run_script_samples/worker/log/supervise
+/script/voice/twitter_crawler/run_script_samples/worker/log/worker.log
+
+# /static/css/basic/
+/static/css/basic/*.production.css
+
+# /static/ssl/
+/static/ssl/
+/static/ssl/*
+
+# /static/js/production
+/static/js/production/*
+
+# /tmpl/common/utf-8/
+/tmpl/common/utf-8/
+/tmpl/common/utf-8/*
+
+# /tmpl/device/touch/common/utf-8/
+/tmpl/device/touch/common/utf-8/
+/tmpl/device/touch/common/utf-8/*
+
+# flake compat js
+static/js/jp/mixi/home/touch/re/re.production.js
+static/js/jp/mixi/home/touch/re/clicktracker.production.js
+static/js/jp/mixi/analysis/google_analytics.production.js
+
+# flake compat css
+static/css/smartphone/touch/re.home.production.css
+
+# /t/static/js/node_modules/
+/t/static/js/node_modules/
+
+# add_skin_data
+/add_skin_data
+
+/t/extlib
+/cover_db

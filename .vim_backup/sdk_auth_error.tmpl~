@@ -1,0 +1,76 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<title>[mixi] </title> 
+<link rel="stylesheet" type="text/css" href="<TMPL_VAR EXPR=form(base_url) />static/css/smartphone/touch/common.css" />
+<link rel="stylesheet" type="text/css" href="<TMPL_VAR EXPR=form(base_url) />static/css/smartphone/touch/_list.css" />
+<link rel="stylesheet" type="text/css" href="<TMPL_VAR EXPR=form(base_url) />static/css/smartphone/touch/platform_wv.css" />
+</head> 
+<body> 
+<div id="page" class="webView01"><div id="mainDisplay"> 
+ 
+<!--[headerArea]--> 
+<div id="headerArea"> 
+ 
+<div class="gHeader02"> 
+<h1><a id="pagetop" href="#"><img src="<TMPL_VAR EXPR=form(base_url) />img/smartphone/touch/common/logo_mixi007-.png" alt="mixi" width="38" height="16" /></a></h1> 
+<!--/gHeader02--></div> 
+ 
+<!--/headerArea--></div> 
+<!--/[headerArea]--> 
+ 
+<!--[mainArea]--> 
+<div id="mainArea"> 
+ 
+ 
+ 
+<!--[cServiceInfo01]--> 
+<div class="gBaseComponent01 cServiceInfo01"> 
+ 
+<!--[gResponseBox01]--> 
+<div class="gResponseBox01"> 
+<div class="contents"> 
+<p><TMPL_VAR NAME=message_html ESCAPE=0></p> 
+</div> 
+<!--/gResponseBox01--></div> 
+<!--/[gResponseBox01]--> 
+ 
+ 
+ 
+<!--[gFootPanel]--> 
+<div class="gFootPanel modeConfirm"><form class="widget" data-widget-namespace="jp.mixi.touch.android.cancel" data-target-ref="input.btnCancel">
+<p class="ctrlButtons"><input class="cpSubmitBtn02 btnCancel" type="button" value="OK" /></p> 
+</form>
+<!--/gFootPanel--></div> 
+<!--/[gFootPanel]--> 
+ 
+ 
+ 
+<!--/cServiceInfo01--></div> 
+<!--/[cServiceInfo01]--> 
+ 
+ 
+ 
+<!--/mainArea--></div> 
+<!--/[mainArea]--> 
+ 
+ 
+<!--/mainDisplay--></div> 
+<div id="footDisplay"> 
+ 
+<!--[footerArea]--> 
+<div id="footerArea"> 
+<address>Copyright (C) mixi, Inc. All rights reserved.</address> 
+<!--/footerArea--></div> 
+<!--/[footerArea]--> 
+ 
+<!--/footDisplay--></div> 
+<!--/page--></div> 
+<TMPL_INCLUDE NAME="prevent_clickjack.tmpl">
+<script type="text/javascript" src="<TMPL_VAR EXPR=form(base_url)>static/js/mixi/touch/mixi.js"></script>
+<script type="text/javascript" src="<TMPL_VAR EXPR=form(base_url)>static/js/mixi/touch/sdk.android.production.js"></script>
+<script type="text/javascript">Namespace.use('jp.co.mixi.ui.widget *').apply(function(ns){ns.callByClassName()})</script>
+</body>
+</html>

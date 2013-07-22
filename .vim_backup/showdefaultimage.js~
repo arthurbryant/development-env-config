@@ -1,0 +1,14 @@
+Namespace('jp.mixi.skin.touch.admin.widget.showdefaultimage')
+.define(function(ns) {
+    /*global $j:false */
+    "use strict";
+
+    var showDefaultImage = function(element, dataset) {
+        $j(element).find(".JS_mikukore_img").on('error', function() {
+            this.src = dataset.imagePath;
+        });
+    };
+    ns.provide({
+        registerElement : showDefaultImage
+    });
+});

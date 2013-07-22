@@ -1,0 +1,39 @@
+<body class="mikukore <TMPL_VAR EXPR="skin_color_type"> mainVisual">
+<div><TMPL_IF NAME="skin_color_type">nothing?<div>
+<div id="page" class="<TMPL_IF NAME=SHOW_NAVIGATION>login<TMPL_ELSE>webView01</TMPL_IF><TMPL_IF EXPR=is_content_only> scopeContent01</TMPL_IF>">
+<div id="displayContainer">
+<div id="mainDisplay">
+
+<TMPL_UNLESS EXPR="is_script('mixi.jp/home.pl')">
+<TMPL_UNLESS NAME="use_ssl">
+<TMPL_IF NAME=SHOW_NAVIGATION>
+<!--[gHeadAdArea01]-->
+<div class="gHeadAdArea01">
+<!--/gHeadAdArea01--></div>
+<!--/[gHeadAdArea01]-->
+</TMPL_IF><!--/SHOW_NAVIGATION-->
+
+</TMPL_UNLESS>
+</TMPL_UNLESS>
+
+<TMPL_IF NAME=SHOW_NAVIGATION>
+<!--[headerArea]-->
+<div id="headerArea">
+
+<TMPL_INCLUDE EXPR="common('component_unsupported_alert.tmpl')">
+
+<div class="gHeader02">
+<h1><a id="pagetop" href="<TMPL_VAR EXPR=form(url_mixi_prefix)>home.pl?from=t_navi"><img src="<TMPL_VAR EXPR=form(CONFIG_IMG_BASE)>/img/smartphone/touch/common/logo_mixi007-.png" alt="mixi" width="38" height="16" /></a></h1>
+
+<ul class="topNavigation01">
+<li class="naviOpen widget" data-widget-namespace="jp.mixi.navigation.global" data-target-ref="#JS_searchNavi"><p><a href="javascript:void(0);"><span>グローバルナビゲーションを開く</span></a></p></li>
+</ul>
+
+<!--/gHeader02--></div>
+
+<!--[gBodyAdArea01]-->
+<TMPL_INCLUDE EXPR="common('ad/impact_header.tmpl')">
+<!--/[gBodyAdArea01]-->
+
+<div id="pagetop"></div>
+</TMPL_IF><!--/SHOW_NAVIGATION-->

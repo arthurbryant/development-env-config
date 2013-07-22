@@ -42,3 +42,4 @@ export PATH=/home/bkapps/software/bin:/home/bkapps/install/activepython/bin:$PAT
 export PATH=~/node_modules/.bin:$PATH
 
 source .bashrc-git
+source .perlrc
