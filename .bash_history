@@ -1,1000 +1,1000 @@
+gb
+gm
+gst
+gps
+git pull --rebase
+gps
+gst
+fg
 gl
-cls
+v tmpl/device/touch/skin/apply.tmpl
+gst
+gl
+gst
+gd
+gst
+ga .
+gm
 git pull
-gb
-gst
-git reset --hard 
+git rebase -i 
+git rebase -i HEAD~1
 gl
-gb
-git push -f
+git rebase -i HEAD~~
 gl
-cls
-gb
-git checkout COREDEVSOCIAL-429-002
-gl
-git checkout COREDEVSOCIAL-429_manager__develop 
-git cherry-pick 3fe99c1ef0d0d19642e196fd9334ab2c526062bd
-gl
-gps
-gl
-git checkout COREDEVSOCIAL-429-002
-git reset --hard
-gl
-ls
-gl
-git reset --hard HEAD~1
-gl
-gst
-git checkout COREDEVSOCIAL-429_manager__develop 
-gb
-clear
-ls
-v
-fg
-g
-fg
-ag Mixi::Skin::Touch::Purchase
-cls
-ag Mixi::Skin::Touch::Purchase
-cls
-ag 
-fg
-ag Mixi::Test::DataFactory
-fg
-ag "Mixi::Test::DataFactory" lib/Mixi/Skin/Touch
-ag "Mixi::Test::DataFactory" -i lib/Mixi/Skin/Touch
-ag "Mixi::Test::DataFactory"
-ag "Mixi::Test::DataFactory" | grep touch
-fg
-find . -name DataFactory
-vim t/lib/Mixi/Test/DataFactory/make.t 
-cl
-vim  ./t/inc/Mixi/Test/DataFactory
-vim t/lib/Mixi/Test/DataFactory/
-fg
-find . -name skindata
-find . -name skindata -i
-find . -name SkinData
-vim db-schema/DB_TOUCHSKIN__touchskin.sql 
-ls
-cls
-ls
-fg
-vim t/inc/Mixi/Test/DataFactory.pm 
-fg
-vim t/inc/Mixi/Test/DataFactory.pm 
-fg
-gb
-fg
-v
-fg
-gpl
-vgl
-gl
-v
-gls
-vim ./t/lib/Mixi/Skin/Touch/Controller/Apply.t
-fg
-mixi-prove  ./t/lib/Mixi/Skin/Touch/Controller/Apply.t | grep "料のやつのデザインを購入しました"
-mixi-prove  ./t/lib/Mixi/Skin/Touch/Controller/Apply.t | grep "料のやつのデザイン"
-fg
-ag 料のやつのデザインを設定しました
-ag "料のやつのデザインを設定しました"
-ag "デザインを設定しました"
-v
-fg
-mixi-prove  ./t/lib/Mixi/Skin/Touch/Controller/Apply.t 
-v ./t/lib/Mixi/Skin/Touch/Controller/Apply.t
-fg
-v
-fg 2
-fg 1
-fg 2
-fg
-mixi-prove  ./t/lib/Mixi/Skin/Touch/Controller/Apply.t 
-fg
-cls
-mixi-prove  ./t/lib/Mixi/Skin/Touch/Controller/Apply.t 
-gst
-gd
-gst
-gd
-ga .
-fg
-gl
-gm
-gps
-ag "#! /usr/bin/perl" t/lib/Mixi/Skin/ 
-man ag
-vim t/lib/Mixi/Skin/Touch/set_member_skin.t 
-vim t/lib/Mixi/Skin/Touch/get_genre.t 
-ag #!
-man ag
-fg
-man ag
-ag #!
-ag "usr/bin/perl"
-
-ag "usr/bin/perl" t/lib/Mixi/Skin/Touch/
-ag "usr/bin/perl" t/inc/Mixi/Test/
-fg
-v
-ag "usr/bin/perl" boofy/tmpl/skin/touch/
-v
-git diff
-fg
-gst
-git checkout t/lib/Mixi/Skin/Touch/Controller/Apply.t
-gst
-git clean
-gst
-cls
-ls
-v
-vim db-schema/DB_TOUCHSKIN__touchskin.sql _
-gpl
-fg
-vim db-schema/DB_TOUCH_SKIN_PURCHASE__touch_skin_purchase.sql 
-v
-fg
-vim db-schema/DB_TOUCHSKIN__touchskin.sql 
-fg
-gst
-rm -rf uccessq 
-gst
-gd t/lib/Mixi/Skin/Touch/Purchase/select_purchase_info_by_member_id.t
-gst
-gd
-gst
-gd t/lib/Mixi/Skin/Touch/Purchase/select_purchase_info_by_member_id.t
-gd
-ga .
-fg
-v
-gst
-gd
-ga .
-gm
-gps
-ls
-cls
-ag "#! /usr/bin/perl"
-ag "#! /usr/bin/perl" | grep touch
-ag "#! /usr/bin/perl" | grep -i touch
-ag "#! /usr/bin/perl" | grep -i skin
-gl
-gpl
-gl
-git reflog 
-gd d4d5b0b
-git reflog 
-git diff 728b5bb
-git l
-gl
-gpl
-git reset --hard origin/COREDEVSOCIAL-429_manager__develop 
-gl
-git fetch
-git reflog
-git reflog --stat
-vim 
-v
-v static/js/jp/mixi/skin/touch/admin/widget/editskinactions.js
-v static/js/jp/mixi/skin/touch/admin/widget/showskinactions.js 
-v static/js/jp/mixi/skin/touch/admin/widget/skininfoinput.js 
-v static/js/jp/mixi/skin/touch/admin/widget/editskinactions.js 
-v
-git reflog --stat
-git log -p fa56db3
-gb
-git cherry-pick fa56db3
-gst
+git reset --hard origin/COREDEVSOCIAL-429-004 
+git cherry-pick 526a090c706507debf37736a72f00fc1719870fc
 git mergetool 
 gst
 git clean
 git clean -f
+gst
+gd
+gd --cached
 gm
 gps
-git push origin HEAD:COREDEVSOCIAL-429-002
-git fetch
-git push origin HEAD:COREDEVSOCIAL-429-002
-git rebase origin/COREDEVSOCIAL-429-002
-git push origin HEAD:COREDEVSOCIAL-429-002
-cls
-git push -f
-gls
-gl
-cls
-v
-cl
-gpl
-fg
-cls
-v
-gst
-gd
-ga .
-gm
-gl
-gm
-gps
-cls
-vim lib/Mixi/Skin/Config.pm 
-gpl
-ls
-fg
-v
-gls
-v
-fg
-gst
-gd
-gst
-ga .
-gm
-gl
-gm
-gps
-ls
-gst
-gl
-v
-fg
-ls
-cls
-cd git/touch-skin/
-ls
-gb
-gpl
-gl
-gls
-git fetch
-ag ebisu
-fg
-v
-gst
 gl
 gpl
-gst
-gl
-git push
-gst
-gb
-gl
-fg
-ag postkey lib/Mixi/Skin
-vim lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
-whoami
-fg
-vim lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
-fg 1
-fg 2
-fg
-vim lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
-fg
-ag postkey
-ag "post_key =>"
-qfg
-fg
-ag "post_key =>" | grep -i member_id
-ag "post_key =>" | grep -i _MEMBER_ID_
-fg
-ls
-vim lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
-fg
-fg 1
-fg 2
-fg
-vim lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
-vim lib/Mixi/Skin/Touch/Controller/Admin/List.pm 
-vim lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm 
-ag post_key
-ag "$self->param->{post_key}" 
-ag post_key | grep "this->param"
-ag post_key | grep "param"
-ag post_key | grep "self->param->{post_key}"
-fg
-v
-gl
-fg
-pwd
-fg
-gst
-fg
-top
-cls
-top
-cls
-gst
-gd
-gst
-gco lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
-vim lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
-gst
-ga .
-gpl
-gl
-gb
-gst
-gm
-gps
-gpl
-fg
-v
-ag procedure lib/Mixi/Skin/Touch
-ag procedure lib/Mixi/Skin/Touch/
-ag procedure lib/Mixi/Skin/Touch/ -i
-ag "Mixi::Skin::Touch::Adapter::Procedure::Skin" lib/Mixi/Skin/Touch/ -i
-fg
-gl
-git fetch
-git l
-gl
-gb
-git reset --hard origin/COREDEVSOCIAL-429_manager__develop 
-gl
-cls
-fg
-cls
-fg
-v
-fg
-v
-fg
-ag datafactory
-fg
-ag DataFactory
-ag DataFactory | grep skin
-ag DataFactory | grep Skin
-fg
-vim t/inc/Mixi/Test/DataFactory.pm 
-vim t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/SkinData.pm 
-fg
-vim t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/SkinData.pm 
-fg
-vim t/inc/Mixi/Test/DataFactory.pm 
-vim t/inc/Mixi/Test/DataFactory/Object.pm 
-fg
-vim t/inc/Mixi/Test/DataFactory/Object.pm 
-fg
-vim t/inc/Mixi/Test/DataFactory/Object.pm 
-fg
-ag "dumper start"
-fg
-vim t/functional/procedure/skin/touch/getByMemberId/internal.t 
-fg
-vim t/functional/procedure/skin/touch/getByMemberId/internal.t 
-fg
-cat ~/bin/condb.sh 
-mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
-fg
-gst
-gd
-cls
-gd
-fg
-v
-gd
-fg
-v
-gst
-ga .
-gm
-vim lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm 
-fg
-gpl
-gst
-git merge --abort
-gst
-gl
-git pull --rebase
-gl
-gst
-gps
-ls
-cls
-gpl
-fg
-exit
-ls
-dadskfsdahflkdslfjdk
-fg
-ls
-gl
-cd git/touch-skin/
-gl
-cls
-fg
-v
-fg
-v
-vv
-sv
-vg
-sg
-sv
-vv
-vd
-cd
-vd
-g
-gd
-gd | grep .vimrc
-gd .vimrc
-fg
-vv
-sv
-vg
-fg
-pwd
-fg
-cdw
-fg
-pwd
-cd
-pwd
-cd -
-fg
-vim /home/bkapps/.vim/plugin/
- vim /usr/share/vim/vim71/ftplugin/perl.vim 
-cd
-mkdir -p .vim/ftplugin
-vim /home/bkapps/.vim/ftplugin/perl.vim
-vim
-fg
-clear
-ls
-fg
-v
-mv .vim/ftplugin/perl.vim .
-fg
-vv
-fg
-v
-pwd
-ls
-cd perl5/
-ls
-cd lib/
-ls
-cd perl5/
-ls
-cd ../..
-ls
-cd ..
-vim /home/bkapps/.bashrc
-vim .perlrc
-sg
-vg
-vim .bashrc
-fg
-vim .bashrc
-vg
-sg
-sb
-fg
-v
-cls
-echo $PERL5
-echo $PERL5LIB
-cdw
-v
-echo $PERL5LIB
-fg
-vv
-v
-vv
-v
-vv
-v
-vv
-v
-vv
-v
-vv
-v
-vv
-v
-gst
-cd
-gst
-vim .gitignore_global 
-vim .git/config 
-v
-git log --author=iwasa
-cd
-cdw
-git log --author=iwasa
-git log --author=iwasa --stat 
-vim 
-vim static/css/smartphone/touch/home_tmpl.css
-ag navi_smart.tmpl
-ag navi_smart.tmpl | grep touch
-find . -name navi_smart.tmpl
-ag "navi_smart.tmpl" | grep touch
-v
-cls
-git log --author=iwasa --stat 
-ag home_tmpl.css
-ag "home_tmpl.css"
-ag "home_tmpl"
-gpl
-git fetch
-gb
-git fetch
-gb
-ls
-cls
-gpl
-mixi-prove lib/Mixi/Game/Mobage/Controller/UserFlow/InviteFriends/basic.t
-mixi-prove  lib/Mixi/Game/Mobage/Controller/UserFlow/InviteFriends/basic.t
-mixi-prove  t/lib/Mixi/Game/Mobage/Controller/UserFlow/InviteFriends/basic.t 
-vim t/lib/Mixi/Game/Mobage/Controller/UserFlow/InviteFriends/basic.t 
-ag skin-option
-ag skin_option
-vim ./lib/Mixi/Pages2/Plugin/Skin.pm
-mixi-prove  t/lib/Mixi/Game/Mobage/Controller/UserFlow/InviteFriends/basic.t 
-fg
-vim ./lib/Mixi/Pages2/Plugin/Skin.pm
-fg
-ls
-cd git/touch-skin/
-ls
-git fetch
-gpl
-clear
-gst
-gb
-gl
-ls
-v
-cd lib/Mixi/Skin/Touch/Adapter/Procedure/Internal/Purchase/
-ls
-v CallBack.pm 
-cd ..
-ls
-cd ..
-ls
-cd ..
-ls
-cd Procedure/
-ls
-vim Skin.pm 
-pwd
-ls
-cdw
-ls
 gb
 gb -all
+gr -v
 gb --all
-gb remotes/origin/COREDEVSOCIAL-429-003
-gl
-gpl
-gl
-gb
-man git branch
-git branch -d remotes/origin/COREDEVSOCIAL-429-003
-gb
-gb --all
-gco remotes/origin/COREDEVSOCIAL-429-003
-git checkout -b COREDEVSOCIAL-429-003
-gl
-gls
 cls
-man git diff
-gls --name-only
-gl
-ls
-cls
-fg
-ls
-gl
-gls --name-only
-find . -name root.tmpl
-ag "root.tmpl"
-vim lib/Mixi/Home/Controller.pm 
-ag home2011_css.tmpl
-vim ./tmpl/device/touch/home/smart/root.tmpl
-find . -name navi_friend.tmpl
-vim ./tmpl/device/touch/common/euc-jp/navi_friend.tmpl
-vim ./tmpl/device/touch/home/smart/root.tmpl
-fg
-find . -name navi_friend.tmpl
-cd tmpl/device/touch/common/euc-jp/
-ls
-fg
-vim ./tmpl/device/touch/home/smart/root.tmpl
-cd -
-vim ./tmpl/device/touch/home/smart/root.tmpl
-fg
-cd -
-vim navi_smart.tmpl 
-pwd
-fg
-cdw
 gpl
-fg
-cd tmpl/device/touch/home/smart/
-ls
-find . -name friend.tmpl
-find . -name show_friend.tmpl
-find . -name show_friend*
-find . -name *friend*
-find . -name *profile*
-cdw
-ls
-gb
-git checkout COREDEVSOCIAL-429_manager__develop
-gst
-gco tmpl/device/touch/home/smart/root.tmpl
-gst
-git checkout COREDEVSOCIAL-429_manager__develop
-man git pull
-git pull origin COREDEVSOCIAL-429-003
-git merge --abort
-gst
+f create.t
+f create.t | grep comm
+f create.t | grep Adapter
+f create.t | grep Adapter | grep Community
+vim ./t/lib/Mixi/Community/Adapter/Procedure/Internal/Diary/create.t
+prove ./t/lib/Mixi/Community/Adapter/Procedure/Internal/Diary/create.t
+prove ./t/lib/Mixi/Community/Adapter/Procedure/Internal/Comment/Create.t 
 gl
-gst
-git pull --rebase origin COREDEVSOCIAL-429-003
-gl
-gpl
-gst
-git merge --abort
-gl
-git push -f
-gpl
-cls
-ls
-gl
-git reflog
-git reflog --name-only
-vim tmpl/device/touch/home/smart/root.tmpl
-fg
-vim tmpl/device/touch/home/smart/root.tmpl
-fg
-gd
-find . -name show_friend.pl
-vim show_friend.pl 
-find . -name show_friend*
-find . -name show_friend.*
-find . -name show_friend.* -r
-find . -name show_frien*
-find . -name show_frie.*
-find . -name show_friend\*
-find . -name show_friend\*.tmpl
-cd ./tmpl/device/touch/
-vim show_friend_main.tmpl 
-vim -O show_friend_main.tmpl show_profile_main.tmpl 
-cd -
-vg
-f
-fg
-sg
-sb
-vg
-vim /home/bkapps/.bashrc
-sb
-f navi_smart.tmpl
-ag navi_smart.tmpl
-ag navi_smart.tmpl | grep show_friend
-ag navi_smart.tmpl | grep show_
-ag navi_friend.tmpl
-cls
-ag navi_friend.tmpl
-f navi_friend.tmpl
-v  ./tmpl/device/touch/common/euc-jp/navi_friend.tmpl
-f navi_smart.tmpl
-ls
-fg
-cd -
-ls
-pwd
-vim show_profile_main.tmpl 
-ag navi_smart.tmpl
-ag navi_smart.tmpl | grep show
-ag navi.tmpl
-ag navi.tmpl | grep sho
-pwd
-ls
-pwd
-f navi_smart.tmpl
-vim common/euc-jp/navi_smart.tmpl 
-fg
-pwd
-ls
-vim show_profile_main.tmpl 
-fg
-f navi_smart.tmpl
-vim common/euc-jp/navi_smart.tmpl 
-cd -
-ls
-f root.tmpl
-vim ./tmpl/device/touch/home/smart/root.tmpl
-ag <tmpl_var
-ag "<tmpl_var"
-ag "<tmpl_var" -i
-g
-fg
-pwd
-cd lib/Mixi/Skin/Controller
-ls
-cd ..
-ls
-cd Touch/Adapter/
-ls
-cd Procedure/
-ls
-vim Skin.pm 
-fg 2
-fg
-pw
-pwd
-ls
-vim Skin.pm 
-cdw
-gpl
-gl
-fg
-ag green
-cd -
-cd git/
-ls
-cd pages-practice/
-ls
-ls -t | head
-vim hello_world.pl 
-ls -t |　more
-ls -t |more
-vim hello_world.pl 
-vim tmpl/sample/pages_practice_main.tmpl 
-fg
-cd -
-ls
-cd touch-skin/
-ls
-cd tmpl/device/touch/skin/
-ls
-cd ..
-ls
-f navi_friend.tmpl
-vim common/euc-jp/navi_friend.tmpl 
-f navi_smart.tmpl
-vim common/euc-jp/navi_smart.tmpl 
-pwd
-fg
-pwd
-vim show_friend_main.tmpl 
-ag show_friend_main.tmpl
-cd -
-cdw
-ag show_friend_main.tmpl
-ag Mixi/ProfileService/Controller/Friend.pm
-ag Friend.pm
-ag Mixi::ProfileService::Controller::Friend.pm
-ag Mixi::ProfileService::Controller::Frien
-cd -
-vim show_friend_main.tmpl 
-fg
-vim show_profile_main.tmpl 
-f navi.tmpl
-vim common/euc-jp/navi.tmpl 
-f root.tmpl
-vim home/smart/root.tmpl 
-cls
-fg
-vim home/smart/root.tmpl 
-wpd
-ag green
-fg
-vim home/smart/root.tmpl 
-f home2011.*tmpl
-history | grep 2011
-history | grep home
-cd -
-vim static/css/smartphone/touch/home_tmpl.css
-pwd
-history | grep home
-ffg
-fg
-ag mainVisual
-fg
-gd
-git diff --color-words 
-vim home/smart/root.tmpl 
-cd -
-vim home/smart/root.tmpl 
-git diff --color-words 
-gst
-ga .
-gm
-gps
-gpl
-git fetch
-fg
-gpl
-git abort --merge
-git reset --hard 
-gl
-git reset --hard origin/COREDEVSOCIAL-429_manager__develop 
-gl
-git fetch
-gl
-ls
-cdw
-ls
-ag add-css
-ag add_css
-ag add_css | grep "-list.css"
-ag add_css | grep "_list.css"
-ag add_css | grep "_list.css" | grep touch
-ag add_css | grep "_edit.css" | grep touch
-ag add_cs.*_edit.css | grep touch
-ag add_cs.*_edit.css 
-ag "add_css.*smartphone/touch/_edit.css"
-man ag
-ag "add_css.*smartphone/touch/_edit.css -l
-man ag
-ag -l "add_css.*smartphone/touch/_edit.css 
-ag -L "add_css.*smartphone/touch/_edit.css .
-ag  "add_css.*smartphone/touch/_edit.css  | grep touch | wc -l
-;
-ag  "add_css.*smartphone/touch/_edit.css  
-ag  "add_css.*smartphone/touch/_edit.css" -l  
-ag  "add_css.*smartphone/touch/_edit.css" -l   | wc -l
-ag  "add_css.*smartphone/touch/_edit.css" 
-vim ./tmpl/device/touch/new_album_main.tmpl
-sed  '/add_css.*smartphone/touch/_edit.css/' ./tmpl/device/touch/new_album_main.tmpl 
-sed  '/add_css.*smartphone\/touch\/_edit.css/d' ./tmpl/device/touch/new_album_main.tmpl 
-sed  '/add_css.*smartphone\/touch\/_edit.css/d' ./tmpl/device/touch/new_album_main.tmpl  > a
-vimdiff a ./tmpl/device/touch/new_album_main.tmpl
+vim ./t/lib/Mixi/Community/Adapter/Procedure/Internal/Comment/Create.t 
 history
-ag  "add_css.*smartphone/touch/_edit.css" -l
- sed  '/add_css.*smartphone\/touch\/_edit.css/d' `ag  "add_css.*smartphone/touch/_edit.css" -l`
-gst
-rm -rf a
- sed -i '/add_css.*smartphone\/touch\/_edit.css/d' `ag  "add_css.*smartphone/touch/_edit.css" -l`
-ag  "add_css.*smartphone/touch/_edit.css" -l
-ag  "add_css.*smartphone/touch/_list.css" -l
-ag  "add_css.*smartphone/touch/_list.css" -l | wc -l
- sed -i '/add_css.*smartphone\/touch\/_list.css/d' `ag  "add_css.*smartphone/touch/_list.css" -l`
-gd
-fg
-gst
+v tmpl/device/touch/skin/apply.tmpl
 gpl
 gl
+gpl
 git fetch
-gst
-gst | wc -l
-ga .
-gm
-git pull --rebase
+gls
+qcls
+cls
+gls
+gl
+git diff d9a055503175b7c90677cc6808a61adfc0611d63
 gpl
-gl
-gst
-gps
-ls
-history | grep sed
-ag "add_css.*_list.css"
-ag "add_css.*_edit.css"
-ag 'add_css.*_edit.css'
-ag 'add_css.*_edit\.css'
-v
-ag -a 'add_css.*_edit\.css'
-ack 'add_css.*_edit\.css'
-ag -a 'add_css.*_edit\.css'
-ag -a 'add_css.*_edit\.css' -l
-ag -a 'add_css.*_list\.css' -l
-gpl
-gl
-ag -a 'add_css.*_list\.css' -l
- sed -i '/add_css.*smartphone\/touch\/_list.css/d' `ag  "add_css.*smartphone/touch/_list.css" -al`
- sed -i '/add_css.*smartphone\/touch\/_edit.css/d' `ag  "add_css.*smartphone/touch/_edit.css" -al`
-gst
-gd
-ag -a 'add_css.*_list\.css' -l
-ag -a 'add_css.*_edit\.css' -l
-ag -a '.*_edit\.css' -l
-ag -a '.*_edit\.css' 
-ag -a '.*_list\.css' 
-vim ./static/css/smartphone/touch/common.css
-vim ./boofy/tmpl/support/judge/ng_phrase/phrase_edit.tmpl
-vim ./static/css/smartphone/touch/common.css
-vim ./media_resources/flake/css-compat/smartphone/touch/re.home.production.yaml
-v ./tmpl/device/touch/sp_skin/common_css.tmpl
-v ./tmpl/device/touch/payment/ebisu/mixi_point_pay_method_for_once_not_enough.tmpl
-v ./tmpl/device/touch/dialog_request.tmpl
-v ./tmpl/device/touch/sdk_auth_revoke.tmpl
-v ./tmpl/device/touch/sdk_auth_confirm.tmpl
-v ./tmpl/device/touch/dialog_invalid.tmpl
-v ./tmpl/device/touch/pr/sandbox_richfeed/_default.tmpl
-v ./tmpl/device/touch/promotion/promotion_mixi_park.tmpl
-v ./tmpl/device/touch/pr/sandbox_richfeed/_default.tmpl
-ag -a '.*_list\.css' 
-v ./tmpl/device/touch/sdk_auth_error.tmpl
-gst
-ag -a '.*_list\.css' 
-ag -a '.*_edit\.css' 
-gst
-ga .
-gl
-gm
-fg
-gps
-ls
-gl
-stop-server 
-start-server 
-start-server -dbg
-vim bin/start-server 
-start-server -dbg
-ls
-cd git/touch-skin/
-git fetch
-gb
-gpl
-mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
-ls
-cd w
-cdw
-git fetch
-gpl
-gl
-ls
-gb
-gco COREDEVSOCIAL-429-003
-gl
-gpl
-git remote -v
-man git add remote
-man git remote 
-history | grep git remote
-history | grep "git remote"
-git pull origin COREDEVSOCIAL-429-003 
 gl
 gls
 cls
-ag DB_DIARY_RANKING_MST
-vim lib/Mixi/Config/Debug.pm 
-ag DB_PUSHNOTIFY_GAP_MST: DBI:mysql:database=pushnotify_gap;host=a03933;mysql_connect_timeout=5
-ag "DB_PUSHNOTIFY_GAP_MST: DBI:mysql:database=pushnotify_gap;host=a03933;mysql_connect_timeout=5"
-vim lib/Mixi/Config/Debug.pm 
+gb
+gpl
+v
+gst
+gd
+gf
+ag can_set_skin
+vim ./lib/Mixi/Skin/Controller/Manage.pm
+ag staging
+ag staging lib/Mixi/Skin/Touch
+vim lib/Mixi/Skin/Touch/Admin.pm
+cls
+fg
+cls
+fg
+cd boofy/gear/skin/touch/
 ls
+ag staging
+vim manage_skin.pl 
+ag can_edit_skin
+cd -
+ag can_edit_skin
+ag can_edit_
+ag can_edit_skin
+v
+cd lib/Mixi/Skin/Touch/
+ls
+vim Controller/Admin/Manage.pm 
+fg
+vim Controller/Admin/Manage.pm 
+ls
+vim Controller/Apply.pm 
+vim Controller/List.pm 
+ag staging
+v
+pwd
+v
+vim Controller/Admin/Manage.pm 
+cd -
+gpl
+gl
+gst
+gd
+fg
+v boofy/tmpl/skin/touch/leftmenu.tmpl
+gst
+gd
+ga .
+gst
+gm
+gps
+gd
+gpl
+g;
+gl
+ls
+git fetch
+ls
+gb
+gco staging
+git pull
+gl
+gls
+gl
+cls
+fg
+gpl
+v
+ag windows
+ag popup
+f simplepopup.js 
+vim static/js/mixi/touch/ui/simplepopup.js 
+vim ./static/js/mixi/popup/simplepopup.js
+ag window
+man find
+find . -type js 
+man find
+f *.sj
+f *.js
+ag window `f *.js `
+ag popup `f *.js `
+vim ./static/js/edit_account.js
+f simplepopup
+f simplepopup.js
+f *simplepopup.js
+v ./static/js/mixi/popup/simplepopup.js
+vim ./static/js/edit_account.js
+fg
+fg 2
+fg 1
+gb
+gl
+fg
+v
+fg 1
+fg 3
+fg
+fg 1
+fg 2
+fg 3
+fg
+gb
+fg
+gst
+gd
+gd --cached
+gls
+gst
+gd
+git checkout boofy/tmpl/skin/touch/show_genre.tmpl
+gst
+gb
+git reset --hard origin/
+git reset --hard origin staging 
+git reset --hard  staging --
+gl
+gst
+gb
+gco COREDEVSOCIAL-429-004
+gpl
+gl
+gb
+v
+fg
+fg 2
+fg 1
+history
+fg
+ag onClick
+ag ".onClick"
+ag "\.onClick"
+cls
+fg
+ls
+fg
+fg 2
+fg 1
+fg
+gst
+git clean -f
+vim static/js/jp/mixi/skin/touch/admin/widget/deleteskinconfirmaction.js
+gst
+gd
+ga .
+gm
+gst
+git pull --rebase
+gb
+gps
+cdw
+git diff 9d4ce3e2170848d5622f418b1a091ffcfd02c8fd
+git diff 032676d219fffee5ac6b18f5d060e5100329c5f1..9d4ce3e2170848d5622f418b1a091ffcfd02c8fd
+hisotry 
+history
+git log 9d4ce
+gl
+git log 9d4ce
 stop-server 
 start-server 
-cd git/touch-skin/
+top
+ps -aux
+ps -aux | grep httpd.confg
+ps -aux | grep httpd.conf
+vim /home/bkapps/bin/stop-server 
+stop-server 
+kill -9 15664
+kill -9 15666
+kill -9 15667
+kill -9 24814
+kill -9 24816
+kill -9 24817
+ps -aux | grep httpd.conf
+kill -9 30875
+kill -9 30877
+kill -9 30878
+kill -9 32582
+kill -9 32584
+kill -9 32585
+ps -aux | grep httpd.conf
+ps
+top
+cls
+stop-server 
+start-server 
+top
+start-server 
+stop-server 
+start-server 
+cdw
 ls
-v
-fg
-v
-fg
-fg 2
-fg
-vim add_skin.sh 
-fg
-fg 2
-fg
-v
-cat set_config.pl 
-fg
-vim set_config.pl 
-cat set_config.pl 
-fg
-vim set_config.pl 
-cat set_config.pl 
+git fetch
+gb
+gco COREDEVSOCIAL-429-004
+git pull
+gl
+clear
 ls
-ag "DB_PUSHNOTIFY_GAP_MST: DBI:mysql:database=pushnotify_gap;host=a03933;mysql_connect_timeout=5"
+cd boofy/tmpl/skin/
+ls
+vim add_confirm_skin.tmpl 
+cd -
+gb
+man git log
+vim tmpl/device/touch/show_friend/myarea.tmpl
+git diff 1f43cca0
+cls
+gl
+gb
+git pull
+gb
+git pull
+vim tmpl/device/touch/show_friend/myarea.tmpl
+history
+ls
+cdw
+ls
+gb
+git fetch
+exit
+ls
+cd git/pages-practice/
+ls
+gst
+gpl
+gv -r
+gr -v
+vim
+php
+cd
+ls
+php
+cdw 
+ls
+ag ag "open\(FILE"
+ag  "open\(FILE"
+gst
+gpl
+git fetch
+gb
+gl
+gls
+lear
+clear
+/dev/random
+/dev/urandom
+sudo /dev/random
+ls
+cdw
+gpl
+git fetch
+gb
+git checkout -b COREDEVSOCIAL-429-005 origin/COREDEVSOCIAL-429-005
+gb
+pl
+gl
+gls
+cdw
+gb
+sed '/add_css.*smartphone�_/touch�_/_list.css/d' `ag  "add_css.*smartphone/touch/_list.css" -al`
+exit
+cdw
+gb
+gb --all
+gb -v
+gls
+vim t/lib/Mixi/Skin/Touch/get_skin.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
+fg
+gls
+mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
+vim t/lib/Mixi/Skin/Touch/get_skin.t
+gls
+gpl
+gl
+gb
+git fetch
+gb -a
+git fetch
+gpl
+gl
+gpl
+gls
+gb
+gb --all
+man git checkout
+git checkout remotes/origin/release
+gb
+git checkout -b release
+gb
+gr -v
+gb -v
+gco staging
+git branch -D release
+git checkout -b release remotes/origin/release
+gb
+gb -r
+gb -v
+gl
+gpl
+gl
+git log 9754e949bd2d7b7acdccec7b5c34ab1f96abfa00
+git diff 9754e949bd2d7b7acdccec7b5c34ab1f96abfa00
+history | grep git
+gs 9754e949bd2d7b7acdccec7b5c34ab1f96abfa00
+gl
+sl
+cls
+script/tool/service_activation 
+cls
+gls
+git fetch
+git checkout -b hotfix origin/hotfix 
+gb
+gb -v
+gpl
+gb
+gb -a
+gpl
+gls
+gpl
+gls
+gl
+gpl
+ls
+gb
+git checkout COREDEVSOCIAL-429-006
+gpl
+git fetch
+gl
+git show e8529dd9e13f34b28ea0fbdd118979b94101c8b0
+git show c3dacfcccd05c75bb49da84edc2dca484a20fbdd
+gb --all
+git checkout remotes/origin/work/activity_feed_for_skin
+git checkout -b activity_feed_for_skin
+gpl
+gco staging
+git branch -D activity_feed_for_skin
+git checkout -b activity_feed_for_skin remotes/origin/work/activity_feed_for_skin
+gpl
+git fetch
+gl
+gs aadfb6a7b8295f0750ca8b09848836349db708a6
+v  t/lib/Mixi/Skin/Touch/set_member_skin.t
+mixi-prove  t/lib/Mixi/Skin/Touch/set_member_skin.t
+v  t/lib/Mixi/Skin/Touch/set_member_skin.t
+fg
+gpl
+gst
+gpl
+gl
+gpl
+git checkout -b activity_feed_for_touch_skin_update work/activity_feed_for_touch_skin_update
+git checkout -b activity_feed_for_touch_skin_update origin/work/activity_feed_for_touch_skin_update
+gb
+gpl
+cls
+gl
+gpl
+gl
+gls
+gs
+clear
+gs
+gs --name-only
+cls
+gs --name-only
+gls
+v lib/Mixi/ActivityFeed/Adapter/Internal/Discarder.pm
+gls
+v lib/Mixi/Home/Element/SocialStream/Feed/Activity/Skin/Touch/Set.pm
+fg
+gls
+fg
+git fetch
+cls
+cd ..
+ls
+cd ..
+ls
+cd
+ls
+cd git/android/
+ls
+cd android/
+ls
+cd ..
+ls
+cd gitolite-admin/
+ls
+cd ..
+ls
+cd ..
+ls
+cd lo
+cd local/
+ls
+cd ..
+ls
+cd studytech/
+ls
+cd ../test/
+ls
+cd ../tmp/
+ls
+rm -rf ActivePython-2.7.2.5-linux-x86_64.tar.gz 
+cd ..
+ls
+locate android
+cd test/
+ls
+cd study_test/
+;ls
+ls
+cd ..
+ls
+cd ..
+ls
+cd /
+ls
+cd home/
+ls
+cd bk
+cd bkapps/
+ls
+pwd
+cd 
+cd /
+ls
+locat iphone
+locate iphone
+cd /
+locate iphone
+f iphone
+ls
+exit
+ls
+cdw
+gb
+gb -a
+gpl
+gb
+stop-server 
+start-server 
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
+cdw
+gb
+git checkout release
+gpl
+ls
+clear
+ls
+cdw
+ls
+gb
+gpl
+f mixi_point_pay_method_for_once.pl
+vim mixi_point_pay_method_for_once.pl 
+ag ポイント増
+ag "ポイント増"
+fg
+ag "ポイント"
+ag "ポイント増減"
+ag -u "ポイント増減"
+fg
+vim mixi_point_pay_method_for_once.pl 
+ls
+cdw
+ls
+git fetch
+gb --all
+gco hotfix
+gpl
+gl
+gb --all
+gb
+git checkout -b hotfix_add_no_nativeapp_message remotes/origin/hotfix_add_no_nativeapp_message
+gb
+gpl
+gl
+gb --all
+gl
+gb
+gb --all
+git checkout -b work/007 remotes/origin/work/007
+gpl
+gl
+gb --all
+gco release
+git branch -D work/007 
+git checkout -b  remotes/origin/work/007
+gb
+git branch  -D  remotes/origin/work/007
+gco master
+git branch  -D  remotes/origin/work/007
+git checkout   remotes/origin/work/007
+gl
+gr -v
+gb -v
+gco relase
+gco release
+gb -v
+git checkout -b 007 origin/work/007 
+gpl
+v
+fg
+ag select_public_genres
+fg
+ag get_public_genres
+cls
+ag get_public_genres
+fg
+ag select_public_genres
+fg
+ls
+cdw
+stop-server 
+start-server 
+gst
+gd
+gst
+git checkout lib/Mixi/Skin/Touch/DB/Skin.pm
+gst
+start-server 
+cls
+start-server 
+fg
+f
+cls
+start-server 
+]
+fg
+start-server 
+fg
+start-server 
+ls
 mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
 cd git/bash/
 ls
-cat argv.sh 
-cat input.sh 
-cat execute.sh 
+mkdir add_skin_counter_to_genre
+cd add_skin_counter_to_genre/
+vim sql
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
+cd git/bash/add_skin_counter_to_genre/
+ls
+vim sql 
+fg
+cls
+vim sql 
+1fg
+vim sql 
+ls
+v
+gst
+ag home2011.css
+ag home2011
+pwd
+ls
+cdw
+ls
+gb
+ag home2011
+ag home2011.css
+v
+vim home.pl 
+find root.tmpl
+f root.tmpl
+v ./tmpl/device/touch/home/smart/root.tmpl
+f header.tmpl
+f header.tmpl | grep touch
+fg
+v ./boofy/tmpl/skin/touch/header.tmpl
+v ./tmpl/device/touch/common/euc-jp/header.tmpl
+fg
+pwd
+fg
+ag is_softlaunch_activated
+cls
+ag is_softlaunch_activated
+vim lib/Mixi/Template/Role/SoftLaunch.pm 
+fg
+ag sp_skin/home2011_css.tmpl
+ag home2011_css.tmpl
+ag "home2011_css.tmpl"
+fg
+ag common_css.tmpl
+vim tmpl/device/touch/show_profile_main.tmpl 
+fg
+f common_css.tmpl
+vim tmpl/device/touch/sp_skin/common_css.tmpl 
+f home2011_css.tmpl
+vim tmpl/device/touch/sp_skin/home2011_css.tmpl 
+ag home2011_css.tmpl
+ag common_css.tmpl
+fg
+ag build_css
+vim ./lib/Mixi/Template/Role/Static/StyleSheet.pm
+fg
+ag build_optimizely
+vim ./lib/Mixi/Template/Role/Optimizely.pm
+fg
+ag build_google_analytics
+v ./lib/Mixi/Template/Role/GoogleAnalytics.pm
+vim ./lib/Mixi/Template/Role/Static/StyleSheet.pm
+fg
+vim ./lib/Mixi/Template/Role/Static/StyleSheet.pm
+jobs -l
+fg 
+fg
+vim ./lib/Mixi/Template/Role/Static/StyleSheet.pm
+ag home2011_css.tmpl
+ag common_css.tmpl
+cls
+fg
+vim ./tmpl/device/touch/home/smart/root.tmpl  
+ag header.tmpl
+ag header.tmpl | grep touch
+f header.tmpl
+f header.tmpl | grep touch
+vim ./boofy/tmpl/skin/touch/header.tmpl
+v ./tmpl/device/touch/common/euc-jp/header.tmpl
+history
+fg
+ag show_friend_main.tmpl
+vim ./lib/Mixi/ProfileService/Controller/Friend.pm
+ag Mixi::ProfileService::Controller::Friend
+vim show_profile.pl 
+fg
+gst
+history
+v ./tmpl/device/touch/home/smart/root.tmpl
+v ./tmpl/device/touch/show_friend_main.tmpl  
+v ./tmpl/device/touch/home/smart/root.tmpl
+vim home.pl 
+v ./tmpl/device/touch/home/smart/root.tmpl
+history
+v ./tmpl/device/touch/common/euc-jp/header.tmpl
+fg
+f sp_skin/common_css.tmpl
+f "sp_skin/common_css.tmpl"
+f "sp_skin\/common_css.tmpl"
+f "common_css.tmpl"
+fg
+cd git/perl/
+ls
+cd exercise/
+ls
+cp add.pl unshift.pl
+vim unshift.pl 
+./unshift.pl 
+fg
+./unshift.pl 
+fg
+./unshift.pl 
+fg
+vim unshift.pl 
+./unshift.pl 
+fg
+vim unshift.pl 
+./unshift.pl 
+fg
+./unshift.pl 
+fg
+./unshift.pl 
+fg
+./unshift.pl 
+fg
+vim unshift.pl 
+fg
+gb
+cdw
+ls
+gb
+stop-server 
+start-server 
+cls
+start-server 
+mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
+cdw
+stop-server 
+start-server 
+df
+fg
+start-server 
+f sytlesheet
+f stylesheet
+fg
+f stylesheet
+start-server 
+fg
+start-server 
+fg
+start-server 
+fg
+start-server 
+fg
+start-server 
+fg
+start-server 
+fg
+start-server 
+fg
+start-server 
+ls
+sshde
+cls
+history
+v ./tmpl/device/touch/common/euc-jp/header.tmpl
+cdw
+gpl
+gb
+cls
+history
+v ./tmpl/device/touch/common/euc-jp/header.tmpl
+fg
+ag _output_filter
+cls
+ag _output_filter
+vim lib/Mixi/Template/Base.pm 
+fg
+ag add_css
+fg
+ag INJECTION_SIGUNATURE
+fg
+gst
+git stash 
+gst
+gb
+gco COREDEVSOCIAL-429-006
+v ./tmpl/device/touch/common/euc-jp/header.tmpl
+fg
+v ./tmpl/device/touch/common/euc-jp/header.tmpl
+fg
+git checkout 007
+man git stash
+git stash pop
+gst
+v
+v tmpl/device/touch/common/euc-jp/header.tmpl
+fg
+history
+v ./tmpl/device/touch/home/smart/root.tmpl
+gst
+gd
+v ./tmpl/device/touch/home/smart/root.tmpl
+fg 2
+fg 1
+fg 2
+fg
+ag "<TMPL_LOOP EXPR>"
+ag "<TMPL_LOOP EXPR"
+FG
+gh
+fg
+ag "<tmpl_loop expr"
+ag "<TMPL_LOOP EXPR"
+fg
+history
+fg
+ag add_google_analytics_param
+fg
+ag build_google_analytics
+cls
+ag build_google_analytics
+fg
+history
+v ./tmpl/device/touch/home/smart/root.tmpl
+fg
+ag NAME="<TMPL_"
+ag NAME="<TMPL"
+ag 'NAME="<TMPL"'
+ag 'NAME=\"<TMPL\"'
+FG
+fg
+cd lib/Mixi/Template/Role/GoogleAnalytics
+ls
+cd lib/Mixi/Template/Role/
+ls
+cd -
+fg
+f google_analytics/_loader.tmpl
+f google_analytics
+fg
+v tmpl/device/touch/common/euc-jp/header.tmpl
+jobs -l
+fg
+v tmpl/device/touch/common/euc-jp/header.tmpl
+f google_analytics/_loader.tmpl
+v
+f _loader.tmpl
+cd ./tmpl/device/touch/common/euc-jp/
+ls
+fg
+mkdir stylesheet
+cd stylesheet/
+vim _loader.tmpl
+c d..
+cd ..
+vim navi.tmpl 
+fg
+f _loader.tmpl
+v ./google_analytics/_loader.tmpl
+cdw
+f _loader.tmpl
+v ./tmpl/device/touch/common/euc-jp/google_analytics/_loader.tmpl
+fg
+v ./tmpl/device/touch/common/euc-jp/google_analytics/_loader.tmpl
+fg
+history
+v tmpl/device/touch/common/euc-jp/header.tmpl
+fg
+v tmpl/device/touch/common/euc-jp/header.tmpl
+f home2011
+ag home2011
+ag home2011.css
+cls
+ag home2011.css
+v ./tmpl/device/touch/home/smart/root.tmpl
+ag home2011_css.tmpl
+fg
+ag _loader.tmpl
+f _loader.tmpl
+v ./tmpl/device/touch/common/euc-jp/google_analytics/_loader.tmpl
+v ./tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl 
+fg
+gst
+gd
+v tmpl/device/touch/common/euc-jp/header.tmpl
+gd
+gst
+ga .
+gst
+gm
+git pull --rebase
+git fetch
+gl
+man git log
+gl --author=feng.zhang
+gl
+gl --simple
+man git log
+gl -100
+gl -50 --author=feng.zhang
+gb
+gco COREDEVSOCIAL-429-006
+gl -50 --author=feng.zhang
+gco release
+gl -50 --author=feng.zhang
+gco hotfix_add_no_nativeapp_message
+gl -50 --author=feng.zhang
+gco 007
+gpl
+cls
+gb --all
+fg
+df
+fg
+ls
+clear
+ls
+pwd
+gb --all
+git checkout -b show_num_of_skin origin/work/007 
+gb -r
+gb -v
+git fetch
+history
+v
+fg
+v
+v lib/Mixi/Skin/Touch/DB/.Skin
+v ./lib/Mixi/Skin/Touch/DB/Skin.pm 
+vimdiff lib/Mixi/Skin/Touch/DB/.Skin.pm.swp lib/Mixi/Skin/Touch/DB/Skin.pm 
+v ./lib/Mixi/Skin/Touch/DB/Skin.pm 
+cls
+gst
+v ./lib/Mixi/Skin/Touch/DB/Skin.pm 
+gst
+v ./lib/Mixi/Skin/Touch/DB/Skin.pm 
+rm -rf ./lib/Mixi/Skin/Touch/DB/.Skin.pm.swp 
+v ./lib/Mixi/Skin/Touch/DB/Skin.pm 
+fg
+ag select_public_genres
+vim ./lib/Mixi/Skin/Touch.pm
+cls
+ag CACHE_KEY_WEATHER_LIST_BY_PREF_ID
+fg
+vim list_touch_skin.pl 
+fg
+f list.tmpl
+f list.tmpl |  q
+f list.tmpl |  grep touch
+v ./tmpl/device/touch/skin/list.tmpl
+jobs -l
+vim lib/Mixi/Skin/Touch/DB/Skin.pm 
+fg
+vim lib/Mixi/Skin/Touch/DB/Skin.pm 
+cls
+l list.tmpl
+f list.tmpl
+vim lib/Mixi/Mobile/Skin/DB/Data.pm 
+gl lib/Mixi/Mobile/Skin/DB/Data.pm 
+vim lib/Mixi/Mobile/Skin/DB/Data.pm 
+cd lib/Mixi/Mobile/Skin
+ag yaml
+ag yml
+ag yaml
+pwd
+ls
+ag yaml
+fg
+cdw
+v lib/Mixi/Skin/Touch/DB/Skin.pm 
 mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
 fg
-cat for.sh 
-cat *
+gst
+gd
 fg
-cat argv.sh 
-ls
-vim argv.sh 
+gst
+ga .
+gm
+gco 007
+gd
+gd --cached
+gl
+gls
+v .tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
+v tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
+fg
+gls
+fg
+kk
 fg

@@ -1,1 +1,13 @@
-insert into touchskin_skin_data ( name , regist_staff , status, skin_color_type , basic_text_color , strong_text_color , weak_text_color , weaker_text_color , link_color , strong_link_color , border_color , background_color , partial_background_color , contents_title_bg_color , gradation_start_color , gradation_end_color ) values ( 'arthur', 'feng zhang', 1, 0, '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff')
+explain SELECT g_t.id, g_t.genre_name, COUNT(r_t.skin_id) AS num_of_skins_in_genre
+        FROM touchskin_genre_data AS g_t, touchskin_skin_genre_relation AS r_t
+        WHERE display = 'y' AND g_t.id = r_t.genre_id
+        GROUP BY g_t.id
+        ORDER BY priority DESC, id DESC;
+
+explain SELECT id, genre_name, COUNT(r_t.skin_id) AS num_of_skins_in_genre
+FROM touchskin_genre_data AS g_t
+        INNER JOIN touchskin_skin_genre_relation AS r_t
+        ON  g_t.id = r_t.genre_id
+        WHERE display = 'y'
+        GROUP BY g_t.id
+        ORDER BY priority DESC, id DESC

@@ -1,3 +1,6 @@
+<TMPL_VAR EXPR="add_css_tmpl('sp_skin/common_css.tmpl')">
+<TMPL_VAR EXPR="add_css_tmpl('sp_skin/home2011_css.tmpl')">
+
 <TMPL_IF EXPR="is_softlaunch_activated('touch_re_after')">
 <TMPL_INCLUDE NAME="../re/root.tmpl">
 <TMPL_ELSE>
@@ -30,13 +33,11 @@
 <TMPL_INCLUDE NAME="group/includes/_append_window.tmpl">
 <TMPL_VAR EXPR="add_js('mixi/touch/checkin.production.js','UTF-8')">
 
-<TMPL_INCLUDE NAME="sp_skin/common_css.tmpl">
-<TMPL_INCLUDE NAME="sp_skin/home2011_css.tmpl">
-
 <body onload='if(!navigator.userAgent.match(/Android/i) && navigator.platform != "Win32"){setTimeout(function(){if(document.body.scrollTop) return;scrollTo(0,1);}, 100);}'<TMPL_IF EXPR="device_name ne 'Android'"> onunload=""</TMPL_IF>>
-<div
-class="login home2011 widget <TMPL_LOOP NAME="design_scheme_touch_skin_info">mikukore <TMPL_VAR NAME="skin_color_type"> <TMPL_IF NAME="has_home_header_img">mainVisual</TMPL_IF></TMPL_LOOP>"
-id="page" data-widget-namespace="jp.mixi.common.touch.widget.pageroot" data-page="home"><div id="mainDisplay">
+
+<div id="page"
+class="login home2011 widget <TMPL_LOOP NAME="design_scheme_touch_skin_info">mikukore <TMPL_VAR NAME="skin_color_name"> <TMPL_IF NAME="has_home_header_img">mainVisual</TMPL_IF></TMPL_LOOP>"
+data-widget-namespace="jp.mixi.common.touch.widget.pageroot" data-page="home"><div id="mainDisplay">
 <!--[headerArea]-->
 <div id="headerArea"><br /><br /><!--/headerArea--></div>
 <!--/[headerArea]-->

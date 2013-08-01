@@ -1,0 +1,87 @@
+package Mixi::Template::Role::Static::StyleSheet;
+use Mouse::Role;
+use MouseX::AttributeHelpers;
+use Mixi;
+use Mixi::Config;
+use Mixi::Expression;
+use List::MoreUtils;
+
+my $INJECTION_SIGUNATURE = q|<!--MIXI_CSS_INJECTION-->|;
+
+requires qw/
+    STATIC_DIRECTORY
+    STATIC_SERVER
+    extend_static_mtime
+    flake_build_when_debug
+/;
+
+has css_files => (
+    metaclass  => 'Collection::Array',
+    is         => 'ro',
+    isa        => 'ArrayRef',
+    auto_deref => 1,
+    default    => sub { +[] },
+    provides   => {
+        push  => 'add_css',
+        clear => 'clear_css',
+    },
+);
+
+
+sub add_static_css {
+    my ( $self, @css ) = @_;
+    return unless @css;
+    $self->add_css( map { sprintf( '%scss%s', $self->STATIC_DIRECTORY, $_ ) }
+            @css );
+}
+
+sub exists_css {
+    my ($self, $file) = @_;
+    return 0 <= List::MoreUtils::first_index { $_ eq $file } @{ $self->css_files };
+}
+
+sub _get_css_url {
+    my ($self, $file) = @_;
+    return ( (PRODUCTION) ? $self->STATIC_SERVER : '' ) . $self->extend_static_mtime($file);
+}
+
+
+before _register_function => sub {
+    my $self = shift;
+    my $css_files = $self->css_files;
+    my $css_tmpl_files = $self->css_tmpl_files;
+
+    # avoid memory leak
+    my $class = ref $self;
+    $self->register_function(
+        add_css => sub {
+            my ($file, $add_to_first) = @_;
+            my $file_path = sprintf('%scss/%s',$class->STATIC_DIRECTORY , $file );
+            if ($add_to_first) {
+                unshift @$css_files, $file_path;
+            } else {
+                push @$css_files, $file_path;
+            }
+            return '';
+        },
+        build_css => sub {
+            return $INJECTION_SIGUNATURE;
+        },
+        add_css_tmpl => sub {
+            my ($css_tmpl) = shift;
+            push @$css_tmpl_files, $css_tmpl;
+            return '';
+        },
+    );
+};
+
+after _output_filter => sub {
+    my ( $self, $ref ) = @_;
+    my $link_elements_text = join "\n", map {
+        my $css_url = $self->_get_css_url($_);
+        qq{<link rel="stylesheet" type="text/css" href="$css_url" />};
+    } $self->flake_build_when_debug( List::MoreUtils::uniq $self->css_files );
+    $$ref =~ s/$INJECTION_SIGUNATURE/$link_elements_text/;
+};
+
+1;

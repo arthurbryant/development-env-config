@@ -1,0 +1,222 @@
+<TMPL_VAR EXPR="set_analysis_data('service:name','profile')">
+<TMPL_VAR EXPR="enable_support_link('post')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/home.css')">
+<TMPL_INCLUDE EXPR="common('header.tmpl')">
+<TMPL_INCLUDE EXPR="common('navi_friend.tmpl')">
+
+<TMPL_IF EXPR="0">
+<!-- FIXME: Below envelope div is required for style tags because jp.mixi.navigation js will manipulate all child tags of #mainArea, nasty. -->
+</TMPL_IF>
+<div style="height:0">
+<TMPL_INCLUDE NAME="sp_skin/common_css.tmpl">
+<TMPL_INCLUDE NAME="sp_skin/home_css.tmpl">
+</div>
+
+<TMPL_VAR EXPR="add_js('mixi/touch/voice.production.js', 'UTF-8')">
+<TMPL_VAR EXPR="add_js('jp/mixi/profile/wall/touch.production.js', 'UTF-8')">
+
+<!--[profileTopArea]-->
+<TMPL_INCLUDE NAME="show_friend/myarea.tmpl">
+<!--/[profileTopArea]-->
+
+<TMPL_IF NAME="profile_data">
+<!--[cUpdateInfo02]-->
+<TMPL_INCLUDE NAME="show_friend/profile.tmpl">
+<!--/[cUpdateInfo02]-->
+</TMPL_IF>
+
+<!--[cProfileMenu01]-->
+<div class="gBaseComponent00 cProfileMenu01">
+<div class="lContents">
+<ul class="gBtnMenu01">
+<TMPL_IF NAME=can_be_recommended_image>
+  <li class="editPhoto"><a href="recommend_profile_image.pl?id=<TMPL_VAR EXPR=html_escape(friend_id)>" class="cpMoreLink01"><span>プロフィール写真をおすすめする</span></a></li>
+</TMPL_IF>
+<TMPL_UNLESS NAME=is_beginner_by_regist_date>
+<TMPL_IF EXPR="owner_not_exists_in_viewers_mylist">
+  <li class="addFavorite"><a href="add_to_mylist.pl?id=<TMPL_VAR EXPR="html_escape(friend_id)">"><span>お気に入りに追加</span></a></li>
+</TMPL_IF>
+<TMPL_IF NAME="can_friend_suggest">
+  <li class="editKeyword"><a href="<TMPL_VAR EXPR=html_escape(friend_suggest_link)>?id=<TMPL_VAR EXPR="html_escape(friend_id)">" class="cpMoreLink01"><span>あなたの友人を紹介する</span></a></li>
+</TMPL_IF>
+</TMPL_UNLESS>
+<li class="widget hello" style="display:none;"
+    data-widget-namespace="jp.mixi.hello.widget.touch.hellobutton"
+    data-hello-button-class=".JS_helloButton"
+    data-hello-button-disabled-class=".JS_helloButtonDisabled"
+    data-to-id="<TMPL_VAR EXPR=html_escape(friend_id)>"
+    data-via-name="show_friend"
+    >
+  <a href="javascript:void(0);" class="hello JS_helloButton" style="display:none;"><span>ハロー！</span></a>
+  <span class="helloDisabled JS_helloButtonDisabled" style="display:none;">ハロー！</span>
+</li>
+</ul>
+<!--/lContents--></div>
+<!--/cProfileMenu01--></div>
+<!--/[cProfileMenu01]-->
+
+<!--[cUpdateInfo02]-->
+<div class="gBaseComponent01 cInfoBase01 cUpdateInfo02">
+
+<TMPL_IF NAME="owner_and_viewer_is_friend">
+<TMPL_IF NAME="profile_activity_feed">
+<TMPL_INCLUDE NAME="show_friend/profile_activity.tmpl">
+</TMPL_IF>
+</TMPL_IF>
+
+<TMPL_IF EXPR='is_wall_activated == 1 && is_owner_activation == 1' >
+<!--[WallFeed]-->
+<TMPL_INCLUDE NAME="show_friend/new_wall.tmpl">
+<!--/[WallFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=voice_new_loop>
+<!--[VoiceFeed]-->
+<TMPL_INCLUDE NAME="show_friend/new_voice.tmpl">
+<!--/[VoiceFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=check_new_loop>
+<!--[CheckFeed]-->
+<TMPL_INCLUDE NAME="show_friend/new_check.tmpl">
+<!--/[CheckFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=diary_new_loop>
+<!--[DiaryFeed]-->
+<TMPL_INCLUDE NAME="show_friend/new_diary.tmpl">
+<!--/[DiaryFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=photo_new_loop>
+<!--[PhotoFeed]-->
+<TMPL_INCLUDE NAME="show_friend/new_photo.tmpl">
+<!--/[PhotoFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=video_new_loop_img>
+<!--[VideoFeed]-->
+<TMPL_INCLUDE NAME="show_friend/new_video.tmpl">
+<!--/[VideoFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=review_new_loop_img>
+<!--[ReviewFeed]-->
+<TMPL_INCLUDE NAME="show_friend/new_review.tmpl">
+<!--/[ReviewFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=appli_new_loop>
+<!--[AppliFeed]-->
+<TMPL_INCLUDE NAME="show_friend/new_appli.tmpl">
+<!--/[AppliFeed]-->
+</TMPL_IF>
+
+<!--/cUpdateInfo02--></div>
+<!--/[cUpdateInfo02]-->
+
+
+<!--[Intro]-->
+<!--[cIntroLog01]-->
+<TMPL_IF NAME=intro_loop>
+<div id="introductions" class="gBaseComponent01 cIntroLog01">
+<div class="cpHeading01 withSubLink"><h2>友人からの紹介文</h2></div>
+<div class="lContents">
+<TMPL_LOOP NAME=intro_loop>
+<ul class="gPhotoAndText01 logList">
+<li class="oneData"><p class="photo"><a href="<TMPL_VAR EXPR=form(show_friend_link)>"><img alt="<TMPL_VAR EXPR=form(name)>" src="<TMPL_VAR EXPR=form(photo)>" /></a></p>
+<TMPL_IF NAME=relation_name><p class="relation">関係：<TMPL_VAR EXPR=html(relation_name)></p></TMPL_IF>
+<TMPL_IF EXPR=0>
+<!-- 
+    relation_nameとdetailsはpl側でtune_htmlされています。 
+-->
+</TMPL_IF>
+<p class="name"><a href="<TMPL_VAR EXPR=form(show_friend_link)>"><TMPL_VAR EXPR="html(name)"></a></p>
+<p class="log"><TMPL_VAR EXPR=emoji_view_pc_tailcut(details)></p>
+</li>
+</ul>
+</TMPL_LOOP>
+<p class="cpMoreLink02"><a href="show_intro.pl?id=<TMPL_VAR EXPR="html_escape(owner_id)">">もっと見る(<TMPL_VAR EXPR="html_escape(intro_count)">件)</a></p>
+<!--/lContents--></div>
+<!--/cIntroLog01--></div>
+<TMPL_ELSE>
+<TMPL_IF NAME="owner_and_viewer_is_friend">
+<div id="introductions" class="gBaseComponent01 cIntroLog01">
+<div class="cpHeading01 withSubLink"><h2>友人からの紹介文</h2></div>
+<div class="lContents">
+<ul class="gPhotoAndText01 logList">
+<li class="oneData colored">
+<TMPL_VAR EXPR="html_escape(nickname)">さんはどんな人か、他のみなさんに教えてあげましょう。
+<ul class="cpFootCtrl01"><li><a href="edit_intro.pl?id=<TMPL_VAR EXPR="html_escape(owner_id)">&type=edit" class="cpMoreLink01">紹介文を書く</a></li></ul>
+</li>
+</ul>
+<!--/lContents--></div>
+<!--/cIntroLog01--></div>
+</TMPL_IF>
+</TMPL_IF>
+<!--/[cIntroLog01]-->
+<!--/[Intro]-->
+
+
+<TMPL_IF NAME="friends_data">
+<div class="gBaseComponent01 friendList">
+	<div class="cpHeading01"><h2>友人一覧</h2></div>
+
+	<div class="gMymixiList01">
+		<table>
+		<TMPL_LOOP NAME=friends_data>
+			<TMPL_IF EXPR="__counter_ <= 6">
+			<TMPL_IF EXPR="(__counter__ % 3) == 1" ><tr></TMPL_IF>
+			<td class="accessState01">
+				<TMPL_UNLESS NAME="blank">
+				<a href="<TMPL_IF NAME="friend_id">show_friend.pl?id=<TMPL_VAR EXPR="form(friend_id)">&from=<TMPL_VAR EXPR="form(route_friend_from)"><TMPL_ELSE>#</TMPL_IF>">
+					<span class="image"><img src="<TMPL_VAR EXPR="form(pic)">" /></span>
+					<span class="name"><TMPL_VAR EXPR="html_escape(nickname)">さん (<TMPL_VAR EXPR="html_escape(friend_count)">)<TMPL_IF NAME=is_beginner><span class="beginnerIcon">初心者</span></TMPL_IF></span>
+				</a>
+				<TMPL_ELSE>
+				&nbsp;
+				</TMPL_UNLESS>
+			</td>
+			<TMPL_IF EXPR="(__counter__ % 3) == 0"></tr></TMPL_IF>
+			</TMPL_IF>
+		</TMPL_LOOP>
+		</table>
+	</div>
+	<TMPL_IF EXPR="friends_total > 6">
+		<p class="cpMoreLink02"><a href="<TMPL_VAR EXPR="form(list_friends_link)">">もっと見る</a></p>
+	</TMPL_IF>
+</div>
+</TMPL_IF>
+
+<TMPL_IF EXPR="is_community_enable() || (hide_link_to_view_all != 1)">
+
+<TMPL_IF EXPR="is_community_enable()"><TMPL_UNLESS NAME="community_list_disable"><TMPL_IF NAME=community_data>
+<TMPL_IF NAME=community_data>
+<TMPL_INCLUDE NAME="show_friend/community.tmpl">
+</TMPL_IF>
+</TMPL_IF></TMPL_UNLESS></TMPL_IF>
+
+<TMPL_IF NAME=fan_data>
+<TMPL_INCLUDE NAME="show_friend/fan_follow.tmpl">
+</TMPL_IF>
+
+<TMPL_IF NAME=appli_table_data>
+<TMPL_INCLUDE NAME="show_friend/appli_list.tmpl">
+</TMPL_IF>
+
+<TMPL_IF NAME=mall_new_loop>
+<TMPL_INCLUDE NAME="show_friend/mall_item.tmpl">
+</TMPL_IF>
+
+</TMPL_IF>
+
+<TMPL_INCLUDE EXPR="common('footer.tmpl')">
+
+<!--[init UIComponent]-->
+<div class="widget" data-widget-namespace="jp.co.mixi.ui.slideupwindow" data-parent-window-id="displayContainer">
+<TMPL_INCLUDE NAME="hello/component/hello_layer_euc.tmpl">
+</div><!--/initUIComponent-->
+
+<TMPL_INCLUDE EXPR="common('end.tmpl')">
+

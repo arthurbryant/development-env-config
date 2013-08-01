@@ -1,0 +1,111 @@
+<TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/home.css')">
+<TMPL_INCLUDE EXPR="common('header.tmpl')">
+<TMPL_INCLUDE EXPR="common('navi_login.tmpl')">
+
+<STRIP>
+  <!--[mainArea]-->
+  <div id="mainArea">
+
+    <!--[cpContentsTitle01]-->
+    <div class="cpContentsTitle01">
+      <div class="lContents">
+        <div class="titleMain onesProfile">
+          <h2>mixiコレクション</h2>
+        <!--/titleMain onesProfile-->
+        </div>
+      <!--/lContents-->
+      </div>
+    <!--/cpContentsTitle01-->
+    </div>
+    <TMPL_IF EXPR=0>
+      <!--CPミクコレが開始した際のバナー設置場所-->
+      <!--/[cpContentsTitle01]-->
+      <div class="gAdComponent01 gBodyAdArea01">
+        <div class="adMain">
+          <a href="#"><img src="<TMPL_VAR NAME="CONFIG_IMG_BASE">/img/smartphone/touch/common/prbnr/mixi_xmas2011_001.jpg" width="300" height="50" /></a>
+        </div>
+      </div>
+    </TMPL_IF>
+    <!--[gMikukoreStore01]-->
+    <div class="gBaseComponent01 gMikukoreStore01">
+      <div class="cpHeading04">
+        <h3>新着情報</h3>
+      </div>
+      <div class="lContents">
+        <ul class="gPhotoAndText01 cMikukoreList01">
+          <TMPL_LOOP NAME="skin_list">
+            <li class="oneData">
+              <a href="manage_touch_skin.pl?mode=main&id=<TMPL_VAR EXPR="html_escape(id)">">
+                <p class="photo">
+                  <span <TMPL_IF NAME="is_new">class="new"</TMPL_IF>>
+                    <img src="<TMPL_VAR NAME="CONFIG_IMG_BASE"><TMPL_VAR EXPR="html_escape(skin_base)">/thumbnail001.jpg" alt="<TMPL_VAR EXPR="html_escape(name)">" />
+                  </span>
+                </p>
+                <p class="name"><TMPL_VAR EXPR="html_escape(name)"></p>
+                <p class="log">必要ポイント：<img class="cpMonetarySign01 mixipoint" src="<TMPL_VAR NAME="CONFIG_IMG_BASE">/img/smartphone/touch/icon/mixipoint001.gif" alt="mixiポイント" />
+                  <TMPL_IF NAME="skin_type">
+                    100pt
+                  <TMPL_ELSE>
+                  <span class="free">FREE</span>
+                  </TMPL_IF>
+                </p>
+              </a>
+            <!--/oneData-->
+            </li>
+          </TMPL_LOOP>
+        </ul>
+      <!--/lContents-->
+      </div>
+      <div class="cpHeading04">
+        <h3>ジャンル</h3>
+      </div>
+      <div class="lContents">
+        <ul class="gPhotoAndText01">
+          <TMPL_LOOP NAME="genre_list">
+            <li class="oneData">
+              <a href="./list_touch_skin.pl?mode=genre&genre_id=<TMPL_VAR EXPR="html_escape(id)">">
+                <p class="photo">
+                  <span><img src="<TMPL_VAR NAME="CONFIG_IMG_BASE">/img/touch_skin/genre_thumbnail/<TMPL_VAR EXPR="html_escape(id)">.jpg" alt="<TMPL_VAR EXPR="html_escape(name)">" /></span>
+                </p>
+                <p class="name">
+                  <TMPL_VAR EXPR="html_escape(genre_name)">(<TMPL_VAR EXPR="num_of_skins_in_genre">)
+                </p>
+              </a>
+            <!--/oneData-->
+            </li>
+          </TMPL_LOOP>
+        </ul>
+      <!--/lContents-->
+      </div>
+      <TMPL_IF NAME="my_skin_id">
+        <div class="cpHeading04">
+          <h3>現在設定しているミクコレ</h3>
+        </div>
+        <div class="lContents">
+          <ul class="gPhotoAndText01 cMikukoreList01">
+            <li class="oneData">
+              <p class="photo">
+                <span>
+                  <img src="<TMPL_VAR NAME="CONFIG_IMG_BASE"><TMPL_VAR EXPR="html_escape(my_skin_base)">/thumbnail001.jpg" alt="<TMPL_VAR EXPR="html_escape(my_skin_name)">" />
+                </span>
+              </p>
+              <p class="name"><TMPL_VAR EXPR="html_escape(my_skin_name)"></p>
+              <ul class="cpFootCtrl01"><li><a class="change" href="./remove_touch_skin.pl">解除する</a></li></ul>
+            <!--/oneData-->
+            </li>
+          </ul>
+        <!--/lContents-->
+        </div>
+      </TMPL_IF>
+    <!--/gMikukoreStore01-->
+    </div>
+    <!--/[gMikukoreStore01]-->
+    <TMPL_INCLUDE NAME="./include/_skin_menu.tmpl">
+  <!--/mainArea-->
+  </div>
+  <!--/[mainArea]-->
+</STRIP>
+
+<TMPL_INCLUDE EXPR="common('footer.tmpl')">
+<TMPL_INCLUDE EXPR="common('end.tmpl')">

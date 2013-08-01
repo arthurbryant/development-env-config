@@ -1,0 +1,6 @@
+<TMPL_VAR EXPR="deprecated('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')">
+<TMPL_LOOP NAME="css_tmpl_files">
+<TMPL_VAR EXPR="deprecated(css_tmpl_files)">
+<TMPL_INCLUDE EXPR="css_tmpl">
+<TMPL_VAR EXPR="deprecated(css_tmpl)">
+</TMPL_LOOP>

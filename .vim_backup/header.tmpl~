@@ -1,19 +1,46 @@
-<html>
+
+<TMPL_UNLESS EXPR="get_option('no_load_js_lib')">
+<TMPL_VAR EXPR="add_js('mixi/touch/mixi.js')">
+<TMPL_VAR EXPR="add_js('jp/mixi/common/touch/fixplaceholderwidth.js','utf-8')">
+</TMPL_UNLESS>
+
+<!DOCTYPE html>
+<html class="<TMPL_VAR EXPR='html_escape(root_class_names())'>">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-jp" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<title>Touch�ߥ���������ġ���</title>
-
-<style type="text/css" media="screen">
-<TMPL_INCLUDE NAME="style.css">
-</style>
-
-<script src="/static/js/lib/prototype-effects-1.6.0.2-1.8.1-compress.js"></script>
-
-<TMPL_VAR EXPR="add_js('lib/namespace-brook-compress.js', 'UTF-8')">
-<TMPL_VAR EXPR="add_js('lib/jquery-1.7.1.min-noconflict-compress.js','UTF-8')">
-
+<link rel="apple-touch-icon-precomposed" href="<TMPL_VAR EXPR=form(_webclip_icon_url)>" />
+<TMPL_INCLUDE EXPR="common('header/meta.tmpl')">
+<title><TMPL_VAR EXPR="html(_title)"></title>
+<TMPL_VAR EXPR="build_css()">
+<TMPL_VAR EXPR="build_css_tmpl()">
+<TMPL_VAR EXPR="add_mikukore_css()">
+<TMPL_UNLESS EXPR="get_analysis_data('temp:disable_google_analytics')">
+<TMPL_VAR EXPR="build_google_analytics()">
+<TMPL_VAR EXPR="build_optimizely()">
+</TMPL_UNLESS>
 </head>
-<body>
-<div>
+<TMPL_IF EXPR=0><!--
+
+    *mixi touch共通のheader*
+
+    このテンプレートはheadタグ内の操作を"Mixi::Template::_user::touch"からおこなうためのものです。
+    表示にかかわる処理の追加、むやみなデフォルト設定の追加は
+    絶対にしないで下さい。
+
+    デフォルト設定追加の際は、Template::Roleで操作可能にしたのちにRole側で
+    default値を設定するようにしてください。
+
+
+    *Template Role Dependency*
+
+    * Mixi::Template::Role::AssignOptions
+    * Mixi::Template::Role::HTMLHeader
+    * Mixi::Template::Role::Static::StyleSheet
+    * Mixi::Template::Role::Touch::WebClipIcon
+        * link_valuesに移行可能
+
+    * Template option *
+
+    * no_load_js_lib *
+        * このフラグが有効な時はheader内でのJSライブラリ読込みskipします *
+
+--></TMPL_IF>

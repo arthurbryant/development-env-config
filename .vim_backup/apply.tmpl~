@@ -1,5 +1,4 @@
 <TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
-<TMPL_VAR EXPR="add_css('smartphone/touch/_list.css')">
 <TMPL_VAR EXPR="add_css('smartphone/touch/home.css')">
 <TMPL_INCLUDE EXPR="common('header.tmpl')">
 <TMPL_INCLUDE EXPR="common('navi.tmpl')">
@@ -11,7 +10,7 @@
     <div class="cpContentsTitle01">
       <div class="lContents">
         <div class="titleMain onesProfile">
-          <h2>ミクコレを<TMPL_IF NAME="is_purchased">購入<TMPL_ELSE>設定</TMPL_IF>する</h2>
+          <h2>ミクコレを設定する</h2>
         <!--/titleMain-->
         </div>
       <!--/lContents-->
@@ -22,11 +21,11 @@
     <!--[gMikukoreStore01]-->
     <div class="gBaseComponent01 gMikukoreStore01">
       <div class="cpHeading04">
-        <h3><TMPL_IF NAME="is_purchased">購入<TMPL_ELSE>設定</TMPL_IF>内容</h3>
+        <h3>設定内容</h3>
       </div>
       <ul class="gUtilityLink01">
         <li>
-          <a href="./list_payment_method.pl?mgfrom=top_charge">
+          <a href="./list_payment_method.pl?mgfrom=top_charge" target="_blank">
             ポイントをチャージする
             <div class="cpSimpleTable02">
               <dl>
@@ -45,29 +44,55 @@
       <!--[gResponseBox02]-->
       <div class="gResponseBox02">
         <div class="contents">
-          <p><TMPL_VAR EXPR="html_escape(name)">のデザインを<TMPL_IF NAME="is_purchased">購入<TMPL_ELSE>設定</TMPL_IF>しました。</p>
+          <p><TMPL_VAR EXPR="html_escape(name)">のデザインを設定しました。</p>
         </div>
       <!--/gResponseBox02-->
       </div>
       <!--/[gResponseBox02]-->
+      <div class="lContents">
+        <ul class="gPhotoAndText01 cMikukoreList01">
+          <li class="oneData">
+            <p class="photo">
+              <span>
+                <img src="<TMPL_VAR NAME="CONFIG_IMG_BASE"><TMPL_VAR EXPR="html_escape(skin_base)">/thumbnail001.jpg" alt="<TMPL_VAR EXPR="html_escape(name)">" />
+              </span>
+            </p>
+            <p class="name"><TMPL_VAR EXPR="html_escape(name)"></p>
+<<<<<<< HEAD
+            <TMPL_UNLESS EXPR=is_purchased>
+=======
+            <TMPL_UNLESS NAME=is_purchased>
+>>>>>>> 526a090... fix tmpl
+              <p class="log">必要ポイント ：
+                <img class="cpMonetarySign01 mixipoint" src="<TMPL_VAR NAME="CONFIG_IMG_BASE">/img/smartphone/touch/icon/mixipoint001.gif" alt="mixiポイント" />
+                購入済み
+              </p>
+            </TMPL_UNLESS >
+          <!--/oneData-->
+          </li>
+        </ul>
+      <!--/lContents-->
+      </div>
+      <!--[gFootPanel]-->
+      <div class="gFootPanel modeConfirm">
+        <div class="ctrlButtons">
+          <form action="./home.pl" method="get">
+            <input type="submit" value="表示を確認する" class="cpSubmitBtn02" />
+          </form>
+        </div>
+      <!--/gFootPanel-->
+      </div>
       <div class="pMixiCheck01">
         <p class="sub">このミクコレをチェックする</p>
-        <p class="button">
-            <a
-                href="<TMPL_VAR NAME='url_mixi_prefix'>share.pl"
-                class="mixi-check-button"
-                data-button="button-1"
-                data-key="ce877d8d05ff83b518912a1d4a4b5b6e296066a6"
-                data-url="http://mixi.jp/promotion.pl?id=school&page=1">
-                mixiチェック
-            </a>
-            <TMPL_IF EXPR="0"><!-- TODO --></TMPL_IF>
-            <script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script>
+        <p class="button"><a href="<TMPL_VAR NAME=url_mixi_prefix>share.pl" class="mixi-check-button" data-button="button-1" data-key="d36375a3ae26f38798d8a287752be99dc12ed94a" data-url="<TMPL_VAR NAME=url_mixi_prefix>manage_touch_skin.pl?id=<TMPL_VAR EXPR="html_escape(id)">">mixiチェック</a>
+          <script type="text/javascript" src="http://static.mixi.jp/js/share.js" data-prefix-uri="http://dp0065.lo.mixi.jp:8888/"></script>
         </p>
       </div>
       <div class="lContents">
         <ul class="gUtilityLink01">
-          <li><a href="#">このカテゴリの別のデザインを探す</a></li>
+          <TMPL_IF NAME="genre_id">
+            <li><a href="<TMPL_VAR NAME='url_mixi_prefix'>list_touch_skin.pl?mode=genre&genre_id=<TMPL_VAR EXPR='html_escape(genre_id)'>">このジャンルの別のデザインを探す</a></li>
+          </TMPL_IF>
           <li><a href="<TMPL_VAR NAME='url_mixi_prefix'>home.pl">ホームに戻る</a></li>
         </ul>
       <!--/lContents-->

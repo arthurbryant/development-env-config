@@ -1,0 +1,214 @@
+<TMPL_VAR EXPR="set_analysis_data('service:name','profile')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
+<TMPL_VAR EXPR="add_css('smartphone/touch/home.css')">
+<TMPL_INCLUDE EXPR="common('header.tmpl')">
+<TMPL_INCLUDE EXPR="common('navi.tmpl')">
+
+<TMPL_IF EXPR="0">
+<!-- FIXME: Below envelope div is required for style tags because jp.mixi.navigation js will manipulate all child tags of #mainArea, nasty. -->
+</TMPL_IF>
+<div style="height:0">
+<TMPL_INCLUDE NAME="sp_skin/common_css.tmpl">
+<TMPL_INCLUDE NAME="sp_skin/home_css.tmpl">
+</div>
+
+<TMPL_VAR EXPR="add_js('mixi/touch/voice.production.js', 'UTF-8')">
+<TMPL_VAR EXPR="add_js('jp/mixi/profile/wall/touch.production.js', 'UTF-8')">
+
+<TMPL_INCLUDE NAME="show_profile/myarea.tmpl">
+
+<!--[cUpdateInfo02]-->
+<div class="gBaseComponent01 cInfoBase01 cUpdateInfo02">
+
+<div id="profile" class="section01">
+<div class="sectionHead"><h2>プロフィール</h2></div>
+
+<div class="sectionBody">
+<div class="profileListTable"><div>
+<table>
+<TMPL_LOOP NAME="profile_data">
+<tr class="<TMPL_IF NAME="__first__">listTop</TMPL_IF> <TMPL_IF NAME="__last__">listBottom</TMPL_IF><TMPL_UNLESS NAME="show_default"> JS_showMore</TMPL_UNLESS>">
+<th><TMPL_VAR EXPR="html(profile_label)"><TMPL_IF NAME="update"><img src="<TMPL_VAR NAME=CONFIG_IMG_BASE>/img/basic/icon/up001.gif" alt="up" width="13" height="8" /></TMPL_IF></th>
+<TMPL_IF EXPR="id eq 'profile_introduction'">
+<td><TMPL_VAR EXPR="emoji_view_pc(clickable(html(profile_data)))"></td>
+<TMPL_ELSIF EXPR="id eq 'profile_job_details' || id eq 'profile_favorite1' || id eq 'profile_favorite2' || id eq 'profile_favorite3'">
+<td><TMPL_VAR EXPR="clickable(html(profile_data))"></td>
+<TMPL_ELSE>
+<td><TMPL_VAR EXPR="html(profile_data)"></td>
+</TMPL_IF>
+</tr>
+</TMPL_LOOP>
+</table>
+</div>
+<!--/profileListTable--></div>
+
+<TMPL_IF EXPR="display_level eq '2'">
+<TMPL_UNLESS NAME="official_member">
+<p class="moreLink01 widget"
+    data-widget-namespace="jp.co.mixi.ui.more.openclose"
+    data-event-name="click"
+    data-open-class="moreLink01"
+    data-open-comment="もっと見る"
+    data-close-class="closeLink01"
+    data-close-comment="閉じる"
+    data-ref=".profileListTable tr.JS_showMore"
+    data-is-smooth-close-ref="#profile"
+><a href="javascript:void(0);">もっと見る</a>
+</p>
+</TMPL_UNLESS>
+</TMPL_IF>
+
+</div>
+<!--/section01--></div>
+
+<!--/cUpdateInfo02--></div>
+<!--/[cUpdateInfo02]-->
+
+
+<!--[cProfileMenu01]-->
+<div class="gBaseComponent00 cProfileMenu01">
+<div class="lContents">
+<ul class="gBtnMenu01">
+<li class="editProfile"><a href="edit_profile.pl">プロフィールの設定</a></li>
+<TMPL_IF EXPR="is_service_activated('TOUCHSKIN_LINK')">
+<li class="editSkin"><a href="list_touch_skin.pl">ミクコレ(デザイン)の設定</a></li>
+</TMPL_IF>
+<li class="editPhoto"><a href="list_self_profile_image.pl">プロフィール写真の設定</a></li>
+<li class="editPhoto"><a href="profile_cover.pl?mode=edit">プロフィール背景画像の設定</a></li>
+<li class="editKeyword"><a href="edit_mykeyword.pl">mixiキーワードの設定</a></li>
+<li class="editSchool"><a href="edit_friend_follow.pl">学校の設定</a></li>
+<TMPL_IF EXPR="is_wall_activated == 1"><li class="editKeyword"><a href="edit_account_wall.pl">伝言板の設定</a></li></TMPL_IF>
+</ul>
+<!--/lContents--></div>
+<!--/cProfileMenu01--></div>
+<!--/[cProfileMenu01]-->
+
+
+
+<!--[cUpdateInfo02]-->
+<div class="gBaseComponent01 cInfoBase01 cUpdateInfo02">
+
+<TMPL_IF NAME="profile_activity_feed">
+<TMPL_INCLUDE NAME="show_profile/profile_activity.tmpl">
+</TMPL_IF>
+
+<TMPL_IF EXPR='is_wall_activated == 1 && is_owner_activation == 1' >
+<!--[WallFeed]-->
+<TMPL_INCLUDE NAME="show_friend/new_wall.tmpl">
+<!--/[WallFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=voice_new_loop>
+<!--[VoiceFeed]-->
+<TMPL_INCLUDE NAME="show_profile/new_voice.tmpl">
+<!--/[VoiceFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=check_new_loop>
+<!--[CheckFeed]-->
+<TMPL_INCLUDE NAME="show_profile/new_check.tmpl">
+<!--/[CheckFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=diary_new_loop>
+<!--[DiaryFeed]-->
+<TMPL_INCLUDE NAME="show_profile/new_diary.tmpl">
+<!--/[DiaryFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=photo_new_loop>
+<!--[PhotoFeed]-->
+<TMPL_INCLUDE NAME="show_profile/new_photo.tmpl">
+<!--/[PhotoFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=video_new_loop_img>
+<!--[VideoFeed]-->
+<TMPL_INCLUDE NAME="show_profile/new_video.tmpl">
+<!--/[VideoFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=review_new_loop_img>
+<!--[ReviewFeed]-->
+<TMPL_INCLUDE NAME="show_profile/new_review.tmpl">
+<!--/[ReviewFeed]-->
+</TMPL_IF>
+
+<TMPL_IF NAME=appli_new_loop>
+<!--[AppliFeed]-->
+<TMPL_INCLUDE NAME="show_profile/new_appli.tmpl">
+<!--/[AppliFeed]-->
+</TMPL_IF>
+
+<!--/cUpdateInfo02--></div>
+<!--/[cUpdateInfo02]-->
+
+
+<TMPL_IF NAME=intro_loop>
+<TMPL_INCLUDE NAME="show_profile/intro.tmpl">
+</TMPL_IF>
+
+
+<TMPL_IF NAME="friends_data">
+<div class="gBaseComponent01 friendList">
+	<div class="cpHeading01"><h2>友人一覧</h2></div>
+
+	<div class="gMymixiList01">
+		<table>
+		<TMPL_LOOP NAME=friends_data>
+			<TMPL_IF EXPR="__counter_ <= 6">
+			<TMPL_IF EXPR="(__counter__ % 3) == 1" ><tr></TMPL_IF>
+			<td class="accessState01">
+				<TMPL_UNLESS NAME="blank">
+				<a href="<TMPL_IF NAME="friend_id">show_friend.pl?id=<TMPL_VAR EXPR="form(friend_id)"><TMPL_ELSE>#</TMPL_IF>">
+					<span class="image"><img src="<TMPL_VAR EXPR="form(pic)">" /></span>
+					<span class="name"><TMPL_VAR EXPR="html(nickname)">さん (<TMPL_VAR EXPR="html(friend_count)">)</span>
+				</a>
+				<TMPL_ELSE>
+				&nbsp;
+				</TMPL_UNLESS>
+			</td>
+			<TMPL_IF EXPR="(__counter__ % 3) == 0"></tr></TMPL_IF>
+			</TMPL_IF>
+		</TMPL_LOOP>
+		</table>
+	</div>
+	<TMPL_IF EXPR="friends_total > 6">
+		<p class="cpMoreLink02"><a href="<TMPL_VAR EXPR="form(list_friends_link)">">もっと見る</a></p>
+	</TMPL_IF>
+</div>
+</TMPL_IF>
+
+<TMPL_IF EXPR="is_community_enable()">
+<TMPL_IF NAME=community_data>
+<TMPL_INCLUDE NAME="show_profile/community.tmpl">
+</TMPL_IF>
+</TMPL_IF>
+
+<TMPL_IF NAME=fan_data>
+<TMPL_INCLUDE NAME="show_profile/fan_follow.tmpl">
+</TMPL_IF>
+
+<TMPL_IF NAME=appli_table_data>
+<TMPL_INCLUDE NAME="show_profile/appli_list.tmpl">
+</TMPL_IF>
+
+<TMPL_IF NAME=mall_new_loop>
+<TMPL_INCLUDE NAME="show_profile/mall_item.tmpl">
+</TMPL_IF>
+
+<TMPL_INCLUDE EXPR="common('footer.tmpl')">
+<!--[init UIComponent]-->
+
+<script type="text/javascript">
+(function(){
+var viewController = document.querySelector('*[name="level"]');
+viewController.addEventListener('change' ,function(){
+    viewController.form.submit();
+}, false);
+
+})();
+</script>
+<!--/initUIComponent-->
+<TMPL_INCLUDE EXPR="common('end.tmpl')">
+

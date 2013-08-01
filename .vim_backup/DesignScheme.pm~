@@ -1,19 +1,15 @@
 package Mixi::Template::Role::Touch::Static::StyleSheet::DesignScheme;
 use Mouse::Role;
-use MouseX::AttributeHelpers;
-use Mixi;
-use Mixi::Template::Touch::DesignScheme;
-use Mixi::SoftLaunch;
 
-requires 'charset';
+use Mixi::Service::Procedure::InternalGateway;
+
+my $INJECTION_SIGNATURE = q|<!-- MIXI_CSS_TMPL_INJECTION -->|;
 
 with q|Mixi::Template::Role::AbstractInterface|;
 
 requires qw/
-    STATIC_DIRECTORY
-    STATIC_SERVER
-    extend_static_mtime
     member_id_option
+    charset
 /;
 
 has skin_option      => (
@@ -21,38 +17,98 @@ has skin_option      => (
     isa => 'HashRef|Undef'
 );
 
-has design_scheme      => (
-    is  => 'rw',
-    isa => 'Mixi::Template::Touch::DesignScheme'
+has css_tmpl_files => (
+    metaclass  => 'Collection::Array',
+    is         => 'ro',
+    isa        => 'ArrayRef',
+    auto_deref => 1,
+    default    => sub { +[] },
+    provides   => {
+        push  => 'add_tmpl_css',
+        clear => 'clear_tmpl_css',
+    },
 );
 
-before _register_function => sub {
+has _css_tmpl_loader => (
+    is         => 'ro',
+    default    => sub {
+        my $self = shift;
+        Mixi::Template::CommonTemplateLoader->new(
+            encoding => $self->charset,
+            paths    => [ $self->default_common_paths ],
+        );
+    },
+);
+
+after _auto_assign_common_params => sub {
     my $self = shift;
 
-    $self->design_scheme(my $theme = Mixi::Template::Touch::DesignScheme->new(
-        { skin    => $self->skin_option }
-    ));
+    return unless $self->skin_option;
+    return if $self->_is_touch_re;
 
-    # bk: クロージャ内部へのインスタンスの残留を防ぐ
-    my $class = ref $self;
+    $self->param(
+        design_scheme_touch_skin_info => [ $self->skin_option ],
+    );
 
-    my $viewer_id = $self->member_id_option;
+};
+
+after _register_function => sub {
+    my $self = shift;
+    my $css_tmpl_files = $self->css_tmpl_files;
 
     $self->register_function(
-        build_design_scheme => sub {
-            return '' if(!defined $viewer_id || Mixi::SoftLaunch->new(service => 'touch_re_after')->is_activated($viewer_id));
-            join "\n",map{
-                my $path;
-                if( /^\/img\// ){
-                    $path = $class->STATIC_SERVER . $_;
-                }else{
-                    $path = (( PRODUCTION ) ? $class->STATIC_SERVER : '' ) .
-                            $class->extend_static_mtime( sprintf('%scss/%s',$class->STATIC_DIRECTORY , $_ ) );
-                }
-                qq{<link rel="stylesheet" type="text/css" href="$path" />};
-            } $theme->get_style;
+        add_css_tmpl => sub {
+            my ($css_tmpl) = shift;
+            push @$css_tmpl_files, $css_tmpl;
+            return '';
+        },
+        build_css_tmpl => sub {
+            return $INJECTION_SIGNATURE;
         },
     );
+};
+
+after _output_filter => sub {
+    my ($self, $ref) = @_;
+    my $css_tmpl_text = $self->_render_css_tmpl();
+    $$ref =~ s/\Q$INJECTION_SIGNATURE\E/$css_tmpl_text/;
+};
+
+sub _render_css_tmpl {
+    my $self = shift;
+
+    my $css_tmpl_files = $self->css_tmpl_files;
+    my $css_tmpl_loader = $self->_css_tmpl_loader;
+    my $charset = $self->charset;
+    my $skin_option = $self->skin_option;
+    my $default_path = $self->default_paths;
+
+    return unless $skin_option;
+
+    my $tmpl = Mixi::Template->new(
+        type => 'user::html',
+        charset => $charset,
+        global_vars => 1,
+    );
+    $tmpl->add_templates(\qq{<TMPL_LOOP NAME="css_tmpl_files"><TMPL_INCLUDE EXPR="css_tmpl"></TMPL_LOOP>});
+    my @css_tmpl_param = map { +{css_tmpl => ("$default_path/$_")} } ( List::MoreUtils::uniq @$css_tmpl_files );
+
+    $tmpl->param( css_tmpl_files => \@css_tmpl_param);
+    $tmpl->param(design_scheme_touch_skin_info => [ $skin_option ]);
+    return $tmpl->output();
+}
+
+sub _is_touch_re {
+    my ($self) = @_;
+    my $viewer_id = $self->member_id_option;
+    return 0 unless $viewer_id;
+    my $response = Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.softlaunch.isActivated' => {
+            requester_id => $viewer_id,
+            params       => { service => 'touch_re_after' },
+        }
+    );
+    return ($response && $response->{is_activated}) ? 1 : 0;
 };
 
 1;

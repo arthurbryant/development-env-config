@@ -1,0 +1,3 @@
+#!/bin/sh
+sed -i '/add_css.*smartphone\/touch\/_list.css/d' `ag  "add_css.*smartphone/touch/_list.css" -al`
+sed -i '/add_css.*smartphone\/touch\/_edit.css/d' `ag  "add_css.*smartphone/touch/_edit.css" -al`'

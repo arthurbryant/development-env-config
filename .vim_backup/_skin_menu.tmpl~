@@ -1,0 +1,29 @@
+<STRIP>
+  <!--[gMikukoreStore01]-->
+  <div class="gBaseComponent00 gMikukoreMenu01">
+    <div class="lContents">
+      <ul class="gBtnMenu01">
+        <li><a href="./list_touch_skin.pl">ミクコレトップへ</a></li>
+        <li>
+          <a href="./list_payment_method.pl?mgfrom=top_charge" target="_blank">ポイントをチャージする
+            <div class="cpSimpleTable02">
+              <dl>
+                <dt>残高：</dt>
+                <dd>
+                  <img class="cpMonetarySign01 mixipoint" src="<TMPL_VAR NAME="CONFIG_IMG_BASE">/img/smartphone/touch/icon/mixipoint001.gif" alt="mixiポイント" />
+                  <span><TMPL_VAR EXPR="html_escape(now_point)">pt</span>
+                </dd>
+              </dl>
+            <!--/cpSimpleTable02-->
+            </div>
+          </a>
+        </li>
+        <li><a href="http://mixi.jp/redirector.pl?id=8908" target="_blank">無料でmixiポイントをもらう</a></li>
+      <!--/gUtilityLink01-->
+      </ul>
+    <!--/lContents-->
+    </div>
+  <!--/gMikukoreStore-->
+  </div>
+  <!--/[gMikukoreStore]-->
+</STRIP>

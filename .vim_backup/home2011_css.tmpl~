@@ -1,0 +1,1794 @@
+<TMPL_LOOP NAME="design_scheme_touch_skin_info">
+<style type="text/css">
+
+.home2011 .plSceneBody.sFeedList01,
+.home2011 .plSceneBody.sHomeView01{
+background:transparent;
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.home2011 .plSceneBody.sFeedList01 a:link,
+.home2011 .plSceneBody.sHomeView01 a:link,
+.home2011 .plSceneBody.sFeedList01 a:visited,
+.home2011 .plSceneBody.sHomeView01 a:visited,
+.home2011 .plSceneBody.sFeedList01 a:focus,
+.home2011 .plSceneBody.sHomeView01 a:focus{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*----.gBodyAdArea01 ----*/
+.home2011 .plSceneBody.sFeedList01 .gBodyAdArea01:not(#JS_ad_homemiddle) + ul,
+.home2011 .plSceneBody.sHomeView01 .gBodyAdArea01:not(#JS_ad_homemiddle) + ul,
+.home2011 .plSceneBody.sFeedList01 .gBodyAdArea01:not(:first-child) + div:not(.cFootNavi01),
+.home2011 .plSceneBody.sHomeView01 .gBodyAdArea01:not(:first-child) + div:not(.cFootNavi01){
+margin-top:10px;
+border-top:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+
+/*----.cMixiInfo ----*/
+.cMixiInfo ul{
+border-top:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cMixiInfo li{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:transparent;
+}
+
+.cMixiInfo li a{
+color:<TMPL_VAR EXPR="html_escape(strong_link_color)"> !important;
+}
+
+.cMixiInfo .blueTxt a{
+color:<TMPL_VAR EXPR="html_escape(link_color)"> !important;
+}
+
+
+/*----.cMixiInfoLocal ----*/
+.cMixiInfoLocal > li{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cMixiInfoLocal p{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*----.cInlineNavi01 ----*/
+.cInlineNavi01 li{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:transparent;
+}
+
+<TMPL_IF EXPR="skin_color_name eq 'black'">
+.mikukore.black .cInlineNavi01 li > a{
+background-image:url(/img/smartphone/touch/skin/black/home2011/icon/inlinenavi001.png);
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'blue'">
+.mikukore.blue .cInlineNavi01 li > a{
+background-image:url(/img/smartphone/touch/skin/blue/home2011/icon/inlinenavi001.png);
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'green'">
+.mikukore.green .cInlineNavi01 li > a{
+background-image:url(/img/smartphone/touch/skin/green/home2011/icon/inlinenavi001.png);
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'orange'">
+.mikukore.orange .cInlineNavi01 li > a{
+background-image:url(/img/smartphone/touch/skin/orange/home2011/icon/inlinenavi001.png);
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'pink'">
+.mikukore.pink .cInlineNavi01 li > a{
+background-image:url(/img/smartphone/touch/skin/pink/home2011/icon/inlinenavi001.png);
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'purple'">
+.mikukore.purple .cInlineNavi01 li > a{
+background-image:url(/img/smartphone/touch/skin/purple/home2011/icon/inlinenavi001.png);
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'red'">
+.mikukore.red .cInlineNavi01 li > a{
+background-image:url(/img/smartphone/touch/skin/red/home2011/icon/inlinenavi001.png);
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'yamabuki'">
+.mikukore.yamabuki .cInlineNavi01 li > a{
+background-image:url(/img/smartphone/touch/skin/yamabuki/home2011/icon/inlinenavi001.png);
+}
+</TMPL_IF>
+
+.cInlineNavi01 li:nth-child(2n+1) > a{
+border-right:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInlineNavi01 li > a p{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*----.cInlineNavi03 ----*/
+<TMPL_IF EXPR="skin_color_name eq 'black'">
+.mikukore.black .cInlineNavi03{
+border-bottom:1px solid #111;
+}
+
+.mikukore.black .cInlineNavi03 > li{
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#333), color-stop(100%,#2f2f2f));
+}
+
+.mikukore.black .cInlineNavi03 a{
+background-image:url(/img/smartphone/touch/skin/black/home2011/icon/tab_navi001.png);
+color:#d0e4f9 !important;
+}
+
+.mikukore.black .cInlineNavi03 a p:after{
+border-right:2px solid #99b2bf;
+border-bottom:2px solid #99b2bf;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'blue'">
+.mikukore.blue .cInlineNavi03{
+border-bottom:1px solid #2e7cc6;
+}
+
+.mikukore.blue .cInlineNavi03 > li{
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#4287c7), color-stop(100%,#3f80bd));
+}
+
+.mikukore.blue .cInlineNavi03 a{
+background-image:url(/img/smartphone/touch/skin/blue/home2011/icon/tab_navi001.png);
+color:#c7e3ff !important;
+}
+
+.mikukore.blue .cInlineNavi03 a p:after{
+border-right:2px solid #7bbdff;
+border-bottom:2px solid #7bbdff;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'green'">
+.mikukore.green .cInlineNavi03{
+border-bottom:1px solid #8cac36;
+}
+
+.mikukore.green .cInlineNavi03 > li{
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#9cc03c), color-stop(100%,#96b839));
+}
+
+.mikukore.green .cInlineNavi03 a{
+background-image:url(/img/smartphone/touch/skin/green/home2011/icon/tab_navi001.png);
+color:#4e6e29 !important;
+}
+
+.mikukore.green .cInlineNavi03 a p:after{
+border-right:2px solid #4e6e29;
+border-bottom:2px solid #4e6e29;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'orange'">
+.mikukore.orange .cInlineNavi03{
+border-bottom:1px solid #c98936;
+}
+
+.mikukore.orange .cInlineNavi03 > li{
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#e69f43), color-stop(100%,#dd9940));
+}
+
+.mikukore.orange .cInlineNavi03 a{
+background-image:url(/img/smartphone/touch/skin/orange/home2011/icon/tab_navi001.png);
+color:#976424 !important;
+}
+
+.mikukore.orange .cInlineNavi03 a p:after{
+border-right:2px solid #976424;
+border-bottom:2px solid #976424;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'pink'">
+.mikukore.pink .cInlineNavi03{
+border-bottom:1px solid #d588a2;
+}
+
+.mikukore.pink .cInlineNavi03 > li{
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#ed97b4), color-stop(100%,#e391ad));
+}
+
+.mikukore.pink .cInlineNavi03 a{
+background-image:url(/img/smartphone/touch/skin/pink/home2011/icon/tab_navi001.png);
+color:#b64b6f !important;
+}
+
+.mikukore.pink .cInlineNavi03 a p:after{
+border-right:2px solid #b64b6f;
+border-bottom:2px solid #b64b6f;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'purple'">
+.mikukore.purple .cInlineNavi03{
+border-bottom:1px solid #573478;
+}
+
+.mikukore.purple .cInlineNavi03 > li{
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#6a3f94), color-stop(100%,#663c8e));
+}
+
+.mikukore.purple .cInlineNavi03 a{
+background-image:url(/img/smartphone/touch/skin/purple/home2011/icon/tab_navi001.png);
+color:#ad8cce !important;
+}
+
+.mikukore.purple .cInlineNavi03 a p:after{
+border-right:2px solid #ad8cce;
+border-bottom:2px solid #ad8cce;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'red'">
+.mikukore.red .cInlineNavi03{
+border-bottom:1px solid #91232c;
+}
+
+.mikukore.red .cInlineNavi03 > li{
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#a82832), color-stop(100%,#a12630));
+}
+
+.mikukore.red .cInlineNavi03 a{
+background-image:url(/img/smartphone/touch/skin/red/home2011/icon/tab_navi001.png);
+color:#e28c8c !important;
+}
+
+.mikukore.red .cInlineNavi03 a p:after{
+border-right:2px solid #ef9191;
+border-bottom:2px solid #ef9191;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'yamabuki'">
+.mikukore.yamabuki .cInlineNavi03{
+border-bottom:1px solid #cfb42f;
+}
+
+.mikukore.yamabuki .cInlineNavi03 > li{
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#e6c834), color-stop(100%,#ddc032));
+}
+
+.mikukore.yamabuki .cInlineNavi03 a{
+background-image:url(/img/smartphone/touch/skin/yamabuki/home2011/icon/tab_navi001.png);
+color:#8a7a2c !important;
+}
+
+.mikukore.yamabuki .cInlineNavi03 a p:after{
+border-right:2px solid #8a7a2c;
+border-bottom:2px solid #8a7a2c;
+}
+</TMPL_IF>
+
+
+/*----.cTopNavi01 ----*/
+.cTopNavi01{
+background:transparent url(<TMPL_VAR EXPR="html_escape(skin_base)">/header001.jpg) no-repeat 50% 0;
+-webkit-background-size:contain;
+}
+
+.cTopNavi01 h3.lSubHeading01,
+.cTopNavi01 h4.lSubHeading01{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cTopNavi01 h3.lSubHeading01:before,
+.cTopNavi01 h4.lSubHeading01:before{
+background:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*----.cTopNavi01 : utilityNavi01 ----*/
+.cTopNavi01 .utilityNavi01 .cpMoreLink08{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList > li a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList > li.more a:after{
+border-top:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+border-right:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList > li.searchGame a{
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList > li.searchGame.new a{
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList > li.searchGame a span{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*---- thumbnailList.none ----*/
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList.none > li.balloon a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList.none > li.balloon a:after{
+border-top:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+border-right:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList.none > li.balloon .thumbnailArea img{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cTopNavi01 .utilityNavi01.pAppli .thumbnailList.none > li.balloon .textArea .text{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*----.lController ----*/
+<TMPL_IF EXPR="skin_color_name eq 'black'">
+.mikukore.black .topIndicator01 .lController > ul,
+.mikukore.black .topIndicator01 .lController02 > ul{
+border:1px solid #b4b4b4;
+}
+
+.mikukore.black .topIndicator01 .lController > ul > li,
+.mikukore.black .topIndicator01 .lController02 > ul > li{
+border-left:1px solid #b4b4b4;
+}
+
+.mikukore.black .topIndicator01 .lController > ul > li > p > a,
+.mikukore.black .topIndicator01 .lController02 > ul > li > p > a{
+background-color:#fefefe;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#fefefe), to(#d0cece));
+}
+
+.mikukore.black .topIndicator01 .lController > ul > li > p > .new,
+.mikukore.black .topIndicator01 .lController02 > ul > li > p > .new{
+background-color:#575757;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#575757), to(#222222));
+}
+
+.mikukore.black .topIndicator01 .lController > ul > li > p > a > span{
+background-image:url(/img/smartphone/touch/skin/black/home2011/icon/notification_home_icon002.png);
+}
+
+.mikukore.black .topIndicator01 .lController02 > ul > .comment > p span{
+background:url(/img/smartphone/touch/skin/black/home2011/icon/notification_home_icon002.png) no-repeat 0 0;
+}
+
+.mikukore.black .topIndicator01 .lController02 > ul > .comment > p a{
+color:#4d4d4d;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'blue'">
+.mikukore.blue .topIndicator01 .lController > ul,
+.mikukore.blue .topIndicator01 .lController02 > ul{
+border:1px solid #7accf1;
+}
+
+.mikukore.blue .topIndicator01 .lController > ul > li,
+.mikukore.blue .topIndicator01 .lController02 > ul > li{
+border-left:1px solid #7accf1;
+}
+
+.mikukore.blue .topIndicator01 .lController > ul > li > p > a,
+.mikukore.blue .topIndicator01 .lController02 > ul > li > p > a{
+background-color:#feffff;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#feffff), to(#c0ecff));
+}
+
+.mikukore.blue .topIndicator01 .lController > ul > li > p > .new,
+.mikukore.blue .topIndicator01 .lController02 > ul > li > p > .new{
+background-color:#4293de;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#4293de), to(#0770d3));
+}
+
+.mikukore.blue .topIndicator01 .lController > ul > li > p > a > span{
+background-image:url(/img/smartphone/touch/skin/blue/home2011/icon/notification_home_icon002.png);
+}
+
+.mikukore.blue .topIndicator01 .lController02 > ul > .comment > p span{
+background:url(/img/smartphone/touch/skin/blue/home2011/icon/notification_home_icon002.png) no-repeat 0 0;
+}
+
+.mikukore.blue .topIndicator01 .lController02 > ul > .comment > p a{
+color:#3687d3;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'green'">
+.mikukore.green .topIndicator01 .lController > ul,
+.mikukore.green .topIndicator01 .lController02 > ul{
+border:1px solid #c9de91;
+}
+
+.mikukore.green .topIndicator01 .lController > ul > li,
+.mikukore.green .topIndicator01 .lController02 > ul > li{
+border-left:1px solid #c9de91;
+}
+
+.mikukore.green .topIndicator01 .lController > ul > li > p > a,
+.mikukore.green .topIndicator01 .lController02 > ul > li > p > a{
+background-color:#fefffe;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#fefffe), to(#dcebb8));
+}
+
+.mikukore.green .topIndicator01 .lController > ul > li > p > .new,
+.mikukore.green .topIndicator01 .lController02 > ul > li > p > .new{
+background-color:#83ae4f;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#83ae4f), to(#5c9517));
+}
+
+.mikukore.green .topIndicator01 .lController > ul > li > p > a > span{
+background-image:url(/img/smartphone/touch/skin/green/home2011/icon/notification_home_icon002.png);
+}
+
+.mikukore.green .topIndicator01 .lController02 > ul > .comment > p span{
+background:url(/img/smartphone/touch/skin/green/home2011/icon/notification_home_icon002.png) no-repeat 0 0;
+}
+
+.mikukore.green .topIndicator01 .lController02 > ul > .comment > p a{
+color:#4e6e29;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'orange'">
+.mikukore.orange .topIndicator01 .lController > ul,
+.mikukore.orange .topIndicator01 .lController02 > ul{
+border:1px solid #eecf8f;
+}
+
+.mikukore.orange .topIndicator01 .lController > ul > li,
+.mikukore.orange .topIndicator01 .lController02 > ul > li{
+border-left:1px solid #eecf8f;
+}
+
+.mikukore.orange .topIndicator01 .lController > ul > li > p > a,
+.mikukore.orange .topIndicator01 .lController02 > ul > li > p > a{
+background-color:#fffefd;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#fffefd), to(#ffdd9e));
+}
+
+.mikukore.orange .topIndicator01 .lController > ul > li > p > .new,
+.mikukore.orange .topIndicator01 .lController02 > ul > li > p > .new{
+background-color:#e5a655;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#e5a655), to(#dc8a1f));
+}
+
+.mikukore.orange .topIndicator01 .lController > ul > li > p > a > span{
+background-image:url(/img/smartphone/touch/skin/orange/home2011/icon/notification_home_icon002.png);
+}
+
+.mikukore.orange .topIndicator01 .lController02 > ul > .comment > p span{
+background:url(/img/smartphone/touch/skin/orange/home2011/icon/notification_home_icon002.png) no-repeat 0 0;
+}
+
+.mikukore.orange .topIndicator01 .lController02 > ul > .comment > p a{
+color:#976424;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'pink'">
+.mikukore.pink .topIndicator01 .lController > ul,
+.mikukore.pink .topIndicator01 .lController02 > ul{
+border:1px solid #f4c1d3;
+}
+
+.mikukore.pink .topIndicator01 .lController > ul > li,
+.mikukore.pink .topIndicator01 .lController02 > ul > li{
+border-left:1px solid #f4c1d3;
+}
+
+.mikukore.pink .topIndicator01 .lController > ul > li > p > a,
+.mikukore.pink .topIndicator01 .lController02 > ul > li > p > a{
+background-color:#fffeff;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#fffeff), to(#ffd7e6));
+}
+
+.mikukore.pink .topIndicator01 .lController > ul > li > p > .new,
+.mikukore.pink .topIndicator01 .lController02 > ul > li > p > .new{
+background-color:#e97a9f;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#e97a9f), to(#e24f81));
+}
+
+.mikukore.pink .topIndicator01 .lController > ul > li > p > a > span{
+background-image:url(/img/smartphone/touch/skin/pink/home2011/icon/notification_home_icon002.png);
+}
+
+.mikukore.pink .topIndicator01 .lController02 > ul > .comment > p span{
+background:url(/img/smartphone/touch/skin/pink/home2011/icon/notification_home_icon002.png) no-repeat 0 0;
+}
+
+.mikukore.pink .topIndicator01 .lController02 > ul > .comment > p a{
+color:#b64b6f;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'purple'">
+.mikukore.purple .topIndicator01 .lController > ul,
+.mikukore.purple .topIndicator01 .lController02 > ul{
+border:1px solid #cbb9df;
+}
+
+.mikukore.purple .topIndicator01 .lController > ul > li,
+.mikukore.purple .topIndicator01 .lController02 > ul > li{
+border-left:1px solid #cbb9df;
+}
+
+.mikukore.purple .topIndicator01 .lController > ul > li > p > a,
+.mikukore.purple .topIndicator01 .lController02 > ul > li > p > a{
+background-color:#fffeff;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#fffeff), to(#e6daf3));
+}
+
+.mikukore.purple .topIndicator01 .lController > ul > li > p > .new,
+.mikukore.purple .topIndicator01 .lController02 > ul > li > p > .new{
+background-color:#9366bf;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#9366bf), to(#7236ab));
+}
+
+.mikukore.purple .topIndicator01 .lController > ul > li > p > a > span{
+background-image:url(/img/smartphone/touch/skin/purple/home2011/icon/notification_home_icon002.png);
+}
+
+.mikukore.purple .topIndicator01 .lController02 > ul > .comment > p span{
+background:url(/img/smartphone/touch/skin/purple/home2011/icon/notification_home_icon002.png) no-repeat 0 0;
+}
+
+.mikukore.purple .topIndicator01 .lController02 > ul > .comment > p a{
+color:#5d3987;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'red'">
+.mikukore.red .topIndicator01 .lController > ul,
+.mikukore.red .topIndicator01 .lController02 > ul{
+border:1px solid #e6afb3;
+}
+
+.mikukore.red .topIndicator01 .lController > ul > li,
+.mikukore.red .topIndicator01 .lController02 > ul > li{
+border-left:1px solid #e6afb3;
+}
+
+.mikukore.red .topIndicator01 .lController > ul > li > p > a,
+.mikukore.red .topIndicator01 .lController02 > ul > li > p > a{
+background-color:#fffefe;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#fffefe), to(#fbcaca));
+}
+
+.mikukore.red .topIndicator01 .lController > ul > li > p > .new,
+.mikukore.red .topIndicator01 .lController02 > ul > li > p > .new{
+background-color:#d7636c;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#d7636c), to(#cb323d));
+}
+
+.mikukore.red .topIndicator01 .lController > ul > li > p > a > span{
+background-image:url(/img/smartphone/touch/skin/red/home2011/icon/notification_home_icon002.png);
+}
+
+.mikukore.red .topIndicator01 .lController02 > ul > .comment > p span{
+background:url(/img/smartphone/touch/skin/red/home2011/icon/notification_home_icon002.png) no-repeat 0 0;
+}
+
+.mikukore.red .topIndicator01 .lController02 > ul > .comment > p a{
+color:#75242a;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'yamabuki'">
+.mikukore.yamabuki .topIndicator01 .lController > ul,
+.mikukore.yamabuki .topIndicator01 .lController02 > ul{
+border:1px solid #e3d489;
+}
+
+.mikukore.yamabuki .topIndicator01 .lController > ul > li,
+.mikukore.yamabuki .topIndicator01 .lController02 > ul > li{
+border-left:1px solid #e3d489;
+}
+
+.mikukore.yamabuki .topIndicator01 .lController > ul > li > p > a,
+.mikukore.yamabuki .topIndicator01 .lController02 > ul > li > p > a{
+background-color:#fffffe;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#fffffe), to(#fff3bc));
+}
+
+.mikukore.yamabuki .topIndicator01 .lController > ul > li > p > .new,
+.mikukore.yamabuki .topIndicator01 .lController02 > ul > li > p > .new{
+background-color:#dfb93f;
+background:-webkit-gradient(linear, 0 0, 0 100%, from(#dfb93f), to(#d6a302));
+}
+
+.mikukore.yamabuki .topIndicator01 .lController > ul > li > p > a > span{
+background-image:url(/img/smartphone/touch/skin/yamabuki/home2011/icon/notification_home_icon002.png);
+}
+
+.mikukore.yamabuki .topIndicator01 .lController02 > ul > .comment > p span{
+background:url(/img/smartphone/touch/skin/yamabuki/home2011/icon/notification_home_icon002.png) no-repeat 0 0;
+}
+
+.mikukore.yamabuki .topIndicator01 .lController02 > ul > .comment > p a{
+color:#8a7a2c;
+}
+</TMPL_IF>
+
+
+/*----.visualNavi01 ----*/
+.visualNavi01 .talkingBalloon .profile a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.visualNavi01 .talkingBalloon .profile .isThumbnail > span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.visualNavi01 .talkingBalloon .voice a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.visualNavi01 .talkingBalloon .voice a:before{
+border-right-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+
+/*---- voive topics mode ----*/
+.visualNavi01 .talkingBalloon .voiceTopics{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.visualNavi01 .talkingBalloon .voiceTopics:before{
+border-top-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+
+/*---- displaySwitch01 ----*/
+<TMPL_IF EXPR="skin_color_name eq 'black'">
+.mikukore.black .displaySwitch01 .channel{border-bottom:1px solid #111;}
+
+.mikukore.black .displaySwitch01 .channel > li > p{border:1px solid #111;}
+
+.mikukore.black .displaySwitch01 .channel > li > p > mark,
+.mikukore.black .displaySwitch01 .channel > li > p > a{
+background:-webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#cecdcd));
+color:#333;
+background-color:#fefefe;
+}
+
+.mikukore.black .displaySwitch01 .channel > li > p span:before{
+background-image:url(/img/smartphone/touch/skin/black/home2011/icon/tab_navi001.png);
+}
+
+.mikukore.black .displaySwitch01 .channel > li > p > .displayed{
+color:#fff;
+background:#333;
+}
+
+.mikukore.black .streamNavigation01{
+border-bottom:1px solid #111;
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#333), color-stop(100%,#2f2f2f));
+}
+
+.mikukore.black .streamNavigation01 > li > a,
+.mikukore.black .streamNavigation01 > li > span{
+background-image:url(/img/smartphone/touch/skin/black/home2011/icon/tab_navi001.png);
+color:#d0e4f9 !important;
+}
+
+.mikukore.black .streamNavigation01 > li > .active{
+background-color:#000;
+}
+
+.mikukore.black .streamNavigation01 > .selector:after{
+border-color:#99b2bf transparent transparent;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'blue'">
+.mikukore.blue .displaySwitch01 .channel{border-bottom:1px solid #3b79b3;}
+
+.mikukore.blue .displaySwitch01 .channel > li > p{border:1px solid #3b79b3;}
+
+.mikukore.blue .displaySwitch01 .channel > li > p > mark,
+.mikukore.blue .displaySwitch01 .channel > li > p > a{
+background:-webkit-gradient(linear, left top, left bottom, from(#feffff), to(#9ce4ff));
+color:#3687d3;
+background-color:#feffff;
+}
+
+.mikukore.blue .displaySwitch01 .channel > li > p span:before{
+background-image:url(/img/smartphone/touch/skin/blue/home2011/icon/tab_navi001.png);
+}
+
+.mikukore.blue .displaySwitch01 .channel > li > p > .displayed{
+color:#fff;
+background:#4287c7;
+}
+
+.mikukore.blue .streamNavigation01{
+border-bottom:1px solid #3b79b3;
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#4287c7), color-stop(100%,#3f80bd));
+}
+
+.mikukore.blue .streamNavigation01 > li > a,
+.mikukore.blue .streamNavigation01 > li > span{
+background-image:url(/img/smartphone/touch/skin/blue/home2011/icon/tab_navi001.png);
+color:#c7e3ff !important;
+}
+
+.mikukore.blue .streamNavigation01 > li > .active{
+background-color:#1d6cb6;
+}
+
+.mikukore.blue .streamNavigation01 > .selector:after{
+border-color:#7bbdff transparent transparent;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'green'">
+.mikukore.green .displaySwitch01 .channel{border-bottom:1px solid #8cac36;}
+
+.mikukore.green .displaySwitch01 .channel > li > p{border:1px solid #8cac36;}
+
+.mikukore.green .displaySwitch01 .channel > li > p > mark,
+.mikukore.green .displaySwitch01 .channel > li > p > a{
+background:-webkit-gradient(linear, left top, left bottom, from(#fffffe), to(#e2f2bc));
+color:#4e6e29;
+background-color:#fffffe;
+}
+
+.mikukore.green .displaySwitch01 .channel > li > p span:before{
+background-image:url(/img/smartphone/touch/skin/green/home2011/icon/tab_navi001.png);
+}
+
+.mikukore.green .displaySwitch01 .channel > li > p > .displayed{
+color:#fff;
+background:#9cc03c;
+}
+
+.mikukore.green .streamNavigation01{
+border-bottom:1px solid #8cac36;
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#9cc03c), color-stop(100%,#96b839));
+}
+
+.mikukore.green .streamNavigation01 > li > a,
+.mikukore.green .streamNavigation01 > li > span{
+background-image:url(/img/smartphone/touch/skin/green/home2011/icon/tab_navi001.png);
+color:#4e6e29 !important;
+}
+
+.mikukore.green .streamNavigation01 > li > .active{
+background-color:#7ca846;
+}
+
+.mikukore.green .streamNavigation01 > .selector:after{
+border-color:#4e6e29 transparent transparent;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'orange'">
+.mikukore.orange .displaySwitch01 .channel{border-bottom:1px solid #c98936;}
+
+.mikukore.orange .displaySwitch01 .channel > li > p{border:1px solid #c98936;}
+
+.mikukore.orange .displaySwitch01 .channel > li > p > mark,
+.mikukore.orange .displaySwitch01 .channel > li > p > a{
+background:-webkit-gradient(linear, left top, left bottom, from(#fffffe), to(#ffdd9d));
+color:#976424;
+background-color:#fffffe;
+}
+
+.mikukore.orange .displaySwitch01 .channel > li > p span:before{
+background-image:url(/img/smartphone/touch/skin/orange/home2011/icon/tab_navi001.png);
+}
+
+.mikukore.orange .displaySwitch01 .channel > li > p > .displayed{
+color:#fff;
+background:#e69f43;
+}
+
+.mikukore.orange .streamNavigation01{
+border-bottom:1px solid #c98936;
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#e69f43), color-stop(100%,#dd9940));
+}
+
+.mikukore.orange .streamNavigation01 > li > a,
+.mikukore.orange .streamNavigation01 > li > span{
+background-image:url(/img/smartphone/touch/skin/orange/home2011/icon/tab_navi001.png);
+color:#976424 !important;
+}
+
+.mikukore.orange .streamNavigation01 > li > .active{
+background-color:#c98732;
+}
+
+.mikukore.orange .streamNavigation01 > .selector:after{
+border-color:#976424 transparent transparent;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'pink'">
+.mikukore.pink .displaySwitch01 .channel{border-bottom:1px solid #d588a2;}
+
+.mikukore.pink .displaySwitch01 .channel > li > p{border:1px solid #d588a2;}
+
+.mikukore.pink .displaySwitch01 .channel > li > p > mark,
+.mikukore.pink .displaySwitch01 .channel > li > p > a{
+background:-webkit-gradient(linear, left top, left bottom, from(#fffeff), to(#ffd1e8));
+color:#b64b6f;
+background-color:#fffeff;
+}
+
+.mikukore.pink .displaySwitch01 .channel > li > p span:before{
+background-image:url(/img/smartphone/touch/skin/pink/home2011/icon/tab_navi001.png);
+}
+
+.mikukore.pink .displaySwitch01 .channel > li > p > .displayed{
+color:#fff;
+background:#ed97b4;
+}
+
+.mikukore.pink .streamNavigation01{
+border-bottom:1px solid #d588a2;
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#ed97b4), color-stop(100%,#e391ad));
+}
+
+.mikukore.pink .streamNavigation01 > li > a,
+.mikukore.pink .streamNavigation01 > li > span{
+background-image:url(/img/smartphone/touch/skin/pink/home2011/icon/tab_navi001.png);
+color:#b64b6f !important;
+}
+
+.mikukore.pink .streamNavigation01 > li > .active{
+background-color:#e57b9d;
+}
+
+.mikukore.pink .streamNavigation01 > .selector:after{
+border-color:#b64b6f transparent transparent;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'purple'">
+.mikukore.purple .displaySwitch01 .channel{border-bottom:1px solid #573478;}
+
+.mikukore.purple .displaySwitch01 .channel > li > p{border:1px solid #573478;}
+
+.mikukore.purple .displaySwitch01 .channel > li > p > mark,
+.mikukore.purple .displaySwitch01 .channel > li > p > a{
+background:-webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e5daf3));
+color:#5e3a88;
+background-color:#ffffff;
+}
+
+.mikukore.purple .displaySwitch01 .channel > li > p span:before{
+background-image:url(/img/smartphone/touch/skin/purple/home2011/icon/tab_navi001.png);
+}
+
+.mikukore.purple .displaySwitch01 .channel > li > p > .displayed{
+color:#fff;
+background:#6a3f94;
+}
+
+.mikukore.purple .streamNavigation01{
+border-bottom:1px solid #573478;
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#6a3f94), color-stop(100%,#663c8e));
+}
+
+.mikukore.purple .streamNavigation01 > li > a,
+.mikukore.purple .streamNavigation01 > li > span{
+background-image:url(/img/smartphone/touch/skin/purple/home2011/icon/tab_navi001.png);
+color:#ad8cce !important;
+}
+
+.mikukore.purple .streamNavigation01 > li > .active{
+background-color:#50336d;
+}
+
+.mikukore.purple .streamNavigation01 > .selector:after{
+border-color:#ad8cce transparent transparent;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'red'">
+.mikukore.red .displaySwitch01 .channel{border-bottom:1px solid #91232c;}
+
+.mikukore.red .displaySwitch01 .channel > li > p{border:1px solid #91232c;}
+
+.mikukore.red .displaySwitch01 .channel > li > p > mark,
+.mikukore.red .displaySwitch01 .channel > li > p > a{
+background:-webkit-gradient(linear, left top, left bottom, from(#fffefe), to(#fbcaca));
+color:#75242a;
+background-color:#fffefe;
+}
+
+.mikukore.red .displaySwitch01 .channel > li > p span:before{
+background-image:url(/img/smartphone/touch/skin/red/home2011/icon/tab_navi001.png);
+}
+
+.mikukore.red .displaySwitch01 .channel > li > p > .displayed{
+color:#fff;
+background:#a82832;
+}
+
+.mikukore.red .streamNavigation01{
+border-bottom:1px solid #91232c;
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#a82832), color-stop(100%,#a12630));
+}
+
+.mikukore.red .streamNavigation01 > li > a,
+.mikukore.red .streamNavigation01 > li > span{
+background-image:url(/img/smartphone/touch/skin/red/home2011/icon/tab_navi001.png);
+color:#e28c8c !important;
+}
+
+.mikukore.red .streamNavigation01 > li > .active{
+background-color:#8d1820;
+}
+
+.mikukore.red .streamNavigation01 > .selector:after{
+border-color:#ef9191 transparent transparent;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'yamabuki'">
+.mikukore.yamabuki .displaySwitch01 .channel{border-bottom:1px solid #cfb42f;}
+
+.mikukore.yamabuki .displaySwitch01 .channel > li > p{border:1px solid #cfb42f;}
+
+.mikukore.yamabuki .displaySwitch01 .channel > li > p > mark,
+.mikukore.yamabuki .displaySwitch01 .channel > li > p > a{
+background:-webkit-gradient(linear, left top, left bottom, from(#fffffe), to(#fff3bb));
+color:#8a7a2c;
+background-color:#fffffe;
+}
+
+.mikukore.yamabuki .displaySwitch01 .channel > li > p span:before{
+background-image:url(/img/smartphone/touch/skin/yamabuki/home2011/icon/tab_navi001.png);
+}
+
+.mikukore.yamabuki .displaySwitch01 .channel > li > p > .displayed{
+color:#fff;
+background:#e6c834;
+}
+
+.mikukore.yamabuki .streamNavigation01{
+border-bottom:1px solid #cfb42f;
+background:-webkit-gradient(linear, left top, left bottom, color-stop(70%,#e6c834), color-stop(100%,#ddc032));
+}
+
+.mikukore.yamabuki .streamNavigation01 > li > a,
+.mikukore.yamabuki .streamNavigation01 > li > span{
+background-image:url(/img/smartphone/touch/skin/yamabuki/home2011/icon/tab_navi001.png);
+color:#8a7a2c !important;
+}
+
+.mikukore.yamabuki .streamNavigation01 > li > .active{
+background-color:#ccac19;
+}
+
+.mikukore.yamabuki .streamNavigation01 > .selector:after{
+border-color:#8a7a2c transparent transparent;
+}
+</TMPL_IF>
+
+
+/*---- cFootNavi01 ----*/
+.home2011 .plSceneBody.sFeedList01 .cFootNavi01 .pagetopLink a,
+.home2011 .plSceneBody.sHomeView01 .cFootNavi01 .pagetopLink a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.home2011 .plSceneBody.sFeedList01 .cFootNavi01 .pagetopLink a:after,
+.home2011 .plSceneBody.sHomeView01 .cFootNavi01 .pagetopLink a:after{
+border-top:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+border-left:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.home2011 .plSceneBody.sFeedList01 .cFootNavi01 .copyright,
+.home2011 .plSceneBody.sHomeView01 .cFootNavi01 .copyright{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.home2011 .plSceneBody.sFeedList01 .cFootNavi01 .naviMain .naviSub > li,
+.home2011 .plSceneBody.sHomeView01 .cFootNavi01 .naviMain .naviSub > li,
+.home2011 .plSceneBody.sFeedList01 .cFootNavi01 .naviMain .naviMain > li,
+.home2011 .plSceneBody.sHomeView01 .cFootNavi01 .naviMain .naviMain > li{
+border-left:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.home2011 .plSceneBody.sFeedList01 .cFootNavi01 .naviMain .naviSub a,
+.home2011 .plSceneBody.sHomeView01 .cFootNavi01 .naviMain .naviSub a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.home2011 .plSceneBody.sFeedList01 .cFootNavi01 .naviMain .naviMain a,
+.home2011 .plSceneBody.sHomeView01 .cFootNavi01 .naviMain .naviMain a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*---- cSimpleLinks01 ----*/
+.cSimpleLinks01 > li{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSimpleLinks01 > li > a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*---- cItemList01 ----*/
+.cItemList01{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cItemList01 ul{
+border-top:1px dotted <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cItemList01 ul > li{
+border-right:1px dotted <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:transparent;
+}
+
+.cItemList01 ul > li .thumbnail span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cItemList01 ul > li .name{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*---- cItemList01 : withPanel ----*/
+.cItemList01 ul.withPanel dl.property dd p{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*---- cItemList01 : pCtrl01 ----*/
+.cItemList01 .pCtrl01 > i,
+.cItemList01 .pCtrl01 > a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+
+/*---- cLogs01 ----*/
+.cLogs01{
+background-color:transparent;
+}
+
+.cLogs01 > ul > li{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cLogs01 > ul > li > a:after{
+border-top:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+border-right:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cLogs01 > ul > li p{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cLogs01 > .leadList > li .headline mark{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cLogs01 > ul > li .headline .atOne{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cLogs01 > ul > li .status > li{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cLogs01 > ul > li .owner > a,
+.cLogs01 > ul > li .owner > span,
+.cLogs01 > ul > li .relations > dd > a,
+.cLogs01 > ul > li .relations > dd > span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:transparent;
+}
+
+
+/*---- cInstance01 ----*/
+.cInstance01{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInstance01 .lOneItem{
+border-top:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInstance01 .lOneItem.expandee,
+.cInstance01 .lOneItem.foldBand{
+border-top:1px dotted <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInstance01 .lOneItem:not(.noView) > .lItemMain:after{
+border-top:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+border-right:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cInstance01.subItems,
+.cInstance01 .lOneItem > .subItems{
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)">;
+}
+
+.cInstance01.subItems .lItemMain,
+.cInstance01 .lOneItem > .subItems .lItemMain{
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)"> ;
+}
+
+.cInstance01 mark.name{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.sFeedList01 .cInstance01 .lOneItem.listMore .cpMoreLink07 a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+background:-webkit-gradient(linear, left top, left bottom, from(<TMPL_VAR EXPR="html_escape(gradation_start_color)">), to(<TMPL_VAR EXPR="html_escape(gradation_end_color)">));
+}
+
+.sFeedList01 .cInstance01 .lOneItem.listMore .cpMoreLink07 span:not(.loading):after{
+border-right:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+border-bottom:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*---- cInstance01 - catch ----*/
+.cInstance01 .catch .owner > a,
+.cInstance01 .catch .owner > span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cInstance01 .outline .contents .top{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cInstance01 .outline .contents .feedImg p > span,
+.cInstance01 .outline .contents .feedImg p > a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cInstance01 .outline .contents .feedImg p > span{
+border-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInstance01 .outline .contents .headline{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cInstance01 .outline .contents .subNote,
+.cInstance01 .outline .contents .headline + .headline{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cInstance01 .outline .contents .tempImg > span,
+.cInstance01 .outline .contents .tempImg > a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cInstance01 .outline .contents .tempImg > span{
+border-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInstance01 .noCatch .outline .contents .bodyText,
+.cInstance01 .noCatch .outline .contents .headline{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cInstance01 .noCatch .outline .contents .bodyText mark,
+.cInstance01 .noCatch .outline .contents .headline mark{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cInstance01 .outline .contents .bodyText{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*---- cInstance01 - subPicts ----*/
+.cInstance01 .outline .subPicts > li.others > p,
+.cInstance01 .outline .subPicts > li > a,
+.cInstance01 .outline .subPicts > li > span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cInstance01 .outline .subPicts > li.others > p,
+.cInstance01 .outline .subPicts > li > span{
+border-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInstance01 .outline .subPicts > li.others > p mark{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*---- cInstance01 - topicVoice ----*/
+.cInstance01 .outline .topicVoice{
+border-bottom:1px dotted <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInstance01 .outline .topicVoice .answer a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background:<TMPL_VAR EXPR="html_escape(partial_background_color)">;
+}
+
+.cInstance01 .outline .topicVoice .answer a span{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*---- cInstance01 - reaction ----*/
+.cInstance01 .outline .reaction > li a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)"> !important;
+}
+
+.cInstance01 .outline .reaction > .like > a.acted{
+border-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInstance01 .outline .reaction > .comment a.acted{
+border-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+
+/*---- cInstance01 - twitterName ----*/
+.cInstance01 .outline > p.twitterName{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cInstance01 .outline > p.twitterName a{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*---- cInstance01 - property ----*/
+.cInstance01 .outline .property > li{
+border-left:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cInstance01 .outline .property > .ctrl a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*---- cInstance01 - status ----*/
+.cInstance01 .outline .status > li{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*---- cInstance01 - local settings ----*/
+.cInstance01 .procAlert .outline .contents .bodyText{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cInstance01 .contentsLog .outline .contents .subNote,
+.cInstance01 .review .outline .contents .subNote,
+.cInstance01 .checkin .outline .contents .subNote,
+.cInstance01 .check .outline .contents .subNote{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cInstance01 .appli .outline .contents .subNote a,
+.cInstance01 .review .outline .contents .subNote a,
+.cInstance01 .review .outline .contents .headline + .headline a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cInstance01 .mixipage .outline .contents .subNote .contentProperty{
+color:<TMPL_VAR EXPR="html_escape(strong_link_color)">;
+}
+
+.cInstance01 + .cpMoreLink07{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInstance01.subItems + .cpMoreLink07{
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)">;
+}
+
+
+/*---- cInnerForm01 ----*/
+.cInstance01 .lInputArea .owner > a,
+.cInstance01 .lInputArea .owner > span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cInnerForm01 .lInputArea .inputs > .text01 .counter{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cInnerForm01 .lInputArea .inputs > .text01 textarea{
+border-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cInnerForm01 .lSubmitArea .subNote{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cInnerForm01 .lSubmitArea .subNote a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*---- cSubstance01 ----*/
+.cSubstance01{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:transparent;
+}
+
+.cSubstance01 mark.name{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*---- cSubstance01 - catch ----*/
+.cSubstance01 .catch .owner > a,
+.cSubstance01 .catch .owner > span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+
+/*---- cSubstance01 - contents ----*/
+.cSubstance01 .contents .top{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cSubstance01 .contents .headline{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cSubstance01 .contents .bodyText{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*---- cSubstance01 - detail ----*/
+.cSubstance01 .detail .tempPicts li > span,
+.cSubstance01 .detail .tempPicts li > a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cSubstance01 .detail .mainText{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cSubstance01 .detail .subText{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cSubstance01 .detail .feedImg p > span,
+.cSubstance01 .detail .feedImg p > a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cSubstance01 .detail .feedImg p > span{
+border-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01.video .detail,
+.cSubstance01.review .detail,
+.cSubstance01.diary .detail{
+border-top:1px dotted <TMPL_VAR EXPR="html_escape(partial_background_color)">;
+}
+
+.cSubstance01.album .detail{
+border-top:1px dotted <TMPL_VAR EXPR="html_escape(partial_background_color)">;
+}
+
+
+/*---- cSubstance01 - detailTable ----*/
+.cSubstance01 .detailTable > dl > dt,
+.cSubstance01 .detailTable > dl > dd{
+border-top:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 .detailTable > dl > dt{
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)">;
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cSubstance01 .detailTable > dl > dd > h3{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cSubstance01.schedule .detailTable p .subNote{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">
+}
+
+.cSubstance01.schedule .detailTable .cpSimpleTable01 dt{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">
+}
+
+.cSubstance01.schedule .detailTable .cpSimpleTable01 dd{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*---- cSubstance01 - joinList ----*/
+.cSubstance01 .joinList{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 .joinList ul{
+border-top:1px dotted <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 .joinList ul:first-child{
+border-top:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 .joinList ul > li{
+border-right:1px dotted <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 .joinList ul > li .thumbnail span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cSubstance01 .joinList ul > li .name{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cSubstance01 .joinList ul.members > li .thumbnail span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+
+/*---- cSubstance01 - subInfo ----*/
+.cSubstance01 ul.subInfo,
+.cSubstance01 a.subInfo > ul{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 ul.subInfo > li,
+.cSubstance01 a.subInfo ul > li{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cSubstance01 ul.subInfo .catch p > a,
+.cSubstance01 ul.subInfo .catch p > span,
+.cSubstance01 a.subInfo ul .catch p > span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cSubstance01.check .subInfo .top a{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cSubstance01.checkin .subInfo .subLink a,
+.cSubstance01.checkin .subInfo .subLink mark,
+.cSubstance01.check .subInfo .subLink a,
+.cSubstance01.check .subInfo .subLink mark{
+color:<TMPL_VAR EXPR="html_escape(link_color)">
+}
+
+.cSubstance01.review .subInfo .subLink a,
+.cSubstance01.review .subInfo .subLink mark{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cSubstance01.appBootup .subInfo .subLink a,
+.cSubstance01.appBootup .subInfo .subLink mark{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*---- cSubstance01 - topicVoice ----*/
+.cSubstance01 .topicVoice{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 .topicVoice .answer{
+border-top:1px dotted <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 .topicVoice .answer a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background:<TMPL_VAR EXPR="html_escape(partial_background_color)">;
+}
+
+.cSubstance01 .topicVoice .answer a span{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*---- cSubstance01 - reaction ----*/
+.cSubstance01 .reaction > li a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)"> !important;
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cSubstance01 .reaction > .like a.acted{
+border-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 .reaction > .comment a.acted{
+border-color:<TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+
+/*---- cSubstance01 - twitterName ----*/
+.cSubstance01 .twitterName{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">
+}
+
+.cSubstance01 .twitterName a{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">
+}
+
+
+/*---- cSubstance01 - property ----*/
+.cSubstance01 .property > li{
+border-left:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cSubstance01 .property > .ctrl a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cSubstance01 .property > .viewLevel a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cSubstance01 .property > .serviceLabel p.appliName01,
+.cSubstance01 .property > .serviceLabel p.cpAppliName01{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cSubstance01 .property > .serviceLabel cite.appliName01,
+.cSubstance01 .property > .serviceLabel cite.cpAppliName01{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*---- cSubstance01 - subLinks ----*/
+.cSubstance01 .subLinks > li{
+border-top:1px dotted <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSubstance01 .subLinks > li a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cSubstance01 .subLinks > li a:after{
+border-top:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+border-right:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*---- cSubstance01 - status ----*/
+.cSubstance01 .status > li{
+border-top:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)">;
+}
+
+.cSubstance01 .status > li > a:after{
+border-top:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+border-right:2px solid <TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cSubstance01 .status .relations h3{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cSubstance01 .status .relations .members > li{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cSubstance01 .status .relations .members > li span{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cSubstance01 .status .relations .members > .others span{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*---- cSections01 ----*/
+.cSections01 > .lOneArea > .lSectionMain{
+background-color:transparent;
+}
+
+.cSections01 > .lOneArea .lHeader{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background:<TMPL_VAR EXPR="html_escape(contents_title_bg_color)"> url(<TMPL_VAR EXPR="html_escape(skin_base)">/title001.jpg) no-repeat 100% 0;
+-webkit-background-size:auto 100%;
+}
+
+.cSections01 .lHeader h2,
+.cSections01 .lHeader h3{
+color:<TMPL_VAR EXPR="html_escape(strong_text_color)">;
+}
+
+.cSections01 h3.lSubHeading01,
+.cSections01 h4.lSubHeading01{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)">;
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cSections01 h3.lSubHeading01:before,
+.cSections01 h4.lSubHeading01:before{
+background:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cSections01 .cpMoreLink07,
+.cSections01 .cpMoreLink08{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSections01 .gTitleAndOutline01 .school{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+
+/*---- cRecommendedUsers01 ----*/
+.cRecommendedUsers01 > li{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cRecommendedUsers01 mark.name{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cRecommendedUsers01 .catch .owner > a,
+.cRecommendedUsers01 .catch .owner > span{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cRecommendedUsers01 .outline .contents .top{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">
+}
+
+.cRecommendedUsers01 .outline .contents .bodyText{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">
+}
+
+.cRecommendedUsers01 .outline .reaction > li a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+background:-webkit-gradient(linear, left top, left bottom, from(<TMPL_VAR EXPR="html_escape(gradation_start_color)">), to(<TMPL_VAR EXPR="html_escape(gradation_end_color)">));
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+
+/*---- cSearchForB01 ----*/
+.cSearchForB01 .searchWords input{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cSearchForB01 .subNote01{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">
+}
+
+.cSearchForB01 .subNote01 a{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cSearchForB01.byPosition,
+.cSearchForB01.byQrCode {
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+
+/*---- cWayToSearch01 ----*/
+.gResponseBox02 + .cWayToSearch01{
+border-top:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cWayToSearch01 > li{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cWayToSearch01 .recommended{
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)">;
+}
+
+.cWayToSearch01 p{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cWayToSearch01 .wayMain{
+color:<TMPL_VAR EXPR="html_escape(link_color)">;
+}
+
+.cWayToSearch01 .subNote01{
+background-color:<TMPL_VAR EXPR="html_escape(partial_background_color)">;
+}
+
+.cWayToSearch01 .subNote01 p{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*---- cWayToFindFriends01 ----*/
+.gResponseBox02 + .cWayToFindFriends01{
+border-top:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cWayToFindFriends01 > li{
+border-bottom:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+.cWayToFindFriends01 p{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+.cWayToFindFriends01 .image > a{
+border:1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+background-color:<TMPL_VAR EXPR="html_escape(background_color)">;
+}
+
+.cWayToFindFriends01 .friendsName{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+.cWayToFindFriends01 .name{
+color:<TMPL_VAR EXPR="html_escape(basic_text_color)">;
+}
+
+
+/*---- cYouMayKnow01 ----*/
+.cYouMayKnow01 .outline .contents .bodyText{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">
+}
+
+
+/*---- postArea ----*/
+<TMPL_IF EXPR="skin_color_name eq 'black'">
+.mikukore.black .postArea > .postHeader > h1{
+color:#fff;
+text-shadow:0 1px 1px #000;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'blue'">
+.mikukore.blue .postArea > .postHeader > h1{
+color:#fff;
+text-shadow:0 1px 1px #000;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'green'">
+.mikukore.green .postArea > .postHeader > h1{
+color:#333;
+text-shadow:0 1px 1px #fff;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'orange'">
+.mikukore.orange .postArea > .postHeader > h1{
+color:#333;
+text-shadow:0 1px 1px #fff;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'pink'">
+.mikukore.pink .postArea > .postHeader > h1{
+color:#fff;
+text-shadow:0 1px 1px #666;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'purple'">
+.mikukore.purple .postArea > .postHeader > h1{
+color:#fff;
+text-shadow:0 1px 1px #666;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'red'">
+.mikukore.red .postArea > .postHeader > h1{
+color:#fff;
+text-shadow:0 1px 1px #666;
+}
+<TMPL_ELSIF EXPR="skin_color_name eq 'yamabuki'">
+.mikukore.yamabuki .postArea > .postHeader > h1{
+color:#333;
+text-shadow:0 1px 1px #fff;
+}
+</TMPL_IF>
+
+
+/*---- pPageNavigation01 ----*/
+.pPageNavigation01 .UI01 .display{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*---- featureArticles ----*/
+.featureArticles .cItemList01 ul > li .credit{
+color:<TMPL_VAR EXPR="html_escape(weaker_text_color)">;
+}
+
+
+/*---- pPRMPlace01 ----*/
+.home2011 .plSceneBody.sFeedList01 .pPRMPlace01{
+border-bottom: 1px solid <TMPL_VAR EXPR="html_escape(border_color)">;
+}
+
+</style>
+</TMPL_LOOP>

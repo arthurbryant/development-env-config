@@ -1,20 +1,8 @@
-pick b917360 delete unused db table and query
-pick db4256e delete whitespace
-pick 6802fcf Fix Mixi::Skin::Touch test and fixture yaml
-pick 3c4afe8 Refactor: move admin controllers to *.pm files
-pick b920d67 delete unused report and count code
-pick 07a86df IEでmodeがうまく渡らない問題に対応
-pick 7a7d2f2 Escapeをhtml_escapeに統一
-pick 952656a 画像周りの項目名、プルダウンの並び順を修正
-pick 3ccbf35 add test for get_public_skins_by_genre_and_skin_type (WIP)
-pick 7124224 add test for get_genre
-pick 901908c Add get_skin and get_staging_skin test, bugfix
-pick c18b80a Fix admin_status and admin list_skin page title
-pick c3fbaf6 Delete unused select_public_skins_for_test
-pick 08507fc Add index to touchskin_skin_data
-pick 1e76d8b UUV対策
+pick 4e3bd94 make css tmpl files be readed from header.tmpl
+pick e3f185e bbbbbbbbbbb
+pick 5bc6269 Aaaa
 
-# Rebase cc24718..1e76d8b onto cc24718
+# Rebase e282c08..5bc6269 onto e282c08
 #
 # Commands:
 #  p, pick = use commit
