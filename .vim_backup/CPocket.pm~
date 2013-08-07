@@ -1,0 +1,65 @@
+package Mixi::Skin::Touch::CPocket;
+
+use strict;
+use warnings;
+use utf8;
+
+#::<<core library>>
+use Nove::Core::Log;
+
+#::<<service>>
+use Mixi::Service::Procedure::InternalGateway;
+
+#::<<application>>
+use Mixi::Skin::Touch;
+
+#::CONSTANTS
+use constant VALIDATION_RULE => {
+    TAG_ID => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+    OFFSET => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/, optional => 1 },
+    LIMIT  => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/, optional => 1 },
+};
+use constant APPLICATION_ID => 'jp.mixi.dev.touch'; use constant SERVICE_ID => 12;
+
+sub get_skin_content_list_by_tag_id {
+    my ($class, %args)= @_;
+
+    my $content_list_response = _get_content_list_by_tag_id(
+        requester_id => $args{requester_id},
+        tag_id       => $args{tag_id},
+        start_index  => defined($args{offset}) ? $args{offset} + 1 : undef,
+        quantity     => $args{limit},
+    );
+    return unless $content_list_response;
+
+    my @content_ids = map {$_->{content_id}} @{$content_list_response->{content_list}};
+    my $skins = Mixi::Skin::Touch->get_skins_by_content_ids(content_ids => \@content_ids);
+
+    my %content_id_to_skin = map { $_->{content_id} => $_ } @$skins;
+    for my $content (@{ $content_list_response->{content_list} }) {
+        my $skin = $content_id_to_skin{$content->{content_id}};
+        unless ($skin) {
+            Nove::Core::Log->warn("content_id [$content->{content_id}] is not exist in skin db");
+        }
+        $content->{skin_base} = $skin->{skin_base};
+    }
+
+    return $content_list_response;
+}
+
+sub _get_content_list_by_tag_id {
+    my %args = @_;
+    return Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.cpocket.market.getContentListByTag', {
+            requester_id => $args{requester_id},
+            params => {
+                tag_ids        => [$args{tag_id}],
+                application_id => APPLICATION_ID,
+                service_id     => SERVICE_ID,
+                start_index    => $args{start_index},
+                quantity       => $args{quantity},
+            },
+        }
+    );
+}
+1;

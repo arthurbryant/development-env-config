@@ -523,15 +523,14 @@ sub update_skin_status_and_temp {
 
 sub select_public_genres {
     my ($self, %args) = @_;
-    # Select name of genres, the number of skins that genres contain
     $self->connection->select_all(q/
-        SELECT g_t.id, g_t.genre_name, COUNT(r_t.skin_id) AS num_of_skins_in_genre
-        FROM touchskin_genre_data AS g_t, touchskin_skin_genre_relation AS r_t, touchskin_skin_data AS s_t
-        WHERE display = 'y' AND g_t.id = r_t.genre_id AND r_t.skin_id = s_t.id AND s_t.status = 1
-        GROUP BY g_t.id
-        ORDER BY priority DESC, id DESC;
+        SELECT id,genre_name
+        FROM touchskin_genre_data
+        WHERE display = 'y'
+        ORDER BY priority DESC, id DESC
     /);
 }
+
 sub select_all_genres_with_limit {
     my ($self, %args) = @_;
     $self->connection->select_all(q/
@@ -656,6 +655,20 @@ sub count_genre_skins {
         FROM touchskin_skin_genre_relation
         WHERE genre_id = ?
      /,@args{qw/genre_id/});
+}
+
+sub select_skins_by_contents_ids {
+    my ($self, %args) = @_;
+
+    my $contents_ids_place_holder = '?,' x scalar(@{$args{contents_ids}});
+    chop($contents_ids_place_holder);
+
+    $self->connection->select_all(qq/
+        SELECT id, skin_type, name, skin_version, contents_id, open_datetime
+        FROM touchskin_skin_data
+        WHERE contents_id IN ($contents_ids_place_holder)
+        ORDER BY open_datetime DESC, id DESC
+    /, @{$args{contents_ids}});
 }
 
 1;

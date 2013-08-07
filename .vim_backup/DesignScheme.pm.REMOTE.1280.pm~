@@ -25,24 +25,6 @@ has css_tmpl_files => (
     isa        => 'ArrayRef',
     auto_deref => 1,
     default    => sub { +[] },
-<<<<<<< HEAD
-    provides   => {
-        push  => 'add_css_tmpl',
-        clear => 'clear_css_tmpl',
-    },
-);
-
-has _css_tmpl_loader => (
-    is         => 'ro',
-    default    => sub {
-        my $self = shift;
-        Mixi::Template::CommonTemplateLoader->new(
-            encoding => $self->charset,
-            paths    => [ $self->default_common_paths ],
-        );
-    },
-=======
->>>>>>> 178f836... delete unused method and add use libs
 );
 
 after _auto_assign_common_params => sub {

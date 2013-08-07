@@ -6,16 +6,10 @@
 #   (use "git reset HEAD <file>..." to unstage)
 #
 #	modified:   advanced_perl/model.pl
-#	new file:   exercise/Balling.pm
-#	modified:   exercise/array.pl
-#	modified:   exercise/hash.pl
-#	new file:   exercise/map.pl
-#	new file:   exercise/peak.pl
-#	modified:   exercise/test.pl
-#	new file:   exercise/unshift.pl
-#	new file:   hash/hash.pl
-#	new file:   hash/model.pl
-#	modified:   regex/test.pl
+#	new file:   exercise/local.pl
+#	new file:   exercise/memcached/server.list
+#	new file:   exercise/memcached/set_and_get.pl
+#	new file:   exercise/reference.pl
 #
 # Changes not staged for commit:
 #   (use "git add/rm <file>..." to update what will be committed)
@@ -23,4 +17,6 @@
 #
 #	deleted:    advanced_perl/chapter17/chp17_exe2.pm
 #	deleted:    advanced_perl/chapter17/t.pl
+#	deleted:    exercise/aaa
+#	deleted:    exercise/say.pl
 #

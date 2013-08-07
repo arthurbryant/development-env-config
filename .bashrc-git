@@ -13,6 +13,7 @@ alias gco="git checkout"
 alias gr="git remote -v" 
 alias gls="git log -1 -p HEAD"
 alias gmls="git commit -c HEAD"
+alias glm="git log -n1 -p"
 
 # alias for linux command 
 alias cls="clear"
@@ -25,3 +26,4 @@ alias vg="vim ~/.bashrc-git"
 alias vv="vim ~/.vimrc"
 alias cdw="cd ~/git/touch-skin"
 alias f="find . -name "
+alias h="history"

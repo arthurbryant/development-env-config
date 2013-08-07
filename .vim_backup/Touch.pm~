@@ -10,10 +10,12 @@ use parent qw/
 #::<<other>>
 use Carp qw(croak);
 use Scalar::Util qw/blessed/;
+use Mixi::Utils::Params::Validate;
 use Params::Validate;
 use Digest::HMAC_SHA1 qw/
     hmac_sha1_hex
 /;
+use Date::Calc;
 
 #::<<core library>>
 use Nove::Core::Log;
@@ -34,20 +36,14 @@ use Mixi::Skin::Touch::DB::Skin;
 
 #::CONSTANTS
 use constant VALIDATION_RULE => {
-    SKIN_ID   => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
-    SKIN_TYPE => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
-    GENRE_ID  => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
-    MEMBER_ID => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+    SKIN_ID     => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+    SKIN_TYPE   => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+    GENRE_ID    => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+    MEMBER_ID   => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+    CONTENT_IDS => { type => Params::Validate::ARRAYREF },
 };
 use constant NAME_MAX_LENGTH => 40;
 use constant NAME_CUT_SUFFIX => '...';
-
-use constant {
-    CACHE_KEY_MIKUKORE_GENRE_INFO_ROWS => 'mikukore:genre:common',
-    # TODO: I don't know if this is right. Should we make it auto update or let it go?
-    CACHE_EXPIRE_MIKUKORE_GENRE_INFO_ROWS => 60 * 60 * 24,
-};
-
 
 sub get_instance {
     my $class = shift;
@@ -75,14 +71,8 @@ sub get_public_genres_by_skin_id {
 }
 
 sub get_public_genres {
-    my $class = shift;
-    my $rows = $class->db({ role => 's' })->select_public_genres();
-
-    my $memcached_key = CACHE_KEY_MIKUKORE_GENRE_INFO_ROWS;
-    my $memcached = $class->memcached();
-    $memcached->set_all($memcached_key, $rows, CACHE_EXPIRE_MIKUKORE_GENRE_INFO_ROWS);
-
-    return $rows;
+    my $self = shift;
+    return $self->db({ role => 's' })->select_public_genres();
 }
 
 sub get_public_skins_by_skin_type {
@@ -199,6 +189,22 @@ sub get_public_skins_by_genre_and_skin_type {
     };
 }
 
+sub get_skins_by_content_ids {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        content_ids => VALIDATION_RULE->{CONTENT_IDS},
+    });
+
+    my $db = $self->db({ role => 's' });
+    my $skins = $db->select_skins_by_content_ids(%args);
+
+    for(@{$skins || [] }){
+        $_->{name}      = Mixi::String::fold_text($_->{name}, NAME_MAX_LENGTH, 1, NAME_CUT_SUFFIX);
+        $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
+    }
+    return $skins;
+}
+
 sub get_skin {
     my $self = shift;
     my %args = Params::Validate::validate(@_, {
@@ -266,6 +272,7 @@ sub set_member_skin {
             member_id => $args{member_id},
             skin_id   => $new_skin->{id},
             skin_type => $new_skin->{skin_type},
+            timestamp => sprintf('%04d%02d%02d%02d%02d%02d', Date::Calc::Today_and_Now),
         }, 'dist_key' => $args{member_id}
     );
     return 1;
@@ -316,7 +323,6 @@ sub _get_skin {
     my $skin = $self->db({ role => 's' })->select_skin_by_id(id => $id);
     $skin->{skin_base} = $self->_make_skin_base($skin->{id}, $skin->{skin_version}) if $skin;
     return $skin;
-
 }
 
 sub can_use_skin {

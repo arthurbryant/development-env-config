@@ -1,0 +1,134 @@
+use strict;
+use warnings;
+
+use Test::More;
+use Test::Deep;
+use Test::MockTime;
+
+use Mixi::Test::Fixtures -checker => 'strict';
+use Nove::Test::Fixtures::Memcached;
+use Mixi::Test::DataFactory qw(
+    Mixi::Skin::Touch::SkinData
+);
+use Mixi::Test::Mock::Service::Procedure;
+
+BEGIN {
+    use_ok 'Mixi::Skin::Touch::CPocket';
+}
+use Mixi::Skin::Touch::Config;
+use Mixi::Skin::Touch;
+
+my $memcached = Nove::Test::Fixtures::Memcached->memcached_instance;
+
+subtest 'get_skin_content_list_by_tag_id' => sub {
+
+    my $skin_1 = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
+        id           => 10001,
+        skin_version => 2,
+        content_id   => 20001,
+    });
+
+    my $tag_id = 1234;
+    my $member_id = 4444;
+
+    my $content_1 = _content_1($skin_1->{content_id});
+    my $content_2 = _content_2(987654321); # not exist in skin db
+
+    my $procedure_mock = Mixi::Test::Mock::Service::Procedure->mock(
+        internal => 'jp.mixi.cpocket.market.getContentListByTag',
+        sub {
+            my ($self, $params) = @_;
+            is($self->requester_id, $member_id,'request_id should be passed');
+            cmp_deeply($params, {
+                tag_ids        => [1234],
+                application_id => ignore(),
+                service_id     => ignore(),
+                start_index    => 1,
+                quantity       => 10,
+            }, 'valid params should be passed to procedure');
+
+            return {
+                total_results => 2,
+                has_next      => 0,
+                has_prev      => 0,
+                content_list  => [
+                    $content_1,
+                    $content_2,
+                ],
+            }
+        }
+    );
+
+    my $result = Mixi::Skin::Touch::CPocket->get_skin_content_list_by_tag_id(
+        requester_id => $member_id,
+        tag_id => $tag_id,
+        offset => 0,
+        limit  => 10,
+    );
+
+    my $skin_base = Mixi::Skin::Touch->_make_skin_base(@{$skin_1}{qw/id skin_version/});
+    cmp_deeply(
+        $result,
+        {
+            total_results => 2,
+            has_next      => 0,
+            has_prev      => 0,
+            content_list  => [
+                {
+                    %$content_1,
+                    skin_base => $skin_base,
+                },
+                {
+                    %$content_2,
+                    # skin_base not available
+                },
+            ]
+        },
+        'should return valid structure with skin_base'
+    );
+};
+
+sub _content_1 {
+    my $content_id = shift;
+    {
+        object_type  => "content_for_sale",
+        content_id   => $content_id,
+        content_name => "くまモンの夏休み",
+        description  => "ゆるキャラくまモンの夏休みバージョンのミクコレです。",
+        tags => [
+            { id => "1234", name => "くまモン" },
+            { id => "2222", name => "くまモンの夏休み" }
+        ],
+        provider  => { id => 111, name => "熊本県広報課" },
+        copyright => "(c)2010熊本県くまモン#99999",
+        price     => 105,
+        selling_begin_at => "2013-01-30 23:59:59",
+        selling_end_at   => "2013-09-30 23:59:59",
+        use_by  => "2013-12-31 23:59:59",
+        has_stock_limit => 0,
+        consumable_type => "nonconsumable"
+    }
+}
+
+sub _content_2 {
+    my $content_id = shift;
+    {
+        object_type  => "content_for_sale",
+        content_id   => $content_id,
+        content_name => "content_idないやつ用",
+        description  => "",
+        tags => [
+            { id => "1234", name => "くまモン" },
+        ],
+        provider  => { id => 111, name => "熊本県広報課" },
+        copyright => "(c)2010熊本県くまモン#99999",
+        price     => 105,
+        selling_begin_at => "2013-01-30 23:59:59",
+        selling_end_at   => "2013-09-30 23:59:59",
+        use_by  => "2013-12-31 23:59:59",
+        has_stock_limit => 0,
+        consumable_type => "nonconsumable"
+    }
+}
+
+done_testing;
