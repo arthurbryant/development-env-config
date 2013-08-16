@@ -1,0 +1,211 @@
+package Mixi::Skin::Touch::Controller::Character::Show;
+
+use strict;
+use warnings;
+use utf8;
+
+#::<<other>>
+use Date::Calc;
+
+#::<<service>>
+use Mixi::Service::Procedure::InternalGateway;
+
+#::<<core library>>
+use Nove::Core::Datetime;
+
+#::<<framework>>
+use Mixi::Pages;
+use Mixi::Config qw/URL_MIXI_PREFIX/;
+use Nove::Core::Settings::Loader;
+
+#::<<application>>
+use Mixi::Skin::Touch;
+use Mixi::Skin::Touch::CPocket;
+
+#::BAD-DEPENDENCIES
+use Mixi::Utils::PageNavigation;
+
+=encoding utf-8
+
+=head1 NAME
+
+ Mixi::Skin::Touch::Controller::Character::Show Touch版ミクコレ キャラクターページ(TOPページ)
+
+=head1 DESCRIPTION
+
+ ミクコレのキャラクターページ(キャラクターTOPページ)
+
+=cut
+
+use constant {
+    _TITLE       => 'mixiコレクション',
+    _BANNER_PATH => 'media_resources/config/skin/touch/character/banner.yaml',
+    _LIMIT       => 10,
+};
+
+__PACKAGE__->use_perlstring(1);
+__PACKAGE__->auth_type(AUTH_REQUIRED);
+__PACKAGE__->template_type([qw/user::touch user::pcsite/]);
+__PACKAGE__->initial_params({
+    page => 1,
+});
+
+__PACKAGE__->validation_and_warnings(
+    '_default' => [
+        tag_id => [
+            'NOT_BLANK' => '',
+            'UINT'      => '',
+        ],
+        content_id => [ 'UINT'  => '' ],
+        page       => [ 'POSITIVEINT' => '' ],
+    ],
+);
+
+__PACKAGE__->conditions(
+    _default => sub {
+        my $self = shift;
+        return $self->alert if($self->has_error);
+
+        if(!$self->device->is_touch_screen){
+            return $self->redirect(URL_MIXI_PREFIX . 'list_skin.pl');
+        }
+
+        my $page   = $self->param->{page} || 1;
+        my $offset = ($page -1 ) * _LIMIT;
+        my $tag_id = $self->param->{tag_id};
+        my $content_id = $self->param->{content_id};
+
+        my $result = Mixi::Skin::Touch::CPocket->get_skin_content_list_by_tag_id(
+            member_id => $self->member->{id},
+            tag_id => $tag_id,
+            offset => $offset,
+            limit  => _LIMIT,
+        );
+        return $self->alert unless defined $result;
+
+        if ($content_id){
+            my $content = Mixi::Skin::Touch::CPocket->get_skin_content_by_content_id(
+                member_id  => $self->member->{id},
+                content_id => $content_id,
+            );
+            $self->stash->{select_skin} = $content;
+        }
+
+        $self->stash->{skin_data} = $result;
+        $self->stash->{banner} = $self->_get_banner($tag_id);
+        $self->stash->{point}  = $self->_get_point;
+        $self->stash->{tag_id} = $tag_id;
+        $self->stash->{page}   = $page;
+
+        return FIXED;
+    },
+);
+
+__PACKAGE__->templates(
+    _default => 'skin/character_show.tmpl',
+);
+
+__PACKAGE__->assign(
+    _default => [\&assign_common, \&assign_banner, \&assign_select_skin],
+);
+
+sub assign_common {
+    my $self      = shift;
+    my $skin_data = $self->stash->{skin_data};
+    my $point     = $self->stash->{point};
+    my $page      = $self->stash->{page};
+    my $tag_id    = $self->stash->{tag_id};
+
+    my $skin_list = $skin_data->{content_list};
+
+    $self->template->set_title(_TITLE);
+
+    my @one_week_ago = Date::Calc::Add_Delta_Days(Date::Calc::Today(),-7);
+    for(@{$skin_list}){
+        my $datetime = Nove::Core::Datetime::normalize_date($_->{selling_begin_at});
+        my $one_week_ago = sprintf("%04d%02d%02d000000", @one_week_ago);
+        $_->{is_new} = ($one_week_ago < $datetime) ? 1 : 0;
+    }
+
+    my $page_link_param = Mixi::Utils::PageNavigation::make_navigation(
+        page_now => $page,
+        per_page => _LIMIT,
+        count    => $skin_data->{total_results},
+        link     => 'show_touch_skin_character.pl',
+        param    => {
+            tag_id => $tag_id,
+        },
+    );
+
+    $self->template->param(
+        %$page_link_param,
+        now_point => $point->{point},
+        skin_list => $skin_list,
+    );
+};
+
+
+
+
+sub assign_select_skin{
+    my $self        = shift;
+    my $select_skin = $self->stash->{select_skin};
+
+    if($select_skin->{content_list}){
+        my ($select_skin_data) = @{$select_skin->{content_list}};
+
+        my $datetime = Nove::Core::Datetime::normalize_date(
+            $select_skin_data->{selling_begin_at}
+        );
+        my @one_week_ago = Date::Calc::Add_Delta_Days(Date::Calc::Today(),-7);
+        my $one_week_ago = sprintf("%04d%02d%02d000000", @one_week_ago);
+        my $is_new = ($one_week_ago < $datetime) ? 1 : 0;
+
+        $self->template->param(
+            select_skin_name      => $select_skin_data->{content_name},
+            select_skin_base      => $select_skin_data->{skin_base},
+            select_skin_price     => $select_skin_data->{price},
+            select_skin_copyright => $select_skin_data->{copyright},
+            select_skin_is_bought => $select_skin_data->{is_bought},
+            select_skin_is_new    => $is_new,
+            select_skin_content_id => $select_skin_data->{content_id},
+        );
+    }
+}
+
+sub assign_banner{
+    my $self   = shift;
+    my $banner = $self->stash->{banner};
+
+    if($banner){
+        $self->template->param(
+            top_banner_url    => $banner->{top_banner_url},
+            bottom_banner_url => $banner->{bottom_banner_url},
+            banner_link       => $banner->{banner_link},
+            text              => $banner->{text},
+        );
+    }
+}
+
+sub _get_banner {
+    my ($self, $tag_id) = @_;
+
+    my ($banner) = Nove::Core::Settings::Loader->load(_BANNER_PATH);
+    my $banner_list = $banner->{banner};
+
+    my $result = (defined $banner_list->{$tag_id}) ? $banner_list->{$tag_id} : 0;
+
+    return $result;
+}
+
+sub _get_point {
+    my $self = shift;
+    my $point = Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.payment.point.get', {
+            requester_id => $self->member->{id},
+        }
+    );
+    return $point;
+}
+
+1;

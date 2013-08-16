@@ -25,24 +25,6 @@ has css_tmpl_files => (
     isa        => 'ArrayRef',
     auto_deref => 1,
     default    => sub { +[] },
-<<<<<<< HEAD
-    provides   => {
-        push  => 'add_css_tmpl',
-        clear => 'clear_css_tmpl',
-    },
-);
-
-has _css_tmpl_loader => (
-    is         => 'ro',
-    default    => sub {
-        my $self = shift;
-        Mixi::Template::CommonTemplateLoader->new(
-            encoding => $self->charset,
-            paths    => [ $self->default_common_paths ],
-        );
-    },
-=======
->>>>>>> 178f836... delete unused method and add use libs
 );
 
 after _auto_assign_common_params => sub {
@@ -75,7 +57,7 @@ after _register_function => sub {
 
 after _output_filter => sub {
     my ($self, $ref) = @_;
-    my $css_tmpl_text = $self->_render_css_tmpl();
+    my $css_tmpl_text = $self->_render_css_tmpl() // '';
     $$ref =~ s/\Q$INJECTION_SIGNATURE\E/$css_tmpl_text/;
 };
 
@@ -97,6 +79,7 @@ sub _render_css_tmpl {
     $tmpl->add_templates(\qq{<TMPL_LOOP NAME="css_tmpl_files"><TMPL_INCLUDE EXPR="css_tmpl"></TMPL_LOOP>});
     my @css_tmpl_param = map { +{css_tmpl => ("$default_path/$_")} } ( List::MoreUtils::uniq @$css_tmpl_files );
 
+    my $tieup_banner_url = $skin_option->{skin_base} . "banner001.jpg";
     $tmpl->param( css_tmpl_files => \@css_tmpl_param);
     $tmpl->param(design_scheme_touch_skin_info => [ $skin_option ]);
     return $tmpl->output();

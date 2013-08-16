@@ -180,7 +180,7 @@ NeoBundle 'vim-perl/vim-perl'
 "let g:ctrlp_map = '<Leader><C-p>'
 let mapleader = ','
 
-autocmd BufNewFile,BufRead *.json setf perl
+autocmd BufNewFile,BufRead *.t setlocal ft=perl
 
 " [ai]g / a: includes index/key/arrow, i: symbol only
 NeoBundle 'vimtaku/vim-textobj-sigil'
@@ -188,6 +188,20 @@ NeoBundle 'vimtaku/vim-textobj-sigil'
 NeoBundle 'vimtaku/vim-textobj-keyvalue'
 " [ai]:
 NeoBundle 'vimtaku/vim-textobj-doublecolon'
+
+" Run current file by <Leader>r and get result in another buffer
+NeoBundle 'thinca/vim-quickrun'
+let g:quickrun_config = {}
+let g:quickrun_config['perl'] = {'command': 'mixi-prove'}
+
+let g:syntastic_mode_map = {
+\   'mode': 'active',
+\   'active_filetypes' : [],
+\   'passive_filetypes': ['perl']
+\}
+
+" Maximizes current split, <C-w>= to restore
+nnoremap <C-w>a <C-w>\|<C-w>_
 
 filetype indent on
 filetype plugin on

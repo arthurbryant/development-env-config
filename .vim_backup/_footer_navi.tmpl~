@@ -26,27 +26,19 @@
     </TMPL_IF>
 </STRIP>
 <TMPL_INCLUDE EXPR="common('ad/audiencescience.tmpl')">
-<TMPL_IF EXPR="0"><!-- comment --></TMPL_IF>
-<TMPL_IF EXPR="0"><!-- tieup skin banner --></TMPL_IF>
-<STRIP>
+
+<TMPL_IF EXPR="is_softlaunch_activated('touch_re_after')">
+<p class="aboutNewDesign"><a href="<TMPL_VAR NAME='url_mixi_prefix'>optout_touch_new_design_beta.pl" class="p-button m-traverse">旧デザインに戻る</a><a href="<TMPL_VAR NAME='url_mixi_prefix'>/inquiry.pl?mode=form&inquiry_type=0&inquiry_id=20&subcategory_id=182" class="p-button m-traverse">新デザインについてのご意見はこちら</a></p>
+</TMPL_IF>
+
+<!-- tieup banner-->
 <TMPL_LOOP NAME="design_scheme_touch_skin_info">
 <TMPL_IF NAME="has_banner_img">
-<TMPL_IF EXPR="0"><!-- TODO: add css to banner --></TMPL_IF>
-<STRIP>
-<div>
-    <a href="<TMPL_VAR EXPR='html_escape(banner_link)'>">
-        <img src="https://img.mixi.net<TMPL_VAR NAME='html_escape(skin_base)'>/banner_img.jpg" >
-    </a>
+<div class="bannerArea01">
+<a href="<TMPL_VAR EXPR="html_escape(banner_link)">"><img src="<TMPL_VAR NAME="CONFIG_IMG_BASE"><TMPL_VAR NAME="html_escape(skin_tieup_banner_url)">" width="" height="" alt="" /></a>
 </div>
 </TMPL_IF>
 </TMPL_LOOP>
-</STRIP>
-</TMPL_IF>
-
-
-<TMPL_IF EXPR="is_softlaunch_activated('touch_re_after')">
-<p class="aboutNewDesign"><a href="<TMPL_VAR NAME='url_mixi_prefix'>optout_touch_new_design_beta.pl" class="p-button m-traverse">旧デザインに戻る</a><a href="http://mixi.jp/inquiry.pl?mode=form&inquiry_type=0&inquiry_id=20&subcategory_id=182" class="p-button m-traverse">新デザインについてのご意見はこちら</a></p>
-</TMPL_IF>
 
 <!--[cFootNavi01]-->
 <div class="cFootNavi01">
@@ -57,26 +49,26 @@
 
 <div class="naviMain">
 <ul class="naviSub"><!--
---><li><a href="<TMPL_VAR EXPR=form(url_mixi_prefix)>list_service.pl">サービス一覧</a></li><!--
---><li><a href="<TMPL_VAR EXPR=form(url_mixi_prefix)>rules.pl">利用規約</a></li><!--
---><li><a href="<TMPL_VAR EXPR=form(url_corp_prefix)>privacy/">プライバシーポリシー</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_mixi_prefix'>list_service.pl">サービス一覧</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_mixi_prefix'>rules.pl">利用規約</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_corp_prefix'>privacy/">プライバシーポリシー</a></li><!--
 --></ul>
 <ul class="naviSub"><!--
 --><li><TMPL_INCLUDE EXPR=common('footer_login/support_report_link.tmpl')></li><!--
---><li><a href="<TMPL_VAR EXPR=form(url_mixi_prefix)>inquiry.pl">お問い合わせ</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_mixi_prefix'>inquiry.pl">お問い合わせ</a></li><!--
 --></ul>
 <ul class="naviSub"><!--
---><li><a href="<TMPL_VAR EXPR=html_escape(url_corp_prefix)>kenzen/">健全化の取り組み</a></li><!--
---><li><a href="<TMPL_VAR EXPR=form(url_mixi_prefix)>search_idea.pl">機能要望</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_corp_prefix'>kenzen/">健全化の取り組み</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_mixi_prefix'>search_idea.pl">機能要望</a></li><!--
 --></ul>
 <ul class="naviSub"><!--
---><li><a href="<TMPL_VAR EXPR=form(url_mixi_prefix)>release_info.pl">運営者からのお知らせ</a></li><!--
---><li><a href="<TMPL_VAR EXPR=form(url_mixi_prefix)>premium.pl?from=footer_lo">mixiプレミアム</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_mixi_prefix'>release_info.pl">運営者からのお知らせ</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_mixi_prefix'>premium.pl?from=footer_lo">mixiプレミアム</a></li><!--
 --></ul>
 <ul class="naviMain"><!--
---><li><a href="<TMPL_VAR EXPR=form(url_mixi_prefix)>home.pl">ホーム</a></li><!--
---><li><a href="<TMPL_VAR EXPR=form(url_mixi_prefix)>help.pl">ヘルプ</a></li><!--
---><li><a href="<TMPL_VAR EXPR=form(url_mixi_prefix)>logout.pl">ログアウト</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_mixi_prefix'>home.pl">ホーム</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_mixi_prefix'>help.pl">ヘルプ</a></li><!--
+--><li><a href="<TMPL_VAR NAME='url_mixi_prefix'>logout.pl">ログアウト</a></li><!--
 --><li><TMPL_IF EXPR=is_script('mixi.jp/home.pl')><a href="switch_view.pl?view_type=pc" class="widget" target="_blank" data-widget-namespace="jp.co.mixi.ui.confirmlink" data-message-text="デザインをPC版に切り替えます。デザインを戻す場合はホーム画面一番下の「スマートフォン版」から切り替え可能です。">PC版</a></TMPL_IF></li><!--
 --><TMPL_IF EXPR="is_script('mixi.jp/home.pl')"><li><a href="javascript:void(0);" class="widget" target="_blank" data-widget-namespace="jp.mixi.home.touch.widget.clientlink">公式アプリ</a></li></TMPL_IF><!--
 --></ul>

@@ -32,13 +32,13 @@ subtest 'get_skin_content_list_by_tag_id' => sub {
     my $member_id = 4444;
 
     my $content_1 = _content_1($skin_1->{content_id});
-    my $content_2 = _content_2(987654321); # not exist in skin db
+    my $content_2 = _content_9999(987654321); # not exist in skin db
 
     my $procedure_mock = Mixi::Test::Mock::Service::Procedure->mock(
         internal => 'jp.mixi.cpocket.market.getContentListByTag',
         sub {
             my ($self, $params) = @_;
-            is($self->requester_id, $member_id,'request_id should be passed');
+            is($self->requester_id, $member_id, 'requester_id should be passed correctly');
             cmp_deeply($params, {
                 tag_ids        => [1234],
                 application_id => ignore(),
@@ -60,10 +60,10 @@ subtest 'get_skin_content_list_by_tag_id' => sub {
     );
 
     my $result = Mixi::Skin::Touch::CPocket->get_skin_content_list_by_tag_id(
-        requester_id => $member_id,
-        tag_id => $tag_id,
-        offset => 0,
-        limit  => 10,
+        member_id => $member_id,
+        tag_id    => $tag_id,
+        offset    => 0,
+        limit     => 10,
     );
 
     my $skin_base = Mixi::Skin::Touch->_make_skin_base(@{$skin_1}{qw/id skin_version/});
@@ -80,6 +80,87 @@ subtest 'get_skin_content_list_by_tag_id' => sub {
                 },
                 {
                     %$content_2,
+                    # skin_base not available
+                },
+            ]
+        },
+        'should return valid structure with skin_base'
+    );
+};
+
+subtest 'get_skin_content_list_by_app_id' => sub {
+    my $skin_1 = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
+        id           => 20001,
+        skin_version => 2,
+        content_id   => 30001,
+    });
+    my $skin_2 = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
+        id           => 20002,
+        skin_version => 1,
+        content_id   => 30002,
+    });
+
+    my $content_1 = _content_1($skin_1->{content_id});
+    my $content_2 = _content_2($skin_2->{content_id});
+    my $content_9999 = _content_9999(987654321); # not exist in skin db
+
+    my $member_id = 2222;
+
+    my $procedure_mock = Mixi::Test::Mock::Service::Procedure->mock(
+        internal => 'jp.mixi.cpocket.store.getContentListByAppId',
+        sub {
+            my ($self, $params) = @_;
+            is($self->requester_id, $member_id, 'requester_id should be passed correctly');
+            cmp_deeply($params, {
+                application_id => ignore(),
+                service_id     => ignore(),
+                start_index    => 1,
+                count          => 10,
+                order          => 'DESC',
+                sort           => 'selling_begin_at',
+            }, 'valid params should be passed to procedure');
+
+            return {
+                total_results => 3,
+                has_next      => 0,
+                has_prev      => 0,
+                content_list  => [
+                    $content_1,
+                    $content_2,
+                    $content_9999,
+                ],
+            }
+        }
+    );
+
+    my $result = Mixi::Skin::Touch::CPocket->get_skin_content_list_by_app_id(
+        member_id => $member_id,
+        offset    => 0,
+        limit     => 10,
+        order     => 'DESC',
+    );
+
+    use Data::Dumper;
+    warn Dumper $result;
+    my $skin_base1 = Mixi::Skin::Touch->_make_skin_base(@{$skin_1}{qw/id skin_version/});
+    my $skin_base2 = Mixi::Skin::Touch->_make_skin_base(@{$skin_2}{qw/id skin_version/});
+    cmp_deeply(
+        $result,
+        {
+            total_results => 3,
+            has_next      => 0,
+            has_prev      => 0,
+            content_list  => [
+                {
+                    %$content_1,
+                    skin_base => $skin_base1,
+                },
+                {
+                    %$content_2,
+                    skin_base => $skin_base2,
+                },
+                {
+                    %$content_9999,
                     # skin_base not available
                 },
             ]
@@ -111,6 +192,27 @@ sub _content_1 {
 }
 
 sub _content_2 {
+    my $content_id = shift;
+    {
+        object_type  => "content_for_sale",
+        content_id   => $content_id,
+        content_name => "content2",
+        description  => "",
+        tags => [
+            { id => "1234", name => "くまモン" },
+        ],
+        provider  => { id => 111, name => "熊本県広報課" },
+        copyright => "(c)2010熊本県くまモン#99999",
+        price     => 105,
+        selling_begin_at => "2013-01-30 23:59:59",
+        selling_end_at   => "2013-09-30 23:59:59",
+        use_by  => "2013-12-31 23:59:59",
+        has_stock_limit => 0,
+        consumable_type => "nonconsumable"
+    }
+}
+
+sub _content_9999 {
     my $content_id = shift;
     {
         object_type  => "content_for_sale",

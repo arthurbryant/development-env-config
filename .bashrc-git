@@ -1,9 +1,9 @@
 # alias for git 
 alias ga="git add"
 alias gm="git commit"
-alias gb="git branch -v"
+alias gb="git branch -vv"
 alias gd="git diff --color"
-alias gl="git log --graph"
+alias gl="git log --graph --stat"
 alias gps="git push"
 alias gpl="git pull"
 alias gst="git status"
@@ -14,6 +14,8 @@ alias gr="git remote -v"
 alias gls="git log -1 -p HEAD"
 alias gmls="git commit -c HEAD"
 alias glm="git log -n1 -p"
+alias gf="git fetch"
+alias grh="git reset --hard"
 
 # alias for linux command 
 alias cls="clear"
@@ -27,3 +29,12 @@ alias vv="vim ~/.vimrc"
 alias cdw="cd ~/git/touch-skin"
 alias f="find . -name "
 alias h="history"
+alias s="screen"
+alias condb="mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp"
+
+# add ssh siau
+alias ssh-siau="ssh feng.zhang@siau -i ~/.ssh/detroit/id_rsa"
+
+# Release Ctrl-Q and Ctrl-S from tty
+stty stop undef
+stty start undef

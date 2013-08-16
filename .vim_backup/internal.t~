@@ -7,21 +7,58 @@ use Test::Deep;
 use Test::Exception;
 
 use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TOUCHSKIN/;
+use Mixi::Test::DataFactory qw(
+    Mixi::Skin::Touch::Purchase
+);
 use Mixi::Test::Fixtures::Memcached;
 use Mixi::Test::Mock::UserEvent;
+use Mixi::Test::Mock::Service::Procedure;
 
 use Mixi::Service::Procedure::InternalGateway;
 
+BEGIN {
+    use_ok 'Mixi::Skin::Touch';
+}
+
 my $f = Mixi::Test::Fixtures->get_fixture_object('DB_TOUCHSKIN');
+my $s = Mixi::Skin::Touch->new;
 
-my $self_member_id   = $f->test_member1->{member_id};
-my $others_member_id = $f->test_member3->{member_id};
+my $member_id             = $f->test_member1->{member_id};
+my $tieup_used_member_id  = $f->tieup_test_member->{member_id};
+my $deluxe_used_member_id = $f->deluxe_test_member->{member_id};
+my $no_skin_member_id     = 99917952;
 
-subtest 'with self member_id' => sub {
+
+sub _mock_display_status {
+    my ($procedure_mock, $member_id, $content_id, $result) = @_;
+    $procedure_mock->mock_method(
+        'jp.mixi.cpocket.accessibility.getDisplayStatus' => sub {
+            my ($self, $params) = @_;
+            cmp_deeply($params, {
+                owner_id       => $member_id,
+                application_id => 'jp.mixi.dev.touch',
+                content_ids    => [$content_id],
+            }, 'should pass valid procedure params to getDisplayStatus');
+            return {
+                list => [
+                    $result
+                ]
+            };
+        }
+    );
+};
+
+subtest 'with can_display skin' => sub {
+    my $procedure_mock = Mixi::Test::Mock::Service::Procedure->new('internal');
+    _mock_display_status($procedure_mock, $member_id, $f->open_test->{content_id}, {
+        content_id  => $f->open_test->{content_id},
+        can_display => 1,
+    });
+
     my $result = Mixi::Service::Procedure::InternalGateway->call(
         'jp.mixi.skin.touch.getByMemberId' => {
             params => {
-                member_id => $self_member_id,
+                member_id => $member_id,
             }
         }
     );
@@ -29,34 +66,96 @@ subtest 'with self member_id' => sub {
     cmp_deeply($result, superhashof({
         basic_text_color => $f->open_test->{basic_text_color},
         skin_base        => ignore(),
-        skin_color_type  => 'black',
+        skin_color_name  => 'black',
     }), 'should return skin base path and color info');
 };
 
-subtest 'with others member_id' => sub {
+subtest 'with member_id who is not using skin' => sub {
+    my $procedure_mock = Mixi::Test::Mock::Service::Procedure->new('internal');
+    _mock_display_status($procedure_mock, $member_id, undef, undef);
+
     my $result = Mixi::Service::Procedure::InternalGateway->call(
         'jp.mixi.skin.touch.getByMemberId' => {
             params => {
-                member_id => $others_member_id,
+                member_id => $no_skin_member_id,
             }
         }
     );
 
-    cmp_deeply($result, superhashof({
-        basic_text_color => $f->open_edit_test->{basic_text_color},
-        skin_base        => ignore(),
-    }), 'should return skin base path and color info');
+    is($result, undef, 'should return nothing');
 };
 
 subtest 'without member_id' => sub {
+    my $procedure_mock = Mixi::Test::Mock::Service::Procedure->new('internal');
+    _mock_display_status($procedure_mock, $member_id, undef, undef);
+
     throws_ok {
         Mixi::Service::Procedure::InternalGateway->call(
             'jp.mixi.skin.touch.getByMemberId' => {
-                requester_id => $self_member_id, # even with requester_id
                 params => {}
             }
         );
     } qr/invalid params/, 'should die with invalid params error'
+};
+
+subtest 'with tieup banner' => sub {
+    my $procedure_mock = Mixi::Test::Mock::Service::Procedure->new('internal');
+    _mock_display_status($procedure_mock, $tieup_used_member_id, $f->tieup_banner_test->{content_id}, {
+        content_id  => $f->tieup_banner_test->{content_id},
+        can_display => 1,
+    });
+
+    my $result = Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.skin.touch.getByMemberId' => {
+            params => {
+                member_id => $tieup_used_member_id,
+            }
+        }
+    );
+
+    my $skin_base= $s->_make_skin_base($f->tieup_banner_test->{id}, $f->tieup_banner_test->{skin_version});
+    my $tieup_banner_url = $skin_base . '/banner001.jpg';
+    cmp_deeply($result, superhashof({
+        basic_text_color => $f->tieup_banner_test->{basic_text_color},
+        skin_base        => $skin_base,
+        skin_tieup_banner_url => $tieup_banner_url,
+        skin_color_name  => 'black',
+    }), 'should return skin base path and color info');
+};
+
+subtest 'with cannot be used in CPocket deluxe skin' => sub {
+    my $procedure_mock = Mixi::Test::Mock::Service::Procedure->new('internal');
+    _mock_display_status($procedure_mock, $deluxe_used_member_id, $f->deluxe_open_test->{content_id}, {
+        content_id  => $f->deluxe_open_test->{content_id},
+        can_display => 0,
+    });
+
+    subtest 'without legacy Purchase DB entry' => sub {
+        my $result = Mixi::Service::Procedure::InternalGateway->call(
+            'jp.mixi.skin.touch.getByMemberId' => {
+                params => {
+                    member_id => $deluxe_used_member_id,
+                }
+            }
+        );
+        ok(!$result, 'should not return anything');
+    };
+
+    subtest 'without legacy Purchase DB entry' => sub {
+        Mixi::Test::DataFactory->make('Mixi::Skin::Touch::Purchase', {
+            member_id  => $deluxe_used_member_id,
+            product_id => $f->deluxe_open_test->{id},
+        });
+
+        my $result = Mixi::Service::Procedure::InternalGateway->call(
+            'jp.mixi.skin.touch.getByMemberId' => {
+                params => {
+                    member_id => $deluxe_used_member_id,
+                }
+            }
+        );
+        ok($result, 'should return skin');
+    };
 };
 
 done_testing;

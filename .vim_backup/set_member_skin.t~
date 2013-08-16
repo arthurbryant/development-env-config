@@ -1,14 +1,24 @@
 use strict;
 use warnings;
+
 use Test::More;
-use Mixi::Test;
+use Test::Deep;
+use Test::MockTime;
+use Test::MockTime::DateCalc;
+
 use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TOUCHSKIN/;
 use Nove::Test::Fixtures::Memcached;
+use Mixi::Test::Mock::UserEvent;
+
+use Date::Calc;
 
 BEGIN {
     use_ok 'Mixi::Skin::Touch';
 }
-use Mixi::Skin::Config;
+
+Test::MockTime::set_fixed_time(Date::Calc::Mktime(2013, 5, 6, 11, 22, 33));
+my $userevent = Mixi::Test::Mock::UserEvent->mock;
+my $memcached = Nove::Test::Fixtures::Memcached->memcached_instance;
 
 my $f = Mixi::Test::Fixtures->get_fixture_object('DB_TOUCHSKIN');
 
@@ -17,33 +27,44 @@ Nove::Test::Fixtures::Memcached->setup_fixture({
 });
 
 my $s = Mixi::Skin::Touch->get_instance();
-my $skin;
 
-$skin = $s->get_skin(id => $f->closed_test->{id});
-is(
-  $s->set_member_skin(member_id => $f->test_member2->{member_id},skin => $skin),
-  undef,
-  '公開中だが公開期間外なので設定不可'
-);
+subtest '期間内' => sub {
 
-$skin = $s->get_skin(id => $f->open_test->{id});
-is(
-  $s->set_member_skin(member_id => $f->test_member1->{member_id},skin => $skin,via_script_name => 'hoge_skin.pl'),
-  1,
-  '公開中かつ公開期間内なので設定可'
-);
+    my $open_skin = $s->get_skin(id => $f->open_test->{id});
+    ok(
+        $s->set_member_skin(member_id => $f->test_member1->{member_id},skin => $open_skin,via_script_name => 'hoge_skin.pl'),
+        '公開中かつ公開期間内なので設定可'
+    );
 
-is(
-    Nove::Test::Fixtures::Memcached->memcached_instance
-        ->{"touch_skin:member_skin:" . $f->test_member1->{member_id}},
-    undef,
-    'memcachedがクリアされたか'
-);
+    is(
+        $memcached->{"touch_skin:member_skin:" . $f->test_member1->{member_id}},
+        undef,
+        'memcachedがクリアされたか'
+    );
 
-is_deeply(
-  $s->get_member_skin(member_id => $f->test_member1->{member_id}),
-  $skin,
-  '設定されているか'
-);
+    is_deeply(
+        $s->get_member_skin(member_id => $f->test_member1->{member_id}),
+        $open_skin,
+        'ミクコレが設定されているか'
+    );
+
+    my ($event) = $userevent->fired_events('skin.touch.update');
+    cmp_deeply($event->{param}, {
+        member_id => $f->test_member1->{member_id},
+        skin_id   => $open_skin->{id},
+        skin_type => $open_skin->{skin_type},
+        timestamp => '20130506112233',
+    }, 'userventが発火されたか');
+
+};
+
+subtest '期間外' => sub {
+    my $closed_skin = $s->get_skin(id => $f->closed_test->{id});
+    # Refer skin availbale period according to CPocket Module, not Skin Module anymore.
+    ok(
+        $s->set_member_skin(member_id => $f->test_member5->{member_id},skin => $closed_skin, via_script_name => 'hoge_skin.pl'),
+        '非公開期間でも設定可'
+    );
+};
 
 done_testing;

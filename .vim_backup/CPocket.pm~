@@ -4,6 +4,9 @@ use strict;
 use warnings;
 use utf8;
 
+#::<<other>>
+use Params::Validate;
+
 #::<<core library>>
 use Nove::Core::Log;
 
@@ -13,38 +16,67 @@ use Mixi::Service::Procedure::InternalGateway;
 #::<<application>>
 use Mixi::Skin::Touch;
 
+=encoding utf-8
+
+=head1 NAME
+
+ Mixi::Skin::Touch::CPocket touchミクコレ
+
+=head1 DESCRIPTION
+
+ touch版ミクコレ cpocketのプロシージャとミクコレ側のモジュール使用しミクコレのデータを取得
+
+=cut
+
+=head1 METHODS
+
+ get_skin_content_list_by_tag_id
+ get_skin_content_by_content_id
+ get_skin_content_list_by_app_id
+ get_paid_skin_content_list
+
+=cut
+
 #::CONSTANTS
-use constant VALIDATION_RULE => {
-    TAG_ID => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
-    OFFSET => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/, optional => 1 },
-    LIMIT  => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/, optional => 1 },
+use constant {
+    APPLICATION_ID => 'jp.mixi.dev.touch',
+    SERVICE_ID => 12,
+    OFFSET2START_INDEX => 1,
 };
-use constant APPLICATION_ID => 'jp.mixi.dev.touch'; use constant SERVICE_ID => 12;
+
+=head2 $result = Mixi::Skin::Touch::CPocket->get_skin_content_list_by_tag_id(%args);
+
+ tag_idからミクコレの一覧を取得
+
+ INPUT
+    member_id
+    tag_id
+    offset
+    limit
+
+ OUTPUT
+  成功時：ミクコレデータのリスト
+  失敗時：undef
+
+=cut
 
 sub get_skin_content_list_by_tag_id {
-    my ($class, %args)= @_;
+    my $class  = shift;
+    my %params = Params::Validate::validate(@_, {
+        member_id => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+        tag_id    => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+        offset    => { optional => 1, default  => 0, },
+        limit     => { optional => 1, defalut  => 10, },
+    });
 
     my $content_list_response = _get_content_list_by_tag_id(
-        requester_id => $args{requester_id},
-        tag_id       => $args{tag_id},
-        start_index  => defined($args{offset}) ? $args{offset} + 1 : undef,
-        quantity     => $args{limit},
+        requester_id => $params{member_id},
+        tag_id       => $params{tag_id},
+        start_index  => $params{offset} + OFFSET2START_INDEX,
+        quantity     => $params{limit},
     );
     return unless $content_list_response;
-
-    my @content_ids = map {$_->{content_id}} @{$content_list_response->{content_list}};
-    my $skins = Mixi::Skin::Touch->get_skins_by_content_ids(content_ids => \@content_ids);
-
-    my %content_id_to_skin = map { $_->{content_id} => $_ } @$skins;
-    for my $content (@{ $content_list_response->{content_list} }) {
-        my $skin = $content_id_to_skin{$content->{content_id}};
-        unless ($skin) {
-            Nove::Core::Log->warn("content_id [$content->{content_id}] is not exist in skin db");
-        }
-        $content->{skin_base} = $skin->{skin_base};
-    }
-
-    return $content_list_response;
+    return _set_skin_base($content_list_response);
 }
 
 sub _get_content_list_by_tag_id {
@@ -62,4 +94,201 @@ sub _get_content_list_by_tag_id {
         }
     );
 }
+
+=head2 Mixi::Skin::Touch::CPocket->get_skin_content_by_skin_id {
+
+ skin_idからミクコレの情報を取得
+
+ INPUT
+   member_id
+   skin_id
+
+ OUTPUT
+   成功時:ミクコレのデータ
+   失敗時:undef
+
+=cut
+
+sub get_skin_content_by_skin_id {
+    my $class  = shift;
+    my %params = Params::Validate::validate(@_, {
+        member_id => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+        skin_id   => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+    });
+
+    my $skin = Mixi::Skin::Touch->new->get_skin(
+        id => $params{skin_id},
+    );
+    return unless $skin;
+
+    return unless $skin->{content_id};
+    my $content_response = _get_content_by_content_id (
+        requester_id => $params{member_id},
+        content_id   => $skin->{content_id},
+    );
+    return unless $content_response;
+    _set_skin_base($content_response);
+
+    return $content_response;
+}
+
+=head2 $result = Mixi::Skin::Touch::CPocket->get_skin_content_by_content_id {
+
+ content_idからミクコレの情報を取得
+
+ INPUT
+   member_id
+   content_id
+
+ OUTPUT
+   成功時:ミクコレのデータ
+   失敗時:undef
+
+=cut
+
+sub get_skin_content_by_content_id {
+    my $class  = shift;
+    my %params = Params::Validate::validate(@_, {
+        member_id  => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+        content_id => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+    });
+
+    my $content_response = _get_content_by_content_id (
+        requester_id => $params{member_id},
+        content_id   => $params{content_id},
+    );
+    return unless $content_response;
+    _set_skin_base($content_response);
+
+    return $content_response;
+}
+
+sub _get_content_by_content_id {
+    my %args = @_;
+    return Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.cpocket.store.getContentListByContentId', {
+            requester_id => $args{requester_id},
+            params => {
+                service_id     => SERVICE_ID,
+                application_id => APPLICATION_ID,
+                content_ids    => [$args{content_id}],
+            },
+        }
+    );
+}
+
+=head2 $result = Mixi::Skin::Touch::CPocket->get_skin_content_list_by_app_id {
+
+ app_idからミクコレの情報を取得
+
+ INPUT
+   service_id
+   application_id
+
+ OUTPUT
+   成功時:ミクコレのデータのリスト
+   失敗時:undef
+
+=cut
+sub get_skin_content_list_by_app_id {
+    my $class = shift;
+
+    my %params = Params::Validate::validate(@_, {
+        member_id => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+        offset    => { optional => 1, default => 0, },
+        limit     => { optional => 1, defalut => 10, },
+        order     => { optional => 1, default => 'DESC', },
+        sort      => { optional => 1, default => 'selling_begin_at', },
+    });
+
+    my $content_list_response = _get_content_list_by_app_id(
+        requester_id => $params{member_id},
+        start_index  => $params{offset} + OFFSET2START_INDEX,
+        count        => $params{limit},
+        order        => $params{order},
+        sort         => $params{sort},
+    );
+    return unless $content_list_response;
+    return _set_skin_base($content_list_response);
+}
+
+sub _get_content_list_by_app_id {
+    my %args = @_;
+    return Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.cpocket.store.getContentListByAppId', {
+            requester_id => $args{requester_id},
+            params => {
+                service_id     => SERVICE_ID,
+                application_id => APPLICATION_ID,
+                start_index    => $args{start_index},
+                count          => $args{count},
+                order          => $args{order},
+                sort           => $args{sort},
+            },
+        }
+    );
+}
+
+=head2 get_paid_skin_content_list
+
+ 購入済みのミクコレの情報を取得
+
+ OUTPUT
+   成功時:ミクコレのデータのリスト
+   失敗時:undef
+
+=cut
+sub get_paid_skin_content_list {
+    my $class = shift;
+
+    my %params = Params::Validate::validate(@_, {
+        member_id => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+        offset    => { optional => 1, default => 0, },
+        limit     => { optional => 1, defalut => 10, },
+    });
+
+    my $content_list_response = _get_content_list_accessibility_by_app_id(
+        requester_id     => $params{member_id},
+        start_index      => $params{offset} + OFFSET2START_INDEX,
+        quantity         => $params{limit},
+        distributed_type => 'paid',
+    );
+    return unless $content_list_response;
+    return _set_skin_base($content_list_response);
+
+    return $content_list_response;
+}
+
+sub _get_content_list_accessibility_by_app_id {
+    my %args = @_;
+    return Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.cpocket.accessibility.getContentListByAppId', {
+            requester_id => $args{requester_id},
+            params => {
+                service_id       => SERVICE_ID,
+                application_id   => APPLICATION_ID,
+                start_index      => $args{start_index},
+                quantity         => $args{quantity},
+                distributed_type => $args{distributed_type},
+            },
+        }
+    );
+}
+
+sub _set_skin_base {
+    my ($content_list_response, $skins) = @_;
+    my @content_ids = map {$_->{content_id}} @{$content_list_response->{content_list}};
+    $skins ||= Mixi::Skin::Touch->get_skins_by_content_ids(content_ids => \@content_ids);
+
+    my %content_id_to_skin = map { $_->{content_id} => $_ } @$skins;
+    for my $content (@{ $content_list_response->{content_list} }) {
+        my $skin = $content_id_to_skin{$content->{content_id}};
+        unless ($skin) {
+            Nove::Core::Log->warn("content_id [$content->{content_id}] is not exist in skin db");
+        }
+        $content->{skin_base} = $skin->{skin_base};
+    }
+    return $content_list_response;
+}
+
 1;

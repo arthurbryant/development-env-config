@@ -1,0 +1,18 @@
+#!/home/bkapps/git/touch-skin/script/perl
+
+use strict;
+use warnings;
+
+use Test::MockObject::Extends;
+use Test::More;
+use feature qw(say);
+
+BEGIN {
+    use_ok('Mixi::Cart');
+}
+
+my $t = Test::MockObject::Extends->new(Mixi::Cart->new);
+$t->mock('prepare', sub {say "mock prepare method"});
+is $t->execute(), 2;
+
+done_testing();

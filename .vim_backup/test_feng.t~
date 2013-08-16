@@ -1,0 +1,12 @@
+use warnings;
+use strict;
+
+use Mixi::Test;
+use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TEST/;
+#use Mixi::Test::Fixtures -checker => 'strict', qw/DB_TOUCHSKIN/;
+
+BEGIN {
+    use_ok('Mixi::FENG_TEST');
+}
+
+done_testing();

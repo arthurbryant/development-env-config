@@ -1,6 +1,3 @@
-<TMPL_VAR EXPR="add_css_tmpl('sp_skin/common_css.tmpl')">
-<TMPL_VAR EXPR="add_css_tmpl('sp_skin/home2011_css.tmpl')">
-
 <TMPL_IF EXPR="is_softlaunch_activated('touch_re_after')">
 <TMPL_INCLUDE NAME="../re/root.tmpl">
 <TMPL_ELSE>
@@ -22,12 +19,15 @@
 <TMPL_IF EXPR=is_redirect_login_access>
 <TMPL_VAR EXPR="set_google_analytics('reset_password_flow')">
 </TMPL_IF>
+
 <TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
 <TMPL_VAR EXPR="add_css('smartphone/touch/home2011.css')">
-<TMPL_VAR EXPR="add_css('smartphone/touch/global_menu.css')">
 <TMPL_VAR EXPR="add_css('smartphone/touch/popuplayer.css')">
 <TMPL_VAR EXPR="add_css('smartphone/touch/emoticon_palette.css')">
 <TMPL_VAR EXPR="add_css('emoticon_color.css')">
+<TMPL_VAR EXPR="add_css_tmpl('sp_skin/common_css.tmpl')">
+<TMPL_VAR EXPR="add_css_tmpl('sp_skin/home2011_css.tmpl')">
+
 <TMPL_INCLUDE EXPR="common('header.tmpl')">
 <TMPL_INCLUDE NAME="includes/_append_js.tmpl">
 <TMPL_INCLUDE NAME="group/includes/_append_window.tmpl">
@@ -36,7 +36,7 @@
 <body onload='if(!navigator.userAgent.match(/Android/i) && navigator.platform != "Win32"){setTimeout(function(){if(document.body.scrollTop) return;scrollTo(0,1);}, 100);}'<TMPL_IF EXPR="device_name ne 'Android'"> onunload=""</TMPL_IF>>
 
 <div id="page"
-class="login home2011 widget <TMPL_LOOP NAME="design_scheme_touch_skin_info">mikukore <TMPL_VAR NAME="skin_color_name"> <TMPL_IF NAME="has_home_header_img">mainVisual</TMPL_IF></TMPL_LOOP>"
+class="login home2011 widget <TMPL_LOOP NAME="design_scheme_touch_skin_info">mikukore <TMPL_VAR EXPR="html_escape(skin_color_name)"> <TMPL_IF NAME="has_home_header_img">mainVisual</TMPL_IF></TMPL_LOOP>"
 data-widget-namespace="jp.mixi.common.touch.widget.pageroot" data-page="home"><div id="mainDisplay">
 <!--[headerArea]-->
 <div id="headerArea"><br /><br /><!--/headerArea--></div>
@@ -58,24 +58,35 @@ data-widget-namespace="jp.mixi.common.touch.widget.pageroot" data-page="home"><d
 <TMPL_INCLUDE NAME="includes/page/_guide.tmpl">
 <TMPL_INCLUDE NAME="includes/page/_jserror.tmpl">
 <TMPL_INCLUDE NAME="includes/page/_error.tmpl">
+
+<div class="bannerArea01">
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+</div>
 <TMPL_IF NAME="is_beginner">
     <TMPL_INCLUDE NAME="includes/beginner/page/_main.tmpl">
 <TMPL_ELSE>
     <TMPL_INCLUDE NAME="includes/page/_main.tmpl">
 </TMPL_IF>
+<div class="bannerArea01">
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+</div>
 <TMPL_INCLUDE NAME="includes/page/_navi.tmpl">
+<div class="bannerArea01">
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+</div>
 <TMPL_INCLUDE NAME="includes/page/_menu.tmpl">
+
 <TMPL_INCLUDE NAME="includes/page/_postcomment.tmpl">
 <TMPL_IF EXPR="userbranch_check('touch_post_form_and_voice_topic', 'touch_post_form_new1', login_member_id) || userbranch_check('touch_post_form_and_voice_topic', 'touch_post_form_new2', login_member_id)">
 <TMPL_INCLUDE NAME="ab_test_post_ui/includes/page/_post.tmpl">
 <TMPL_ELSE>
 <TMPL_INCLUDE NAME="includes/page/_post.tmpl">
 </TMPL_IF>
+
 <TMPL_INCLUDE NAME="includes/page/_notify.tmpl">
 <TMPL_INCLUDE NAME="includes/page/_voice.tmpl">
 <TMPL_INCLUDE NAME="includes/page/_review.tmpl">
 <TMPL_INCLUDE NAME="includes/page/_feedback.tmpl">
-<TMPL_INCLUDE NAME="includes/page/_video.tmpl">
 <TMPL_INCLUDE NAME="includes/page/_photo.tmpl">
 <TMPL_INCLUDE NAME="includes/page/_album.tmpl">
 <TMPL_INCLUDE NAME="includes/page/_diary.tmpl">
@@ -99,6 +110,7 @@ data-widget-namespace="jp.mixi.common.touch.widget.pageroot" data-page="home"><d
 <!--/[pMainScene01]-->
 
 <!--/[mainArea]--></div>
+
 
 <div class="widget" data-widget-namespace="jp.co.mixi.ui.slideupwindow" data-parent-window-id="mainArea">
 <div class="JS_Container"

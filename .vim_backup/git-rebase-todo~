@@ -1,7 +1,10 @@
-pick 773fd1b delete unused method and add use libs
-pick 6fe1465 delete
+pick 71edea3 Make css tmpl files be included in header.tmpl
+pick e31a5a9 Remove global_menu.css from tmpl/js
+pick 6e5fc28 デザイン崩れ対策として、お気に入りに追加を常に出すようにする
+pick 7eff638 Add fetchAll/gather to brookutils.js, register to mixi/touch/mixi.js
+pick 36fa1a8 Refactor touch/hellobutton.js
 
-# Rebase 046a2d7..6fe1465 onto 046a2d7
+# Rebase fa6ef90..36fa1a8 onto fa6ef90
 #
 # Commands:
 #  p, pick = use commit

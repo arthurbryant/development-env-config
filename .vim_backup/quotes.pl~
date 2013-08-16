@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use feature qw(say);
+
+my $name = "arthur";
+
+my @single_quotes = q/what hell $name/;
+say $single_quotes[0];
+
+my @double_quotes = qq/what hell $name/;
+say $double_quotes[0];
+
+
+my @last_quotes = qw/what hell $name/;
+say @last_quotes;

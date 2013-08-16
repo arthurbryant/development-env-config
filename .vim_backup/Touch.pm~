@@ -251,7 +251,6 @@ sub set_member_skin {
     my ($self, %args) = @_;
 
     my $new_skin = $args{skin};
-    return unless $self->can_set_skin($new_skin);
 
     my $db = $self->db({ role => 'm' });
     eval {

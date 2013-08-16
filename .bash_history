@@ -1,1000 +1,1000 @@
-fg
+ag tag_ids
+ccls
+cls
 v
-f home2011_css.tmpl
-v ./tmpl/device/touch/common/euc-jp/sp_skin/h
+fg
+gpl
+gb
+git checkout work/touchskin_ph2_2
+gpl
+gl
+v
 gst
-mv tmpl/device/touch/common/euc-jp/sp_skin/ tmpl/device/touch/common/euc-jp/stylesheet/
+gd
 gst
-vim skin_option 
-vim template- 
-rm -rf skin_option template- 
+codereview.pl lib/Mixi/Skin/Touch/CPocket.pm
+codereview.pl t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
 gst
 ga .
+gm
 gst
-ga -u
-gst
-make
+gs
+gd --cached
+gm
+gps
+ls
+gpl
+ag glob
+ag glob lib/Mixi/Skin/Touch
+ag glob lib/Mixi/Skin/Touch*
+ag glob lib/Mixi/Skin/Touch/*
+cls
+fg
+ag local
+ag local lib/Mixi/Skin/Touch*
+fg
 gst
 fg
-history
 v 
 fg
-v
-fg
-v /home/bkapps/git/touch-skin/tmpl/device/touch/common//euc-jp/stylesheet/sp_skin/common_css.tmpl
-v /home/bkapps/git/touch-skin/tmpl/device/touch/common//euc-jp/stylesheet/sp_skin/home2011_css.tmpl
-gst
-ga .
-gd
-gst
-gm
-gl
-gm
-history | grep git
-history | grep -i
-history | grep "git rebase -i"
-history | grep "git rebase "
-git rebase -i 
-gl
-gb
-gb -v
-git push origin 007:put_css_tmpl_to_header
-fg
-gl --stat
-mv tmpl/device/touch/common/euc-jp/stylesheet/sp_skin tmpl/device/touch/
-mv -rf tmpl/device/touch/common/euc-jp/stylesheet/sp_skin tmpl/device/touch/
-mv -f tmpl/device/touch/common/euc-jp/stylesheet/sp_skin tmpl/device/touch/
-mv -f tmpl/device/touch/common/euc-jp/stylesheet/sp_skin tmpl/device/touch
-man mv
-mkdir tmpl/device/touch/sp_skin
-mv  tmpl/device/touch/common/euc-jp/stylesheet/sp_skin/* tmpl/device/touch/sp_skin/
-fg
-v
-gst
-ga .
-ga . -u
-gst
-gl
-gst
-cls
-gd
-gd --cached
-gst
-gd --cached
+screen
 ls
-gm
-git rebase -i
-gl
-gst
-gl
-cls
-gl --stat
-gb -v
-git diff 007 origin/work/007
-gl --stat
-git checkout lib/Mixi/Template/Role/Static/StyleSheet.pm
-gst
-git checkout HEAD~1 lib/Mixi/Template/Role/Static/StyleSheet.pm 
-gst
-ga .
-gst
-gm
-gl --stat
-gd static/js/mixi/home/pc/home.production.js
-gd --cached
-gs
-man git show
-git show -2
-gl
-git checkout HEAD~2 ./static/js/mixi/home/pc/home.production.js
-gst
-ga .
-gm
-git rebase -i
-gl
-gl --stat
-gls
-gd
-cls
-gl
-history | grep "git push"
-git push -f origin 007:put_css_tmpl_to_header
-cls
-gl
-gst
-cls
+screen
+screen -list
+screen -r 16587.pts-1.dp0104
+s
+sb
+s
+s v home.pl
+s
+s -list
+s -r 16786.pts-1.dp0104
 fg
+screen --help
+s
 ls
+v
 ls
 cdw
-ls
 gpl
 gb
-gm
-gst
 gl
+fg
+v
+fg
+vv
+fg
+v
+:q
+gpl
+fg
+vv
+fg
+vv
+fg
+vv
+v
+fg
+vb
+vs
+vg
+sb
+v
+fg
+v
+vv
+v
+vv
+v
+vv
+fg
+v
+vv
+v
+vv
+v
+vv
+fg
+vv
+gb
+gco touch_skin_ph15
+gst
+gd
+git stash
+gco touch_skin_ph15
+gl
+gpl
+gl
+gb -v
+fg
+cls
+fg
+cdw
+v
+vim t/lib/Mixi/Skin/Touch/CPocket/
+gb
+gco work/touchskin_ph2_2
+gst
+git stash pop
+v
+vv
+v
+fg
+gpl
+v
+ag jp.mixi.cpocket.market.getContentListByTag
+v ./lib/Mixi/CPocket/Adapter/Procedure/Market/GetContentListByTag.pm
+v ./t/lib/Mixi/CPocket/Adapter/Procedure/Market/GetContentListByTag.t
+fg
+v
+gls
+gl
+gls
+fg
+g
+fg
+gst
+gd
+ga .
+gm
 git pull --rebase
+gps
+git fetch
+vg
+sb
+gf
+cls
+mixi-prove . -c
 gst
+mixi-prove .
+cls
+
+ls
+cd git/perl/
+ls
+cd exercise/
+ls
+mkdir test
+cd test/
+cp ../add.pl mock.pl
+vim mock.pl 
+./mock.pl 
+g
+fg
+vim /home/bkapps/git/touch-skin/script/devel/perl
+ /home/bkapps/git/touch-skin/script/perl 
+fg
+./mock.pl 
+fg
+./mock.pl 
+fg
+vim mock.pl 
+./mock.pl 
+fg
+./mock.pl 
+fg
+ls
+cdw
+gb
+gpl
+cd lib/Mixi/Skin/Touch/
+ls
+vim CPocket.pm 
+file CPocket.pm 
+filetype CPocket.pm 
+vim CPocket.pm 
+cd -
+v
+gst
+git stash
+git pull
+gl
+git stash pop
+gst
+fg
+v t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+gl
+lgs
+gls
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+cls
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+cls
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+cls
+fg
+cls
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+gpl
+gl
+gls
+fg
+v
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+cls
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+cls
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+cls
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+gst
+codereview.pl lib/Mixi/Skin/Touch/CPocket.pm
+fg
+gst
+mixi-prove . -c
 gd
-gm
+fg
+gst
+v lib/Mixi/Skin/Touch/CPocket.pm
 ga .
 gm
-ls
-cls
+git pull --rebase
+gps
 gl
-gb
-gco show_num_of_skin
-cls
-ls
-gb
-gl
-git push
-gls
-gl
-gb
-gl
-gst
-gl
-gst
-gl
-git fetch
-git log origin/work/007 
-git fetch
-git log origin/work/007 
-git checkout -b aaa origin/work/007 
-gco 007
-gl
-gb
-gb -v
-gco show_num_of_skin
-gl
-git reset --hard e282c0808b93b95e71efffda9bd78587ddfb40a0
-gl
-git push -f 
-git fetch
-git log origin/work/007
+v
+mixi-prove . -c
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+v
+fg
 gpl
-gco aaa
-gb
-git branch -D show_num_of_skin 
-git branch -m show_num_of_skin
-gb
 gl
-cd ..
+gpl
+cd t/inc/Mixi/Test/Mock/
 ls
-cd pages-practice/
-gb
+v
+cd Service/
+ls
+vim Procedure.pm 
+gpl
+gst
+gd
+git checkout t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+gst
 gb -v
-gb --all
-gb -vv
-gb -vvv
-vim .git/config 
-cd ../procedure_practice_2013/
-ls
-gb -vv
-vim .git/config 
-man git push 
-gb
-git push ssh://git@git.lo.mixi.jp/users/feng.zhang/pages_practice_2013.git master:procedure_practice_2013
-gb
-gb -v
-git push origin :master 
-git push origin :release
-git push origin :master 
-vim .git/config 
-cls
-cd ..
-ls
-cd touch-skin/
-gb
-git branch -m COREDEVSOCIAL-420_show_num_of_skin
-gb
-git push ssh://git@git.lo.mixi.jp/users/feng.zhang/pages_practice_2013.git HEAD:COREDEVSOCIAL-420_show_num_of_skin
-gco 007
-git branch -D COREDEVSOCIAL-420_show_num_of_skin
-gb
-gb --all
-ls
-gst
+git reset --hard work/touchskin_ph2_2
+gpl
 gl
-cls
+v
 gst
-git rebase -i HEAD~2
-gl
-gst
-cls
-gb
-gst
-gs
-v tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
-fg
-clsl
-cls
-fg
-ls
-gst
-gb
 gls
-v lib/Mixi/Template/Role/Static/StyleSheet.pm
-v tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
-fg
-v tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
-fg
-gls
-v ./tmpl/device/touch/home/smart/root.tmpl
-vim home.pl 
-fg 1
-fg 2
-fg 1
-fg 2
-fg 1
-v tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
-f home2011.css.tmpl
-f home2011_css.tmpl
-fg
-ffg
-fg
-v tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
-fg
-f home2011_css.tmpl
-v ./tmpl/device/touch/sp_skin/home2011_css.tmpl
-fg
-vim home.pl 
-fg
-fg 2
-fg
-fg 1
-fg 2
-fg 
-vim home.pl 
-fg
-vim home.pl 
-ag $self->template->skin_option
-ag "$self->template->skin_option"
-man aga
-man ag
-ag -Q "$self->template->skin_option"
-ag -Q $self->template->skin_option
-ag -Q self->template->skin_option
-ag -Q "self->template->skin_option"
-cls
-fg
-vim lib/Mixi/Template.pm 
-fg
-vim home.pl 
-cd lib/Mixi/Template/
-ls
-v ../Template.pm
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
 fg
 cdw
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
 fg
-v home.pl 
-f home2011_css.tmpl
-v ./tmpl/device/touch/sp_skin/home2011_css.tmpl
-fg
-jobs -l
-fg
-f _loader.tmpl | grep touch
-f home2011_css.tmpl
-fg
-v lib/Mixi/Template/Base.pm 
-fg
-ag default_common_paths
-fg
-f _loader.tmpl
-v ./tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
-fg 2
-fg 1
-fg
-v ./tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
 v
-f _loader.tmpl | grep touch
-f home2011_css.tmpl
-mkdir  tmpl/device/touch/common/euc-jp/sp_skin
-mv ./tmpl/device/touch/sp_skin/home2011_css.tmpl ./tmpl/device/touch/common/euc-jp/sp_skin/
-mv ./tmpl/device/touch/sp_skin/common_css.tmpl ./tmpl/device/touch/common/euc-jp/sp_skin/
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_list.t
+fg
+codereview.pl lib/Mixi/Skin/Touch/CPocket.pm 
+fg
+gd
+fg
+cls
+gst
+ga .
+gm
+gd
+gd --cached
+gls
+gst
+gps
+gl
+cls
+cd -
+s
+cls
+cdw
+gst
+git clean
+git clean -f
+gst
+gpl
+gb
+gpl
+gl
+cls
+vv
+vim lib/Mixi/Skin/Touch.pm 
+gb
+cls
+ag new
+ag lib/Mixi/Skin/Touch/
+ag lib/Mixi/Skin/*
+ag lib/Mixi/Skin
+ag new lib/Mixi/Skin
+ag new lib/Mixi/Skin/Touch
+cls
+ag new lib/Mixi/Skin/Touch
+vim lib/Mixi/Skin/Touch.pm 
+gb
+gb -all
+gb --all
+git checkout touchskin_ph15_staging
+git checkout -b touchskin_ph15_staging remotes/origin/work/touchskin_ph15_staging
+gl
+gb -v
+ls
+ag new lib/Mixi/Skin/Touch
+fg
+v lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm
+cls
+ag Mock t/lib/Mixi/Skin/Touch/
+v t/lib/Mixi/Skin/Touch/Purchase/get_purchase_info_by_order_id.t
+fg
+v t/fixtures/factory/DB_TOUCHSKIN_PURCHASE.yaml 
+fg
+v t/fixtures/factory/DB_TOUCHSKIN_PURCHASE.yaml 
+fg
+v lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm
+ag fixture t/lib/Mixi/Skin/Touch
+v t/lib/Mixi/Skin/Touch/get_skin.t
+v t/fixtures/DB_FENG_ZHANG_TEST.yaml
+v t/lib/Mixi/Skin/Touch/test_feng.t
+f DB_TOUCHSKIN
+f DB_TOUCHSKIN*
+v ./t/fixtures/DB_TOUCHSKIN.yaml
+fg
+f DB_FENG_ZHANG_TEST*
+fg
+ag  DB_TOUCHSKIN
+ag DB_FENG_ZHANG_TEST*
+v ./t/fixtures/DB_FENG_ZHANG_TEST.yaml
+fg
+f fixture*
+fg
+v ./t/fixtures/DB_FENG_ZHANG_TEST.yaml
+mv  ./t/fixtures/DB_FENG_ZHANG_TEST.yaml ./t/fixtures/DB_TEST.yaml
 fg
 v
 make
 fg
 v
 fg
-v
-fg
-history
-fg
-vim ./tmpl/device/touch/common/euc-jp/stylesheet/sp_skin/common_css.tmpl 
-vim ./tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl 
-f home2011_css.tmpl
-ag home2011_css.tmpl
-v ./tmpl/device/touch/home/smart/root.tmpl
-v
-fg
-gst
-gs
-fg
-v ./lib/Mixi/Template/Role/Static/StyleSheet.pm
-gst
-fg
-gl
-gl --vv
-gl -vvv
-gl --stat
-fg
-v lib/Mixi/Template/Role/GoogleAnalytics.pm 
-pwd
+cd /lib/Mixi
+cd lib/Mixi/
 ls
 fg
-grep add_template
-ag add_template
-v ./t/lib/Mixi/Template/Role/Optimizely/00_basic.t
+cdw
+ag procedure lib/Mixi/Skin/Touch/
+ag procedure lib/Mixi/Skin/Touch/*
+ag procedure lib/Mixi/Skin/Touch*
+man ag
+ag procedure lib/Mixi/Skin/Touch* -i
+v lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm
+v t/functional/procedure/skin/touch/getByMemberId/internal.t 
+gst
+git clean -f
+gst
+gpl
+gl
+gpl
+ag ""
+use Mixi::Test::Mock::Service::Procedure;
+ag "use Mixi::Test::Mock::Service::Procedure;"
+ag "use Mixi::Test::Mock::Service::Procedure;" | grep touch
+ag "use Mixi::Test::Mock::Service::Procedure;" | grep skin -i
+v ./t/lib/Mixi/Skin/Touch/Adapter/Procedure/Internal/Purchase/CallBack.t
+cd git/perl/exercise/
+ls
+ls -t
+cd test/
+ls
+ls -a
+vim mock.pl 
 fg
+v mock.pl 
+./mock.pl 
+fg
+./mock.pl 
+fg
+./mock.pl 
+fg
+v mock.pl 
+./mock.pl 
+fg
+v mock.pl 
+./mock.pl 
+fg
+v mock.pl 
+./mock.pl 
+fg
+v mock.pl 
+fg
+ls
+mkdir Mixi
+vim Mixi/Cart.pm
+fg 1
+fg 2
+fg
+ls
+v Mixi/Cart.pm 
+fg
+v Mixi/Cart.pm 
+ls
+./mock.pl 
+v mock.pl 
+fg
+ls
+mv mock.pl mock_object.pl
+cp mock_object.pl mock_object_extends.pl
+vim mock_object_extends.pl 
+ls
+cd ..
+ls
+vim quota.pl 
+mv quota.pl quotes.pl
+vim quotes.pl 
+ls
+cdw
+ls
+gb
+cls
+f getContentListByAppId
+AG getContentListByAppId
+ag getContentListByAppId
+v ./lib/Mixi/CPocket/Adapter/Procedure/Store/GetContentListByAppId.pm
+gls
+gl
+cls
+gl
+cls
+ls
+git fetch
+gb
+ls
+gb
+gst
+ls
+gb
+gl
+gls
+cls
+gls
+v lib/Mixi/Skin/Touch/CPocket.pm
+fg
+gb
+ls
+cls
+fg
+exit
+ls
+cls
+cdw
+gb
+gb -v
+gps -f
+gd
+ga .
+gm
+gps
+ssh feng.zhang@siau
+gb
+gco master
+gb -v
+git reset --hard mixi/master 
+git fetch
+git fetch mixi 
+gl
+git merge mixi/release 
+git reset --hard mixi/master 
+git merge --no-ff mixi/release 
+git push mixi master:master -u
+gl
+gb -v
+gl
+history
+history | grep git
 cls
 history
-v ./tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
-f _loader.tmpl
-rm -rf tmpl/device/touch/common/utf-8/
-f _loader.tmpl
-rm -rf ./tmpl/device/touch/common/euc-jp/stylesheet/_loader.tmpl
-gst
-fg
-v
-gd
-gst
-ga -u
-gst
-ga
-ga .
-ga -u
-gst
-vim lib/Mixi/Template/Role/Static/StyleSheet.pm
-f show_profile.tmpl
-f show_profile*
-vim show_profile.pl 
-vim show_profile_main.tmpl 
-f show_profile_main.tmpl 
-v ./tmpl/device/touch/show_profile_main.tmpl
-ag home2011_css.tmpl
-ag common_css.tmpl
-v ./tmpl/device/touch/show_friend_main.tmpl
-fg
-v ./tmpl/device/touch/show_profile_main.tmpl
+clear
 ls
-v
-cat a
-gs 2
-gs -2
-gls
-gl --stat
+gb
+gr -v
+gb -v
+gco work/touchskin_ph2_3
+gpl
 gl
+cls
+gls
 ls
-cdw 
+cd log/
 ls
+vim PLATFORM_SYSLOG/
+vim PLATFORM_SYSLOG/syslog_02/
+pwd
+ag "use of unin"
+ag "use of unin" *
+ag "use of" .
+l
+s
+cdw
+git fetch
+git pull
+gl
+git checkout work/touchskin_ph2_3
+gb
+gpl
+gl
+gls
+cls
+cdw
+ls
+vim lib/Nove.pm 
+vim lib/Nove/Config.pm 
+cd lib/Nove/
+ls
+cd Core/
+ls
+cd ..
+ls
+cd ..
+ls
+cd Nove/Core/
+ls
+vim DB.pm 
+cd ../..
+ls
+cd Nove/
+ls
+vim Config.pm 
+ls
+cd Core/
+ls
+vim Encodings.pm 
+vim Hash.pm 
+gpl
+cd -
+cdw
 gb
 gpl
 git fetch
-gb --all
-git checkout put_css_tmpl_to_header remotes/origin/put_css_tmpl_to_header
-git checkout -b put_css_tmpl_to_header remotes/origin/put_css_tmpl_to_header
+pwd
+cd
+cdw
+ls
 gl
 gb
-gls
-ls
-gls
-v ./lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-gst
+gco touchskin_ph15_staging
+cls
 gl
-gst
-ga .
-gm
-git rebase -i
-git rebase -i HEAD~2
-gls
+gb
+gb -v
 ls
-gl
+gb
+gb -v
+gr -v
 git fetch
+git fetch mixi 
+git merge-base HEAD mixi/master  
+git rebase  -i fa6ef908e0997939bf0698f08e377156cdb709d6
 gl
+ls
+gl
+git rebase  -i fa6ef908e0997939bf0698f08e377156cdb709d6
+gl
+git rebase mixi/master 
+git push mixi HEAD:master 
 git pull --rebase
-gl
+git rebase abort
 git rebase --abort
 gl
-git reflog
-gls
+git pull --rebase mixi master 
+git push mixi HEAD:master
 gl
-gb 
-gb -v
-git reset --hard origin/touch_skin_ph15 
-gl
-gls
+history
 ls
-gl
-history | grep git
-gl -stat
-gl --stat
-v lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-gst
-gd
-cls
-gst
-rm -rf q
-gst
-ga 
-ga .
-gm
-gst
-gps
-gl
-gd 
-gs -1
-gs -3
-cls
-cd git/perl/exercise/memcached/
-ls
-v set_and_get.pl 
-./set_and_get.pl 
-fg
-./set_and_get.pl 
-fg
-./set_and_get.pl 
-fg
-./set_and_get.pl 
-fg
-./set_and_get.pl 
-fg
-./set_and_get.pl 
-memcached -f 2 -vv
-memcached -f 1.25 -vv 
-ls
-vim server.list
-ls
+f DesingScheme*
 gb
-cdw
+gr -v
 gb --all
+gb -v
+git checkout release 
+git reset --hard mixi/release 
+git 
 git fetch
-git checkout work/design_yaml_for_ph2 origin/work/design_yaml_for_ph2
-git checkout -b work/design_yaml_for_ph2 origin/work/design_yaml_for_ph2
+git fetch mixi
+git reset --hard mixi/release 
 gl
-gpl
-gl
-gst
-gb
-gb --all
-git checkout -b ph15 remotes/origin/touch_skin_ph15
-gl
-gst
-gb 
-gb -v
-gpl
-git cherry-pick 4019f6398e9c29d8e176ba13014f49a162546a8e
-git cherry-pick 06dc5e6911535ade808c4423c2dff09929042983
-git cherry-pick 046a2d71ac73bd16d1e862f3b4faece4da48e21e
-gl
-git rebase -i
-gb -v
-gps
+v lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
+gd
+codereview.pl lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
+mixi-prove -c
+mixi-prove lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
+cls
+stop-server 
+start-server 
+history
+cls
 stop-server 
 start-server 
 ls
-gb
-cwd
-gb
-cdw
-gb
-gl
-git fetch
-gpl
-gl
+v lib/Mixi/Skin/Touch.pm 
+gd
+cd git/perl/exercise/
 ls
-f getContentListByAppId
-ag getContentListByAppId
-ag y.getContentListByAppId
-ag getContentListByAppId
-gpls
-cw
-gwd
-cwd
-gdw
-cdw
-gpl
-ag getContentListByAppId
-f CPocket*
-f mixipayment
-f mixipayment*
-vim lib/Mixi/Payment/
-cd lib/Mixi/Payment/
-ks
-ls
-cls
-ls
+vim hash.pl 
+fg 1
+fg 2
 fg
-git fetch
+./hash.pl 
+fg
+./hash.pl 
+fg
+./hash.pl 
+fg
+v hash.pl 
 cdw
-git fetch
-gpl
 ls
+cd ../git/perl/exe
+cdw
+cd
+cd git/perl/exercise/
+ls
+regex
+mkdir regex
+cd regex/
+ls
+vim regex.pl
+cls
+fg
 cd ..
 ls
-man git clone
-git clone ssh://git@git.lo.mixi.jp/projects/cpocket.git develop
-ls
-ls -at
-cd develop/
-ls
-cd ..
-ls -t
-df -h develop/
-dd
-ls -s /dev/
-ls -s develop/
-man ls
-du -h develop/
-cls
-rm -rf develop/
-ls
-cdw
-ls
-git fetch
-gpl
-cls
-git remote add cpocket ssh://git@git.lo.mixi.jp/projects/cpocket.git
-gr -v
-git fetch
-git fetch cpocket 
-git checkout -b cpocket_develop cpocket/develop 
-gb
-git fetch
-gb --all
-ls
-gb
-ls
-mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
-cdw
-cd db-schema/
-ls
-v DB_c
-history
-gb
-cd ../..
-ls
-git clone ssh://git@git.lo.mixi.jp/projects/cpocket.git
-ls
-ls -t
-cd cpocket/
-ls
-f getContentListByAppId
-ag getContentListByAppId
-gl
-gb
-git fetch
-gv -r
-gr -v
-git checkout -b develop origin/develop 
-gb
-gpl
-f getContentListByAppId
-ag getContentListByAppId
-v ./lib/Mixi/CPocket/Adapter/Procedure/Store/GetContentListByAppId.pm
-mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
+vim print.pl 
 fg
-ls
-vim a
-rm -rf a
-ls
+vim print.pl 
+rm -rf .print.pl.swp 
+vim print.pl 
+./print.pl 
+fg
+v print.pl 
+./print.pl < print.pl 
+fg
+./print.pl < print.pl 
+fg
+./print.pl < print.pl 
+fg
+./print.pl < print.pl 
+fg
+./print.pl 
+./print.pl < print.pl 
+fg
+exit
 cdw
-ls
+gpl
+git checkout origin/work/manage_pl_cpocket
+gst
+git checkout lib/Mixi/Skin/Touch.pm
 gb
+gco 007
+git checkout origin/work/manage_pl_cpocket
+git checkout work/manage_pl_cpocket
 gls
 gl
 cls
-ls
-ag getContentListByContentId
-v ./t/lib/Mixi/CPocket/Adapter/Procedure/Accessibility/GetContentListByContentId.t
-v db-schema/DB_CPOCKET_CONTENT_DATA__cpocket_content_data.sql 
-gpl
-gl
-gb --all
-gco 007
-gpl
-gl
-gst
-g
-gl
-gb --all
-gco remotes/origin/touch_skin_ph15
+gs
+v lib/Mixi/Skin/Touch/Controller/Manage.pm
+ag jp.mixi.cpocket.accessibility.getDisplayStatus
+v jp.mixi.cpocket.accessibility.getDisplayStatus
+ag "jp.mixi.cpocket.accessibility.getDisplayStatus"
+pwd
 gb
-gco touch_skin_ph15
+ag "jp.mixi.cpocket.accessibility.getDisplayStatus"
 gpl
-gl
-cls
+v lib/Mixi/Skin/Touch/Controller/Manage.pm
 cd lib/Mixi/Skin/Touch/
-ls
-vim Admin.pm 
 ls
 cd Controller/
 ls
-vim Manage.pm 
-fg
+vim Character/List.pm 
+vim Character/Show.pm 
 cdw
-gb
-gco cpocket_develop
-f getContentListBy
-ag getContentListBy
-ag getContentListByAppId
-v ./lib/Mixi/CPocket/Adapter/Procedure/Store/GetContentListByAppId.pm
-cd db-schema/
-ls
-v DB_CPOCKET_CONTENT_DATA__cpocket_content_data.sql 
-v DB_CPOCKET_MANAGER__cpocket_manager.sql 
-cls
-ls
-mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp touchskin 
-cdw
-ls
-gb
-gco touch_skin_ph15
-gpl
-cd lib/Mixi/Skin/Touch/
-ks
-ls
-vim DB/Skin.pm 
-ag distribute_type
-gco
-ls
-cd -
-gco
-gst
-gb
-gco cpocket_develop
+vim db-schema/DB_CPOCKET_CONTENT_DATA__cpocket_content_data.sql
 fg
-gco lib/Mixi/Skin/Touch/DB/Skin.pm
-gst
-gco cpocket_develop
-ag distribute_type
-v ./lib/Mixi/CPocket/DB/MemberNode/OwnedContent.pm
+ag charactor
 fg
-cls
-gb
-gco touch_skin_ph15
-ls
-cd -
-ls
-vim DB/Skin.pm 
-gco cpocket_develop
-cd -
-ag appid
-ag AppId
-cls
-ag appid
-gco touch_skin_ph15
-ag appid
+vim Character/Show.pm 
+v lib/Mixi/Skin/Touch/Controller/Character/Show.pm 
 fg
-gb
-cd -
-ls
-v DB/Skin.pm 
-ls
-v Adapter/Procedure/Internal/Purchase/CallBack.pm 
-ag CallBack
-v Adapter/Procedure/Internal/Purchase/CallBack.pm 
-v Adapter/Procedure/Internal/GetForEasyShare.pm 
-cd Adapter/Procedure/Internal/
-ls
-pwd
-cd -
-ls
-vim Controller/List.pm 
-fg
-cd -
-cd ../../..
-ls
-v DB/Skin.pm 
-ag select_skins
-vim Admin.pm 
-v DB/Skin.pm 
-fg
-vim Admin.pm 
-fg
-cls
-top
-fg
-gb
-ag in
-ag " in "
-ag " in"
-ag "in" 
-ag "in " 
-cdw
-ag " in "
-ag " in " | grep db
-v ./t/lib/Mixi/Application/PreRegister/ApplicationEntity.t
-cs
-cls
-ag in
-ag in | grep db
-vim ./lib/Mixi/Fan/BasicApps/DB/Diary.pm
-ag IN
-ag " IN"
-ag " IN "
-vim ./accept_join_request.pl
-fg
-cls
-ag " IN "
-fg
-pwd
-cd lib/Mixi/Skin/Touch/
-ls
-cd ..
-ls
-v Touch.pm 
-fg
-v Touch.pm 
-fg
-pwd
-cdw
-fg
-v Touch.pm 
-fg
-v Touch.pm 
-cd -
-v Touch.pm 
-pwd
-v Touch/DB/Skin.pm 
+v lib/Mixi/Skin/Touch/Controller/Character/Show.pm 
 fg
 gd
-v Touch.pm 
-gst
-v Touch/DB/Skin.pm
+fg
+v
 gd
+codereview.pl lib/Mixi/Skin/Touch/Controller/Manage.pm
+v lib/Mixi/Skin/Touch/Controller/Manage.pm
+codereview.pl lib/Mixi/Skin/Touch/Controller/Manage.pm
+mixi-prove lib/Mixi/Skin/Touch/Controller/Manage.pm
+gd
+gst
 ga .
 gm
 gb
-git branch touch_skin_cpocket
-git reset --hard HEAD~
-git checkout touch_skin_cpocket 
-git branch -m get_skins_by_content_ids
-gb -vv
-gb
-git push -u origin get_skins_by_content_ids 
-gb
-ls
-fg
-fd
-du
-dh
-df
-gf
+gps
 gd
-gd --cached
+gls
+cls
+cd
+git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
+gs
+cw
+cdw
+cls
+gls
+gs
+git config --global color.diff true
+git config --global color.status true
+git config --global color.branch true
+git config --global color.interactive true
+ls
+gb -v
+vv
+vg
+gr
+fg
+sb
+gb
+cls
+gpl
+gb
+gb rebase --squash 
+git merge --squash work/touchskin_ph2_3 
+gls
+gl
+cls
+gb
+git reset --hard work/manage_pl_cpocket 
+gl
+vg
+sb
+grh
+gl
+gb
+git reset --hard work/manage_pl_cpocket 
+gl
+man git
+cls
 gls
 v
-ag get_public_genres
-fg
-ag get_public_skins_by_skin_type
-pwd
-cdw
-ag get_public_skins_by_skin_type
-v ./t/lib/Mixi/Skin/Touch/get_skin.t
-git fetch
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-mixi-prove 
-cls
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-gd
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-cls
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-v
-gs -2
-v lib/Mixi/Skin/Touch/DB/Skin.pm
-fg
-v lib/Mixi/Skin/Touch/DB/Skin.pm
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-vim /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch/DB/Skin.pm
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-cls
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-cls
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-cls
+vv
 fg
 v
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-fg 2
-fg 1
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-fg
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-cls
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-v /t/lib/Mixi/Skin/Touch/get_skin.t
-v t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-cls
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-cls
-fg
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-fg
-ag validate_params
-fg
-ag "Mixi::Utils::Params::Validate::validate_params"
-v ./lib/Mixi/Ad/DMP/MemberAttribute/Summary.pm
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-fg
-cls
-fg
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-fg
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-v /home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-v
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-ag skin_base
-v lib/Mixi/Skin/Touch.pm 
-fg 2
-fg 1
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
-v t/lib/Mixi/Skin/Touch/get_skin.t
-mixi-prove t/lib/Mixi/Skin/Touch/get_skin.t
-fg
 gd
 gst
 ga .
 gm
+gl
+gst
+gm
 gps
+cls
+s
+cdw
+ls
+gb
 v
-ag get_skins_by_contents_ids
-v ./t/lib/Mixi/Skin/Touch/get_skin.t
-cls
-ag contents_ids
-cls
-ag content_ids
-ag contents_ids
-ag contents_id
-mixi-prove -c
-AG 
-ag CONTENTS_ID lib/Mixi/Skin/Touch
-ag CONTENTS_ID lib/Mixi/Skin/Touch t/lib/Mixi/Skin/Touch/
-ag CONTENTS_ID lib/Mixi/Skin/Touch t/lib/Mixi/Skin/Touch/ t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/
-ag CONTENTS_ID lib/Mixi/Skin/Touch t/lib/Mixi/Skin/Touch/ t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/ 
-v
-ag CONTENTS_ID lib/Mixi/Skin/Touch t/lib/Mixi/Skin/Touch/ t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/ t/fixtures/DB_TOUCHSKIN.yaml db-schema/DB_TO*
-ag CONTENTS_ID lib/Mixi/Skin/Touch t/lib/Mixi/Skin/Touch/ t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/ t/fixtures/DB_TOUCH* db-schema/DB_TO*
-cls
+v lib/Mixi/Skin/Touch/Controller/Apply.pm 
+ag can_set_skin
 fg
+v
+gpl
+gls
+ls
+cls
+v
+fg
+exit
 ls
 cdw
-gb
+ls
 gpl
-cls
-git checkout -b work/touchskin_ph2_1 origin/work/touchskin_ph2_1
 gb
+git reset --hard origin/work/touchskin_ph2_4
+gl
+gst
+gpl
+gb
+gco work/manage_pl_cpocket
+git reset --hard origin/work/manage_pl_cpocket 
 gpl
 gl
-cd lib/Mixi/Skin/
-ls
-vim Touch.pm 
-ls
-v
-cdw
-vim db-schema/DB_CPOCKET_CONTENT_DATA__cpocket_content_data.sql 
-fg
-ag get_skin
-fg
-mkdir  t/lib/Mixi/Skin/Touch/CPocket
-v  t/lib/Mixi/Skin/Touch/CPocket/get_skin.t
-fg
-v  t/lib/Mixi/Skin/Touch/get_skin.t 
-cd t/lib/Mixi/Skin/
-cp Touch/get_skin.t Touch/CPocket/get_skin.t 
-v Touch/CPocket/get_skin.t 
-fg
-cdw
-ls
-v
-mixi-prove t/lib/Mixi/Skin/Touch/CPocket/get_skin.t 
-fg
-gd
-gst
-ga .
-gm
-gps
-git pull --rebase
-gb
-gps
-ls
-gb
-vim lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-gco touch_skin_ph15
-clear
-vim lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-gb
-fg
-gst
-cdw
+cls
 stop-server 
 start-server 
-fg
+cls
+start-server 
+cls
 start-server 
 ls
 cdw
 ls
-gb
+v
+cls
+gpl
+gls
+cls
+condb.sh 
+vim /home/bkapps/bin/condb.sh 
+sb
+condb feng_zhang
+rm -rf ~/bin/condb.sh 
+condb
+ls
+condb
+mysql
+condb 
+ls
+cdw
+v /home/bkapps/git/touch-skin/t/inc/|353    owner_id
+cdw
+v t/inc/Nove/Test/Fixtures.pm 
 fg
-gd
 gst
-gco lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-gb
-gco put_css_tmpl_to_header
+git stash
+gpl
 gl
-gs -3
+gls
+ag contents_id
+fg
+ls
+cdw
+start-server 
+ v /home/bkapps/git/touch-skin/lib/Mixi/Tools/HTMLLint.pm
+start-server 
+cdw
+gl
+gs HEAD~1
+vim db-schema/DB_TOUCHSKIN__touchskin.sql 
+v home/bkapps/git/touch-skin/lib/Mixi/Tools/HTMLLint.pm
+v /home/bkapps/git/touch-skin/lib/Mixi/Tools/HTMLLint.pm
+gs HEAD~1
+v lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm
+ag get_by_member_id
+gs HEAD~1
+ag get_by_member_id lib/Mixi/Skin/Touch
+ag jp.mixi.skin.touch.getByMemberId
+v ./lib/Mixi/Home/Controller.pm
+find design-scheme
+find design-scheme*
+f design-sche*
+f design-sch*
+history
+history | grep design
 v lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-ag provides lib/Mixi/Template/Role/*
-ag providers lib/Mixi/Template/Role/*
-ag providors lib/Mixi/Template/Role/*
-ag providor lib/Mixi/Template/Role/*
 fg
-ag provides
-cls
+v ./media_resources/config/beginner/is_beginner.yaml
+gpl
+gl
+sb
+gl
 fg
-ag add_tmpl_css
+cd lib/Mixi/Skin/Touch/
+ls
+v CPocket.pm 
+ag get_member_skin
+v ./Adapter/Procedure/Skin.pm
+ag call_cached
 fg
-gst
+ag call_cached
 fg
-v lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
+cd ..
+ag call_cached
+cdw
+ag call_cached
+fg
+ag get_member_skin
+cd -
+ag get_member_skin
+v ./Touch/Adapter/Procedure/Skin.pm
+fg
+cdw
+mixi-prove -c
+fg
+mixi-prove -a
 gd
-cls
-mixi-prove t/lib/Mixi/Skin/Touch/
-codereview.pl lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
+v t/functional/procedure/skin/touch/getByMemberId/internal.t 
+v t/fixtures/DB_TOUCHSKIN.yaml 
 fg
-v lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
+fg 1
+fg
+fg 2
+fg
+gst
 gd
 gst
-git checkout lib/Mixi/Template/Role/Admin.pm
-gst
-codereview.pl lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm 
-gst
-ga .
-
-gb
-gps
-fg
-v lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm 
-mixi-prove t/lib/Mixi/Skin/Touch/
-v /home/bkapps/git/touch-skin/lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
-fg
-mixi-prove t/lib/Mixi/Skin/Touch/
-fg
+git checkout -p t/functional/procedure/skin/touch/getByMemberId/internal.t
 gd
 ga .
 gm
-git rebase -i
+gm --amend
+gl
+git pull --rebase
+gps
+v t/fixtures/DB_TOUCHSKIN.yaml 
+fg
+vim lib/Mixi/Skin/Touch/CPocket.pm 
+fg
+gpl
+fg
+gl
+v t/functional/procedure/skin/touch/getByMemberId/internal.t
+find blueprint*
+f blueprint*
+f Blueprint* -i
+f Blueprint* 
+v ./t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/Purchase.pm 
+fg
+cls
 gst
+gd
+git add .
+gd
+gd --cached
+gm
+gps
+gpl
+gl
+ls
+cdw
+cat /etc/passwd
+v /etc/passwd
+cls
+cd
+v .bashrc
+sb
+exit
+which bash
+cls
+fg
+exit
+zsh
+vim .bashrc
+which bash
+man chsh
+vim /etc/shells 
+cat /etc/shells 
+which bash
+chsh -s /bin/bash bkapps
+s
+zsh
+exit
+ls
+cdw
+gb
+gpl
+gl
+exit

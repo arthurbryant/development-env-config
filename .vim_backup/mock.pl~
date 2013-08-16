@@ -1,0 +1,51 @@
+#!/home/bkapps/git/touch-skin/script/perl
+
+use strict;
+use warnings;
+
+use Test::MockObject;
+use Test::More;
+
+BEGIN {
+    use_ok("Mixi::Cart");
+}
+
+# test Mixi::Cart
+subtest 'test_mixi_cart' => sub {
+    my $mock_item = Test::MockObject->new();
+    $mock_item->fake_module(qw/Mixi::Item/);
+    $mock_item->fake_new(qw/Mixi::Item/);
+    $mock_item->set_always('get_name', "paper");
+    $mock_item->set_always('get_price', 100);
+
+    use_ok('Mixi::Item');
+
+    my $t = Mixi::Cart->new();
+    ok $t;
+    my $item = Mixi::Item->new("pc", 50000);
+    $t->add($item, 10);
+    is $t->get_total(), 10;
+    my $item2 = Mixi::Item->new("pc2", 50000);
+    $t->add($item2);
+    is $t->get_total(), 11;
+};
+
+# test Test::MockObject
+subtest 'test_mockobject' => sub {
+    my $mock = Test::MockObject->new();
+    $mock->set_true('test_sub');
+    ok($mock->test_sub());
+
+    my @list = ("name", "age");
+    $mock->set_true("test_true", "test_sub2");
+    $mock->set_false("fake");
+    $mock->set_series("test_list", @list);
+    is($mock->fake, undef);
+    is($mock->test_sub, 1);
+    is($mock->test_sub2, 1);
+    for my $l (@list) {
+        cmp_ok($mock->test_list, "eq", $l, "should be the same");
+    }
+};
+
+done_testing();
