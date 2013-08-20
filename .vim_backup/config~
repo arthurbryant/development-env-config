@@ -1,3 +1,7 @@
 Host git.lo.mixi.jp
 IdentityFile ~/.ssh/id_rsa
 User feng.zhang
+
+Host siau
+IdentityFile ~/.ssh/id_rsa
+User feng.zhang

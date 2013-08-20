@@ -1,222 +1,221 @@
-package Mixi::Skin::Touch::Controller::Manage;
-
+package Mixi::Skin::Controller::Manage;
 use strict;
 use warnings;
-use utf8;
-
-#::<<core library>>
-use Nove::Core::Log;
-use Nove::Core::Net::URI;
 
 #::<<common library>>
-use Mixi;
-
-#::<<service>>
-use Mixi::Service::Procedure::InternalGateway;
+use Mixi::String qw/
+    count_time
+/;
 
 #::<<framework>>
-use Mixi;
 use Mixi::Pages;
-use Mixi::Config qw/URL_MIXI_PREFIX/;
 
 #::<<application>>
-use Mixi::Skin::Touch::CPocket;
+use Mixi::Skin;
+use Mixi::Skin::Config;
 
-=encoding utf-8
-
-=head1 NAME
-
- Mixi::Skin::Touch::Controller::Manage - touch版ミクコレ storeミクコレ検索
-
-=head1 DESCRIPTION
-
-  ミクコレ store 各ミクコレ詳細画面
-
-=cut
+#::BAD-DEPENDENCIES
+use Mixi::LastLogin;
+use Mixi::Member::ProfileImage::MemberSingle;
 
 #::CONSTANTS
 use constant {
-    TITLE  => 'mixiコレクション',
-    FROM_PARAMETERS_FOR_REDIRECT => [
-        'activity_feed', 'store_top' # TODO
-    ],
-    CHARACTER_TOP => "show_touch_skin_character.pl",
-    APPLICATION_ID => 'jp.mixi.dev.touch',
-    ORDER_FINISH_URL => URL_MIXI_PREFIX . 'apply_touch_skin.pl',
+    _TITLE_ => '�ߥ���������',
 };
 
-my %IS_FROM_PARAMETERS_FOR_REDIRECT = map { $_ => 1 } @{FROM_PARAMETERS_FOR_REDIRECT()};
-
-__PACKAGE__->use_perlstring(1);
 __PACKAGE__->auth_type(AUTH_REQUIRED);
-__PACKAGE__->template_type([qw/user::touch user::pcsite /]);
-__PACKAGE__->initial_params(mode => 'main');
-
-__PACKAGE__->validation(
-    '_default' => [
-        id         => ['POSITIVEINT'], # skin id
-        content_id => ['POSITIVEINT'],
-        mode       => [['IN_ARRAY', qw/main apply/]],
-        from       => [],
-    ],
-    'apply' => [
-        post_key => [
-            'NOT_BLANK',
-            ['POSTKEY',qw/_MEMBER_ID_ _TIMESTAMP_/]
-        ],
-    ]
+__PACKAGE__->initial_params(
+    via_script_name => 'list_skin.pl',
 );
-
+__PACKAGE__->validation( 
+    _default => [ 
+        id  => [
+            ['NOT_BLANK'],
+            ['UINT'],
+        ],
+        via_script_name => [
+            ['ASCII'],
+        ],
+    ],
+    set_commit => [
+        post_key => ['NOT_BLANK', [POSTKEY => qw/_MEMBER_ID_ _TIMESTAMP_/]]
+    ],
+    delete_commit => [
+        post_key => ['NOT_BLANK', [POSTKEY => qw/_MEMBER_ID_ _TIMESTAMP_/]]
+    ],
+);
+__PACKAGE__->templates( 
+    delete_confirm => 'skin/delete_confirm.tmpl',
+    delete_commit  => 'skin/delete_commit.tmpl',
+    set_confirm    => 'skin/set_confirm.tmpl',
+    set_commit     => 'skin/set_commit.tmpl',
+);
 __PACKAGE__->conditions(
     _prepare => sub {
         my $self = shift;
         return $self->alert if $self->has_error;
-        return $self->alert unless (
-            $self->param->{content_id} || $self->param->{id}
+        my $member_id = $self->member->{id};
+        $self->stash->{skin_module} = Mixi::Skin->get_instance();
+        $self->stash->{member_skin} = $self->stash->{skin_module}->get_member_skin(member_id => $member_id);
+    },
+    -delete_confirm => sub {
+        my $self = shift;
+        return $self->alert if $self->has_error;
+        return FIXED;
+    },
+    -delete_commit => sub {
+        my $self = shift;
+        return $self->alert if $self->has_error;
+        return $self->alert unless $self->request->method eq 'POST';
+
+        unless($self->param->{commit}){
+            my $uri = URI->new('list_skin.pl');
+            return $self->redirect($uri->as_string());
+        }
+
+        my $flag = $self->stash->{skin_module}->delete_member_skin(
+            member_id => $self->member->{id},
         );
 
-        unless ($self->device->is_touch_screen) {
-            return $self->redirect(URL_MIXI_PREFIX . 'list_skin.pl');
-        }
-
-        my $skin_content_list = $self->_get_skin_content;
-        unless ($skin_content_list) {
-            Nove::Core::Log->debug('_get_skin_content failed');
-            return $self->alert;
-        }
-        my $skin_content = $skin_content_list->{content_list}->[0]; # TODO: should refactor into CPocket.pm
-        unless ($skin_content) {
-            Nove::Core::Log->debug('content_list is empty');
-            return $self->alert;
-        }
-
-        $self->stash->{skin_content} = $skin_content;
-        $self->stash->{point}        = $self->_get_point;
+        return $self->alert unless $flag;
+        return FIXED;
     },
-
-    -main => sub {
+    -set_confirm => sub {
         my $self = shift;
+        return $self->alert if $self->has_error;
 
-        my $should_redirect = $IS_FROM_PARAMETERS_FOR_REDIRECT{$self->param->{from}};
-        if ($should_redirect) {
-            my $skin_content = $self->stash->{skin_content};
-            my $tag_id = ($skin_content->{tags}->[0] || {})->{id};
-            return FIXED unless $tag_id;
+        $self->stash->{new_skin} = $self->stash->{skin_module}->get_skin(id => $self->param->{id});
+        return $self->alert unless $self->stash->{new_skin};
+        return $self->alert unless $self->stash->{skin_module}->can_set_skin($self->stash->{new_skin});
 
-            my $content_id = $skin_content->{content_id};
-            my $character_top_url = CHARACTER_TOP . "?tag_id=$tag_id&content_id=$content_id";
-            return $self->redirect($character_top_url);
-        }
+        my $via = $self->param->{via_script_name};
+        $self->stash->{via_script_name} = $via if Mixi::Skin::Config::VIA_SCRIPT_NAMES->{$via};
+
+        #skin preview
+        $self->skin_id($self->stash->{new_skin}->{id});
 
         return FIXED;
     },
-
-    -apply => sub {
+    -set_commit => sub {
         my $self = shift;
-        return $self->alert if $self->has_error('apply');
+        return $self->alert if $self->has_error;
+        return $self->alert unless $self->request->method eq 'POST';
+        
+        unless($self->param->{commit}){
+            my $uri = URI->new('list_skin.pl');
+            return $self->redirect($uri->as_string());
+        }
 
-        my $content_id = $self->stash->{skin_content}->{content_id};
-        my $finish_url = Nove::Core::Net::URI->create_as_string(ORDER_FINISH_URL, {
-            query_array => [
-                content_id => $content_id,
-            ],
-        });
-        my $result = $self->_create_order($content_id, $finish_url);
-        return $self->alert unless $result;
-        return $self->redirect($finish_url) unless (defined $result->{transaction_type});
+        $self->stash->{new_skin} = $self->stash->{skin_module}->get_skin(id => $self->param->{id});
+        return $self->alert unless $self->stash->{new_skin};
+        return $self->alert unless $self->stash->{skin_module}->can_set_skin($self->stash->{new_skin});
+    
+        my $via = $self->param->{via_script_name};
 
-        my $transaction_type = $result->{transaction_type};
-        return $self->redirect($finish_url) if ($transaction_type eq 'settled');
+        my $flag = $self->stash->{skin_module}->set_member_skin(
+            skin            => $self->stash->{new_skin},
+            member_id       => $self->member->{id},
+            via_script_name => (defined $via && Mixi::Skin::Config::VIA_SCRIPT_NAMES->{$via}) ? $via : undef,
+        );
 
-        use Data::Dumper;
-        warn Dumper $result;
-        return $self->redirect($result->{transaction_url});
+        return $self->alert unless $flag;
+        return FIXED;
     },
 );
-
-__PACKAGE__->templates(
-    main => 'skin/manage.tmpl',
-);
-
 __PACKAGE__->assign(
-    main => [\&assign_common, \&assign_main],
+    delete_confirm => [\&assign_default,\&assign_delete_confirm],
+    delete_commit  => [\&assign_default,\&assign_delete_commit],
+    set_confirm    => [\&assign_default,\&assign_set_confirm,\&assign_user_info,\&assign_preview_data],
+    set_commit     => [\&assign_default,\&assign_set_commit],
 );
 
-sub _get_skin_content {
+sub assign_default {
     my $self = shift;
-
-    my $content_id = $self->param->{content_id};
-    my $skin_id    = $self->param->{id};
-    my $member_id  = $self->member->{id};
-
-    if ($content_id) {
-        return Mixi::Skin::Touch::CPocket->get_skin_content_by_content_id(
-            member_id  => $member_id,
-            content_id => $content_id,
-        );
-    }
-    if ($skin_id) {
-        return Mixi::Skin::Touch::CPocket->get_skin_content_by_skin_id(
-            member_id => $member_id,
-            skin_id   => $skin_id,
-        );
-    }
-    return;
+    $self->template->set_title(_TITLE_);
 }
 
-
-sub assign_common {
+sub assign_delete_confirm {
     my $self = shift;
-    $self->template->set_title(TITLE);
-}
-
-
-sub assign_main {
-    my $self  = shift;
-
-    my $skin_content = $self->stash->{skin_content};
-    my $point        = $self->stash->{point};
 
     $self->template->param(
-        now_point      => $point->{point},
-        post_key       => $self->post_key->encode([qw/_MEMBER_ID_ _TIMESTAMP_/]),
-        can_buy        => ($skin_content->{price} && !$skin_content->{is_bought}),
+        post_key => $self->post_key->encode([qw/_MEMBER_ID_ _TIMESTAMP_/]),
         map {
-            ( "$_" => $skin_content->{$_} )
-        } keys %$skin_content, # TODO
+           ("skin_$_" =>  $self->stash->{member_skin}->{$_})
+        } keys %{$self->stash->{member_skin}},
     );
 }
 
-sub _get_point {
-    my $self  = shift;
-    my $point = Mixi::Service::Procedure::InternalGateway->call(
-        'jp.mixi.payment.point.get', {
-            requester_id => $self->member->{id},
-        }
+sub assign_delete_commit {
+    my $self = shift;
+
+    $self->template->param(
+        map {
+           ("skin_$_" =>  $self->stash->{member_skin}->{$_})
+        } keys %{$self->stash->{member_skin}},
     );
-    return $point;
+
 }
 
-sub _create_order {
-    my ($self, $content_id, $finish_url) = @_;
+sub assign_set_confirm {
+    my $self = shift;
 
-    return Mixi::Service::Procedure::InternalGateway->call(
-        'jp.mixi.cpocket.mixipayment.order.create' => {
-            requester_id => $self->member->{id},
-            params => {
-                application_id => APPLICATION_ID,
-                cart_details   => [
-                    {
-                        content_id => $content_id,
-                        quantity   => 1,
-                    }
-                ],
-                finish_url => $finish_url,
-                device     => 'touch',
-                is_sandbox => DEBUG(),
-            },
+
+    $self->template->param(
+        via_script_name => $self->stash->{via_script_name},
+        post_key => $self->post_key->encode([qw/_MEMBER_ID_ _TIMESTAMP_/]),
+        map {
+           ("skin_$_" =>  $self->stash->{new_skin}->{$_})
+        } keys %{$self->stash->{new_skin}},
+    );
+}
+
+sub assign_user_info {
+    my $self = shift;
+    my $member_id = $self->member->{id};
+
+    $self->cache->fetchbase(
+        {
+            base_key => 'nickname',
+            base_id  => $member_id 
         },
+        {
+            base_key => 'link_count',
+            base_id  => $member_id 
+        },
+    );
+
+    ## Last login
+    my $last_login_time = Mixi::LastLogin->new->get_last_logins($member_id);
+
+    my $pmember = Mixi::Member::ProfileImage::MemberSingle->new(
+        member_id => $member_id,
+        viewer_id => $member_id,
+    );
+    my $main_image = $pmember->find_main_image();
+    $self->template->param(
+        photo      => $main_image->url(),
+        level_2    => $self->cache->get_link_count($member_id) || 0,
+        nickname   => $self->cache->get_nickname($member_id),
+        last_login => count_time($last_login_time ? ( time - $last_login_time ) : undef)
+    );
+}
+
+sub assign_preview_data {
+    my $self = shift;
+    
+    $self->template->param(%{ Mixi::Skin::Config::PREVIEW_DATA() });
+}
+
+sub assign_set_commit {
+    my $self = shift;
+
+    $self->template->param(
+        map {
+           ("skin_$_" => $self->stash->{new_skin}->{$_})
+        } keys %{$self->stash->{new_skin}},
     );
 }
 
 1;
+__END__
+

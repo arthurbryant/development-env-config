@@ -35,7 +35,7 @@
 <TMPL_LOOP NAME="design_scheme_touch_skin_info">
 <TMPL_IF NAME="has_banner_img">
 <div class="bannerArea01">
-<a href="<TMPL_VAR EXPR="html_escape(banner_link)">"><img src="<TMPL_VAR NAME="CONFIG_IMG_BASE"><TMPL_VAR NAME="html_escape(skin_tieup_banner_url)">" width="" height="" alt="" /></a>
+<a href="<TMPL_VAR EXPR="html_escape(banner_link)">"><img src="<TMPL_VAR NAME="CONFIG_IMG_BASE"><TMPL_VAR EXPR="html_escape(skin_banner_url)">" width="" height="" alt="" /></a>
 </div>
 </TMPL_IF>
 </TMPL_LOOP>

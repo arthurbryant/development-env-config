@@ -15,8 +15,10 @@ use Mixi::Service::Procedure::InternalGateway;
 
 #::<<application>>
 use Mixi::Skin::Touch;
+use Mixi::Skin::Touch::Purchase;
+use Mixi::Skin::Touch::Config;
 
-=encoding utf-8
+=encoding utf8
 
 =head1 NAME
 
@@ -34,6 +36,8 @@ use Mixi::Skin::Touch;
  get_skin_content_by_content_id
  get_skin_content_list_by_app_id
  get_paid_skin_content_list
+ set_member_skin_by_content_id
+ get_display_status_by_content_id
 
 =cut
 
@@ -76,7 +80,8 @@ sub get_skin_content_list_by_tag_id {
         quantity     => $params{limit},
     );
     return unless $content_list_response;
-    return _set_skin_base($content_list_response);
+    _set_skin_data($content_list_response);
+    return $content_list_response;
 }
 
 sub _get_content_list_by_tag_id {
@@ -126,8 +131,11 @@ sub get_skin_content_by_skin_id {
         requester_id => $params{member_id},
         content_id   => $skin->{content_id},
     );
-    return unless $content_response;
-    _set_skin_base($content_response);
+    unless ($content_response) {
+        Nove::Core::Log->warn("skin_id [$skin->{id}]: content_id [$skin->{content_id}] is not exist in CPocket");
+        return;
+    }
+    _set_skin_data($content_response, [$skin]);
 
     return $content_response;
 }
@@ -158,7 +166,7 @@ sub get_skin_content_by_content_id {
         content_id   => $params{content_id},
     );
     return unless $content_response;
-    _set_skin_base($content_response);
+    _set_skin_data($content_response);
 
     return $content_response;
 }
@@ -190,6 +198,7 @@ sub _get_content_by_content_id {
    失敗時:undef
 
 =cut
+
 sub get_skin_content_list_by_app_id {
     my $class = shift;
 
@@ -209,7 +218,9 @@ sub get_skin_content_list_by_app_id {
         sort         => $params{sort},
     );
     return unless $content_list_response;
-    return _set_skin_base($content_list_response);
+    _set_skin_data($content_list_response);
+
+    return $content_list_response;
 }
 
 sub _get_content_list_by_app_id {
@@ -238,6 +249,7 @@ sub _get_content_list_by_app_id {
    失敗時:undef
 
 =cut
+
 sub get_paid_skin_content_list {
     my $class = shift;
 
@@ -251,10 +263,10 @@ sub get_paid_skin_content_list {
         requester_id     => $params{member_id},
         start_index      => $params{offset} + OFFSET2START_INDEX,
         quantity         => $params{limit},
-        distributed_type => 'paid',
+        distribute_type  => 'owned',
     );
     return unless $content_list_response;
-    return _set_skin_base($content_list_response);
+    _set_skin_data($content_list_response);
 
     return $content_list_response;
 }
@@ -269,14 +281,126 @@ sub _get_content_list_accessibility_by_app_id {
                 application_id   => APPLICATION_ID,
                 start_index      => $args{start_index},
                 quantity         => $args{quantity},
-                distributed_type => $args{distributed_type},
+                distribute_type  => $args{distribute_type},
             },
         }
     );
 }
 
-sub _set_skin_base {
+=head2 set_member_skin_by_contnt_id
+
+ ミクコレを設定する
+
+ INPUT
+   member_id
+   content_id
+
+ OUTPUT
+   成功時: 1
+   失敗時: 0
+
+=cut
+
+sub set_member_skin_by_content_id {
+    my $class = shift;
+
+    my %params = Params::Validate::validate(@_, {
+        member_id  => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+        content_id => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+    });
+
+    my $skins = Mixi::Skin::Touch->get_skins_by_content_ids(
+        content_ids => [$params{content_id}]
+    );
+    return unless $skins && $skins->[0];
+    my $skin = $skins->[0];
+
+    return unless $class->get_display_status_by_content_id(
+        owner_id   => $params{member_id},
+        content_id => $params{content_id},
+        _skin      => $skin,
+    );
+
+    return Mixi::Skin::Touch->new->set_member_skin(
+        member_id => $params{member_id},
+        skin      => $skin,
+    );
+}
+
+sub _is_purchased_skin_legacy {
+    my %args = @_;
+    my $member_id = $args{member_id};
+    my $skin      = $args{skin};
+
+    return 1 if $skin->{skin_type} == Mixi::Skin::Touch::Config::SKIN_TYPE->{SIMPLE};
+
+    return Mixi::Skin::Touch::Purchase->get_purchase_info_by_member_id_and_product_id(
+        member_id  => $member_id,
+        product_id => $skin->{id},
+    ) ? 1 : 0;
+}
+
+=head2 get_display_status_by_content_id
+
+ owner_idがミクコレを使用可能かチェックする
+
+ INPUT
+   owner_id
+   content_id
+
+ OUTPUT
+   利用可能: 1
+   利用不可: 0
+
+=cut
+
+sub get_display_status_by_content_id {
+    my $class = shift;
+
+    my %params = Params::Validate::validate(@_, {
+        owner_id   => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+        content_id => { type => Params::Validate::SCALAR, regex => qr/\A\d+\z/, },
+        _skin      => { type => Params::Validate::HASHREF, optional => 1, }, # TODO: for legacy db
+    });
+
+    my $skin = $params{_skin};
+    unless ($skin) {
+        my $skins = Mixi::Skin::Touch->get_skins_by_content_ids(
+            content_ids => [$params{content_id}]
+        );
+        # staging skinはまだ登録していないので、content_idがない。 
+        # legacy purchase will not be checked!!!
+        return unless $skins && $skins->[0];
+        $skin = $skins->[0];
+    }
+
+    my $status_response = Mixi::Service::Procedure::InternalGateway->call(
+        'jp.mixi.cpocket.accessibility.getDisplayStatus', {
+            params => {
+                owner_id       => $params{owner_id},
+                application_id => APPLICATION_ID,
+                content_ids    => [$params{content_id}],
+            },
+        }
+    );
+
+    return 1 if ($status_response && $status_response->{list}->[0]->{can_display});
+
+    # TODO: remove later
+    # Legacy Purchase DB fallback
+    return 1 if _is_purchased_skin_legacy(
+        member_id => $params{owner_id},
+        skin      => $skin,
+    );
+
+    return 0;
+};
+
+
+sub _set_skin_data {
     my ($content_list_response, $skins) = @_;
+    return unless($content_list_response->{total_results});
+
     my @content_ids = map {$_->{content_id}} @{$content_list_response->{content_list}};
     $skins ||= Mixi::Skin::Touch->get_skins_by_content_ids(content_ids => \@content_ids);
 
@@ -285,10 +409,11 @@ sub _set_skin_base {
         my $skin = $content_id_to_skin{$content->{content_id}};
         unless ($skin) {
             Nove::Core::Log->warn("content_id [$content->{content_id}] is not exist in skin db");
+            next;
         }
+        $content->{skin_id}   = $skin->{id};
         $content->{skin_base} = $skin->{skin_base};
     }
-    return $content_list_response;
 }
 
 1;

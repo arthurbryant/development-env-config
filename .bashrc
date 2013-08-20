@@ -36,7 +36,6 @@ alias dfsget='hadoop dfs -get'     # HDFS
 
 export LANG=en_US.UTF-8
 
-export PATH=~/bin:$PATH
 export MIXI_ROOT=/home/bkapps/git/pages_practice_2013
 export PATH=/home/bkapps/software/bin:/home/bkapps/install/activepython/bin:$PATH
 export PATH=~/node_modules/.bin:$PATH

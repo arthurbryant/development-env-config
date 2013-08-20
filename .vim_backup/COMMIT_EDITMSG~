@@ -1,9 +1,9 @@
 
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
-# On branch work/touchskin_ph2_5
+# On branch work/touchskin_ph2_8
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
-#	new file:   t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
+#	modified:   tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
 #

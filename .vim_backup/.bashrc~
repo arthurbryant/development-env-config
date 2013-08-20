@@ -43,4 +43,3 @@ export PATH=~/node_modules/.bin:$PATH
 
 source ~/.bashrc-git
 source ~/.perlrc
-/bin/zsh

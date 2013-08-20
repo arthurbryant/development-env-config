@@ -8,7 +8,7 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/gd
+~MSle0~/conditions
 
 # Last Substitute Search Pattern:
 ~MSle0&_make_skin_base
@@ -21,10 +21,13 @@ $
 :wq
 :w
 :q!
+:vs .zshrc
+:!mixi-prove %
 :wq!
+:vs /etc/zshrc
+:set paste
 :save t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
 :vs t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_by_content_id.t
-:!mixi-prove %
 :file
 :qall!
 :qall
@@ -52,7 +55,6 @@ $
 :%s/_make_skin_base/make_skin_base/gc
 :%s/
 :set nopaste
-:set paste
 :save lib/Mixi/Skin/Touch/CPocket.pm
 :mixi-prove %
 :qa
@@ -115,10 +117,63 @@ $
 :k
 :vs a.pl
 :205
-:!codereview.pl %
-:331
 
 # Search String History (newest to oldest):
+?/conditions
+?/tmpl
+?/skin_image_path
+? \<__make_onetime_url_by_path\>
+? \<Mixi::Skin::Touch::Config::SKIN_IMAGE_PATH\>
+? \<get_image_url\>
+?/onetime_url
+?/banner
+? \<assign_touch_skin\>
+?/touch
+? \<SKIN_IMAGE_ONETIME_URL_SECRET\>
+?/onetime
+?/cp-img
+? \<edit_commit\>
+?/commit
+? \<assign_confirm\>
+? \<edit_confirm\>
+?/set_skin
+?/set_member
+?/adgah
+?/db
+? \<set_skin_log_as_end\>
+?/set_member_skin
+? \<skin_module\>
+? \<set_member_skin\>
+? \<set_confirm\>
+?/confirm
+?/edi
+?/edi_skin
+?/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pmb/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+? \<SKIN_TEST_ENVIRONMENT\>
+? \<is_skin_test_environment\>
+?/can_use_skin
+? \<assign_set_user_skin\>
+? \<set_user_skin_confirm\>
+?/staging
+?/list_touch_skin
+?/content_id
+?/get_skin
+? \<_is_purchased_skin_legacy\>
+?/get_displ
+? \<get_display_status_by_content_id\>
+?/sub
+? \<method_name\>
+?/cpocket
+? \<getByMemberId\>
+?/get
+? \<get_by_member_id\>
+? \<_get_purchase_info\>
+?/vg
+?/status
+?/get_by_me
+?/bash
+?/gqwh
+?/auto
 ?/gd
 ?/t=k
 ? \<member\>
@@ -137,7 +192,6 @@ $
 ?/get_
 ? \<call_cached\>
 ?/get_member
-?/can_use_skin
 ?/gl
 ?/path
 ?/logout
@@ -154,15 +208,9 @@ $
 ?/ã‚¹ãƒžãƒ›ãƒŸã‚¯ã‚³ãƒ¬é–‹å§‹
 ?/find
 ? \<smart\>
-?/tmpl
-?/conditions
 ?/conditionns
-?/touch
 ?/set_
-?/set_member
 ?/mock
-?/set_member_skin
-? \<set_member_skin\>
 ?/dadhg
 ? \<select_member_skin_id\>
 ? \<test_member5\>
@@ -171,54 +219,6 @@ $
 ?/adgha
 ?/memcached
 ? \<Nove::Test::Fixtures::Memcached\>
-?/me
-?/membercached/mem
-? \<userevent\>
-?/get_inst
-?/close
-? \<get_skin\>
-?/d
-? touch-skin
-? \<self_member_id\>
-? \<skin_base\>
-?/home/bkapps/git/touch-skin/lib/Mixi/Skin/Touch.pm
-? \<getByMemberId\>
-? \<assign_touch_skin\>
-?/skin_option
-?/pr
-? \<skin_option\>
-?/skin_ooption
-?/skin
-?/.tmpl
-?/condition
-?/templ
-?/k
-? \<skin\>
-? \<skin_module\>
-? \<_set_skin_stash\>
-? \<_is_accessible_skin\>
-?/order.create
-?/create
-?/sand
-? \<create_purchase_key\>
-? \<purchase_key\>
-?/param
-? \<Mixi::Payment::Ebisu::PayProcess::Controller::PCSite\>
-?/pcsite
-? \<IS_FROM_PARAMETERS_FOR_REDIRECT\>
-? \<FROM_PARAMETERS_FOR_REDIRECT\>
-? \<character_top_url\>
-? \<pickup\>
-? \<_create_order\>
-? \<transaction_type\>
-?/t
-?/content_id
-?/alert
-?/main
-?/condiction
-?/mode
-?/genre
-?/skin_name
 
 # Expression History (newest to oldest):
 
@@ -229,31 +229,28 @@ $
 
 # Registers:
 "0	LINE	0
-	    my $skin = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
-	        content_id   => $content_id,
-	    });
-"1	LINE	0
-	source .bashrc
+	IdentityFile ~/.ssh/id_rsa
+	User feng.zhang
+""1	LINE	0
+	
 "2	LINE	0
-	/bin/zsh
+	    use Data
 "3	LINE	0
-	        my $member = Mixi::Test::DataFactory->make_object('Mixi::Member', {member_id => $member_id});
+	export PATH=~/bin:$PATH
 "4	LINE	0
-	        my $member = Mixi::Test::DataFactory->make_object('Mixi::Member', {member_id => $member_id});
+	    Nove::Core::Log->debug('display status');
 "5	LINE	0
 	
 "6	LINE	0
-	        my $member = Mixi::Test::DataFactory->make_object('Mixi::Member', {member_id => $member_id});
+	source /et
 "7	LINE	0
 	
 "8	LINE	0
-	        my $skin = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
-	            content_id   => $content_id,
-	        });
+	source .bashrc
+	source .bashrc-git
 "9	LINE	0
-	        my $skin = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
-	            content_id   => $content_id,
-	        });
+	source .bashrc
+	source .bashrc-git
 "f	CHAR	0
 	1811
 <gkkkkkkkkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkllllllllllllllllllllllllllllllllllllllllllkjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhl/get_skinnjjjjjjjjjjjjjjjjjjjjjkkkkkkjjwlllllllllllllllllllllll*nnnNk/isGjjkGkkklllllllllllllllllllllllkkkjkkjkkkkkkkkkkkkjjjjjjjkkkkkklhhhhkkjjjjjjjjjjjjjjjjjjjjhkdd:wkjkjkjklllllllllllllllllllllllllllllllllllllllllllulllllllllllllllllllllllhhlllllllllllllllllllllhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjhklhdwimocklluu:wkjllllllllllllllllllkkkjjjkkjkjjkkjlwwjwjwhhhhhhhhhhhhhhhklwkkkjjkklllllllllllllljkhhhhhhhhhllllllllllllljjjkkkjjjjkkjkhhhlhkjjkkkkllll*kkkkkjhlllkjkhjhhkjlllkjhhhlllhhhlkjhkjkkkkkkkhjjhjkjjlkjjjjjwwwwwl*njjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkllllllllllllllljjjjjjjjjhhhhhkkkkkkkkkkkkkkkkkkkkjjjjjlllllljjjjllllllllllllllllllljjkllllllllllllllllkkjlkkkkkkkkkkkklllllklllllllllljjjjjjjjjjjjjjkkkkkkkkkkkkjkkkkkkkjjkjjjjjkovim€kb€kb€kbif€kb€kbif()€kl$self->{}€kl€kr€kl€kl_get_skin€kr€kr€kl$id€kr€kr€kljjjjjjjjjjjjjjkjjkkkkkkkkkkkkkkkhhhhhhhhhhhhhhhhhhhhvlllllllllllllllllllllhdkomy $skin ï¼failed€kb€kb€kb€kb€kb€kbpa;hhhhhhhhhhhhhhhhhhhhhhhlr=;li hhllllllllllllllllljkhhhhhhhhhhhhhhhhhhlllh:wlhrkjlllllllllllllllllllllllljhli$skin-?{}€kl€kl€kb>€krstatuskhhhhhhhhhllllllllllllljjllllllllllllllllvllllllllllllllllllllllllllllllllllllhhdkkkpa {likhhhhi	lllllllllllllllllji	€kd€kl	€ku	jjVjjdkkkjpi	jhhhi	j€kb€kd€kl€kl€kl€kl	l;kkkddllllllllllllllllllllljkkjjhli == hhhhhhhhhhhhhhhhhhhhhireturn hjjjjjhhhhvlllllllllllllllllllllllllllllllllllllllllllllllllylkjllllllllllllllllllllllplkjlllllllllllllllllllllllhhhhllllla;:wkjkjkkjjkjhi vhhhhhhhhhhhhhhhuuuuukjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhlllllllllllhhhxxiune€kbless $self->can_use_skin()€kl$skinlldiwdvwvllllllllllllldkjkja)
@@ -267,183 +264,465 @@ $
 "q	CHAR	0
 	1421
 <wwwkjjkjk$hhhhhhhhhhhhhhhhhi{$€kr€kr€kr€kr€kr€kr€kr€kr€kr€kr€kr€kr€kr€kr€kr€kr€kr}hhhhhhhhhhhhhhhhhhwwwhhhhhhhhllllllllll:wkkkjjhllljkhhhhhhhhhhhhhhhhhhhhhhhhhhkddjkxjj:wkkkkkjlljjjkjjjllkkkkjlllhlllllllllllllllllllljkjjjhhhhhhhhhhhhhhhhhhkkkkjjjjjjjdduddkklklllllllwwhhhhhhhhhhhhi""€kl €kr x 4 ,€kb€kb, vim€kb€kb€kb$deskkkhhhhhhhhvllllllyjjjlllllllllhphhhhhhi, llllllli€kr hhhhhhhhhhhlllllllllllllllllllllllllllllll:wkkkkkkkkjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkjjjkjkjkkkkkjjjjddkkkkkkkkkkk/#n/dagdhjjGkkkkkkkkkkkkkjjddddk:wjjjjjjjjjjkkkkklwwwwwwwwwjjjjj:wq€kb:set nonukkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkjjj#!/usr/bin/perl## Author:zhangfeng  cst.feng@gmail.com  2012-07-17use warnings;use strict;use Data::Dumper;my %total_bytes;my $sum_bytes = "sum_bytes";while(<>){  next if(/^#.*/);  my ($source, $destination, $bytes) = split;  $total_bytes{$source}{$destination} += $bytes;  $total_bytes{$source}{$sum_bytes} += $bytes;}# sort by source and destination.my $src;foreach $src (sort { $total_bytes{$a}{$sum_bytes} <=> $total_bytes{$b}{$sum_bytes} } keys %total_bytes){  print $src, " => ", $total_bytes{$src}{$sum_bytes}, "\n";  foreach my $des (sort { $total_bytes{$src}{$a} <=> $total_bytes{$src}{$b}} keys %{$total_bytes{$src}})  {    print " " x 4, $des, " => ", $total_bytes{$src}{$des}, "\n";  }}kjjGj:qq
-""-	CHAR	0
-	#
+"-	CHAR	0
+	}
 
 # File marks:
-'0  18  0  ~/.zsh/auto-fu.zsh
-'1  34  1  ~/.zshrc
-'2  26  0  ~/.zshrc
-'3  1  0  ~/.bashrc
-'4  29  0  ~/.bashrc
-'5  37  17  ~/.zshrc
-'6  46  7  ~/.bashrc
-'7  15  0  /etc/passwd
-'8  4  0  /etc/shells
-'9  5  26  ~/.bashrc-git
+'0  41  0  ~/.bashrc-git
+'1  37  63  ~/.bashrc-git
+'2  5  8  ~/.ssh/config
+'3  1  6  ~/.git/COMMIT_EDITMSG
+'4  1  0  media_resources/honey/worker/mixi/analysis/honey/worker/
+'5  56  12  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/skin/touch/member_skin_relation_by_job.yaml
+'6  11  14  ~/git/touch-skin/tmpl/device/touch/skin/include/_skin_menu.tmpl
+'7  3  29  ~/git/touch-skin/tmpl/device/touch/global_search/includes/_search_forms/_search_diary_form.tmpl
+'8  64  0  ~/git/touch-skin/script/support/cron/judge/report_operator_performance_for_mikan.pl
+'9  133  1  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
 
 # Jumplist (newest first):
--'  18  0  ~/.zsh/auto-fu.zsh
--'  886  0  ~/.zsh/auto-fu.zsh
--'  4  0  ~/.zsh/auto-fu.zsh
--'  1  0  ~/.zsh/auto-fu.zsh
--'  34  1  ~/.zshrc
--'  26  0  ~/.zshrc
--'  37  0  ~/.zshrc
--'  1  0  ~/.bashrc
--'  29  0  ~/.bashrc
--'  46  0  ~/.bashrc
--'  1  0  ~/.zshrc
--'  10  0  ~/.bashrc
--'  15  0  /etc/passwd
--'  1  0  /etc/passwd
--'  4  0  /etc/shells
--'  1  0  /etc/shells
--'  5  26  ~/.bashrc-git
--'  7  0  ~/.bashrc-git
--'  6  0  ~/.bashrc-git
--'  1  40  ~/git/touch-skin/.git/COMMIT_EDITMSG
--'  1  0  ~/git/touch-skin/[quickrun output]
--'  44  0  ~/git/touch-skin/[quickrun output]
--'  43  0  ~/git/touch-skin/[quickrun output]
--'  134  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  23  35  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  132  68  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  362  14  ~/git/touch-skin/lib/Mixi/Skin/Touch/CPocket.pm
--'  153  51  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  27  29  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  22  31  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  30  4  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  145  26  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  175  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Purchase.pm
--'  146  12  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  133  21  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  144  21  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  50  0  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  1  0  ~/git/touch-skin/[quickrun output]
--'  44  0  ~/git/touch-skin/[quickrun output]
--'  43  0  ~/git/touch-skin/[quickrun output]
--'  134  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  23  35  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  132  68  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  362  14  ~/git/touch-skin/lib/Mixi/Skin/Touch/CPocket.pm
--'  153  51  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  27  29  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  22  31  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  30  4  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  145  26  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  175  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Purchase.pm
--'  146  12  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  133  21  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  144  21  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  50  0  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  1  40  ~/git/touch-skin/.git/COMMIT_EDITMSG
--'  1  0  ~/git/touch-skin/[quickrun output]
--'  44  0  ~/git/touch-skin/[quickrun output]
--'  43  0  ~/git/touch-skin/[quickrun output]
--'  134  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  23  35  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  132  68  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  362  14  ~/git/touch-skin/lib/Mixi/Skin/Touch/CPocket.pm
--'  153  51  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  27  29  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  22  31  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  30  4  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  145  26  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  175  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Purchase.pm
--'  146  12  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  133  21  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  144  21  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  50  0  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  1  0  ~/git/touch-skin/[quickrun output]
--'  44  0  ~/git/touch-skin/[quickrun output]
--'  43  0  ~/git/touch-skin/[quickrun output]
--'  134  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  23  35  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  132  68  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  362  14  ~/git/touch-skin/lib/Mixi/Skin/Touch/CPocket.pm
--'  153  51  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  27  29  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  22  31  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  30  4  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
--'  145  26  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  175  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Purchase.pm
--'  146  12  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  133  21  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  144  21  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  50  0  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  1  40  ~/git/touch-skin/.git/COMMIT_EDITMSG
--'  1  0  ~/git/touch-skin/[quickrun output]
--'  44  0  ~/git/touch-skin/[quickrun output]
--'  43  0  ~/git/touch-skin/[quickrun output]
--'  134  0  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  23  35  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  132  68  ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
--'  362  14  ~/git/touch-skin/lib/Mixi/Skin/Touch/CPocket.pm
--'  153  51  ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
--'  27  29  ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
+-'  41  0  ~/.bashrc-git
+-'  37  0  ~/.bashrc-git
+-'  5  8  ~/.ssh/config
+-'  1  0  ~/.ssh/config
+-'  28  0  ~/.bashrc-git
+-'  1  6  ~/.git/COMMIT_EDITMSG
+-'  1  0  media_resources/honey/worker/mixi/analysis/honey/worker/
+-'  56  12  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/skin/touch/member_skin_relation_by_job.yaml
+-'  11  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/skin/touch/member_skin_relation_by_job.yaml
+-'  1  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/skin/touch/member_skin_relation_by_job.yaml
+-'  11  14  ~/git/touch-skin/tmpl/device/touch/skin/include/_skin_menu.tmpl
+-'  1  0  ~/git/touch-skin/tmpl/device/touch/skin/include/_skin_menu.tmpl
+-'  3  29  ~/git/touch-skin/tmpl/device/touch/global_search/includes/_search_forms/_search_diary_form.tmpl
+-'  1  0  ~/git/touch-skin/tmpl/device/touch/global_search/includes/_search_forms/_search_diary_form.tmpl
+-'  64  0  ~/git/touch-skin/script/support/cron/judge/report_operator_performance_for_mikan.pl
+-'  291  0  ~/git/touch-skin/script/support/cron/judge/report_operator_performance_for_mikan.pl
+-'  88  0  ~/git/touch-skin/script/support/cron/judge/report_operator_performance_for_mikan.pl
+-'  1  0  ~/git/touch-skin/script/support/cron/judge/report_operator_performance_for_mikan.pl
+-'  133  1  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+-'  124  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+-'  89  16  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+-'  126  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+-'  77  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+-'  54  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+-'  49  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+-'  44  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+-'  1  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+-'  1  0  ~/git/touch-skin/media_resources/honey/worker/mixi/message/honey/worker/all/user_event/post/group_add.yaml
+-'  16  1  ~/git/touch-skin/boofy/tmpl/platform/_menu_with_bootstrap.tmpl
+-'  1  0  ~/git/touch-skin/boofy/tmpl/platform/_menu_with_bootstrap.tmpl
+-'  3  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/all_service/mikan_age_sex_device_uu.yaml
+-'  1  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/all_service/mikan_age_sex_device_uu.yaml
+-'  13  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+-'  61  10  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+-'  3  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+-'  2  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+-'  8  47  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile.yaml
+-'  1  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile.yaml
+-'  44  10  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+-'  18  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+-'  60  10  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+-'  15  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+-'  1  0  ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+-'  1  0  ~/git/touch-skin/aaa
+-'  1  0  ~/git/touch-skin/media_resources/honey/worker/mixi/application/honey/worker/count/add_pre_register_pv.yaml
+-'  31  66  ~/git/touch-skin/boofy/tmpl/skin/touch/leftmenu.tmpl
+-'  1  0  ~/git/touch-skin/boofy/tmpl/skin/touch/leftmenu.tmpl
+-'  368  7  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  125  8  ~/git/touch-skin/lib/Mixi/Skin/Touch/Config.pm
+-'  350  50  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  124  19  ~/git/touch-skin/lib/Mixi/Skin/Touch/Config.pm
+-'  132  8  ~/git/touch-skin/lib/Mixi/Skin/Touch/Config.pm
+-'  389  4  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  361  30  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  354  15  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  346  4  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  414  1  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  401  63  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  331  4  ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+-'  1  4  ~/git/touch-skin/.git/COMMIT_EDITMSG
+-'  38  139  ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+-'  424  65  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  1  0  ~/git/touch-skin/lib/Nove/Core/Service/Activation.pm
+-'  157  0  ~/git/touch-skin/lib/Nove/Core/Service/Activation.pm
+-'  351  9  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  342  12  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  324  4  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  323  36  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  322  4  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  292  18  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  259  26  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  238  4  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  223  29  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  220  30  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  176  4  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  141  4  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  104  4  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  30  37  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  2  0  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  447  0  ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+-'  5  13  ~/git/touch-skin/home.pl
+-'  121  26  ~/git/touch-skin/lib/Mixi/Skin/Touch/Config.pm
+-'  36  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Config.pm
+-'  1  0  ~/git/touch-skin/lib/Mixi/Skin/Touch/Config.pm
+-'  20  4  ~/git/touch-skin/lib/Mixi/Picture/Prefix.pm
+-'  1  0  ~/git/touch-skin/lib/Mixi/Picture/Prefix.pm
+-'  1462  35  ~/git/touch-skin/lib/Mixi/Config/Debug.pm
+-'  1463  36  ~/git/touch-skin/lib/Mixi/Config/Debug.pm
+-'  42  4  ~/git/touch-skin/lib/Mixi/Config/Debug.pm
+-'  50  0  ~/git/touch-skin/lib/Mixi/Config/Debug.pm
+-'  1  0  ~/git/touch-skin/lib/Mixi/Config/Debug.pm
+-'  1  0  lib/Mixi/Config/Debug.pm
+-'  362  34  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+-'  42  92  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+-'  311  9  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+-'  241  32  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+-'  660  4  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+-'  245  32  ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
 
 # Buffer list:
-%~/.zsh/auto-fu.zsh	18	0
+%~/.bashrc-git	41	0
 
 # History of marks within files (newest to oldest):
 
-> ~/.zsh/auto-fu.zsh
-	"	18	0
-
-> ~/.zshrc
-	"	34	1
-	^	34	2
-	.	34	1
-	+	37	17
-	+	38	0
-	+	36	0
-	+	34	0
-	+	35	0
-	+	34	1
-
-> ~/.bashrc
-	"	1	0
-	.	46	0
-	+	46	0
-
-> /etc/passwd
-	"	15	0
-	^	15	0
-	.	14	7
-	+	14	7
-
-> /etc/shells
-	"	4	0
-
 > ~/.bashrc-git
-	"	5	26
-	^	5	35
-	.	5	26
-	+	31	16
-	+	41	0
+	"	41	0
+	^	37	63
+	.	37	62
+	+	32	16
+	+	42	0
 	+	19	0
 	+	16	24
-	+	31	0
-	+	32	14
-	+	28	0
-	+	40	15
+	+	32	0
+	+	33	14
+	+	29	0
+	+	41	15
 	+	17	18
-	+	36	58
-	+	37	0
-	+	36	40
+	+	37	58
+	+	38	0
+	+	37	40
 	+	4	23
 	+	18	26
-	+	33	13
-	+	33	14
-	+	33	73
+	+	34	13
+	+	34	14
+	+	34	73
 	+	6	31
 	+	5	26
+	+	28	21
+	+	37	62
+
+> ~/.ssh/config
+	"	5	8
+	.	6	0
+	+	6	0
+
+> ~/.git/COMMIT_EDITMSG
+	"	1	6
+	^	1	7
+	.	1	6
+	+	1	6
+
+> ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/skin/touch/member_skin_relation_by_job.yaml
+	"	56	12
+
+> ~/git/touch-skin/tmpl/device/touch/skin/include/_skin_menu.tmpl
+	"	11	14
+
+> ~/git/touch-skin/tmpl/device/touch/global_search/includes/_search_forms/_search_diary_form.tmpl
+	"	3	29
+
+> ~/git/touch-skin/script/support/cron/judge/report_operator_performance_for_mikan.pl
+	"	64	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
+	"	133	1
+
+> ~/git/touch-skin/media_resources/honey/worker/mixi/message/honey/worker/all/user_event/post/group_add.yaml
+	"	1	0
+
+> ~/git/touch-skin/boofy/tmpl/platform/_menu_with_bootstrap.tmpl
+	"	16	1
+
+> ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/all_service/mikan_age_sex_device_uu.yaml
+	"	3	0
+
+> ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+	"	13	0
+
+> ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile.yaml
+	"	8	47
+
+> ~/git/touch-skin/ControlP
+	"	1	0
+	.	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+
+> ~/git/touch-skin/media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_friend.yaml
+	"	1	0
+
+> ~/git/touch-skin/aaa
+	"	1	0
+	.	197	0
+	+	1	0
+	+	55	0
+	+	197	0
+
+> ~/git/touch-skin/media_resources/honey/worker/mixi/application/honey/worker/count/add_pre_register_pv.yaml
+	"	1	0
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/leftmenu.tmpl
+	"	31	66
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
+	"	368	7
+	^	331	53
+	.	1	0
+	+	351	0
+	+	48	70
+	+	53	0
+	+	48	14
+	+	48	0
+	+	53	0
+	+	53	0
+	+	53	0
+	+	48	0
+	+	51	0
+	+	47	0
+	+	48	3
+	+	52	0
+	+	48	0
+	+	50	3
+	+	48	13
+	+	50	45
+	+	48	65
+	+	50	57
+	+	51	1
+	+	49	85
+	+	83	57
+	+	86	0
+	+	85	83
+	+	355	0
+	+	134	0
+	+	192	31
+	+	192	31
+	+	199	48
+	+	197	20
+	+	194	0
+	+	197	0
+	+	195	53
+	+	43	0
+	+	41	0
+	+	43	21
+	+	42	0
+	+	43	4
+	+	42	4
+	+	43	0
+	+	13	0
+	+	38	0
+	+	42	0
+	+	195	25
+	+	194	34
+	+	200	12
+	+	206	0
+	+	207	5
+	+	206	22
+	+	42	0
+	+	206	0
+	+	199	0
+	+	198	0
+	+	208	0
+	+	209	0
+	+	208	0
+	+	199	6
+	+	206	21
+	+	194	60
+	+	14	0
+	+	14	0
+	+	14	0
+	+	195	41
+	+	196	53
+	+	43	0
+	+	43	0
+	+	43	0
+	+	43	0
+	+	43	0
+	+	43	0
+	+	43	0
+	+	39	58
+	+	43	56
+	+	39	56
+	+	193	0
+	+	43	0
+	+	200	26
+	+	199	0
+	+	202	0
+	+	201	0
+	+	341	0
+	+	328	0
+	+	357	0
+	+	100	0
+	+	128	0
+	+	156	0
+	+	185	0
+	+	205	0
+	+	246	0
+	+	326	0
+	+	357	0
+	+	62	0
+	+	94	0
+	+	95	0
+	+	95	0
+	+	97	19
+	+	36	21
+	+	302	0
+	+	331	0
+	+	1	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Config.pm
+	"	125	8
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm
+	"	63	48
+	.	30	0
+	+	58	0
+	+	54	0
+	+	50	49
+	+	51	17
+	+	50	12
+	+	51	60
+	+	50	25
+	+	54	0
+	+	50	0
+	+	53	21
+	+	40	115
+	+	44	25
+	+	18	30
+	+	48	0
+	+	48	0
+	+	48	0
+	+	37	13
+	+	35	13
+	+	41	40
+	+	42	21
+	+	41	38
+	+	43	0
+	+	41	24
+	+	41	34
+	+	44	42
+	+	44	20
+	+	45	0
+	+	47	5
+	+	45	0
+	+	46	14
+	+	44	0
+	+	45	54
+	+	44	19
+	+	30	63
+	+	30	0
+	i	30	14
 
 > ~/git/touch-skin/.git/COMMIT_EDITMSG
-	"	1	40
-	^	1	41
-	.	1	9
+	"	1	4
+	^	1	5
+	.	1	4
 	+	2	28
 	+	2	44
 	+	2	45
@@ -543,318 +822,170 @@ $
 	+	1	56
 	+	1	50
 	+	2	0
-	+	1	9
+	+	1	4
 
-> ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
-	"	151	37
-	^	144	18
-	.	145	0
-	+	62	0
-	+	21	30
-	+	62	0
-	+	64	63
-	+	130	25
-	+	64	0
-	+	130	0
-	+	111	25
-	+	130	0
-	+	120	0
-	+	130	0
-	+	129	0
-	+	120	0
-	+	123	0
-	+	124	28
-	+	122	0
-	+	120	18
-	+	120	0
-	+	124	0
-	+	127	0
-	+	16	7
-	+	17	10
-	+	120	96
-	+	25	27
-	+	24	24
-	+	23	24
-	+	25	42
-	+	115	39
-	+	125	45
-	+	121	56
-	+	125	45
-	+	121	55
-	+	125	12
-	+	122	0
-	+	122	0
-	+	130	0
-	+	130	0
-	+	12	0
-	+	130	0
-	+	30	0
-	+	48	0
-	+	30	24
-	+	29	0
-	+	28	0
-	+	29	0
-	+	30	0
-	+	29	0
-	+	64	43
-	+	30	0
-	+	30	0
-	+	30	0
-	+	30	0
-	+	30	0
-	+	30	0
-	+	30	0
-	+	30	0
-	+	64	0
-	+	64	0
-	+	49	0
-	+	63	0
-	+	30	0
-	+	30	0
-	+	30	0
-	+	63	0
-	+	63	48
-	+	63	59
-	+	29	0
-	+	32	0
-	+	31	0
-	+	55	0
-	+	50	0
-	+	63	0
-	+	51	0
-	+	31	0
-	+	71	3
-	+	130	0
-	+	71	0
-	+	144	17
-	+	145	0
+> ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+	"	38	139
+	^	38	140
+	.	38	139
+	+	46	0
+	+	46	0
+	+	45	0
+	+	34	18
+	+	42	0
+	+	42	0
+	+	37	26
+	+	38	66
+	+	39	8
+	+	38	0
+	+	39	0
+	+	38	31
+	+	45	0
+	+	38	156
+	+	36	28
+	+	40	8
+	+	36	29
+	+	38	163
+	+	38	0
+	+	34	0
+	+	35	0
+	+	41	10
+	+	38	103
+	+	38	0
+	+	38	124
+	+	38	111
+	+	36	29
+	+	38	94
+	+	38	0
+	+	38	139
 
-> ~/git/touch-skin/[quickrun output]
+> ~/git/touch-skin/home.pl
+	"	5	13
+
+> ~/git/touch-skin/lib/Mixi/Home/Controller.pm
+	"	424	65
+	^	188	16
+	.	188	0
+	+	188	0
+
+> ~/git/touch-skin/lib/Nove/Core/Service/Activation.pm
+	"	157	0
+
+> /usr/share/vim/vim73/doc/help.txt
 	"	1	0
-	.	44	0
-	+	160	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	99	0
-	+	1	0
-	+	99	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	48	0
-	+	1	0
-	+	48	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	44	0
-	+	1	0
-	+	44	0
 
-> ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
-	"	30	4
+> ~/git/touch-skin/lib/Mixi/Picture/Prefix.pm
+	"	20	4
 
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Purchase.pm
-	"	149	0
+> ~/git/touch-skin/lib/Mixi/Config/Debug.pm
+	"	1462	35
 
-> ~/git/touch-skin/ControlP
+> lib/Mixi/Config/Debug.pm
+	"	1	0
+
+> ~/git/touch-skin/boofy/gear/skin/touch/manage_skin.pl
+	"	6	38
+
+> ~/git/touch-skin/boofy/gear/skin/touch/ControlP
+	"	1	0
+	.	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+	"	362	34
+	^	689	29
+	.	689	28
+	+	687	0
+	+	689	28
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/edit_confirm_skin.tmpl
+	"	2	0
+
+> ~/git/touch-skin/manage_skin.pl
+	"	5	18
+
+> ~/git/touch-skin/lib/Mixi/Skin/Controller/Manage.pm
+	"	58	46
+	^	86	2
+	.	205	0
+	+	89	101
+	+	89	0
+	+	205	0
+
+> ~/git/touch-skin/lib/Mixi/Skin.pm
+	"	138	70
+	^	190	18
+	.	138	0
+	+	138	69
+	+	138	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/DB.pm
 	"	5	0
-	.	2	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	2	0
+
+> ~/git/touch-skin/lib/Mixi/Skin/DB/Skin.pm
+	"	380	37
+
+> ~/git/touch-skin/db-schema/DB_TOUCHSKIN__touchskin.sql
+	"	74	20
+
+> ~/git/touch-skin/boofy/tmpl/skin/touch/set_user_skin_confirm.tmpl
+	"	15	19
 
 > ~/git/touch-skin/lib/Mixi/Skin/Touch/CPocket.pm
-	"	380	11
-	^	124	38
-	.	124	37
-	+	137	4
-	+	139	0
-	+	131	11
-	+	130	0
-	+	136	11
-	+	137	9
-	+	138	0
-	+	110	95
+	"	369	47
+	^	371	25
+	.	371	80
 	+	110	48
 	+	110	170
 	+	110	67
@@ -947,9 +1078,140 @@ $
 	+	174	51
 	+	125	0
 	+	124	37
+	+	368	0
+	+	373	47
+	+	374	30
+	+	377	0
+	+	374	0
+	+	372	47
+	+	371	82
+	+	371	80
+
+> ~/git/touch-skin/lib/Mixi/Skin/Controller/List.pm
+	"	41	54
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Admin.pm
+	"	78	8
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Manage.pm
+	"	161	0
+	^	132	48
+	.	216	0
+	+	128	32
+	+	128	30
+	+	128	36
+	+	128	49
+	+	128	0
+	+	128	55
+	+	128	43
+	+	128	27
+	+	128	28
+	+	128	32
+	+	128	48
+	+	129	5
+	+	128	0
+	+	128	42
+	+	128	20
+	+	128	0
+	+	128	8
+	+	128	21
+	+	128	56
+	+	128	8
+	+	128	20
+	+	128	8
+	+	128	0
+	+	128	15
+	+	129	0
+	+	128	0
+	+	128	52
+	+	128	86
+	+	128	0
+	+	128	0
+	+	128	0
+	+	169	39
+	+	164	47
+	+	167	18
+	+	169	36
+	+	171	13
+	+	165	41
+	+	171	20
+	+	173	30
+	+	165	19
+	+	166	0
+	+	23	30
+	+	117	12
+	+	117	0
+	+	121	0
+	+	119	24
+	+	121	0
+	+	128	0
+	+	121	11
+	+	122	11
+	+	124	11
+	+	124	0
+	+	121	0
+	+	122	0
+	+	120	0
+	+	117	0
+	+	116	12
+	+	111	0
+	+	112	17
+	+	116	12
+	+	128	0
+	+	116	68
+	+	116	0
+	+	111	42
+	+	113	58
+	+	114	47
+	+	116	40
+	+	116	32
+	+	114	8
+	+	116	8
+	+	114	32
+	+	116	0
+	+	114	41
+	+	115	0
+	+	111	0
+	+	113	24
+	+	188	0
+	+	188	0
+	+	109	7
+	+	110	68
+	+	113	0
+	+	188	7
+	+	186	28
+	+	188	0
+	+	108	65
+	+	107	0
+	+	110	52
+	+	124	0
+	+	91	84
+	+	124	0
+	+	123	0
+	+	197	17
+	+	135	38
+	+	144	0
+	+	145	33
+	+	139	0
+	+	140	37
+	+	131	25
+	+	132	27
+	+	216	0
+
+> ~/git/touch-skin/t/lib/Mixi/CPocket/Adapter/Procedure/Accessibility/GetDisplayStatus.t
+	"	95	66
+
+> ~/git/touch-skin/lib/Mixi/CPocket/Adapter/Procedure/Accessibility/GetDisplayStatus.pm
+	"	122	36
+
+> ~/git/touch-skin/lib/Mixi/Service/Procedure/InternalGateway.pm
+	"	163	0
+
+> ~/git/touch-skin/lib/Mixi/CPocket/Service.pm
+	"	333	0
 
 > ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_display_status_by_content_id.t
-	"	99	29
+	"	91	49
 	^	32	32
 	.	103	0
 	+	25	13
@@ -1052,6 +1314,296 @@ $
 	+	101	36
 	+	103	0
 
+> ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_by_skin_id.t
+	"	84	41
+	^	111	8
+	.	108	25
+	+	84	26
+	+	89	26
+	+	84	29
+	+	88	30
+	+	97	0
+	+	103	0
+	+	103	0
+	+	102	48
+	+	112	0
+	+	113	0
+	+	110	43
+	+	102	48
+	+	86	30
+	+	102	18
+	+	111	47
+	+	96	18
+	+	101	18
+	+	111	7
+	+	108	25
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Adapter/Procedure/Internal/Purchase/CallBack.pm
+	"	99	8
+	^	84	67
+	.	84	66
+	+	80	0
+	+	84	66
+	i	84	4
+
+> ~/.bashrc
+	"	39	0
+	^	6	1
+	.	39	0
+	+	45	0
+	+	4	0
+	+	5	0
+	+	6	0
+	+	4	0
+	+	5	0
+	+	6	0
+	+	39	0
+
+> ~/.zshrc
+	"	49	0
+	^	49	0
+	.	49	0
+	+	53	17
+	+	53	0
+	+	53	0
+	+	34	0
+	+	35	0
+	+	34	1
+	+	53	0
+	+	35	35
+	+	35	36
+	+	35	80
+	+	53	0
+	+	36	30
+	+	46	0
+	+	53	0
+	+	53	0
+	+	53	0
+	+	53	0
+	+	51	0
+	+	50	16
+	+	48	0
+	+	49	0
+
+> ~/git/touch-skin/t/functional/procedure/skin/touch/getByMemberId/internal.t
+	"	117	0
+	^	144	18
+	.	144	17
+	+	62	0
+	+	21	30
+	+	62	0
+	+	64	63
+	+	130	25
+	+	64	0
+	+	130	0
+	+	111	25
+	+	130	0
+	+	120	0
+	+	130	0
+	+	129	0
+	+	120	0
+	+	123	0
+	+	124	28
+	+	122	0
+	+	120	18
+	+	120	0
+	+	124	0
+	+	127	0
+	+	16	7
+	+	17	10
+	+	120	96
+	+	25	27
+	+	24	24
+	+	23	24
+	+	25	42
+	+	115	39
+	+	125	45
+	+	121	56
+	+	125	45
+	+	121	55
+	+	125	12
+	+	122	0
+	+	122	0
+	+	130	0
+	+	130	0
+	+	12	0
+	+	130	0
+	+	30	0
+	+	48	0
+	+	30	24
+	+	29	0
+	+	28	0
+	+	29	0
+	+	30	0
+	+	29	0
+	+	64	43
+	+	30	0
+	+	30	0
+	+	30	0
+	+	30	0
+	+	30	0
+	+	30	0
+	+	30	0
+	+	30	0
+	+	64	0
+	+	64	0
+	+	49	0
+	+	63	0
+	+	30	0
+	+	30	0
+	+	30	0
+	+	63	0
+	+	63	48
+	+	63	59
+	+	29	0
+	+	32	0
+	+	31	0
+	+	55	0
+	+	50	0
+	+	63	0
+	+	51	0
+	+	31	0
+	+	71	3
+	+	130	0
+	+	71	0
+	+	144	17
+	+	145	0
+	+	144	17
+
+> ~/git/touch-skin/[quickrun output]
+	"	15	0
+	.	35	0
+	+	1	0
+	+	130	0
+	+	1	0
+	+	130	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	79	0
+	+	1	0
+	+	79	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	75	0
+	+	1	0
+	+	75	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	35	0
+	+	1	0
+	+	35	0
+
+> /etc/zshrc
+	"	50	0
+	.	51	0
+	+	51	0
+	+	51	0
+
+> /etc/bashrc
+	"	9	2
+
+> /etc/bash
+	"	1	0
+
+> ~/.zsh/auto-fu.zsh
+	"	18	0
+
+> /etc/passwd
+	"	15	0
+	^	15	0
+	.	14	7
+	+	14	7
+
+> /etc/shells
+	"	4	0
+
+> ~/git/touch-skin/t/inc/Mixi/Test/DataFactory.pm
+	"	30	4
+
+> ~/git/touch-skin/lib/Mixi/Skin/Touch/Purchase.pm
+	"	149	0
+
 > ~/git/touch-skin/t/inc/Nove/Test/Fixtures.pm
 	"	205	35
 
@@ -1079,35 +1631,6 @@ $
 	+	18	0
 	+	18	0
 	+	18	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm
-	"	41	34
-	^	41	35
-	.	41	34
-	+	55	0
-	+	51	0
-	+	47	49
-	+	48	17
-	+	47	12
-	+	48	60
-	+	47	25
-	+	51	0
-	+	47	0
-	+	50	21
-	+	40	115
-	+	44	25
-	+	18	30
-	+	45	0
-	+	45	0
-	+	45	0
-	+	37	13
-	+	35	13
-	+	41	40
-	+	42	21
-	+	41	38
-	+	43	0
-	+	41	24
-	+	41	34
 
 > ~/git/touch-skin/lib/Mixi/Skin/Touch/ControlP
 	"	10	0
@@ -1213,111 +1736,6 @@ $
 	+	1	0
 	+	2	0
 
-> ~/git/touch-skin/lib/Mixi/Skin/Touch.pm
-	"	302	4
-	^	36	22
-	.	302	0
-	+	83	32
-	+	48	46
-	+	351	0
-	+	48	70
-	+	53	0
-	+	48	14
-	+	48	0
-	+	53	0
-	+	53	0
-	+	53	0
-	+	48	0
-	+	51	0
-	+	47	0
-	+	48	3
-	+	52	0
-	+	48	0
-	+	50	3
-	+	48	13
-	+	50	45
-	+	48	65
-	+	50	57
-	+	51	1
-	+	49	85
-	+	83	57
-	+	86	0
-	+	85	83
-	+	355	0
-	+	134	0
-	+	192	31
-	+	192	31
-	+	199	48
-	+	197	20
-	+	194	0
-	+	197	0
-	+	195	53
-	+	43	0
-	+	41	0
-	+	43	21
-	+	42	0
-	+	43	4
-	+	42	4
-	+	43	0
-	+	13	0
-	+	38	0
-	+	42	0
-	+	195	25
-	+	194	34
-	+	200	12
-	+	206	0
-	+	207	5
-	+	206	22
-	+	42	0
-	+	206	0
-	+	199	0
-	+	198	0
-	+	208	0
-	+	209	0
-	+	208	0
-	+	199	6
-	+	206	21
-	+	194	60
-	+	14	0
-	+	14	0
-	+	14	0
-	+	195	41
-	+	196	53
-	+	43	0
-	+	43	0
-	+	43	0
-	+	43	0
-	+	43	0
-	+	43	0
-	+	43	0
-	+	39	58
-	+	43	56
-	+	39	56
-	+	193	0
-	+	43	0
-	+	200	26
-	+	199	0
-	+	202	0
-	+	201	0
-	+	341	0
-	+	328	0
-	+	357	0
-	+	100	0
-	+	128	0
-	+	156	0
-	+	185	0
-	+	205	0
-	+	246	0
-	+	326	0
-	+	357	0
-	+	62	0
-	+	94	0
-	+	95	0
-	+	95	0
-	+	97	19
-	+	36	21
-	+	302	0
-
 > ~/git/touch-skin/lib/Mixi/Skin/Touch/[quickrun output]
 	"	1	0
 	.	2	0
@@ -1325,12 +1743,6 @@ $
 
 > ~/git/touch-skin/t/lib/Mixi/Skin/Touch/Controller/Apply.t
 	"	63	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Config.pm
-	"	1	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Adapter/Procedure/Internal/Purchase/CallBack.pm
-	"	108	0
 
 > b/t/functional/procedure/skin/touch/getByMemberId/internal.t
 	"	1	0
@@ -1385,40 +1797,6 @@ $
 > ~/git/touch-skin/tmpl/device/touch/home/smart/includes/beginner/page/_main.tmpl
 	"	42	0
 
-> ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
-	"	35	29
-	^	38	124
-	.	38	0
-	+	46	0
-	+	46	0
-	+	45	0
-	+	34	18
-	+	42	0
-	+	42	0
-	+	37	26
-	+	38	66
-	+	39	8
-	+	38	0
-	+	39	0
-	+	38	31
-	+	45	0
-	+	38	156
-	+	36	28
-	+	40	8
-	+	36	29
-	+	38	163
-	+	38	0
-	+	34	0
-	+	35	0
-	+	41	10
-	+	38	103
-	+	38	0
-	+	38	124
-	+	38	111
-	+	36	29
-	+	38	94
-	+	38	0
-
 > ~/git/touch-skin/media_resources/config/beginner/is_beginner.yaml
 	"	6	11
 	^	6	12
@@ -1429,12 +1807,6 @@ $
 	+	14	11
 	+	10	11
 	+	6	11
-
-> ~/git/touch-skin/lib/Mixi/Home/Controller.pm
-	"	437	25
-	^	188	16
-	.	188	0
-	+	188	0
 
 > ~/git/touch-skin/lib/Mixi/Template/Role/Touch/Static/StyleSheet/DesignScheme.pm
 	"	83	4
@@ -1554,9 +1926,6 @@ $
 	.	104	0
 	+	104	0
 
-> ~/git/touch-skin/db-schema/DB_TOUCHSKIN__touchskin.sql
-	"	52	2
-
 > ~/git/touch-skin/tmpl/device/touch/home/smart/includes/_header_navi.tmpl
 	"	18	0
 
@@ -1583,9 +1952,6 @@ $
 
 > ~/git/touch-skin/tmpl/device/touch/common/euc-jp/ad/impact_homeview.tmpl
 	"	18	9
-
-> ~/git/touch-skin/home.pl
-	"	5	17
 
 > ~/git/touch-skin/t/lib/Mixi/Skin/Touch/set_member_skin.t
 	"	70	0
@@ -1629,19 +1995,6 @@ $
 > ~/git/touch-skin/t/inc/Mixi/Test/Mock/UserEvent.pm
 	"	19	21
 
-> ~/git/touch-skin/lib/Mixi/Skin/Controller/Manage.pm
-	"	58	46
-	^	86	2
-	.	89	0
-	+	89	101
-	+	89	0
-
-> ~/git/touch-skin/lib/Mixi/Skin.pm
-	"	355	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Admin.pm
-	"	574	4
-
 > ~/git/touch-skin/bbb
 	"	627	47
 	^	627	85
@@ -1651,120 +2004,8 @@ $
 > ~/git/touch-skin/t/inc/Mixi/Test/UserEvent/Spy.pm
 	"	15	0
 
-> ~/git/touch-skin/aaa
-	"	197	9
-	.	197	0
-	+	1	0
-	+	55	0
-	+	197	0
-
 > ~/git/touch-skin/manage_touch_skin.pl
 	"	5	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Manage.pm
-	"	132	1
-	^	132	48
-	.	216	0
-	+	128	32
-	+	128	30
-	+	128	36
-	+	128	49
-	+	128	0
-	+	128	55
-	+	128	43
-	+	128	27
-	+	128	28
-	+	128	32
-	+	128	48
-	+	129	5
-	+	128	0
-	+	128	42
-	+	128	20
-	+	128	0
-	+	128	8
-	+	128	21
-	+	128	56
-	+	128	8
-	+	128	20
-	+	128	8
-	+	128	0
-	+	128	15
-	+	129	0
-	+	128	0
-	+	128	52
-	+	128	86
-	+	128	0
-	+	128	0
-	+	128	0
-	+	169	39
-	+	164	47
-	+	167	18
-	+	169	36
-	+	171	13
-	+	165	41
-	+	171	20
-	+	173	30
-	+	165	19
-	+	166	0
-	+	23	30
-	+	117	12
-	+	117	0
-	+	121	0
-	+	119	24
-	+	121	0
-	+	128	0
-	+	121	11
-	+	122	11
-	+	124	11
-	+	124	0
-	+	121	0
-	+	122	0
-	+	120	0
-	+	117	0
-	+	116	12
-	+	111	0
-	+	112	17
-	+	116	12
-	+	128	0
-	+	116	68
-	+	116	0
-	+	111	42
-	+	113	58
-	+	114	47
-	+	116	40
-	+	116	32
-	+	114	8
-	+	116	8
-	+	114	32
-	+	116	0
-	+	114	41
-	+	115	0
-	+	111	0
-	+	113	24
-	+	188	0
-	+	188	0
-	+	109	7
-	+	110	68
-	+	113	0
-	+	188	7
-	+	186	28
-	+	188	0
-	+	108	65
-	+	107	0
-	+	110	52
-	+	124	0
-	+	91	84
-	+	124	0
-	+	123	0
-	+	197	17
-	+	135	38
-	+	144	0
-	+	145	33
-	+	139	0
-	+	140	37
-	+	131	25
-	+	132	27
-	+	216	0
 
 > /etc/bash_completion.d/git
 	"	523	8
@@ -1808,332 +2049,3 @@ $
 
 > ~/git/touch-skin/lib/Mixi/Template/Role/Static/StyleSheet/DesignScheme.pm
 	"	33	26
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Apply.pm
-	"	8	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/ControlP
-	"	10	0
-	.	2	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	2	0
-
-> ~/git/touch-skin/lib/Mixi/Payment/Ebisu/Controller/Admin/Service/SubService/Create.pm
-	"	104	5
-
-> ~/git/touch-skin/lib/Mixi/Service/Procedure/InternalGateway.pm
-	"	155	4
-
-> ~/git/touch-skin/show_touch_skin_character.pl
-	"	5	0
-
-> ~/git/touch-skin/t/lib/Mixi/CPocket/Adapter/Procedure/MixiPayment/Create.t
-	"	355	16
-
-> ~/git/touch-skin/mypage_touch_skin.pl
-	"	5	31
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/MyPage.pm
-	"	1	0
-
-> ~/git/touch-skin/mixi_point_pay_method_for_once.pl
-	"	9	74
-
-> ~/git/touch-skin/lib/Mixi/Pages2/Server/Runner.pm
-	"	47	0
-
-> ~/git/touch-skin/lib/Mixi/Payment/Ebisu/PayProcess/Once/Controller/Method/Point/PCSite.pm
-	"	234	8
-	^	180	24
-	.	180	0
-	+	180	0
-
-> ~/git/touch-skin/select_pay_method_for_once.pl
-	"	9	60
-
-> ~/git/touch-skin/select_pay_method_for_once.pll
-	"	1	0
-
-> ~/git/data/content_id.data
-	"	47	0
-	^	70	25
-	.	70	20
-	+	70	20
-
-> ~/git/data/skin.data
-	"	58	0
-	^	112	20
-	.	58	1
-	+	112	0
-	+	58	1
-
-> ~/bin/condb.sh
-	"	3	44
-	.	3	60
-	+	3	60
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/List/Top.pm
-	"	44	58
-
-> ~/git/touch-skin/media_resources/config/skin/touch/pickup.yaml
-	"	13	14
-
-> ~/git/touch-skin/list_touch_skin.pl
-	"	5	36
-
-> ~/git/touch-skin/apply_touch_skin.pl
-	"	5	15
-
-> ~/git/touch-skin/tmpl/device/touch/skin/include/_skin_menu.tmpl
-	"	25	7
-
-> ~/git/touch-skin/.git/rebase-merge/git-rebase-todo
-	"	1	0
-	^	4	2
-	.	4	1
-	+	1	1
-	+	1	1
-	+	1	1
-	+	1	1
-	+	1	0
-	+	6	0
-	+	7	1
-	+	4	0
-	+	2	0
-	+	1	0
-	+	5	0
-	+	4	1
-
-> ~/git/perl/exercise/regex/regex.pl
-	"	9	25
-	^	9	47
-	.	9	0
-	+	1	15
-	+	8	25
-	+	9	0
-	+	8	7
-	+	9	21
-	+	10	22
-	+	11	6
-	+	4	13
-	+	6	17
-	+	7	0
-	+	11	13
-	+	8	13
-	+	9	23
-	+	8	14
-	+	9	0
-	y	9	0
-
-> ~/.git/config
-	"	11	0
-
-> ~/git/perl/exercise/regex/[quickrun output]
-	"	1	0
-	.	3	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	3	0
-	+	3	0
-	+	1	0
-	+	3	0
-
-> ~/git/touch-skin/lib/Nove.pm
-	"	28	0
-
-> ~/git/touch-skin/lib/Mixi/CPocket/Adapter/Procedure/MixiPayment/Create.pm
-	"	120	27
-
-> ~/git/touch-skin/t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_by_skin_id.t
-	"	111	5
-	^	111	8
-	.	108	25
-	+	84	26
-	+	89	26
-	+	84	29
-	+	88	30
-	+	97	0
-	+	103	0
-	+	103	0
-	+	102	48
-	+	112	0
-	+	113	0
-	+	110	43
-	+	102	48
-	+	86	30
-	+	102	18
-	+	111	47
-	+	96	18
-	+	101	18
-	+	111	7
-	+	108	25
-
-> ~/git/touch-skin/t/lib/Mixi/CPocket/Adapter/Procedure/Internal/MixiPayment/Callback.t
-	"	93	12
-
-> lib/Mixi/Skin/Touch/Controller/Manage.pm
-	"	1	0
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Batch/Report.pm
-	"	67	5
-
-> ~/git/perl/exercise/print.pl
-	"	13	0
-	^	12	16
-	.	12	15
-	+	2	0
-	+	9	0
-	+	3	10
-	+	9	12
-	+	13	0
-	+	6	17
-	+	7	0
-	+	11	11
-	+	10	13
-	+	12	15
-
-> ~/git/perl/exercise/hash.pl
-	"	47	20
-	^	62	21
-	.	62	12
-	+	63	45
-	+	63	49
-	+	63	52
-	+	63	33
-	+	63	75
-	+	63	88
-	+	63	103
-	+	63	30
-	+	63	9
-	+	63	105
-	+	63	84
-	+	63	69
-	+	63	70
-	+	63	105
-	+	63	2
-	+	63	43
-	+	63	32
-	+	63	84
-	+	63	108
-	+	63	179
-	+	63	88
-	+	63	129
-	+	63	151
-	+	63	106
-	+	63	146
-	+	63	145
-	+	63	153
-	+	63	161
-	+	63	160
-	+	63	185
-	+	63	156
-	+	63	42
-	+	63	94
-	+	63	90
-	+	63	48
-	+	63	26
-	+	9	0
-	+	63	0
-	+	63	0
-	+	58	0
-	+	56	0
-	+	58	1
-	+	9	15
-	+	9	15
-	+	9	15
-	+	9	15
-	+	10	0
-	+	23	44
-	+	58	0
-	+	60	0
-	+	2	0
-	+	9	0
-	+	6	17
-	+	60	11
-	+	60	7
-	+	7	17
-	+	60	4
-	+	63	29
-	+	63	0
-	+	63	0
-	+	63	18
-	+	63	60
-	+	63	0
-	+	63	23
-	+	63	0
-	+	63	18
-	+	63	0
-	+	63	19
-	+	63	23
-	+	63	25
-	+	63	27
-	+	63	10
-	+	60	7
-	+	33	0
-	+	60	19
-	+	63	0
-	+	61	27
-	+	39	21
-	+	40	24
-	+	61	35
-	+	62	12
-
-> ~/.vimrc
-	"	201	1
-	^	201	2
-	.	201	0
-	+	205	28
-	+	205	0
-	+	195	0
-	+	183	0
-	+	181	0
-	+	183	26
-	+	204	30
-	+	203	0
-	+	204	0
-	+	181	0
-	+	197	28
-	+	197	33
-	+	197	40
-	+	197	45
-	+	197	28
-	+	201	0
-
-> Character/Show.pm
-	"	1	0
-
-> ~/git/touch-skin/db-schema/DB_CPOCKET_CONTENT_DATA__cpocket_content_data.sql
-	"	25	1
-
-> ~/git/touch-skin/lib/Mixi/Skin/Touch/Controller/Character/List.pm
-	"	63	37
