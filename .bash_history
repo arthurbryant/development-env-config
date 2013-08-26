@@ -1,446 +1,3 @@
-ga .
-gm
-gm --amend
-gl
-git pull --rebase
-gps
-v t/fixtures/DB_TOUCHSKIN.yaml 
-fg
-vim lib/Mixi/Skin/Touch/CPocket.pm 
-fg
-gpl
-fg
-gl
-v t/functional/procedure/skin/touch/getByMemberId/internal.t
-find blueprint*
-f blueprint*
-f Blueprint* -i
-f Blueprint* 
-v ./t/inc/Mixi/Test/DataFactory/Blueprint/Skin/Touch/Purchase.pm 
-fg
-cls
-gst
-gd
-git add .
-gd
-gd --cached
-gm
-gps
-gpl
-gl
-ls
-cdw
-cat /etc/passwd
-v /etc/passwd
-cls
-cd
-v .bashrc
-sb
-exit
-which bash
-cls
-fg
-exit
-zsh
-vim .bashrc
-which bash
-man chsh
-vim /etc/shells 
-cat /etc/shells 
-which bash
-chsh -s /bin/bash bkapps
-s
-zsh
-exit
-ls
-cdw
-gb
-gpl
-gl
-exit
-lsof -i:4242
-ls
-lsof -i:4242
-exit
-pa aux | grep perl
-stop-server 
-exit
-gpl
-gls
-man git log
-git log --filename-only
-git log --only-filename
-git log --name-only
-gl
-git log -stat
-git log --stat
-gl
-gl -stat
-gl --stat
-vg
-sb
-gl
-gpl
-gls
-cls
-ls
-fg
-ag can_use_skin
-v ./lib/Mixi/Skin/Touch.pm
-cls
-ag can_use_skin
-v lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm 
-v lib/Mixi/Skin/Touch/Adapter/Procedure/Internal/Purchase/CallBack.pm 
-cd lib/Mixi/Skin/Touch/
-ls
-v Config.pm 
-cls
-fg
-cls
-ls
-v CPocket.pm 
-ag jp.mixi.cpocket.store.getContentListByAppId
-v CPocket.pm 
-q
-ls
-cls
-vg
-cls
-cdw
-gst
-gpl
-gl
-vg
-fg
-sg
-q
-cls
-ls
-cls
-fg
-ls
-gpl
-exit
-stop-server 
-start-server 
-cls
-man alias
-alias -p
-alias -p | grep '^alias ls='
-alias -p | grep '^alias '
-man complete
-v /etc/bash_completion.d/git 
-ag type_boolean
-cdw
-cls
-ag type_boolean
-ag boolean
-cls
-gb
-cls
-gb
-gb -a
-gb
-cls
-gl
-fg
-v manage_touch_skin.pl 
-ag "CONFIG_IMG_BASE"
-cls
-ag 
-ag "CONFIG_IMG_BASE" lib/Mixi/Skin
-ag "CONFIG_IMG_BASE" lib/Mixi/Skin/*
-ag CONFIG_IMG_BASE lib/Mixi/Skin/*
-ag CONFIG_IMG_BASE lib/Mixi/Skin/* -i
-man ag
-ag CONFIG_IMG_BASE 
-ag CONFIG_IMG_BASE  > aaa
-vim aaa 
-rm -rf aaa
-gst
-cls
-v t/functional/procedure/skin/touch/getByMemberId/internal.t
-fg
-v t/lib/Mixi/Skin/Touch/Controller/Apply.t
-gst
-gd
-v t/lib/Mixi/Skin/Touch/set_member_skin.t
-v t/lib/Mixi/Skin/Touch/Controller/Apply.t
-+    test_member5:
-+        member_id: 9991
-+        skin_id: 5
-v t/fixtures/DB_TOUCHSKIN.yaml 
-v t/lib/Mixi/Skin/Touch/set_member_skin.t
-cls
-ag set_member_skin
-v ./lib/Mixi/Skin/Touch/Admin.pm
-ag can_set_member_skin
-ag can_set_skin
-v ./lib/Mixi/Skin/Controller/Manage.pm
-fg
-gst
-rm -rf aaa bbb
-gst
-gd
-ga .
-gm
-git pull --rebase
-gps
-gl
-ag "運営者からのお知らせ"
-/tmpl/common/utf-8/footer_login_home.tmpl
-13:<li><a href="<TMPL_VAR NAME=url_mixi_prefix ESCAPE=0>release_info.pl">運営者からのお知らせ</a></li>
-./tmpl/common/utf-8/footer_login.tmpl
-13:<li><a href="<TMPL_VAR NAME=url_mixi_prefix ESCAPE=0>release_info.pl">運営者からのお知らせ</a></li>
-./tmpl/ads/includes/_right_mad_admin_info.tmpl
-3:<h2>運営者からのお知らせ</h2>
-./tmpl/device/touch/common/utf-8/footer_login.tmpl
-24:<p class="gGlobalMenuSub01"><a href="<TMPL_VAR NAME="url_mixi_prefix" ESCAPE="0">release_info.pl">運営者からのお知らせ</a>│<a href="<TMPL_VAR NAME="url_mixi_prefix" ESCAPE="0">premium.pl?from=footer_lo">mixiプレミアム</a></p>
-./tmpl/device/touch/common/utf-8/footer_promotion_login.tmpl
-ag footer_login_home.tmpl
-ag home_main.tmpl
-cls
-ag footer_login.tmpl
-history
-ag footer_login.tmpl | grep root.tmpl
-history | grep root.tmpl
-fg
-ag このページの上部へ
-ag このページの上部へ | grep touch
-v
-v lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm 
-fg
-v /home/bkapps/git/touch-skin/t/lib/Mixi/Skin/Touch/Adapter/Procedure/Internal/
-gl
-gs 8761c9d78fedfc39b200ec89d896afd549c2f8ad
-v b/t/functional/procedure/skin/touch/getByMemberId/internal.t
-v t/functional/procedure/skin/touch/getByMemberId/internal.t
-ls
-s
-exit
-ls
-cls
-stop-server 
-start-server 
-gpl
-gl
-cdw
-gpl
-gl
-gb
-cls
-gpl
-gb
-git fetch
-git fetch origin 
-cls
-gpl
-start-server 
-ls
-ssh feng.zhang@siau
-ls
-cd .ssh/
-ls
-cd detroit/
-ls
-cd ..
-man ssh
-ls
-cd ..
-ssh feng.zhang@siau
-man ssh
-ssh feng.zhang@siau -i .ssh/detroit/id_rsa
-vg
-vb
-vg
-v .bashrc
-cd bin/
-ls
-vim git-push.sh 
-vim ssh-siau
-cd ..
-cd bin/
-ls
-rm -rf ssh-siau 
-vg
-sb
-ssh-siau 
-cd ~/.ssh/
-ls
-vg
-vim config 
-man ssh
-man ssh_config
-vg
-ssh-siau 
-ls
-cdw
-tail -f log/PLATFORM_SYSLOG/syslog_0*/analysis/～
-tail -f log/PLATFORM_SYSLOG/syslog_0*/analysis/
-tail -f log/PLATFORM_SYSLOG/syslog_0*/analysis/*
-tail -f log/PLATFORM_SYSLOG/syslog_0*
-tail -f log/PLATFORM_SYSLOG/syslog_0*/analysis
-tail -f log/PLATFORM_SYSLOG/syslog_0*/*
-cls
-tail -f log/PLATFORM_SYSLOG/syslog_0*/*
-tail -f ~/log/socialad.error_log | perl ~/errorlog.pl
-tail -f ~/log/socialad.error_log 
-cd
-tail -f log/feng.zhang.error_log 
-tail -f log/feng.zhang.*
-tail -f log/feng.zhang.* |　grep "error"
-tail -f log/feng.zhang.* | grep "error"
-f errorlog.pl
-cdw
-f errorlog.pl
-ag color_table
-f errorlog*
-ag Term::ANS
-v ./lib/Mixi/Tools/ApacheRunner/ApacheLog.pm
-cd
-ls
-cd log/
-ls
-cd
-cdw
-ls
-gb
-cls
-cd
-ls
-cd git/perl/exercise/
-ls
-vim hash.pl 
-./hash.pl 
-fg
-cls
-vim hash.pl 
-./hash.pl 
-fg
-./hash.pl 
-fg
-v hash.pl 
-./hash.pl 
-fg
-cls
-cdw
-ls
-cls
-gb
-gpl
-gl
-vg
-glm
-cls
-gl
-glm 2
-vg
-gl -n2 -p
-gl
-git show HEAD~1
-v t/lib/Mixi/Skin/Touch/CPocket/get_skin_content_by_skin_id.t
-cls
-ag post_key lib/Mixi/Skin/Touch
-v lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
-ag _ENV_REMOTE_USER_
-vim lib/Mixi/Config.pm 
-v lib/Mixi/Skin/Touch/Controller/Admin/ManageGenre.pm
-ag _ENV_REMOTE_USER_
-ag "_ENV_REMOTE_USER_ =>"
-ag "_ENV_REMOTE_USER_ ="
-ag "_ENV_REMOTE_USER_ "
-ag "_ENV_REMOTE_USER_" > aaa
-vim aaa 
-rm -rf aaa 
-f blueprint.pl
-f blueprints.pl
-v t/blueprints.pl 
-vim t/lib/Mixi/Test/DataFactory/Blueprint/
-cd t/lib/Mixi/Test/
-ls
-vim DataFactory/Blueprint/PushNotify/GAP/Observer.t 
-f DataFactory*
-cdw
-f DataFactory*
-vim t/inc/Mixi/Test/DataFactory.pm 
-fg
-ls
-fg
-cd ../perl/exercise/regex/
-ls
-vim regex.pl 
-fg
-chx regex.pl 
-./regex.pl 
-fg
-./regex.pl 
-fg
-./regex.pl 
-fg
-./regex.pl 
-fg
-cd
-ls
-vim .git/config 
-vim .git
-fg
-cd -
-vim regex.pl 
-fg
-cdw
-ls
-gb
-gpl
-gls
-gl
-gs HEAD~1
-cls
-gl
-git merge-base work/touchskin_ph2_4 
-man merge-base
-git merge-base HEAD work/touchskin_ph2_
-git merge-base HEAD work/touchskin_ph2_4
-gl
-git rebase -i a44f68fc3ebf9aad98143e5b013b41fde3595dda
-gl
-gst
-gb
-git checkout work/touchskin_ph2_4 
-gpl
-cls
-fg
-ls
-cls
-mixi-prove 
-mixi-prove lib/Mixi/Skin/Touch/
-cd lib/Mixi/Skin/Touch/
-ls
-cd Controller/
-ls
-cd ..
-ls
-v CPocket.pm 
-v
-ag "ミクコレトップへ"
-ag "ミクコレトップ"
-fg
-cls
-ag sandbox
-cls
-condb.sh 
-ls
-cls
-cdw
-v show_touch_skin_character.pl
-ls
-cd lib/Mixi/Skin/Touch/
-ls
-cls
-ls
-v Admin.pm 
-cd Controller/
-ls
-vim Manage.pm 
 fg
 vim Manage.pm 
 vim Apply.pm 
@@ -997,4 +554,447 @@ ssh bkssh@a04688 -i ~/.ssh/detroit/id_rsa
 exit
 md5sum .ssh/id_rsa 
 md5sum .ssh/detroit/id_rsa
+exit
+vg
+cd
+ls
+cls
+vim .ssh/config 
+cat .ssh/id_rsa 
+ls
+cd
+ls
+vg
+h
+vg
+pwd
+gl
+gst
+git reset HEAD .ssh/*
+gst
+cls
+gst
+git add .vim* .bash*
+gm
+gps
+cdw
+gpl
+gl
+v media_resources/honey/worker/cron/daily/evening.yaml
+v media_resources/honey/worker/mixi/analysis/honey/worker/skin.yaml
+ls
+ssh-siau 
+exit
+ssh-siau 
+exit
+ssh-siau 
+ssh-siau -A
+h
+sb
+ssh-siau 
+vg
+ssh feng.zhang@siau -i ~/.ssh/detroit/id_rsa -A
+exit
+ssh-siau 
+vg
+ssh-siau -A
+exit
+sb
+ssh-siau 
+exit
+vg
+sb
+cls
+cdw
+gpl
+cd
+ssh-siau 
+exit
+gst
+gd
+cls
+ls
+cdw
+ssh-siau 
+vg
+gd
+cd
+gd .bashrc-git 
+gd .bashrc-git --cached
+gd .bashrc-git -cached
+gd --cached .bashrc-git 
+vg
+ls
+vg
+ssh-add -l
+ssh-siau 
+s
+ls
+cdw
+stop-server 
+start-server 
+cd git/
+cd data-analyze/
+cd mikukore/
+ls
+cat readme 
+fg
+ssh-siau 
+ls
+top
+cls
+ls
+ssh-siau 
+cls
+ls
+cd git/
+ls
+mkdir data-analyze
+cd data
+ls
+cd ../data-analyze/
+ls
+mkdir mikukore
+cd mikukore/
+vim readme
+cat readme 
+ls
+cd
+ls
+stop-server 
+start-server 
+ls
+cd git/data-analyze/mikukore/
+ls
+cat readme 
+hive
+cd ..
+cdw
+ls
+gst
+gpl
+stop-server 
+ls
+cls
+stop-server 
+start-server 
+ssh-siau 
+exit
+ls
+cdw
+stop-server 
+start-server 
+cls
+cat 
+start-server 
+ls
+gpl
+gl
+fg
+exit
+ssh-add -l
+ssh-siau 
+ls
+cd git/data-analyze/mikukore/
+ls
+cat readme 
+vim derby.log 
+start-server 
+ssh-siau 
+cdw
+gpl
+gls
+cls
+gl
+cls
+fg
+gpl
+gls
+cls
+fg
+ls
+exit
+ls
+ssh-siau 
+git remote -v
+cat .bashrc-git 
+cdw
+ls
+gpl
+gl
+cdw
+gs 24ff02fbe6f539f2377e38bedc987f4ee0b398f7
+v media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_profile.yaml
+v media_resources/honey/worker/mixi/analysis/honey/worker/profile.yaml
+ag show_profile.yaml
+ag "show_profile.yaml"
+fg
+gl
+f skin_touch_update*
+ag skin_touch_update
+history
+cd media_resources/honey/worker/mixi/analysis/honey/worker/
+ls
+cd profile/
+ls
+v show_profile.yaml 
+ag "show_profie.pl"
+cdw
+ag "show_profie.pl"
+ag "show_profile.pl"
+ag "show_friend.pl" 
+ag "show_friend.pl"  | grep analytics
+ag MIKAN
+v ./media_resources/honey/worker/mixi/analysis/honey/worker/all_service/mikan_age_sex_device_uu.yaml
+v ./boofy/tmpl/platform/_menu_with_bootstrap.tmpl
+gl
+f show_profile*
+gl
+ls
+cls
+gpl
+gl
+ls
+gpl
+cls
+cd ..
+ls
+ls -t
+git clone ssh://git@git.lo.mixi.jp/mixi/mixi.git
+ls
+cd mixi/
+ls
+cls
+ls
+ag activity
+cls
+fg
+ls
+vim lib/Mixi/Activity.pm 
+cd lib/Mixi/Activity
+ls
+ag skin
+ag touch
+ag activity
+cdw
+ls
+cd lib/Mixi/Skin/Touch/
+ls
+vim CPocket.pm 
+ag "$self->member->"
+ag "self->member->"
+cdw
+vim t/lib/Mixi/Skin/Touch/get_skin.t 
+cls
+fg
+ls
+vim t/lib/Mixi/Skin/Touch/Controller/Apply.t 
+ls
+clear
+fg
+gpl
+ls
+gpl
+gl
+cd ..
+ls
+cd mixi/
+ls
+cd ..
+ls
+cd android/
+ls
+gr -v
+gb
+gb -v
+gr
+cd ..
+ls
+cd android/
+ls
+cd android/
+ls
+gb 
+gv -r
+gv
+gr
+gpl
+ls
+gl
+ls
+cd ..
+ls
+cd android/
+gpl
+fg
+exit
+ls
+zsh
+ls
+ag jp.mixi.cpocket.accessibility.getDisplayStatus
+cdw
+cls
+ag jp.mixi.cpocket.accessibility.getDisplayStatus
+gb
+git pull
+gb
+git checkout work/touchskin_ph2_6
+gpl
+gl
+fg
+cls
+ag jp.mixi.cpocket.accessibil
+vim lib/Mixi/CPocket/Service.pm 
+v ./lib/Mixi/Skin/Touch/CPocket.pm
+ag jp.mixi.cpocket.accessibility.getDisplayStatus
+vim ./t/lib/Mixi/CPocket/Adapter/Procedure/Accessibility/GetDisplayStatus.t
+gpl
+cls
+fg
+v
+gd
+fg
+v
+ag get_skin*
+cls
+ag get_skin* lib/Mixi/Skin/Touch
+cls
+ag get_skin(
+ag "get_skin("
+ag "get_skin"
+ag "get_skin" lib/Mixi/Skin/Touch
+v lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm_get_skin_admin_status
+cls
+ag list_touch_skin
+v ./lib/Mixi/Skin/Controller/List.pm
+fg
+gd
+fg
+v lib/Mixi/Skin/Touch/CPocket.pm
+cls
+fg
+ag staging
+cls
+ag staging lib/Mixi/Skin/Touch
+fg
+v lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+fg
+f manage_skin.pl
+v ./boofy/gear/skin/touch/manage_skin.pl
+fg
+ag Mixi::Skin::Touch::Config::SKIN_TYPE_LABEL
+cls
+fg
+gst
+gd
+git clean -f
+ls
+gb
+gpl
+git checkout work/touchskin_ph2_8
+gst
+gd
+ls
+gd
+ga .
+gm 
+git checkout work/touchskin_ph2_8
+gls
+gl
+ls
+clear
+gb
+gb --all
+git checkout work/touchskin_ph2_8_review 
+gb
+cls
+gl
+cls
+gb
+gco work/touchskin_ph2_8
+gl
+gci work/touchskin_ph2_8_review 
+gco work/touchskin_ph2_8_review 
+gl
+gls
+cls
+ag can_use_skin
+v ./lib/Mixi/Skin/Touch.pm
+ag is_skin_test_environment
+v ./lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm
+gb --all
+gb
+gco work/touchskin_ph2_6
+gl
+gd
+gs
+v db-schema/DB_TOUCHSKIN__touchskin.sql 
+gd
+gco 
+gco work/touchskin_ph2_8_review
+v lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+gl
+gls
+cls
+fg
+ag SKIN_TEST_ENVIRONMENT
+gb
+cls
+gl
+gs 3cb2cfd485f8487ae679946385879caf2927b7c4
+v lib/Mixi/Skin/Touch/Adapter/Procedure/Skin.pm
+cls
+fg
+ls
+fg
+v
+fg
+cl
+cls
+gb
+gst
+git clean -f
+ls
+gst
+cls
+gl
+gl | grep MIKAN
+gl
+v media_resources/honey/worker/mixi/message/honey/worker/all/user_event/post/group_add.yaml
+v lib/Mixi/Skin/Touch/Batch/Report.pm
+v script/support/cron/judge/report_operator_performance_for_mikan.pl
+v tmpl/device/touch/global_search/includes/_search_forms/_search_diary_form.tmpl
+cd tmpl/device/touch/skin/include/
+ls
+v _skin_menu.tmpl 
+cd ..
+ls
+cd include/
+ls
+vim _skin_menu.tmpl 
+cd ..
+ls
+cd ..
+ls
+cd skin/include/
+ls
+cd ..
+ls
+history | grep show_friend
+history
+cdw
+cd media_resources/honey/worker/mixi/analysis/honey/worker/skin/touch/
+ls
+vim member_skin_relation_by_job.yaml 
+cls
+ls
+history | grep show_profile
+h
+gl
+v media_resources/honey/worker/mixi/analysis/honey/worker/
+cdw
+v media_resources/honey/worker/mixi/analysis/honey/worker/profile/show_friend.yaml 
+fg
+cls
+fg
 exit

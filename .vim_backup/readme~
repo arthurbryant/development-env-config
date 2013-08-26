@@ -1,21 +1,13 @@
-1. Run
+Analyze show_friend.pl
+A.
+1. Get show_friends.pl's pv
+2. Get the uu of 1
+3. Get the number of user who are using mikukore from 2.
 
-node app.js
+Result: show_friend pv, uu, mikukore friend pv, mikukore friend uu.
 
-2. if error: Cannot find module 'express' 
-try the following
+B.
+1. Get the number of user who are using mikukore from A.
+2. Get the "using this mikukore" button click number from event
 
-npm install -d
-
-
-Todo:
-1. reportの時間を見やすいようにする
-
-2. Add bubble
-    a. D! get frequently queried keywords
-    b. D! put the words into the bubble image
-    c. make bubble animation(algorithm)
-    d. make the page looks pretty
-    e. when click the bubble it should disappear
-Question:
-    bubbleをクリックしたら、何か起こすの？
+Result: mikukore friend pv, mikukore friend uu, click event count, uu click event count.

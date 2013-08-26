@@ -1,9 +1,67 @@
 
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
-# On branch work/touchskin_ph2_8
+# On branch master
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
-#	modified:   tmpl/device/touch/home/smart/includes/_footer_navi.tmpl
+#	modified:   .bash_history
+#	modified:   .bashrc
+#	modified:   .bashrc-git
+#	modified:   .vim_backup/.bashrc-git~
+#	modified:   .vim_backup/.bashrc~
+#	modified:   .vim_backup/.zshrc~
+#	modified:   .vim_backup/COMMIT_EDITMSG~
+#	modified:   .vim_backup/CPocket.pm~
+#	new file:   .vim_backup/CallBack.pm~
+#	modified:   .vim_backup/Manage.pm~
+#	modified:   .vim_backup/Skin.pm~
+#	modified:   .vim_backup/_footer_navi.tmpl~
+#	modified:   .vim_backup/config~
+#	modified:   .viminfo
 #
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   .gitconfig
+#	deleted:    .vim/bundle/.neobundle/doc/indent_guides.txt
+#	deleted:    .vim/bundle/vim-indent-guides
+#	deleted:    .vim/bundle/vim-jsbeautify
+#	modified:   .zshrc
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	.bundle/
+#	.cache/
+#	.ccache/
+#	.cpan/
+#	.cpanm/
+#	.hivehistory
+#	.jshintrc
+#	.lesshst
+#	.local/
+#	.mysql_history
+#	.neocomplcache/
+#	.npm/
+#	.perlrc
+#	.ssh/
+#	.zcompdump
+#	backup/
+#	bin/
+#	command.log
+#	conf/
+#	git/
+#	info
+#	install/
+#	local/
+#	log/
+#	mixi/
+#	node_modules/
+#	perl.vim
+#	perl5/
+#	software/
+#	studytech/
+#	test/
+#	tmp/

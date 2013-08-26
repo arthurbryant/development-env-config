@@ -34,7 +34,7 @@ alias s="screen"
 alias condb="mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp"
 
 # add ssh siau
-alias ssh-siau="ssh feng.zhang@siau -i ~/.ssh/detroit/id_rsa"
+alias ssh-siau="ssh feng.zhang@siau -i ~/.ssh/detroit/id_rsa -A"
 
 # Release Ctrl-Q and Ctrl-S from tty
 stty stop undef
