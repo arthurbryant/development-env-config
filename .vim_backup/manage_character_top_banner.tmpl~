@@ -1,0 +1,77 @@
+<TMPL_INCLUDE NAME="header.tmpl">
+<TMPL_INCLUDE NAME="leftmenu.tmpl">
+
+<STRIP>
+<div class="span9 widget">
+
+<TMPL_IF NAME='error'>
+    <div class="alert alert-error">
+        <TMPL_VAR NAME='error'>
+    </div>
+</TMPL_IF>
+
+<TMPL_IF NAME='success_message'>
+    <div class="alert alert-success">
+        <TMPL_VAR EXPR='html_escape(success_message)'>
+    </div>
+</TMPL_IF>
+<h2>チャラクタートップバナー管理</h2>
+
+<br>
+
+<form action="manage_character_top_banner.pl?mode=add" method="POST">
+<table class="table table-bordered table-condensed">
+    <thead>
+    <tr>
+    <th style="text-align:center;" colspan="2">バナー追加</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+        <th>タグID<span class="necessaryItem"> *</span></th>
+        <td>
+        <input type="text" name="tag_id" value="<TMPL_VAR EXPR="html_escape(tag_id)">" size="40"  />
+        </td>
+        </tr>
+
+        <tr>
+        <th>タイトルバナー画像</th>
+        <td>
+        <input type="text" name="top_image_url" value="<TMPL_VAR EXPR="html_escape(top_image_url)">" size="40"  />
+        </td>
+        </tr>
+
+        <tr>
+        <th>特集バナー画像</span></th>
+        <td>
+        <input type="text" name="bottom_image_url" value="<TMPL_VAR EXPR="html_escape(bottom_image_url)">" size="40"  />
+        </td>
+        </tr>
+
+        <tr>
+        <th>特集バナーリンクURL</span></th>
+        <td>
+        <input type="text" name="bottom_link_url" value="<TMPL_VAR EXPR="html_escape(bottom_link_url)">" size="40"  />
+        </td>
+        </tr>
+
+        <tr>
+        <th>特集バナーテキスト</span></th>
+        <td>
+        <input type="text" name="bottom_text" value="<TMPL_VAR EXPR="html_escape(bottom_text)">" size="40"  />
+        </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="submitButton">
+  <input type="submit" class="btn-primary" value="入力内容を確認する" />
+</div>
+
+</form>
+
+</div>
+</STRIP>
+
+<TMPL_INCLUDE NAME="footer.tmpl">

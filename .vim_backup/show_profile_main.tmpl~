@@ -1,16 +1,10 @@
 <TMPL_VAR EXPR="set_analysis_data('service:name','profile')">
 <TMPL_VAR EXPR="add_css('smartphone/touch/common.css')">
 <TMPL_VAR EXPR="add_css('smartphone/touch/home.css')">
+<TMPL_VAR EXPR="add_css_tmpl('sp_skin/common_css.tmpl')">
+<TMPL_VAR EXPR="add_css_tmpl('sp_skin/home_css.tmpl')">
 <TMPL_INCLUDE EXPR="common('header.tmpl')">
 <TMPL_INCLUDE EXPR="common('navi.tmpl')">
-
-<TMPL_IF EXPR="0">
-<!-- FIXME: Below envelope div is required for style tags because jp.mixi.navigation js will manipulate all child tags of #mainArea, nasty. -->
-</TMPL_IF>
-<div style="height:0">
-<TMPL_INCLUDE NAME="sp_skin/common_css.tmpl">
-<TMPL_INCLUDE NAME="sp_skin/home_css.tmpl">
-</div>
 
 <TMPL_VAR EXPR="add_js('mixi/touch/voice.production.js', 'UTF-8')">
 <TMPL_VAR EXPR="add_js('jp/mixi/profile/wall/touch.production.js', 'UTF-8')">
@@ -72,6 +66,21 @@
 <li class="editProfile"><a href="edit_profile.pl">プロフィールの設定</a></li>
 <TMPL_IF EXPR="is_service_activated('TOUCHSKIN_LINK')">
 <li class="editSkin"><a href="list_touch_skin.pl">ミクコレ(デザイン)の設定</a></li>
+<TMPL_UNLESS NAME="design_scheme_touch_skin_info">
+<TMPL_IF EXPR="is_service_activated_per_user('mikukore.profile.announce.skippostfeed')">
+<!--/gHelpTooltip03-->
+<div class="gHelpTooltip03 below widget"
+    id="JS_announceBalloonVoice"
+    data-widget-namespace="jp.mixi.service.widget.announceballoon"
+    data-name="mikukore.profile.announce.skippostfeed">
+<div class="lTooltipBody">
+<div class="lHeader"><h3>Information</h3></div>
+<p class="close JS_closeBalloon"><a href="#">（このチップを閉じる）</a></p>
+<p class="lContents"><span class="cpAttention01">NEW!!</span><br>プロフィールのデサインが変更できるようになりました。さっそく設定してみましょう</p>
+<!--/lTooltipBody--></div>
+<!--/gHelpTooltip03--></div>
+</TMPL_IF>
+</TMPL_UNLESS>
 </TMPL_IF>
 <li class="editPhoto"><a href="list_self_profile_image.pl">プロフィール写真の設定</a></li>
 <li class="editPhoto"><a href="profile_cover.pl?mode=edit">プロフィール背景画像の設定</a></li>
@@ -120,12 +129,6 @@
 <!--[PhotoFeed]-->
 <TMPL_INCLUDE NAME="show_profile/new_photo.tmpl">
 <!--/[PhotoFeed]-->
-</TMPL_IF>
-
-<TMPL_IF NAME=video_new_loop_img>
-<!--[VideoFeed]-->
-<TMPL_INCLUDE NAME="show_profile/new_video.tmpl">
-<!--/[VideoFeed]-->
 </TMPL_IF>
 
 <TMPL_IF NAME=review_new_loop_img>

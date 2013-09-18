@@ -1,0 +1,21 @@
+package Mixi::Test::DataFactory::Blueprint::Skin::Touch::Store::Pickup;
+use strict;
+use Mixi::Warnings;
+use parent 'Mixi::Test::DataFactory::Blueprint';
+use Mixi::Test::DataFactory::Attributes ':all';
+
+sub columns {[
+    position   => sequence,
+    content_id => uniqint32,
+]}
+
+sub builder {
+    Mixi::Test::DataFactory::Builder::DB->new({
+        database => 'DB_TOUCHSKIN_STORE_MST',
+        table    => 'store_pickup',
+        serial   => 'position',
+        fixture  => 'factory/DB_TOUCHSKIN_STORE',
+    });
+}
+
+1;

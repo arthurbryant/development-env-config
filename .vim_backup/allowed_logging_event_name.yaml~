@@ -1,0 +1,123 @@
+---
+common:
+ - header.mixilogo
+
+notify:
+ - mailbox.feedback
+ - mailbox.feedback.new
+ - mailbox.feedback.unread
+ - mailbox.comment
+ - mailbox.comment.new
+ - mailbox.comment.unread
+ - mailbox.log
+ - mailbox.log.new
+ - mailbox.log.unread
+ - mailbox.application
+ - mailbox.application.new
+ - mailbox.application.unread
+ - mailbox.attention
+ - mailbox.attention.new
+ - mailbox.attention.unread
+ - mailbox.action.feedback
+ - mailbox.action.comment
+ - attention
+
+socialstream:
+ - album.comment.send
+ - album.detail
+ - diary.feedback
+ - diary.comment.send
+ - diary.detail
+ - easyshare.feedback
+ - easyshare.comment.send
+ - easyshare.detail
+ - photo.feedback
+ - photo.comment.send
+ - photo.detail
+ - review.feedback
+ - review.comment.send
+ - review.detail
+ - schedule.feedback
+ - schedule.comment.send
+ - schedule.detail
+ - video.detail
+ - voice.feedback
+ - voice.comment.send
+ - voice.detail
+ - platform.feed.application.detail
+ - categorytab.categorized
+ - categorytab.timeline
+ - categorytab.voice
+ - categorytab.diary
+ - categorytab.photo
+ - categorytab.easyshare
+ - categorytab.schedule
+ - categorytab.review
+ - categorytab.video
+ - categorytab.application
+ - categorytab.activity
+
+
+commenthistory:
+ - diary.detail
+ - check.detail
+ - checkin.detail
+ - photo.detail
+ - schedule.detail
+ - voice.detail
+ - link
+
+promotionappinvite:
+ - android.touch.top.runapp
+ - android.app.top.recommendandjoin.mail
+ - android.app.middle.recommendandjoin.mail
+ - android.app.bottom.recommendandjoin.mail
+ - android.app.bottom.recommendandjoin.line
+ - iphone.touch.top.runapp
+ - iphone.app.top.recommendandjoin.sms
+ - iphone.app.top.recommendandjoin.mail
+ - iphone.app.middle.recommendandjoin.sms
+ - iphone.app.middle.recommendandjoin.mail
+ - iphone.app.bottom.recommendandjoin.sms
+ - iphone.app.bottom.recommendandjoin.mail
+ - iphone.app.bottom.recommendandjoin.line
+
+community:
+ - joinlink.send
+
+topics:
+ - pr.banner
+ - pr.more
+ - featuredgame.open
+ - featuredgame.more
+ - mixiparty
+ - mixiparty.more
+ - featuredmall
+ - featuredmall.more
+ - retentionmall
+ - retentionmall.more
+ - featuredreview
+ - featuredreview.more
+ - recommendservice.mixigame
+ - recommendservice.community
+ - recommendservice.mixipage
+ - recommendservice.miximall
+ - recommendservice.mixiparty
+ - recommendservice.mixipremium
+ - recommendservice.schoolcampaign
+ - recommendservice.fanta
+ - recommendservice.mikukore
+<<<<<<< HEAD
+ - mycommunity
+ - mycommunity.more
+ - mycommunity.feed.more
+ - campaign
+ - campaign.more
+ - marketplace.newitems
+ - marketplace.newitems.more
+=======
+
+touchskin:
+ - balloon.showprofile.close
+ - balloon.showfriend.close
+>>>>>>> 9098e2d... add click counters for balloon announces of touchskin

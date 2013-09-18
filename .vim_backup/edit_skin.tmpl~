@@ -1,15 +1,13 @@
-<TMPL_VAR EXPR="add_js('jp/mixi/skin/touch/admin/widget/editskinactions.js', 'UTF-8')">
 <TMPL_INCLUDE NAME="header.tmpl">
 <TMPL_INCLUDE NAME="leftmenu.tmpl">
 
+<TMPL_VAR EXPR="add_js('jp/mixi/skin/touch/admin/widget/editskinactions.js', 'UTF-8')">
 
-<STRIP>
+<div class="span9">
 
-<div id="main_area">
+<h2>ミクコレデザイン情報変更</h2>
 
-<h1>ミクコレデザイン情報変更<em> (<span class="necessaryItem">*</span>の項目は入力必須)</em></h1>
-
-<div id="importantArea">
+<div class="alert">
     <p>
         「<TMPL_VAR EXPR="html_escape(name)">」ミクコレのステイタスは<span class="necessaryItem"><TMPL_VAR EXPR="html_escape(admin_status_text)"></span>です。
     </p>
@@ -21,7 +19,11 @@
     </TMPL_UNLESS>
 </div>
 
+<TMPL_IF NAME=error>
+<div class="alert alert-error">
 <TMPL_VAR NAME="error" ESCAPE=0>
+</div>
+</TMPL_IF>
 
 <form action="manage_skin.pl" method="POST">
     <input type="hidden" name="mode" value="edit_confirm" />
@@ -29,11 +31,14 @@
 
     <TMPL_INCLUDE NAME="skin_form_parts.tmpl">
 
-    <p><input type="submit" value="変更内容を確認する"  /></p>
+    <div class="submitButton">
+      <input type="submit" class="btn-primary" value="変更内容を確認する" />
+    </div>
 
 </form>
 
-<h2>その他の操作</h2>
+<h3>その他の操作</h3>
+<div class="panel">
 <ul class="widget" data-widget-namespace="jp.mixi.skin.touch.admin.widget.editskinactions">
     <li><a class="JS_set_to_delete" href="manage_skin.pl?mode=set_to_delete&id=<TMPL_VAR EXPR="html_escape(id)">&post_key=<TMPL_VAR EXPR="html_escape(post_key)">">削除する</a></li>
     <TMPL_IF EXPR="status eq '1' || status eq '2'">
@@ -43,8 +48,6 @@
 
 </div>
 
-</STRIP>
-
-
+</div>
 
 <TMPL_INCLUDE NAME="footer.tmpl">

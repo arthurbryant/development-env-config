@@ -1,0 +1,111 @@
+#!script/perl
+use strict;
+use Mixi::Warnings;
+use utf8;
+
+use Test::More;
+use Test::Exception;
+use Mixi::Test::Fixtures -checker => 'strict';
+use Mixi::Test::DataFactory qw(
+    Mixi::Skin::Touch::Store::TopBanner
+);
+use Nove::Test::Fixtures::Memcached;
+
+BEGIN {
+    use_ok 'Mixi::Skin::Touch::Store::TopBanner';
+}
+
+my $TOP_BANNER_LIST = [
+    { id => 1, link_url => 'http://hogefuga.com/path/to/page1.html', image_url => "http://img.mixi.net/img/touch_skin/piyopiyopiyo1.jpg"},
+    { id => 2, link_url => 'http://hogefuga.com/path/to/page2.html', image_url => "http://img.mixi.net/img/touch_skin/piyopiyopiyo2.jpg"},
+    { id => 3, link_url => 'http://hogefuga.com/path/to/page3.html', image_url => "http://img.mixi.net/img/touch_skin/piyopiyopiyo3.jpg"},
+];
+
+my $memcached = Nove::Test::Fixtures::Memcached->memcached_instance;
+
+subtest 'get_top_banner_list' => sub {
+    _create_top_banner_list();
+    %$memcached = ();
+
+    my $result = Mixi::Skin::Touch::Store::TopBanner->get_top_banner_list();
+    is_deeply(
+        $result,
+        $TOP_BANNER_LIST,
+        "should return banner list"
+    );
+
+    is_deeply(
+        $memcached->{'touchskin_store_top_banner'},
+        $TOP_BANNER_LIST,
+        "should cached banner list"
+    );
+};
+
+subtest 'add' => sub {
+    _reset_db();
+    %$memcached = (touchskin_store_top_banner => 'DUMMY');
+
+    my %params = (
+        link_url  => "http://hogefuga.com/path/to/page.html",
+        image_url => "http://img.mixi.net/img/touch_skin/piyopiyopiyo4.jpg",
+    );
+    my $result = Mixi::Skin::Touch::Store::TopBanner->add(%params);
+    ok($result, "should add top banner successfully");
+    is($memcached->{touchskin_store_top_banner}, undef, 'should clear memcached');
+};
+
+subtest 'edit' => sub {
+    _create_top_banner_list();
+    %$memcached = (touchskin_store_top_banner => 'DUMMY');
+
+    my %params = (
+        id        => 1,
+        link_url  => "http://hogefuga.com/path/to/edit.html",
+        image_url => "http://img.mixi.net/img/touch_skin/edit.jpg",
+    );
+    my $result = Mixi::Skin::Touch::Store::TopBanner->edit(%params);
+    ok($result, "should update top banner successfully");
+    is($memcached->{touchskin_store_top_banner}, undef, 'should clear memcached');
+};
+
+subtest 'remove' => sub {
+    _create_top_banner_list();
+
+    subtest 'with existing id' => sub {
+        %$memcached = (touchskin_store_top_banner => 'DUMMY');
+
+        my %correct_id = ( id => 1 );
+        my $result = Mixi::Skin::Touch::Store::TopBanner->remove(%correct_id);
+        ok($result, "should remove top banner successfully");
+        is($memcached->{touchskin_store_top_banner}, undef, 'should clear memcached');
+    };
+
+    subtest 'with not existing id' => sub {
+        my %unexisted_id = ( id => 39456931 );
+        my $result = Mixi::Skin::Touch::Store::TopBanner->remove(%unexisted_id);
+        ok(!$result, "should return false");
+    };
+
+    subtest 'with string id' => sub {
+        my %uncorrect_id = ( id => '34dadgh67' );
+        dies_ok {
+            Mixi::Skin::Touch::Store::TopBanner->remove(%uncorrect_id);
+        } "should die";
+    };
+};
+
+sub _reset_db {
+    my $db_master = Mixi::Skin::Touch::Store::TopBanner->db({ role => 'master' });
+    $db_master->connection->execute(q(
+        DELETE FROM store_top_banner
+    ));
+}
+
+sub _create_top_banner_list {
+    _reset_db();
+    foreach my $banner (@$TOP_BANNER_LIST) {
+        Mixi::Test::DataFactory->make('Mixi::Skin::Touch::Store::TopBanner', $banner);
+    }
+}
+
+done_testing;

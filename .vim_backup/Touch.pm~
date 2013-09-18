@@ -10,7 +10,6 @@ use parent qw/
 #::<<other>>
 use Carp qw(croak);
 use Scalar::Util qw/blessed/;
-use Mixi::Utils::Params::Validate;
 use Params::Validate;
 use Digest::HMAC_SHA1 qw/
     hmac_sha1_hex
@@ -25,7 +24,9 @@ use Nove::Core::Datetime qw/
 /;
 
 #::<<common library>>
+use Mixi;
 use Mixi::String;
+use Mixi::Picture::OnetimeURL;
 
 #::<<service>>
 use Mixi::UserEvent;
@@ -40,6 +41,7 @@ use constant VALIDATION_RULE => {
     SKIN_TYPE   => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
     GENRE_ID    => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
     MEMBER_ID   => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
+    CONTENT_ID  => { type => Params::Validate::SCALAR, regex => qr/^\d+\z/  },
     CONTENT_IDS => { type => Params::Validate::ARRAYREF },
 };
 use constant NAME_MAX_LENGTH => 40;
@@ -93,9 +95,9 @@ sub get_public_skins_by_skin_type {
 
     my $count = $db->count_public_skins_by_skin_type(%args);
     my $skins = $db->select_public_skins_by_skin_type(%args);
-    for(@{$skins || [] }){
-        $_->{name}      = Mixi::String::fold_text($_->{name}, NAME_MAX_LENGTH, 1, NAME_CUT_SUFFIX);
-        $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
+    for my $skin (@{$skins || []}){
+        $self->_fold_name($skin);
+        $self->_set_skin_base($skin);
     }
 
     return {
@@ -121,10 +123,11 @@ sub get_public_skins {
 
     my $count = $db->count_public_skins(%args);
     my $skins = $db->select_public_skins(%args);
-    for(@{$skins || [] }){
-        $_->{name}      = Mixi::String::fold_text($_->{name}, NAME_MAX_LENGTH, 1, NAME_CUT_SUFFIX);
-        $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
+    for my $skin (@{$skins || []}){
+        $self->_fold_name($skin);
+        $self->_set_skin_base($skin);
     }
+
     return {
         count => $count,
         rows  => $skins,
@@ -149,9 +152,9 @@ sub get_public_skins_by_genre {
 
     my $count = $db->count_public_skins_by_genre(%args);
     my $skins = $db->select_public_skins_by_genre(%args);
-    for(@{$skins || [] }){
-        $_->{name}      = Mixi::String::fold_text($_->{name}, NAME_MAX_LENGTH, 1, NAME_CUT_SUFFIX);
-        $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
+    for my $skin (@{$skins || []}){
+        $self->_fold_name($skin);
+        $self->_set_skin_base($skin);
     }
 
     return {
@@ -178,9 +181,9 @@ sub get_public_skins_by_genre_and_skin_type {
     my $db = $self->db({ role => 's' });
     my $count = $db->count_public_skins_by_genre_and_skin_type(%args);
     my $skins = $db->select_public_skins_by_genre_and_skin_type(%args);
-    for(@{$skins || [] }){
-        $_->{name}      = Mixi::String::fold_text($_->{name}, NAME_MAX_LENGTH, 1, NAME_CUT_SUFFIX);
-        $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
+    for my $skin (@{$skins || []}){
+        $self->_fold_name($skin);
+        $self->_set_skin_base($skin);
     }
 
     return {
@@ -189,20 +192,34 @@ sub get_public_skins_by_genre_and_skin_type {
     };
 }
 
-sub get_skins_by_content_ids {
+sub get_skin_by_content_id {
+    my $self = shift;
+    my %args = Params::Validate::validate(@_, {
+        content_id => VALIDATION_RULE->{CONTENT_ID},
+    });
+
+    my $content_id = $args{content_id};
+    my $skin_map = $self->get_skin_map_by_content_ids(content_ids => [$content_id]);
+    return unless $skin_map && $skin_map->{$content_id};
+    return $skin_map->{$content_id};
+}
+
+sub get_skin_map_by_content_ids {
     my $self = shift;
     my %args = Params::Validate::validate(@_, {
         content_ids => VALIDATION_RULE->{CONTENT_IDS},
     });
+    return unless scalar @{$args{content_ids}};
 
     my $db = $self->db({ role => 's' });
     my $skins = $db->select_skins_by_content_ids(%args);
+    return unless $skins;
 
-    for(@{$skins || [] }){
-        $_->{name}      = Mixi::String::fold_text($_->{name}, NAME_MAX_LENGTH, 1, NAME_CUT_SUFFIX);
-        $_->{skin_base} = $self->_make_skin_base($_->{id},$_->{skin_version});
+    for my $skin (@$skins){
+        $self->_set_skin_base($skin);
     }
-    return $skins;
+
+    return { map { ($_->{content_id} => $_) } @$skins };
 }
 
 sub get_skin {
@@ -220,14 +237,15 @@ sub get_skin {
         return $skin;
     }
 
-    ## @KEY: touch_skin:skin_data:<SKIN_ID> TOUCHスキン情報
     my $skin = $self->call_cached(-Format => {
         keyinfo => [Mixi::Skin::Touch::Config::CACHE->{SKIN_DATA}->{KEY}, $id],
         expire  => Mixi::Skin::Touch::Config::CACHE->{SKIN_DATA}->{EXPIRE},
-        code    => sub { $self->_get_skin($id); },
+        code    => sub { $self->_get_skin_from_db($id); },
     });
-    return $skin if $self->can_use_skin($skin);
-    return;
+    return unless ($skin && $self->can_use_skin($skin));
+
+    $self->_set_skin_base($skin);
+    return $skin;
 }
 
 sub get_staging_skin {
@@ -241,7 +259,7 @@ sub get_staging_skin {
 
         # Caution: Skin will be spoiled if temporary_skin_info has bad data.
         @{$skin}{keys %$editing_skin} = values %$editing_skin;
-        $skin->{skin_base} = $self->_make_skin_base($skin->{id}, $skin->{skin_version});
+        $self->_set_skin_base($skin);
     }
 
     return $skin;
@@ -251,6 +269,7 @@ sub set_member_skin {
     my ($self, %args) = @_;
 
     my $new_skin = $args{skin};
+    return unless $self->can_set_skin($new_skin);
 
     my $db = $self->db({ role => 'm' });
     eval {
@@ -259,9 +278,8 @@ sub set_member_skin {
             skin_id   => $new_skin->{id},
         );
     };
-
-    if($@){
-        Nove::Core::Log->warn("failed to set_member_skin [$@]");
+    if (my $error = $@){
+        Nove::Core::Log->warn("failed to set_member_skin [$error]");
         return;
     }
     $self->delete_cached(-Format => [Mixi::Skin::Touch::Config::CACHE->{MEMBER_SKIN}->{KEY},$args{member_id}]);
@@ -274,6 +292,7 @@ sub set_member_skin {
             timestamp => sprintf('%04d%02d%02d%02d%02d%02d', Date::Calc::Today_and_Now),
         }, 'dist_key' => $args{member_id}
     );
+
     return 1;
 }
 
@@ -299,7 +318,6 @@ sub get_member_skin {
     my $self = shift;
     my %args = Params::Validate::validate(@_, { member_id => VALIDATION_RULE->{MEMBER_ID} });
 
-    ## @KEY: pc_skin:member_skin:<MEMBER_ID> ユーザが着用しているTouchスキンのID
     my $skin_id  = $self->call_cached(-Format => {
         keyinfo => [Mixi::Skin::Touch::Config::CACHE->{MEMBER_SKIN}->{KEY},$args{member_id}],
         expire  => Mixi::Skin::Touch::Config::CACHE->{MEMBER_SKIN}->{EXPIRE},
@@ -316,16 +334,24 @@ sub get_member_skin {
 
 # get uncached skin
 sub _get_skin {
-    my ($self,$id) = @_;
-    return unless $id;
+    my ($self, $id) = @_;
 
-    my $skin = $self->db({ role => 's' })->select_skin_by_id(id => $id);
-    $skin->{skin_base} = $self->_make_skin_base($skin->{id}, $skin->{skin_version}) if $skin;
+    my $skin = $self->_get_skin_from_db($id);
+    return unless $skin;
+
+    $self->_set_skin_base($skin);
     return $skin;
 }
 
+sub _get_skin_from_db {
+    my ($self, $id) = @_;
+    return unless $id;
+
+    return $self->db({ role => 's' })->select_skin_by_id(id => $id);
+}
+
 sub can_use_skin {
-    my ($self,$skin) = @_;
+    my ($self, $skin) = @_;
     return unless defined $skin;
     return unless defined $skin->{status};
     return 1 if $self->is_skin_test_environment && $skin->{status} == Mixi::Skin::Touch::Config::SKIN_STATUS_DB->{REGISTRATION};
@@ -336,25 +362,42 @@ sub can_use_skin {
 }
 
 sub can_set_skin {
-    my ($self,$skin) = @_;
+    my ($self, $skin) = @_;
 
-    return $self->can_use_skin($skin) if $self->is_skin_test_environment;
+    return $self->can_use_skin($skin);
+}
 
-    return unless defined $skin;
-    return unless defined $skin->{status};
-    return unless defined $skin->{open_datetime};
-    return unless defined $skin->{close_datetime};
-    return unless (
-        $skin->{status} == Mixi::Skin::Touch::Config::SKIN_STATUS_DB->{CAN_OPEN} ||
-        $skin->{status} == Mixi::Skin::Touch::Config::SKIN_STATUS_DB->{CAN_OPEN_EDIT}
-    );
-    return in_duration($skin->{open_datetime}, $skin->{close_datetime});
+sub get_image_url_data {
+    my ($self, $skin, $types) = @_;
+
+    my $skin_base = ref $skin ? $skin->{skin_base} : $skin;
+    my $skin_image_path_map = Mixi::Skin::Touch::Config::SKIN_IMAGE_PATH_MAP;
+
+    my @types = ($types ? ( @$types ) : keys %$skin_image_path_map);
+    return {
+        map {
+            my $path = $skin_base . $skin_image_path_map->{$_};
+            ("skin_${_}_img_url" => Mixi::Picture::OnetimeURL->get_cp_img_url($path))
+        } grep {
+            $_ eq 'thumbnail' || $_ eq 'preview' || $skin->{"has_${_}_img"}
+        } @types
+    };
 }
 
 sub _make_skin_base {
-    my ( $self, $id, $version) = @_;
-    my $digest = Digest::HMAC_SHA1::hmac_sha1_hex( join( "_", $id, $version), Mixi::Skin::Touch::Config::SKIN_SECRET );
+    my ($self, $id, $version) = @_;
+    my $digest = Digest::HMAC_SHA1::hmac_sha1_hex( join( "_", $id, $version), Mixi::Skin::Touch::Config::SKIN_SECRET);
     return Mixi::Skin::Touch::Config::SKIN_BASE_PATH . "/" . $digest;
+}
+
+sub _set_skin_base {
+    my ($self, $skin) = @_;
+    $skin->{skin_base} = $self->_make_skin_base($skin->{id}, $skin->{skin_version});
+}
+
+sub _fold_name {
+    my ($self, $skin) = @_;
+    $skin->{name} = Mixi::String::fold_text($skin->{name}, NAME_MAX_LENGTH, 1, NAME_CUT_SUFFIX);
 }
 
 sub _get_editing_skin_data {
@@ -377,3 +420,19 @@ sub is_skin_test_environment {
 }
 
 1;
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+Mixi::Skin::Touch
+
+=head1 AUTHOR
+
+プロフィールユニット E<lt>unit-profile@mixi.co.jp<gt>
+
+問い合わせはJIRA( http://jira.intra.mixi.co.jp/browse/PROFILE ) までお願いします。
+
+=cut

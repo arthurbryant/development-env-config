@@ -1,0 +1,68 @@
+/**
+@name jp.mixi.service.widget.announceballoon.js
+@namespace details here
+*/
+Namespace('jp.mixi.service.widget.announceballoon')
+.use('brook promise')
+.use('brook.util through,from')
+.use('jp.co.mixi.gateway gateway')
+.use('jp.mixi.model.utils createRPCPromise,whenExpiredSessionToReload')
+.use('jp.mixi.service.analysis postUIEventLog')
+.define(function(ns){
+    /*global _:false, $j:false*/
+    'use strict';
+
+    var CLOSE_METHOD_MAPPING = {
+        'hide': 'hide',
+        'remove': 'remove'
+    };
+    var elementsOf = {};
+
+    var __deactivete = _.once(function (){
+        return ns.promise().bind(
+            ns.createRPCPromise(
+                'jp.mixi.serviceactivation.peruser.deactivate'
+            ),
+            ns.whenExpiredSessionToReload
+        );
+    });
+
+    var registerElement = function( element, dataset){
+        element = $j(element);
+        var name    = dataset.name;
+        if( !elementsOf[name] ){ elementsOf[name] = []; }
+        elementsOf[ name ].push( element );
+        element.find('.JS_closeBalloon').click(function (evt) {
+            evt.preventDefault();
+            (closeBalloon( name, dataset.closeAction ).ready())();
+            var eventName = dataset.eventName;
+            if (eventName) {
+                ns.postUIEventLog(eventName);
+            }
+        });
+    };
+
+    var closeBalloon = function( name, action ){
+        var closeMethod = CLOSE_METHOD_MAPPING[action] || CLOSE_METHOD_MAPPING.hide;
+
+        var hideElement = ns.promise( function(next, value){
+
+            var elements = elementsOf[ name ];
+            if( !elements ){ return; }
+            _.invoke( elements, closeMethod );
+            next( value );
+        });
+        return ns.from( { service : name } )
+            .bind( hideElement )
+            .bind( __deactivete() )
+        ;
+    };
+
+    ns.provide({
+        registerElement : registerElement,
+        closeBalloon    : closeBalloon
+    });
+
+});
+
+

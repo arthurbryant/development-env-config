@@ -1,38 +1,46 @@
 use strict;
 use warnings;
+use utf8;
 
 use Test::More;
 use Test::Deep;
-use Test::MockTime;
 
+use Mixi::Test qw/require_utf8_output/;
 use Mixi::Test::Fixtures -checker => 'strict';
 use Nove::Test::Fixtures::Memcached;
 use Mixi::Test::DataFactory qw(
     Mixi::Skin::Touch::SkinData
+    Mixi::Skin::Touch::Purchase
 );
 use Mixi::Test::Mock::Service::Procedure;
 
 BEGIN {
     use_ok 'Mixi::Skin::Touch::CPocket';
 }
-use Mixi::Skin::Touch::Config;
-use Mixi::Skin::Touch;
-
-my $memcached = Nove::Test::Fixtures::Memcached->memcached_instance;
 
 subtest 'get_skin_content_list_by_tag_id' => sub {
+    my $member_id = 4444;
 
     my $skin_1 = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
         id           => 10001,
         skin_version => 2,
         content_id   => 20001,
     });
+    my $skin_2 = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
+        id           => 10002,
+        skin_version => 3,
+        content_id   => 20002,
+    });
+    Mixi::Test::DataFactory->make('Mixi::Skin::Touch::Purchase', {
+        member_id  => $member_id,
+        product_id => $skin_2->{id},
+    });
 
     my $tag_id = 1234;
-    my $member_id = 4444;
 
     my $content_1 = _content_1($skin_1->{content_id});
-    my $content_2 = _content_9999(987654321); # not exist in skin db
+    my $content_2 = _content_2($skin_2->{content_id});
+    my $content_9999 = _content_9999(987654321); # not exist in skin db
 
     my $procedure_mock = Mixi::Test::Mock::Service::Procedure->mock(
         internal => 'jp.mixi.cpocket.market.getContentListByTag',
@@ -48,12 +56,13 @@ subtest 'get_skin_content_list_by_tag_id' => sub {
             }, 'valid params should be passed to procedure');
 
             return {
-                total_results => 2,
+                total_results => 3,
                 has_next      => 0,
                 has_prev      => 0,
                 content_list  => [
                     $content_1,
                     $content_2,
+                    $content_9999,
                 ],
             }
         }
@@ -66,29 +75,39 @@ subtest 'get_skin_content_list_by_tag_id' => sub {
         limit     => 10,
     );
 
-    my $skin_base = Mixi::Skin::Touch->_make_skin_base(@{$skin_1}{qw/id skin_version/});
     cmp_deeply(
         $result,
         {
-            total_results => 2,
+            total_results => 3,
             has_next      => 0,
             has_prev      => 0,
             content_list  => [
                 {
                     %$content_1,
-                    skin_base => $skin_base,
+                    skin_id                => $skin_1->{id},
+                    skin_preview_img_url   => re("\Qhttp://\E.+\Q/preview001.jpg\E\$"),
+                    skin_thumbnail_img_url => re("\Qhttp://\E.+\Q/thumbnail001.jpg\E\$"),
                 },
                 {
                     %$content_2,
-                    # skin_base not available
+                    skin_id                => $skin_2->{id},
+                    skin_preview_img_url   => re("\Qhttp://\E.+\Q/preview001.jpg\E\$"),
+                    skin_thumbnail_img_url => re("\Qhttp://\E.+\Q/thumbnail001.jpg\E\$"),
+                    is_bought              => 1, # overridden by legacy purchase db
+                },
+                {
+                    %$content_9999,
+                    # img_urls not available
                 },
             ]
         },
-        'should return valid structure with skin_base'
+        'should return valid structure with skin data'
     );
 };
 
 subtest 'get_skin_content_list_by_app_id' => sub {
+    my $member_id = 2222;
+
     my $skin_1 = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
         id           => 20001,
         skin_version => 2,
@@ -99,12 +118,14 @@ subtest 'get_skin_content_list_by_app_id' => sub {
         skin_version => 1,
         content_id   => 30002,
     });
+    Mixi::Test::DataFactory->make('Mixi::Skin::Touch::Purchase', {
+        member_id  => $member_id,
+        product_id => $skin_2->{id},
+    });
 
     my $content_1 = _content_1($skin_1->{content_id});
     my $content_2 = _content_2($skin_2->{content_id});
     my $content_9999 = _content_9999(987654321); # not exist in skin db
-
-    my $member_id = 2222;
 
     my $procedure_mock = Mixi::Test::Mock::Service::Procedure->mock(
         internal => 'jp.mixi.cpocket.store.getContentListByAppId',
@@ -140,10 +161,6 @@ subtest 'get_skin_content_list_by_app_id' => sub {
         order     => 'DESC',
     );
 
-    use Data::Dumper;
-    warn Dumper $result;
-    my $skin_base1 = Mixi::Skin::Touch->_make_skin_base(@{$skin_1}{qw/id skin_version/});
-    my $skin_base2 = Mixi::Skin::Touch->_make_skin_base(@{$skin_2}{qw/id skin_version/});
     cmp_deeply(
         $result,
         {
@@ -153,19 +170,24 @@ subtest 'get_skin_content_list_by_app_id' => sub {
             content_list  => [
                 {
                     %$content_1,
-                    skin_base => $skin_base1,
+                    skin_id                => $skin_1->{id},
+                    skin_preview_img_url   => re("\Qhttp://\E.+\Q/preview001.jpg\E\$"),
+                    skin_thumbnail_img_url => re("\Qhttp://\E.+\Q/thumbnail001.jpg\E\$"),
                 },
                 {
                     %$content_2,
-                    skin_base => $skin_base2,
+                    skin_id                => $skin_2->{id},
+                    skin_preview_img_url   => re("\Qhttp://\E.+\Q/preview001.jpg\E\$"),
+                    skin_thumbnail_img_url => re("\Qhttp://\E.+\Q/thumbnail001.jpg\E\$"),
+                    is_bought              => 1, # overridden by legacy purchase db
                 },
                 {
                     %$content_9999,
-                    # skin_base not available
+                    # skin data not available
                 },
             ]
         },
-        'should return valid structure with skin_base'
+        'should return valid structure with skin data'
     );
 };
 
@@ -187,7 +209,8 @@ sub _content_1 {
         selling_end_at   => "2013-09-30 23:59:59",
         use_by  => "2013-12-31 23:59:59",
         has_stock_limit => 0,
-        consumable_type => "nonconsumable"
+        consumable_type => "nonconsumable",
+        is_bought => 0,
     }
 }
 
@@ -208,7 +231,8 @@ sub _content_2 {
         selling_end_at   => "2013-09-30 23:59:59",
         use_by  => "2013-12-31 23:59:59",
         has_stock_limit => 0,
-        consumable_type => "nonconsumable"
+        consumable_type => "nonconsumable",
+        is_bought => 0,
     }
 }
 
@@ -229,7 +253,8 @@ sub _content_9999 {
         selling_end_at   => "2013-09-30 23:59:59",
         use_by  => "2013-12-31 23:59:59",
         has_stock_limit => 0,
-        consumable_type => "nonconsumable"
+        consumable_type => "nonconsumable",
+        is_bought => 0,
     }
 }
 

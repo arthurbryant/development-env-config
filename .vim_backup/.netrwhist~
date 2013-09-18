@@ -1,8 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/bkapps/git/touch-skin/log/PLATFORM_SYSLOG/syslog_02'
-let g:netrw_dirhist_2='/home/bkapps/git/touch-skin/t/lib/Mixi/Test/DataFactory/Blueprint'
-let g:netrw_dirhist_3='/home/bkapps/git/touch-skin/t/lib/Mixi/Test/DataFactory'
-let g:netrw_dirhist_4='/home/bkapps/git/touch-skin/t/lib/Mixi/Test/DataFactory/Blueprint'
-let g:netrw_dirhist_5='/home/bkapps/git/touch-skin/t/lib/Mixi/Test/DataFactory/Blueprint/PushNotify'
-let g:netrw_dirhist_6='/home/bkapps/.git'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/bkapps/git/touch-skin'
+let g:netrw_dirhist_2='/home/bkapps/git'
+let g:netrw_dirhist_3='/home/bkapps'
+let g:netrw_dirhist_4='/home/bkapps/git/touch-skin/log/PLATFORM_SYSLOG/syslog_02/analysis'
+let g:netrw_dirhist_5='/home/bkapps/git/touch-skin/log/PLATFORM_SYSLOG/syslog_02/analysis/click.home.header.navi'
+let g:netrw_dirhist_6='/home/bkapps/git/touch-skin/log/PLATFORM_SYSLOG/syslog_01/analysis_ui_event/mikukore.showfriend.close'
+let g:netrw_dirhist_7='/home/bkapps/git/touch-skin/log/PLATFORM_SYSLOG/syslog_02/analysis_ui_event/touchskin.balloon.showprofile.close'
+let g:netrw_dirhist_8='/home/bkapps/git/touch-skin/boofy/tmpl/skin/touch'

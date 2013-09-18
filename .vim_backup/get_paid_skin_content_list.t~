@@ -1,0 +1,154 @@
+use strict;
+use warnings;
+use utf8;
+
+use Test::More;
+use Test::Deep;
+
+use Mixi::Test qw/require_utf8_output/;
+use Mixi::Test::Fixtures -checker => 'strict';
+use Nove::Test::Fixtures::Memcached;
+use Mixi::Test::DataFactory qw(
+    Mixi::Skin::Touch::SkinData
+);
+use Mixi::Test::Mock::Service::Procedure;
+
+BEGIN {
+    use_ok 'Mixi::Skin::Touch::CPocket';
+}
+
+my $skin_1 = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
+    id           => 10001,
+    skin_version => 2,
+    content_id   => 20001,
+});
+
+my $skin_2 = Mixi::Test::DataFactory->make('Mixi::Skin::Touch::SkinData', {
+    id           => 10002,
+    skin_version => 3,
+    content_id   => 20002,
+});
+
+my $member_id = 4444;
+
+my $content_1    = _content_1($skin_1->{content_id}, $member_id);
+my $content_2    = _content_2($skin_2->{content_id}, $member_id);
+my $content_9999 = _content_9999(987654321, $member_id); # not exist in skin db
+
+my $procedure_mock = Mixi::Test::Mock::Service::Procedure->mock(
+    internal => 'jp.mixi.cpocket.accessibility.getContentListByAppId',
+    sub {
+        my ($self, $params) = @_;
+        is($self->requester_id, $member_id, 'requester_id should be passed correctly');
+        cmp_deeply($params, {
+            application_id   => ignore(),
+            service_id       => ignore(),
+            start_index      => 41,
+            quantity         => 20,
+            distribute_type => 'owned',
+        }, 'valid params should be passed to procedure');
+
+        return {
+            total_results => 43,
+            has_next      => 0,
+            has_prev      => 1,
+            content_list  => [
+                $content_1,
+                $content_2,
+                $content_9999,
+            ],
+        }
+    }
+);
+
+my $result = Mixi::Skin::Touch::CPocket->get_paid_skin_content_list(
+    member_id => $member_id,
+    offset    => 40,
+    limit     => 20,
+);
+
+cmp_deeply(
+    $result,
+    {
+        total_results => 43,
+        has_next      => 0,
+        has_prev      => 1,
+        content_list  => [
+            {
+                %$content_1,
+                skin_id                => $skin_1->{id},
+                skin_preview_img_url   => re("\Qhttp://\E.+\Q/preview001.jpg\E\$"),
+                skin_thumbnail_img_url => re("\Qhttp://\E.+\Q/thumbnail001.jpg\E\$"),
+            },
+            {
+                %$content_2,
+                skin_id                => $skin_2->{id},
+                skin_preview_img_url   => re("\Qhttp://\E.+\Q/preview001.jpg\E\$"),
+                skin_thumbnail_img_url => re("\Qhttp://\E.+\Q/thumbnail001.jpg\E\$"),
+            },
+            {
+                %$content_9999,
+                # skin data not available
+            },
+        ]
+    },
+    'should return valid structure with skin data'
+);
+
+sub _content_1 {
+    my ($content_id, $member_id) = @_;
+    +{
+        object_type  => "content_for_sale",
+        content_id   => $content_id,
+        product_id   => 1111,
+        content_name => "くまモンの夏休み",
+        description  => "ゆるキャラくまモンの夏休みバージョンのミクコレです。",
+        tags => [
+            { id => "1234", name => "くまモン" },
+            { id => "2222", name => "くまモンの夏休み" }
+        ],
+        provider        => { id => 111, name => "熊本県広報課" },
+        copyright       => "(c)2010熊本県くまモン#99999",
+        paid_member_id  => $member_id,
+        owner_member_id => $member_id,
+        can_display     => 1,
+    };
+}
+
+sub _content_2 {
+    my ($content_id, $member_id) = @_;
+    +{
+        object_type  => "content_for_sale",
+        content_id   => $content_id,
+        content_name => "content2",
+        description  => "",
+        tags => [
+            { id => "1234", name => "くまモン" },
+        ],
+        provider  => { id => 111, name => "熊本県広報課" },
+        copyright => "(c)2010熊本県くまモン#99999",
+        paid_member_id  => $member_id,
+        owner_member_id => $member_id,
+        can_display     => 1,
+    };
+}
+
+sub _content_9999 {
+    my ($content_id, $member_id) = @_;
+    +{
+        object_type  => "content_for_sale",
+        content_id   => $content_id,
+        content_name => "content_idないやつ用",
+        description  => "",
+        tags => [
+            { id => "1234", name => "くまモン" },
+        ],
+        provider  => { id => 111, name => "熊本県広報課" },
+        copyright => "(c)2010熊本県くまモン#99999",
+        paid_member_id  => $member_id,
+        owner_member_id => $member_id,
+        can_display     => 1,
+    };
+}
+
+done_testing;

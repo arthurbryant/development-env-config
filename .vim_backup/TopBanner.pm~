@@ -1,0 +1,75 @@
+package Mixi::Skin::Touch::Store::TopBanner;
+
+use strict;
+use Mixi::Warnings;
+use utf8;
+
+use List::Util qw/shuffle/;
+use Mixi::Skin::Touch::DB::Store;
+use Nove::Core::Cache::Memcached::Wrap qw/use_memcached clear_memcached/;
+use Nove::Core::Log;
+use Mixi::Utils::Params::Validate qw/validate_params/;
+use Nove::Core::Data::Structure qw/TYPE_UINT TYPE_URL/;
+
+use constant TOP_BANNER_CACHE_KEY     => 'touchskin_store_top_banner';
+use constant TOP_BANNER_CACHE_EXPIRED => 60 * 60 * 24 * 7;
+
+sub db {
+    my $class = shift;
+
+    return Mixi::Skin::Touch::DB::Store->new(@_);
+}
+
+sub get_top_banner_list {
+    my  $class = shift;
+
+    return $class->db({role => 'master'})->select_top_banner_list;
+}
+
+use_memcached get_top_banner_list => [ TOP_BANNER_CACHE_KEY ] => TOP_BANNER_CACHE_EXPIRED;
+
+sub add {
+    my $class = shift;
+    my %params = validate_params(@_, {
+        image_url => { validator => TYPE_URL },
+        link_url  => { validator => TYPE_URL },
+    });
+
+    return $class->db({role => 'master'})->insert_top_banner(%params);
+}
+
+clear_memcached add => [ TOP_BANNER_CACHE_KEY ];
+
+sub edit {
+    my $class = shift;
+    my %params = validate_params(@_, {
+        id        => { validator => TYPE_UINT },
+        image_url => { validator => TYPE_URL },
+        link_url  => { validator => TYPE_URL },
+    });
+    return $class->db({role => 'master'})->update_top_banner(%params);
+}
+clear_memcached edit => [ TOP_BANNER_CACHE_KEY ];
+
+sub remove {
+    my $class = shift;
+    my %params = validate_params(@_, {
+        id => { validator => TYPE_UINT },
+    });
+
+    return $class->db({role => 'master'})->delete_top_banner(%params);
+}
+
+clear_memcached remove => [ TOP_BANNER_CACHE_KEY ];
+
+sub get_top_banner_with_randaom {
+    my $class = shift;
+
+    my $banner_list         = $class->get_top_banner_list;
+    my @shuffle_banner_list = List::Util::shuffle(@$banner_list);
+    my $banner              = $shuffle_banner_list[0];
+
+    return $banner;
+}
+
+1;

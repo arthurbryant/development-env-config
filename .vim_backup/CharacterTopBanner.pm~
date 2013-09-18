@@ -1,0 +1,87 @@
+package Mixi::Skin::Touch::Store::CharacterTopBanner;
+
+use strict;
+use Mixi::Warnings;
+use utf8;
+
+use Mixi::Skin::Touch::DB::Store;
+use Nove::Core::Cache::Memcached::Wrap qw/use_memcached clear_memcached/;
+use Nove::Core::Log;
+use Mixi::Utils::Params::Validate qw/validate_params/;
+use Nove::Core::Data::Structure qw/TYPE_POSITIVE_INT TYPE_UINT TYPE_STRING/;
+
+# @KEY: touchskin_store_character_top_banner:<TAG_ID> toucuskin character top banner
+use constant CHARACTER_TOP_BANNER_CACHE_KEY    => 'touchskin_store_character_top_banner:%d';
+use constant CHARACTER_TOP_BANNER_CACHE_EXPIRE => 60 * 60 * 24 * 7;
+
+sub db {
+    my $class = shift;
+
+    return Mixi::Skin::Touch::DB::Store->new(@_);
+}
+
+sub get_list_and_count {
+    my $class = shift;
+    my %params = validate_params(@_, {
+        offset => { validator => TYPE_UINT },
+        limit  => { validator => TYPE_POSITIVE_INT },
+    });
+
+    my $db    = $class->db({role => 'slave'});
+
+    my $count = $db->count_character_top_banner;
+    my $list  = $db->select_character_top_banner_list_with_limit(%params);
+
+    return {
+        count => $count,
+        list  => $list,
+    };
+}
+
+sub get_by_tag_id {
+    my $class = shift;
+    my %params = validate_params(@_, {
+        tag_id => { validator => TYPE_POSITIVE_INT },
+    });
+
+    return $class->db({role => 'slave'})->select_character_top_banner_by_tag_id(%params);
+}
+
+use_memcached get_by_tag_id => [ CHARACTER_TOP_BANNER_CACHE_KEY, qw/+tag_id/ ] => CHARACTER_TOP_BANNER_CACHE_EXPIRE;
+
+sub add {
+    my $class = shift;
+    # validate url in controller
+    my %params = validate_params(@_, {
+        tag_id           => { validator => TYPE_POSITIVE_INT },
+        top_image_url    => { validator => TYPE_STRING },
+        bottom_image_url => { validator => TYPE_STRING },
+        bottom_link_url  => { validator => TYPE_STRING },
+        bottom_text      => { validator => TYPE_STRING },
+    });
+
+    return $class->db({role => 'master'})->insert_character_top_banner(%params);
+}
+
+sub edit {
+    my $class = shift;
+    my %params = validate_params(@_, {
+        tag_id => { validator => TYPE_POSITIVE_INT },
+    });
+    return $class->db({role => 'master'})->get_by_tag_id(%params);
+}
+
+clear_memcached edit => [ CHARACTER_TOP_BANNER_CACHE_KEY, qw/+tag_id/ ];
+
+sub remove {
+    my $class = shift;
+    my %params = validate_params(@_, {
+        tag_id => { validator => TYPE_POSITIVE_INT },
+    });
+
+    return $class->db({role => 'master'})->delete_character_top_banner(%params);
+}
+
+clear_memcached remove => [ CHARACTER_TOP_BANNER_CACHE_KEY, qw/+tag_id/ ];
+
+1;

@@ -1,0 +1,71 @@
+<TMPL_INCLUDE NAME="header.tmpl">
+<TMPL_INCLUDE NAME="leftmenu.tmpl">
+
+<TMPL_VAR EXPR="add_js('jp/mixi/skin/touch/admin/widget/reorderform.js', 'UTF-8')">
+
+<STRIP>
+<div class="span9" class="widget" data-widget-namespace="jp.mixi.skin.touch.admin.widget.reorderform">
+
+<h2>ピックアップ管理</h2>
+
+<br>
+
+<div class="row">
+    <form class="span5" action="manage_pickup.pl" method="post">
+        <input type="hidden" name="mode" value="confirm" />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th><input type="checkbox"></th>
+                    <th>コンテンツID</th>
+                    <th>ミクコレID</th>
+                    <th>ミクコレ名</th>
+                </tr>
+            </thead>
+            <tbody class="JS_tableBody">
+                <TMPL_LOOP NAME="pickup_list">
+                <tr>
+                    <th><input type="checkbox"></th>
+                    <td><input type="hidden" name="pickup_id_list" value="<TMPL_VAR EXPR='html_escape(content_id)'>" /><TMPL_VAR EXPR='html_escape(content_id)'></td>
+                    <td><TMPL_VAR EXPR='html_escape(skin_id)'></td>
+                    <td><TMPL_VAR EXPR='html_escape(skin_name)'></td>
+                </tr>
+                </TMPL_LOOP>
+            </tbody>
+        </table>
+    </form>
+    <div class="span2">
+        <br>
+        <div><button class="btn JS_upButton">上へ移動</button></div>
+        <br>
+        <div><button class="btn JS_downButton">下へ移動</button></div>
+        <br>
+        <div><button class="btn JS_removeButton">削除</button></div>
+        <br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span5 form-inline">
+        <div class="control-group JS_addForm">
+            <div class="input-append">
+                <input id="manage-pickup-add-content-id-input" class="input-small JS_addInput" type="text" placeholder="コンテンツID">
+                <button class="btn JS_addButton" type="button">追加</button>
+            </div>
+            <span class="help-inline JS_invalidPositiveInt" style="display:none">正の整数で入力してください。</span>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="span5">
+        <button class="btn btn-primary JS_submitButton">入力内容を確認する</button>
+    </div>
+</div>
+
+</div>
+</STRIP>
+
+<TMPL_INCLUDE NAME="footer.tmpl">

@@ -6,57 +6,6 @@ use warnings;
 use Data::Dumper;
 use feature qw(say);
 
-my $response = {
-    total_results => 100,
-    has_next      => 1,
-    has_prev      => 0,
-    content_list  => [
-      {
-        object_type    => "content_for_sale",
-        content_id     => 1111,
-        content_name   => "くまモンの夏休み",
-        description    => "ゆるキャラくまモンの夏休みバージョンのスタンプセットです。",
-        tags => [
-          { id => "111", name => "くまモン" },
-          { id => "2222", name => "くまモンの夏休み" }
-        ],
-        provider  => { "id" => 111, "name" => "熊本県広報課" },
-        copyright => "(c)2010熊本県くまモン#99999",
-        price   => 105,
-        selling_begin_at => "2013-01-30 23:59:59",
-        selling_end_at   => "2013-09-30 23:59:59",
-        use_by  => "2013-12-31 23:59:59",
-        stock   => 999999999999,
-        has_stock_limit => 1,
-        consumable_type => "nonconsumable"
-      },
-      {
-        object_type    => "content_for_sale",
-        content_id     => 1111,
-        content_name   => "くまモンの夏休み",
-        description    => "ゆるキャラくまモンの夏休みバージョンのスタンプセットです。",
-        tags => [
-          { id => "333", name => "くまモン" },
-          { id => "333333", name => "くまモンの夏休み" }
-        ],
-        provider  => { "id" => 111, "name" => "熊本県広報課" },
-        copyright => "(c)2010熊本県くまモン#99999",
-        price   => 105,
-        selling_begin_at => "2013-01-30 23:59:59",
-        selling_end_at   => "2013-09-30 23:59:59",
-        use_by  => "2013-12-31 23:59:59",
-        stock   => 999999999999,
-        has_stock_limit => 1,
-        consumable_type => "nonconsumable"
-      },
-      {
-        object_type    => "content_for_sale",
-        application_id => 222,
-        content_id     => 2222,
-      }
-    ]
-};
+my %params = (name => "arthur", age => 27);
 
-my $content_list = $response->{content_list};
-my $tags = $content_list->[0]->{tags};
-say $tags->[0]->{id};
+say $params{name};
