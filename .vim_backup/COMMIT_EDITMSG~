@@ -1,9 +1,12 @@
-fixup: use validator data
+
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
-# On branch hotfix_manage_skin_tool
+# On branch HOME-749-add-search-to-menu
+# Your branch and 'origin/HOME-708-IAP' have diverged,
+# and have 23 and 13 different commits each, respectively.
+#
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
-#	modified:   lib/Mixi/Skin/Touch/Controller/Admin/Manage.pm
+#	modified:   tmpl/device/touch/home/re/menu_content_native.tmpl
 #

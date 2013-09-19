@@ -1,41 +1,3 @@
-gd
-gst
-git checkout lib/Mixi/Skin/Touch/Controller/Admin/Store/ManagePickup.pm
-git checkout static/js/jp/mixi/skin/touch/admin/widget/reorderform.js
-gst
-gpl
-gl
-fg
-exit
-ssh-add -l
-exit
-ssh-add -l
-exit
-ssh-add -l
-cdw
-ls
-gl
-stop
-stop-server 
-start-server 
-ls
-cdw
-gb
-gco work/touchskin_ph2_12_yaml_admin
-gco staging_touchskin_add_announce_balloon
-gst
-vim set_can_edit_style 
-vim elf-\>set_can_edit_style\; 
-git clean -f
-gst
-gd
-gd a/lib/Mixi/Skin/Controller/Manage.pm
-gd lib/Mixi/Skin/Controller/Manage.pm
-git checkout lib/Mixi/Skin/Controller/Manage.pm
-gst
-cls
-gd
-gst
 ga static/js/jp/mixi/skin/touch/admin/widget/reorderform.js
 gm
 git stash
@@ -998,3 +960,41 @@ gb
 start-server 
 cdw
 gb
+ls
+cdw
+ls
+stop-server 
+start-server 
+cd ../home/
+ls
+script/devel/server  -p 55555
+cdw
+vv
+cd
+pwd
+vv
+gst
+gd .vimrc
+gst
+gd .vimrc
+git checkout .vimrc
+gd .vimrc
+gdc .vimrc
+vv
+vim xxx 
+vimdiff xxx .vimrc
+rm -rf xxx 
+ls
+gst
+git add .vim* .bash*
+gm
+gps
+ls
+cdw
+gb
+cdw
+cd ../home/
+ls
+gb
+cat ~/bin/start-server 
+script/devel/server -p 44444 --type=GraphAPI 
