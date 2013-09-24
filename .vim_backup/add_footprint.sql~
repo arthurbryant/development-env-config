@@ -1,7 +1,0 @@
-INSERT INTO
-    notify (member_id, from_member_id, created_at, unreads, count)
-VALUES
-    (1, 2, current_date(), 1, 1) 
-ON DUPLICATE KEY UPDATE 
-    unreads = VALUES(unreads) + 1, 
-    count = VALUES(count) + 1;

@@ -1,6 +1,0 @@
-function submitComment(){
-    alert();
-    var comment = html_escape($('comments').text);
-
-    console.log(comment);
-}

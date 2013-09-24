@@ -1,4 +1,0 @@
-#!/usr/bin/sh
-
-# -e: filter access_log
-/home/bkapps/git/touch-skin/script/perl /home/bkapps/git/touch-skin/script/devel/server -p 4242 -e "$@"

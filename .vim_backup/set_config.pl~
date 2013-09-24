@@ -1,9 +1,0 @@
-## TOUCHSkin
-DB_TOUCHSKIN_MST: DBI:mysql:database=touchskin;host=hx4y-3099;mysql_connect_timeout=5
-DB_TOUCHSKIN_SLV: DBI:mysql:database=touchskin;host=hx4y-3099;mysql_connect_timeout=5
-DB_TOUCHSKIN_BAK: DBI:mysql:database=touchskin;host=hx4y-3101;mysql_connect_timeout=5
-
-##TOUCH_Skin_Purchase
-DB_TOUCHSKIN_PURCHASE_MST: DBI:mysql:database=touchskin_purchase;host=hx4y-3099;mysql_connect_timeout
-DB_TOUCHSKIN_PURCHASE_SLV: DBI:mysql:database=touchskin_purchase;host=hx4y-3099;mysql_connect_timeout
-DB_TOUCHSKIN_PURCHASE_BAK: DBI:mysql:database=touchskin_purchase;host=hx4y-3101;mysql_connect_timeout

@@ -1,5 +1,0 @@
-exports.show = function() {
-    var db = require('../../lib/db');
-    var hot_quries = db.getHotQueries();
-    console.dir(hot_quries);
-};
