@@ -1,7 +1,9 @@
-# alias for git 
+# alias for git
 alias ga="git add"
 alias gm="git commit"
+alias gma="git commit --amend"
 alias gb="git branch -vv"
+alias gba="git branch --all"
 alias gd="git diff --color"
 alias gdc="git diff --color --cached"
 alias gl="git log --graph --stat"
@@ -24,6 +26,10 @@ alias gcp="git cherry-pick"
 alias gsh="git stash"
 alias gsp="git stash pop"
 
+# alias for rails
+alias rco="rails c"
+alias rcos="rails c --sandbox"
+
 # alias for linux command
 alias cls="clear"
 alias v="vim"
@@ -44,6 +50,9 @@ alias jl="jobs -l"
 
 # add ssh siau
 alias ssh-siau="ssh feng.zhang@siau -i ~/.ssh/detroit/id_rsa -A"
+
+# add for ruby
+alias r="/usr/bin/ruby"
 
 # Release Ctrl-Q and Ctrl-S from tty
 stty stop undef
