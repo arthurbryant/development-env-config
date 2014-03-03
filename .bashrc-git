@@ -25,10 +25,12 @@ alias gcf="git clean -f"
 alias gcp="git cherry-pick"
 alias gsh="git stash"
 alias gsp="git stash pop"
+alias gbd="git branch -D"
 
 # alias for rails
 alias rco="rails c"
 alias rcos="rails c --sandbox"
+alias rss="rails s"
 
 # alias for linux command
 alias cls="clear"
@@ -37,6 +39,7 @@ alias cp='cp -i'
 alias rm='rm -i'
 alias chx="chmod +x"
 alias vg="vim ~/.bashrc-git"
+alias vmac="vim ~/.bashrc-mac"
 alias vz="vim ~/.zshrc"
 alias vv="vim ~/.vimrc"
 alias f="find . -iname"
@@ -45,11 +48,13 @@ alias s="screen"
 alias condb="mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp"
 alias prove="/usr/local/mixi-devtools/mixi-test/bin/mixi-prove"
 alias mc="/home/bkapps/git/touch-skin/script/devel/service_activation_per_user"
+alias agi="ag -i"
 alias agl="ag '--pager=less -R'"
 alias jl="jobs -l"
 
-# add ssh siau
+# add ssh
 alias ssh-siau="ssh feng.zhang@siau -i ~/.ssh/detroit/id_rsa -A"
+alias ssh-dg="ssh -Ap 2222 kyoro@stg.deploygate.com"
 
 # add for ruby
 alias r="/usr/bin/ruby"
