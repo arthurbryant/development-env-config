@@ -50,6 +50,7 @@ alias prove="/usr/local/mixi-devtools/mixi-test/bin/mixi-prove"
 alias mc="/home/bkapps/git/touch-skin/script/devel/service_activation_per_user"
 alias agi="ag -i"
 alias agl="ag '--pager=less -R'"
+alias agli="ag --ignore log '--pager=less -R'"
 alias jl="jobs -l"
 
 # add ssh
