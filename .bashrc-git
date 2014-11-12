@@ -79,4 +79,6 @@ stty start undef
 
 # for vagrant
 alias envv='envchain aws bash'
-alias vagrant_rsync='vagrant gatling-rsync-auto'
+alias envstart="envchain aws bash -c 'vagrant up --provider aws; vagrant gatling-rsync-auto'"
+alias vagrant_rsync='vagrant rsync'
+alias vagrant_s='vagrant gatling-rsync-auto'
