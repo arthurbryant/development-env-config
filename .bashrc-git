@@ -1,3 +1,7 @@
+# for system
+alias ll='ls -l'
+alias cp='cp -i'
+
 # alias for git
 alias ga="git add"
 alias gm="git commit"
@@ -50,16 +54,29 @@ alias prove="/usr/local/mixi-devtools/mixi-test/bin/mixi-prove"
 alias mc="/home/bkapps/git/touch-skin/script/devel/service_activation_per_user"
 alias agi="ag -i"
 alias agl="ag '--pager=less -R'"
-alias agli="ag --ignore log '--pager=less -R'"
+alias agli="ag --ignore log --ignore coverage '--pager=less -R'"
 alias jl="jobs -l"
+
+# chrome
+alias openchrome="open -a Google\ Chrome"
 
 # add ssh
 alias ssh-siau="ssh feng.zhang@siau -i ~/.ssh/detroit/id_rsa -A"
-alias ssh-dg="ssh -Ap 2222 kyoro@stg.deploygate.com"
+alias ssh-stg="ssh -Ap 2222 kyoro@stg.deploygate.com"
+alias ssh-dg-real="ssh -Ap 2222 kyoro@deploygate.com"
+alias ssh-ec2="ssh -A fengzhang@54.92.65.144"
 
 # add for ruby
 alias r="/usr/bin/ruby"
 
+# rails and sidekiq
+alias restart_rails='cd /Users/feng.zhang/home/deploygate-app/deploygate/webfront; kill -9 `cat tmp/pids/server.pid`; script/sslrails s -d'
+alias restart_sidekiq='cd /Users/feng.zhang/home/deploygate-app/deploygate/webfront; sidekiqctl stop tmp/pids/sidekiq.pid 60; bundle exec sidekiq -C config/sidekiq.yml -d'
+
 # Release Ctrl-Q and Ctrl-S from tty
 stty stop undef
 stty start undef
+
+# for vagrant
+alias envv='envchain aws bash'
+alias vagrant_rsync='vagrant gatling-rsync-auto'
