@@ -1,3 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/home/bkapps/git/procedure_practice_2013/lib/Mixi/Independence'
+let g:netrw_dirhist_2='/Users/arthur/.arthur_config/configfiles/.vim/bundle/neobundle.vim'
+let g:netrw_dirhist_3='/Users/arthur/home/deploygate/.idea'
+let g:netrw_dirhist_4='/Users/arthur/home/deploygate-staging/deploygate/.idea'
+let g:netrw_dirhist_5='/Users/arthur/home/javascript/css'
+let g:netrw_dirhist_6='/Users/arthur/home/ruby/tap'
+let g:netrw_dirhist_7='/Users/arthur/tmp'
+let g:netrw_dirhist_8='/Users/arthur/home/depot/app/views/products'
+let g:netrw_dirhist_9='/Users/arthur/home/deploygate-staging/deploygate/webfront/.idea'

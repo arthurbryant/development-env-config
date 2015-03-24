@@ -1,2 +1,5 @@
 alias cdh="cd ~/home"
-alias cdda="cd ~/home/deploygate-app/deploygate/webfront/"
+alias cdc="cd ~/home/create/"
+alias cdr="cd ~/home/ruby/"
+alias cdhi="cd ~/home/iphone"
+alias cdha="cd ~/Documents/android"

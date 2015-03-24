@@ -108,9 +108,9 @@ NeoBundle 'tpope/vim-surround'
 
 " autocompletes parenthesis, braces and more
 NeoBundle 'kana/vim-smartinput'
-call smartinput#define_rule({ 'at': '\[\_s*\%#\_s*\]', 'char': '<Enter>', 'input': '<Enter><C-o>O' })
-call smartinput#define_rule({ 'at': '{\_s*\%#\_s*}'  , 'char': '<Enter>', 'input': '<Enter><C-o>O' })
-call smartinput#define_rule({ 'at': '(\_s*\%#\_s*)'  , 'char': '<Enter>', 'input': '<Enter><C-o>O' })
+"call smartinput#define_rule({ 'at': '\[\_s*\%#\_s*\]', 'char': '<Enter>', 'input': '<Enter><C-o>O' })
+"call smartinput#define_rule({ 'at': '{\_s*\%#\_s*}'  , 'char': '<Enter>', 'input': '<Enter><C-o>O' })
+"call smartinput#define_rule({ 'at': '(\_s*\%#\_s*)'  , 'char': '<Enter>', 'input': '<Enter><C-o>O' })
 
 
 NeoBundle 'tpope/vim-fugitive', { 'augroup' : 'fugitive' }
@@ -205,5 +205,9 @@ nnoremap <C-w>a <C-w>\|<C-w>_
 
 filetype indent on
 filetype plugin on
+
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
 syntax on
