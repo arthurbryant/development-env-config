@@ -66,6 +66,9 @@ alias ssh-stg="ssh -Ap 2222 kyoro@stg.deploygate.com"
 alias ssh-dg-real="ssh -Ap 2222 kyoro@deploygate.com"
 alias ssh-ec2="ssh -A fengzhang@54.92.65.144"
 
+# fout
+alias ssh-dev="ssh -i ~/fout/aws/config/feng_dev_key_pair.pem  ec2-user@ec2-52-68-90-196.ap-northeast-1.compute.amazonaws.com"
+
 # add for ruby
 alias r="/usr/bin/ruby"
 
