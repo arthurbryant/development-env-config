@@ -2,7 +2,9 @@ set nocompatible
 filetype off
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle'))
+  call neobundle#begin(expand('~/.vim/bundle/'))
+  NeoBundleFetch 'Shougo/neobundle.vim'
+  call neobundle#end()
 endif
 
 set background=dark
@@ -82,7 +84,7 @@ set expandtab
 set iskeyword+=:
 
 "javascript
-call pathogen#infect()
+execute pathogen#infect()
 
 "JsBeautfy
 "map <c-f> :call JsBeautify()<cr>
