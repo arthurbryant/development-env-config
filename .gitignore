@@ -1,6 +1,5 @@
-/*
 !/.bashrc-git
 !/.vimrc
-!/.vim/*
-!/.gitignore
+.vim/bundle/*
+.bashrc-mac
 .git

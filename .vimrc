@@ -95,6 +95,7 @@ execute pathogen#infect()
 " for css or scss
 "autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
+  call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'scrooloose/syntastic'
@@ -193,6 +194,8 @@ NeoBundle 'vimtaku/vim-textobj-doublecolon'
 
 " Run current file by <Leader>r and get result in another buffer
 NeoBundle 'thinca/vim-quickrun'
+call neobundle#end()
+
 let g:quickrun_config = {}
 let g:quickrun_config['perl'] = {'command': 'mixi-prove'}
 
