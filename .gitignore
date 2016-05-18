@@ -1,4 +1,6 @@
+.*
 !/.bashrc-git
 !/.vimrc
-.bashrc-mac
-.git
+!/.vim/*
+!/.gitignore
+!README.md

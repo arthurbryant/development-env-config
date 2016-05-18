@@ -1,6 +1,7 @@
 # for system
 alias ll='ls -l'
 alias cp='cp -i'
+alias grep='grep --color'
 
 # alias for git
 alias ga="git add"
@@ -10,6 +11,7 @@ alias gb="git branch -vv"
 alias gba="git branch --all"
 alias gd="git diff --color"
 alias gdc="git diff --color --cached"
+alias grh="git reset HEAD"
 alias gl="git log --graph --stat"
 alias gps="git push"
 alias gpl="git pull"
@@ -24,7 +26,6 @@ alias gls="git log -1 -p HEAD"
 alias gmls="git commit -c HEAD"
 alias glm="git log -n1 -p"
 alias gf="git fetch"
-alias grh="git reset --hard"
 alias gcf="git clean -f"
 alias gcp="git cherry-pick"
 alias gsh="git stash"
@@ -61,29 +62,40 @@ alias jl="jobs -l"
 alias openchrome="open -a Google\ Chrome"
 
 # add ssh
-alias ssh-siau="ssh feng.zhang@siau -i ~/.ssh/detroit/id_rsa -A"
-alias ssh-stg="ssh -Ap 2222 kyoro@stg.deploygate.com"
 alias ssh-dg-real="ssh -Ap 2222 kyoro@deploygate.com"
-alias ssh-ec2="ssh -A fengzhang@54.92.65.144"
 
 # fout
-alias ssh-dev="ssh -i ~/fout/aws/config/feng_dev_key_pair.pem  ec2-user@ec2-52-68-90-196.ap-northeast-1.compute.amazonaws.com"
-alias ssh-foryou2="ssh -i .ssh/foryou-production.pem ec2-user@52.69.127.19"
-alias ssh-foryou="ssh -i .ssh/foryou-production.pem ec2-user@54.64.37.0"
+alias ssh-test="ssh -A ec2-user@52.196.81.4"
+alias ssh-dev="ssh -A ec2-user@dev.foru.club"
+alias ssh-stg="ssh -A ec2-user@52.68.95.181"
+alias ssh-newrelic-monitor="ssh -A ec2-user@54.178.183.10"
+alias ssh-foryou-db='mysql -h foru-db.c2aqn1wsobic.ap-northeast-1.rds.amazonaws.com:3306  -uf0ryou -pnE411BHBaBrp'
+alias ssh-ble-log="ssh ec2-user@54.65.25.24"
+alias ssh-japan="ssh ec2-user@52.192.87.237"
 
 # add for ruby
 alias r="/usr/bin/ruby"
 
 # rails and sidekiq
 alias restart_rails='cd /Users/feng.zhang/home/deploygate-app/deploygate/webfront; kill -9 `cat tmp/pids/server.pid`; script/sslrails s -d'
-alias restart_sidekiq='cd /Users/feng.zhang/home/deploygate-app/deploygate/webfront; sidekiqctl stop tmp/pids/sidekiq.pid 60; bundle exec sidekiq -C config/sidekiq.yml -d'
+alias restart_sidekiq='sidekiqctl stop tmp/pids/sidekiq.pid 60; bundle exec sidekiq -C config/sidekiq.yml'
 
 # Release Ctrl-Q and Ctrl-S from tty
 stty stop undef
 stty start undef
 
+# source
+alias sg="source ~/.bashrc-git"
+
 # for vagrant
-alias envv='envchain aws bash'
-alias envstart="envchain aws bash -c 'vagrant up --provider aws; vagrant gatling-rsync-auto'"
-alias vagrant_rsync='vagrant rsync'
+alias envv="envchain aws bash"
+alias envstart="envchain aws bash -c 'vagrant up; vagrant gatling-rsync-auto'"
 alias vagrant_s='vagrant gatling-rsync-auto'
+alias vawsup="vagrant up --provider=aws"
+alias vup="vagrant up"
+alias vdes="vagrant destroy"
+alias vpro="vagrant provision"
+alias vs="vagrant status"
+
+# swagger
+alias swagger='RAILS_ENV=production rake swagger:docs'
