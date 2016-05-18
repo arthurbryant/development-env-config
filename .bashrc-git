@@ -61,16 +61,13 @@ alias jl="jobs -l"
 # chrome
 alias openchrome="open -a Google\ Chrome"
 
-# add ssh
-alias ssh-dg-real="ssh -Ap 2222 kyoro@deploygate.com"
-
 # fout
-alias ssh-test="ssh -A ec2-user@52.196.81.4"
 alias ssh-dev="ssh -A ec2-user@dev.foru.club"
 alias ssh-stg="ssh -A ec2-user@52.68.95.181"
 alias ssh-newrelic-monitor="ssh -A ec2-user@54.178.183.10"
 alias ssh-foryou-db='mysql -h foru-db.c2aqn1wsobic.ap-northeast-1.rds.amazonaws.com:3306  -uf0ryou -pnE411BHBaBrp'
 alias ssh-ble-log="ssh ec2-user@54.65.25.24"
+alias ssh-jmeter="ssh -i .ssh/ec2-vagrant.pem ec2-user@52.196.79.48"
 alias ssh-japan="ssh ec2-user@52.192.87.237"
 
 # add for ruby
