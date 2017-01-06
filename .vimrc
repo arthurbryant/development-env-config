@@ -96,7 +96,7 @@ execute pathogen#infect()
 " for css or scss
 "autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
-  call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'scrooloose/syntastic'
@@ -104,8 +104,6 @@ NeoBundle 'Shougo/neocomplcache.vim'
 
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard'] " speedup
 let g:neocomplcache_enable_at_startup = 1
-
-
 
 " surrounding with braces or quotes with s and S key
 NeoBundle 'tpope/vim-surround'
@@ -195,6 +193,16 @@ NeoBundle 'vimtaku/vim-textobj-doublecolon'
 
 " Run current file by <Leader>r and get result in another buffer
 NeoBundle 'thinca/vim-quickrun'
+
+" nerdtree
+NeoBundle 'scrooloose/nerdtree'
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+" syntax highlight for scala
+NeoBundle 'derekwyatt/vim-scala'
+
+" unite plugin
+NeoBundle 'Shougo/unite.vim'
 call neobundle#end()
 
 let g:quickrun_config = {}
@@ -214,13 +222,3 @@ autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
 syntax on
-
-" nerdtree
-NeoBundle 'scrooloose/nerdtree'
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-
-" syntax highlight for scala
-NeoBundle 'derekwyatt/vim-scala'
-
-" unite plugin
-NeoBundle 'Shougo/unite.vim'
