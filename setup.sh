@@ -1,5 +1,9 @@
 #!/bin/sh
 
+##################################################
+# vim
+##################################################
+
 # install neobundle
 curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
 sh ./install.sh && rm -rf install.sh
@@ -17,3 +21,9 @@ mkdir -p ~/.vim_backup
 
 # install neobundle plugins without open vim
 vim -E -c NeoBundleInstall -c q
+
+##################################################
+# linux
+##################################################
+source ~/.bashrc-git
+echo "source ~/.bashrc-git" >> ~/.bash_profile
