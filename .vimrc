@@ -39,6 +39,7 @@ set ff=unix
 filetype on                   " Enable filetype detection
 filetype indent on            " Enable filetype-specific indenting
 filetype plugin on            " Enable filetype-specific plugins
+filetype plugin indent on            " Enable filetype-specific plugins
 set wildmode=longest:full
 set wildmenu                  " menu has tab completion
 let maplocalleader=','        " all my macros start with ,
@@ -208,11 +209,18 @@ let g:syntastic_mode_map = {
 " Maximizes current split, <C-w>= to restore
 nnoremap <C-w>a <C-w>\|<C-w>_
 
-filetype indent on
-filetype plugin on
-
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
 syntax on
+
+" nerdtree
+NeoBundle 'scrooloose/nerdtree'
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+" syntax highlight for scala
+NeoBundle 'derekwyatt/vim-scala'
+
+" unite plugin
+NeoBundle 'Shougo/unite.vim'

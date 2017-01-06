@@ -32,11 +32,6 @@ alias gsh="git stash"
 alias gsp="git stash pop"
 alias gbd="git branch -D"
 
-# alias for rails
-alias rco="rails c"
-alias rcos="rails c --sandbox"
-alias rss="rails s"
-
 # alias for linux command
 alias cls="clear"
 alias v="vim"
@@ -49,7 +44,6 @@ alias vz="vim ~/.zshrc"
 alias vv="vim ~/.vimrc"
 alias f="find . -iname"
 alias h="history"
-alias s="screen"
 alias condb="mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp"
 alias prove="/usr/local/mixi-devtools/mixi-test/bin/mixi-prove"
 alias mc="/home/bkapps/git/touch-skin/script/devel/service_activation_per_user"
@@ -60,15 +54,6 @@ alias jl="jobs -l"
 
 # chrome
 alias openchrome="open -a Google\ Chrome"
-
-# fout
-alias ssh-dev="ssh -A ec2-user@dev.foru.club"
-alias ssh-stg="ssh -A ec2-user@52.68.95.181"
-alias ssh-newrelic-monitor="ssh -A ec2-user@54.178.183.10"
-alias ssh-foryou-db='mysql -h foru-db.c2aqn1wsobic.ap-northeast-1.rds.amazonaws.com:3306  -uf0ryou -pnE411BHBaBrp'
-alias ssh-ble-log="ssh ec2-user@54.65.25.24"
-alias ssh-jmeter="ssh -i .ssh/ec2-vagrant.pem ec2-user@52.196.79.48"
-alias ssh-japan="ssh ec2-user@52.192.87.237"
 
 # add for ruby
 alias r="/usr/bin/ruby"
@@ -94,5 +79,6 @@ alias vdes="vagrant destroy"
 alias vpro="vagrant provision"
 alias vs="vagrant status"
 
-# swagger
-alias swagger='RAILS_ENV=production rake swagger:docs'
+# deploy
+alias deploy-dev='bundle exec cap development deploy --trace'
+alias deploy-stg='bundle exec cap staging deploy --trace'
