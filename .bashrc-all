@@ -1,1 +1,2 @@
-source ./.bashrc-config/*
+source ./.bashrc-config/common
+source ./.bashrc-config/mac
