@@ -203,6 +203,12 @@ NeoBundle 'derekwyatt/vim-scala'
 
 " unite plugin
 NeoBundle 'Shougo/unite.vim'
+
+" react
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
 call neobundle#end()
 
 let g:quickrun_config = {}
@@ -222,3 +228,5 @@ autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
 syntax on
+
+call pathogen#helptags()

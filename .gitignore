@@ -1,5 +1,6 @@
 .*
-!/.bashrc-git
+!/.bashrc-all
+!/.bashrc-config
 !/.vimrc
 !/.gitignore
 !README.md

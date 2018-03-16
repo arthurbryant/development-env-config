@@ -44,13 +44,11 @@ alias vz="vim ~/.zshrc"
 alias vv="vim ~/.vimrc"
 alias f="find . -iname"
 alias h="history"
-alias condb="mysql --default-character-set=utf8 -uroot -hmysql.lo.mixi.jp"
-alias prove="/usr/local/mixi-devtools/mixi-test/bin/mixi-prove"
-alias mc="/home/bkapps/git/touch-skin/script/devel/service_activation_per_user"
 alias agi="ag -i"
 alias agl="ag '--pager=less -R'"
 alias agli="ag --ignore log --ignore coverage '--pager=less -R'"
 alias jl="jobs -l"
+alias tail="tail -n 150 -f "
 
 # chrome
 alias openchrome="open -a Google\ Chrome"
@@ -58,16 +56,9 @@ alias openchrome="open -a Google\ Chrome"
 # add for ruby
 alias r="/usr/bin/ruby"
 
-# rails and sidekiq
-alias restart_rails='cd /Users/feng.zhang/home/deploygate-app/deploygate/webfront; kill -9 `cat tmp/pids/server.pid`; script/sslrails s -d'
-alias restart_sidekiq='sidekiqctl stop tmp/pids/sidekiq.pid 60; bundle exec sidekiq -C config/sidekiq.yml'
-
 # Release Ctrl-Q and Ctrl-S from tty
 stty stop undef
 stty start undef
-
-# source
-alias sg="source ~/.bashrc-git"
 
 # for vagrant
 alias envv="envchain aws bash"
@@ -84,4 +75,6 @@ alias deploy-dev='bundle exec cap development deploy --trace'
 alias deploy-stg='bundle exec cap staging deploy --trace'
 
 # clear ssh port forward
+alias ssh-show='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep'
 alias ssh-cls='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep | awk '\''{ print "kill -9 ", $2}'\'' | sh'
+alias ssh-spark="ssh -i ~/.ssh/ase/development-initial-keypair.pem -ND 8157 hadoop@ec2-52-68-12-77.ap-northeast-1.compute.amazonaws.com"
