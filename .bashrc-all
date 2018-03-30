@@ -1,2 +1,4 @@
-source ./.bashrc-config/common
-source ./.bashrc-config/mac
+for f in ~/.bashrc-config/*; do
+    source $f
+    echo "source $f"
+done
