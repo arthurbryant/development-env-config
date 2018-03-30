@@ -16,9 +16,13 @@ Tested on macOS 10.13.3 and Amazon linux
 That's it! Vim and your bash alias are setup for use.
 
 # Customize
-If you want to add your own config file and want it be sourced automatically.
+If you want to add your tool's config files or customize bashrc file.
+## tool config file
+- add your tool config file to bin/
+- rerun . ./setup.sh
 
-- Add your own customize file to .bashrc-config/
-- run: . ~/.bashrc
+## customize bashrc file
+- add your customize file to bashrc-config
+- rerun . ./setup.sh
 
-If you want to save your own config, please fork this repository,  add config file to .bashrc-config/ and commit.
+If you want to save your own config and use it again, please fork this repository, add your files and commit.

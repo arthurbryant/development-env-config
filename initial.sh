@@ -12,7 +12,7 @@ fi
 
 rm -rf ~/.bashrc-all && ln -sf ~/.initial-config/development-env-config/.bashrc-all ~/.bashrc-all
 rm -rf ~/.bashrc-config && mkdir -p ~/.bashrc-config
-ln -sf ~/.initial-config/development-env-config/.bashrc-config/* ~/.bashrc-config/
+ln -sf ~/.initial-config/development-env-config/bashrc-config/* ~/.bashrc-config/
 
 if grep -Fxq "source ~/.bashrc-all" ~/.bashrc
 then
