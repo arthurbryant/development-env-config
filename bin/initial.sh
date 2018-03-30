@@ -18,5 +18,5 @@ if grep -Fxq "source ~/.bashrc-all" ~/.bashrc
 then
     echo "'source ~/.bashrc-all' already exists at ~/.bashrc!"
 else
-    echo "\nsource ~/.bashrc-all" >> ~/.bashrc
+    printf "\nsource ~/.bashrc-all\n" >> ~/.bashrc
 fi
