@@ -8,7 +8,7 @@ Tested on macOS 10.13.3
 * `cd ~/.your-name`
 * `git clone git@github.com:arthurbryant/development-env-config.git`
 * `cd development-env-config.git`
-* `./setup.sh`
+* `. ./setup.sh`
 
 That's it! Vim and your bash alias are setup for use.
 
