@@ -14,9 +14,15 @@ rm -rf ~/.bashrc-all && ln -sf ~/.initial-config/development-env-config/.bashrc-
 rm -rf ~/.bashrc-config && mkdir -p ~/.bashrc-config
 ln -sf ~/.initial-config/development-env-config/bashrc-config/* ~/.bashrc-config/
 
-if grep -Fxq "source ~/.bashrc-all" ~/.bashrc
-then
+if grep -Fxq "source ~/.bashrc-all" ~/.bashrc; then
     echo "'source ~/.bashrc-all' already exists at ~/.bashrc!"
 else
     printf "\nsource ~/.bashrc-all\n" >> ~/.bashrc
+fi
+
+result="$(grep -F CUSTOM_TOOL_PATH ~/.bashrc)"
+if [ -z "${result}" ]; then
+    printf "\nCUSTOM_TOOL_PATH=~/.initial-config/development-env-config/tools\n" >> ~/.bashrc
+    printf 'export PATH="$CUSTOM_TOOL_PATH:$PATH"' >> ~/.bashrc
+    printf "\n" >> ~/.bashrc
 fi
