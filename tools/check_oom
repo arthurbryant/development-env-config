@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# for centos
+sudo cat /var/log/messages | grep Killed
