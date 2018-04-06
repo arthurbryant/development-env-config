@@ -7,6 +7,6 @@
 source ~/.bashrc
 
 # set up tool config
-for f in ./bin/*; do
+for f in ./tools/*; do
     ./$f
 done
