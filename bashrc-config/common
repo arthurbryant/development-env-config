@@ -77,4 +77,3 @@ alias deploy-stg='bundle exec cap staging deploy --trace'
 # clear ssh port forward
 alias ssh-show='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep'
 alias ssh-cls='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep | awk '\''{ print "kill -9 ", $2}'\'' | sh'
-alias ssh-spark="ssh -i ~/.ssh/ase/development-initial-keypair.pem -ND 8157 hadoop@ec2-52-68-12-77.ap-northeast-1.compute.amazonaws.com"

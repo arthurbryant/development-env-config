@@ -1,5 +1,1 @@
-.*
-!/.bashrc-all
-!/.vimrc
-!/.gitignore
-!README.md
+./bashrc-config/mac

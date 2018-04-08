@@ -13,7 +13,7 @@ mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vi
 
 # setup link
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-rm -rf ~/.vimrc && ln -s ${DIR}/.vimrc ~/.vimrc
+rm -rf ~/.vimrc && ln -s ${DIR}/install/.vimrc ~/.vimrc
 rm -rf ~/.bashrc-git && ln -s ${DIR}/.bashrc-git ~/.bashrc-git
 
 # create backup dir
