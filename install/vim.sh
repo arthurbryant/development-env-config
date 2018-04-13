@@ -12,9 +12,8 @@ sh ./install.sh && rm -rf install.sh
 mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # setup link
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR="${HOME}/.initial-config/development-env-config/"
 rm -rf ~/.vimrc && ln -s ${DIR}/install/.vimrc ~/.vimrc
-rm -rf ~/.bashrc-git && ln -s ${DIR}/.bashrc-git ~/.bashrc-git
 
 # create backup dir
 mkdir -p ~/.vim_backup
