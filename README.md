@@ -23,6 +23,14 @@ Add your own bashrc file
 - add your file to bashrc-config/
 - rerun . ./setup.sh
 
+Add your bashrc file from bitbucket private repository
+
+- export BITBUCKET_CONFIG_REPOSITORY=YOUR_BITBUCKET_REPOSITORY
+
+This will automatically copy all the files under your bitbucket private repository to ~/.bashrc-config and work all your config will work right away.
+
+Note: please make sure you have access to your bitbucket repository before set BITBUCKET_CONFIG_REPOSITORY variable.
+
 ### tools
 Install the tools you want to install
 
