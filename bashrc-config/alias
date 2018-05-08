@@ -78,3 +78,7 @@ alias deploy-stg='bundle exec cap staging deploy --trace'
 # clear ssh port forward
 alias ssh-show='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep'
 alias ssh-cls='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep | awk '\''{ print "kill -9 ", $2}'\'' | sh'
+
+# aws
+alias aws-s3-ls="aws s3 ls --profile fout-feng"
+alias aws-s3-ls-size="aws s3 ls --profile fout-feng --recursive --human --sum"
