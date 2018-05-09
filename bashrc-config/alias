@@ -51,9 +51,6 @@ alias agli="ag --ignore log --ignore coverage '--pager=less -R'"
 alias jl="jobs -l"
 alias tail="tail -n 150 -f "
 
-# chrome
-alias openchrome="open -a Google\ Chrome"
-
 # add for ruby
 alias r="/usr/bin/ruby"
 
@@ -82,3 +79,12 @@ alias ssh-cls='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep | awk 
 # aws
 alias aws-s3-ls="aws s3 ls --profile fout-feng"
 alias aws-s3-ls-size="aws s3 ls --profile fout-feng --recursive --human --sum"
+
+# Intellij 
+alias intellij="open -a 'Intellij IDEA CE'"
+
+# chrome
+alias chrome="open -a Google\ Chrome"
+
+# rubymine
+alias rubymine="open -a rubymine"
