@@ -6,6 +6,14 @@ As a developer when you change computers or when you ssh login to a remote serve
 Just put whatever you want to use at the right placde, development-env-config will set everything for you.
 
 # Install
+1. If you put your private bashrc file at bitbucket, you can setup the following, otherwise skip.
+
+```
+export BITBUCKET_CONFIG_REPOSITORY=YOUR_BITBUCKET_REPOSITORY
+```
+
+2. execute the setup script
+
 ```
 mkdir -p ~/.initial-config && cd ~/.initial-config
 git clone git@github.com:arthurbryant/development-env-config.git
@@ -25,7 +33,9 @@ Add your own bashrc file
 
 Add your bashrc file from bitbucket private repository
 
-- export BITBUCKET_CONFIG_REPOSITORY=YOUR_BITBUCKET_REPOSITORY
+```
+export BITBUCKET_CONFIG_REPOSITORY=YOUR_BITBUCKET_REPOSITORY
+```
 
 This will automatically copy all the files under your bitbucket private repository to ~/.bashrc-config and work all your config will work right away.
 
