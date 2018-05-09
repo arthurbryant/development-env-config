@@ -23,7 +23,7 @@ else
     \cp -rf * "${base_path}/.bashrc-config/"
 fi
 
-rm -rf ~/.bashrc-all && ln -sf ${base_path}/.bashrc-all ~/.bashrc-all
+rm -rf ~/.bashrc-all && ln -sf ${base_path}/bashrc-all ~/.bashrc-all
 rm -rf ~/.bashrc-config && mkdir -p ~/.bashrc-config
 ln -sf ${base_path}/bashrc-config/* ~/.bashrc-config/
 
