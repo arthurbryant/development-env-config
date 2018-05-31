@@ -32,6 +32,7 @@ alias gcp="git cherry-pick"
 alias gsh="git stash"
 alias gsp="git stash pop"
 alias gbd="git branch -D"
+alias gdn="git diff --name-only"
 
 # alias for linux command
 alias cls="clear"
@@ -43,7 +44,7 @@ alias vg="vim ~/.bashrc-config/alias"
 alias vmac="vim ~/.bashrc-config/mac"
 alias vz="vim ~/.zshrc"
 alias vv="vim ~/.vimrc"
-alias f="find . -iname"
+alias f="find . -name"
 alias h="history"
 alias agi="ag -i"
 alias agl="ag '--pager=less -R'"
@@ -77,8 +78,8 @@ alias ssh-show='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep'
 alias ssh-cls='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep | awk '\''{ print "kill -9 ", $2}'\'' | sh'
 
 # aws
-alias aws-s3-ls="aws s3 ls --profile fout-feng"
-alias aws-s3-ls-size="aws s3 ls --profile fout-feng --recursive --human --sum"
+alias aws-s3-ls="aws s3 ls"
+alias aws-s3-ls-size="aws s3 ls --recursive --human --sum"
 
 # Intellij 
 alias intellij="open -a 'Intellij IDEA CE'"
