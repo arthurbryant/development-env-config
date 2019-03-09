@@ -212,6 +212,9 @@ let g:jsx_ext_required = 0
 " vim-fish
 NeoBundle 'dag/vim-fish'
 
+" editorconfig-vim
+NeoBundle 'editorconfig/editorconfig-vim'
+
 call neobundle#end()
 
 let g:quickrun_config = {}
