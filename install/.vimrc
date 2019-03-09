@@ -209,6 +209,9 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
+" vim-fish
+NeoBundle 'dag/vim-fish'
+
 call neobundle#end()
 
 let g:quickrun_config = {}
@@ -230,3 +233,6 @@ autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 syntax on
 
 call pathogen#helptags()
+
+" fzf
+set rtp+=/usr/local/opt/fzf
