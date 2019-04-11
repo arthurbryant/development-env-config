@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+from difflib import SequenceMatcher
+import sys
+import argparse
+
+if len(sys.argv) < 2:
+  print "Usage: ./" + __file__ + " file1 file2"
+  sys.exit()
+
+text1 = open(sys.argv[1]).read()
+text2 = open(sys.argv[2]).read()
+m = SequenceMatcher(None, text1, text2)
+print("Match ratio: %.2f" %(m.ratio()))
