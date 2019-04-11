@@ -40,10 +40,6 @@ alias v="vim"
 alias cp='cp -i'
 alias rm='rm -i'
 alias chx="chmod +x"
-alias vg="vim ~/.bashrc-config/alias"
-alias vmac="vim ~/.bashrc-config/mac"
-alias vz="vim ~/.zshrc"
-alias vv="vim ~/.vimrc"
 alias f="find . -name"
 alias h="history"
 alias agi="ag -i"
@@ -52,40 +48,13 @@ alias agli="ag --ignore log --ignore coverage '--pager=less -R'"
 alias jl="jobs -l"
 alias tail="tail -n 150 -f "
 
-# add for ruby
-alias r="/usr/bin/ruby"
-
 # Release Ctrl-Q and Ctrl-S from tty
 stty stop undef
 stty start undef
-
-# for vagrant
-alias envv="envchain aws bash"
-alias envstart="envchain aws bash -c 'vagrant up; vagrant gatling-rsync-auto'"
-alias vagrant_s='vagrant gatling-rsync-auto'
-alias vawsup="vagrant up --provider=aws"
-alias vup="vagrant up"
-alias vdes="vagrant destroy"
-alias vpro="vagrant provision"
-alias vs="vagrant status"
-
-# deploy
-alias deploy-dev='bundle exec cap development deploy --trace'
-alias deploy-stg='bundle exec cap staging deploy --trace'
-
-# clear ssh port forward
-alias ssh-show='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep'
-alias ssh-cls='ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep | awk '\''{ print "kill -9 ", $2}'\'' | sh'
 
 # aws
 alias aws-s3-ls="aws s3 ls"
 alias aws-s3-ls-size="aws s3 ls --recursive --human --sum"
 
-# Intellij 
+# Intellij
 alias intellij="open -a 'Intellij IDEA CE'"
-
-# chrome
-alias chrome="open -a Google\ Chrome"
-
-# rubymine
-alias rubymine="open -a rubymine"
