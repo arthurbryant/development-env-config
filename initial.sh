@@ -1,6 +1,7 @@
 #!/bin/sh
 
 base_path=~/.initial-config/development-env-config
+repository_name=`basename ${base_path}`
 
 mkdir -p ~/.initial-config
 cd ~/.initial-config
@@ -40,9 +41,9 @@ else
     printf "\nsource ~/.bashrc-all\n" >> ~/.bashrc
 fi
 
-result="$(grep -F CUSTOM_TOOL_PATH ~/.bashrc)"
+result="$(grep -F ${repository_name} ~/.bashrc)"
 if [ -z "${result}" ]; then
-    printf "\nCUSTOM_TOOL_PATH=${base_path}/tools\n" >> ~/.bashrc
-    printf 'export PATH="$CUSTOM_TOOL_PATH:$PATH"' >> ~/.bashrc
+    printf "\nexport PATH=\${PATH}:\$(find ${base_path}/tools -type d | tr '\\\n' ':' | sed 's/:$//')\n" >> ~/.bashrc
+    printf "export PATH=${PATH}:find ${base_path}/tools -type d | tr '\n' ':' | sed 's/:$//'" >> ~/.bashrc
     printf "\n" >> ~/.bashrc
 fi
