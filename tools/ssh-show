@@ -1,0 +1,1 @@
+ps -ef | grep ssh | grep '\''3306\|6379'\'' | grep -v grep
