@@ -1,6 +1,4 @@
 # for system
-alias ls='ls -G'
-alias ll='ls -lG'
 alias cp='cp -i'
 alias grep='grep --color'
 
@@ -58,3 +56,14 @@ alias aws-s3-ls-size="aws s3 ls --recursive --human --sum"
 
 # Intellij
 alias intellij="open -a 'Intellij IDEA CE'"
+
+# lsd
+alias ls="lsd"
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+
+# docker
+alias dk="docker"
+alias dki="docker image"
