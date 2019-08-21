@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo 'Usage: git branch | grep -v "" | xargs git branch -D'
