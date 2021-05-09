@@ -1,7 +1,3 @@
-# for system
-alias cp='cp -i'
-alias grep='grep --color'
-
 # alias for git
 alias ga="git add"
 alias gm="git commit"
@@ -10,42 +6,43 @@ alias gb="git branch -vv"
 alias gba="git branch --all"
 alias gd="git diff --color"
 alias gdc="git diff --color --cached"
-alias grh="git reset HEAD"
 alias gl="git log --graph --stat"
 alias gps="git push"
 alias gpl="git pull"
-alias gplr="git pull --rebase"
-alias grc="git rebase --continue"
 alias gst="git status"
 alias gs="git show"
-alias cmx="chmod +x"
 alias gco="git checkout"
 alias gr="git remote -v"
 alias gls="git log -1 -p HEAD"
 alias gmls="git commit -c HEAD"
 alias glm="git log -n1 -p"
 alias gf="git fetch"
-alias gcf="git clean -f"
-alias gcp="git cherry-pick"
-alias gsh="git stash"
-alias gsp="git stash pop"
 alias gbd="git branch -D"
 alias gdn="git diff --name-only"
-alias gbrm="gco master && git branch | grep -v 'master\|.*feng.*' | xargs git branch -D"
+alias gcf="git clean -f"
+
+alias git-track="git describe --all --contains"
+
+gbrm() {
+    git branch | grep -v `git branch --show-current` | grep -v 'master\|feng' | xargs git branch -d
+}
 
 # alias for linux command
 alias cls="clear"
-alias v="vim"
 alias cp='cp -i'
 alias rm='rm -i'
 alias chx="chmod +x"
 alias f="find . -name"
 alias h="history"
-alias agi="ag -i"
-alias agl="ag '--pager=less -R'"
 alias agli="ag --ignore log --ignore coverage '--pager=less -R'"
-alias jl="jobs -l"
 alias tail="tail -n 150 -f "
+alias grep='grep --color'
+alias v="vim"
+
+# rg
+rgless() {
+    rg -p "$@" | less -R
+}
 
 # Release Ctrl-Q and Ctrl-S from tty
 stty stop undef
@@ -55,16 +52,9 @@ stty start undef
 alias aws-s3-ls="aws s3 ls"
 alias aws-s3-ls-size="aws s3 ls --recursive --human --sum"
 
-# Intellij
-alias intellij="open -a 'Intellij IDEA CE'"
-
 # lsd
 alias ls="lsd"
 alias ll='ls -l'
 alias la='ls -a'
-alias lla='ls -la'
-alias lt='ls --tree'
-
-# docker
-alias dk="docker"
-alias dki="docker image"
+alias lla='ll -a'
+alias lt='ll -t'
