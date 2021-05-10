@@ -1,4 +1,0 @@
-#!/bin/sh
-
-echo "Login to AWS account automatically via saml2aws.\n"
-echo "Usage: saml2aws login -a ACCOUNT_NAME --username=USERNAME --password='PASSWORD' --role='AWS_ROLE' --skip-prompt"
