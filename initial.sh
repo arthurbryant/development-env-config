@@ -24,7 +24,6 @@ else
         rm -rf $repository_name
         git clone $BITBUCKET_CONFIG_REPOSITORY
         cd "$(\ls -1dt ./*/ | head -n 1)"
-        \cp -rf * "${base_path}/bashrc-config/"
     else
         echo 'Error: copy bashrc from bitbucket!'
         exit -1
@@ -32,8 +31,6 @@ else
 fi
 
 rm -rf ~/.bashrc-all && ln -sf ${base_path}/.bashrc-all ~/.bashrc-all
-rm -rf ~/.bashrc-config && mkdir -p ~/.bashrc-config
-ln -sf ${base_path}/bashrc-config/* ~/.bashrc-config/
 
 if grep -Fxq "source ~/.bashrc-all" ~/.bashrc; then
     echo "'source ~/.bashrc-all' already exists at ~/.bashrc!"
