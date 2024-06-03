@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-puts "Git blame usage:"
-puts
-puts "git log --pretty=short -L 14,14:file_name"
